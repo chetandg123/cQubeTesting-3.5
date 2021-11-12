@@ -2,10 +2,10 @@ import unittest
 
 from HTMLTestRunner import HTMLTestRunner
 
-from Exceptions_Reports.Periodic_Exception import regression_pat_exception
-from Exceptions_Reports.Semester_Exception import exception_regression_testing
-from Exceptions_Reports.Student_Exception import regression_student_exception
-from Exceptions_Reports.Teacher_Exception import regression_teacher_exception
+from cQube_Dashboard.Exception_List.pat_exception import regression_pat_exception
+from cQube_Dashboard.Exception_List.sat_exception import exception_regression_testing
+from cQube_Dashboard.Exception_List.student_exception import regression_student_exception
+from cQube_Dashboard.Exception_List.teacher_exception import regression_teacher_exception
 from get_dir import pwd
 from reuse_func import GetData
 

@@ -1,20 +1,19 @@
 import unittest
 
-import HTMLTestRunner
-from selenium import webdriver
 
 from Login.login_to_cQube import cQube_login
 from reuse_func import GetData
 
-
 class login(unittest.TestCase):
 
+
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
         self.data = GetData()
-        # self.driver = self.data.get_driver()
-        self.driver = webdriver.Chrome(executable_path='/home/chetan/Downloads/chromedriver_linux94/chromedriver')
+        self.driver = self.data.get_driver()
         self.data.open_cqube_appln(self.driver)
         self.data.page_loading(self.driver)
 

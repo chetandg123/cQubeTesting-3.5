@@ -1,16 +1,12 @@
-
-from Landing_Page import cQube_landing_page
 from Login import login_page
-from Periodic_Test_Reports.Periodic_report import periodic_smoke_testing
-from Student_Attendance import student_attendance_smoke_testing
-from School_infrastructure.Infra_map_Report import School_Map_smoke_testing
-
-from Semester import semester_report_smoke_testing
-from Exceptions_Reports.Semester_Exception import exception_smoke_testing
-from Teacher_Attendance import teacher_attendance_smoke_testing
-from Telemetry import telemetry_smoke_testing
-from UDISE import udise_smoke_testing
-
+from cQube_Dashboard.Attendance.student_attendance import student_attendance_smoke_testing
+from cQube_Dashboard.Attendance.teacher_attendance import teacher_attendance_smoke_testing
+from cQube_Dashboard.Dashboard_Icons import cQube_landing_page
+from cQube_Dashboard.School_Infrastructure.Infrastructure_map import School_Map_smoke_testing
+from cQube_Dashboard.School_Infrastructure.udise_report import udise_smoke_testing
+from cQube_Dashboard.Student_Performance.pat_map import periodic_smoke_testing
+from cQube_Dashboard.Student_Performance.sat_map import semester_report_smoke_testing
+from cQube_Dashboard.Telemetry import telemetry_smoke_testing
 from get_dir import pwd
 
 import unittest
@@ -90,27 +86,27 @@ class MyTestSuite_Smoke_map_reports(unittest.TestCase):
                 outfile.close()
 
    
-    # def test_issue04(self):
-    #         self.data.page_loading(self.driver)
-    #         self.data.navigate_to_semester_report()
-    #         if 'No data found' in self.driver.page_source:
-    #             print('Semester Report is showing no data found!..')
-    #             self.driver.close()
-    #         else:
-    #             smoke_test = unittest.TestSuite()
-    #             smoke_test.addTests([
-    #                 unittest.defaultTestLoader.loadTestsFromTestCase(semester_report_smoke_testing.cQube_Semester_Report),
-    #             ])
-    #             p = pwd()
-    #             outfile = open(p.get_smoke_map_report(), "a")
-    #
-    #             runner1 = HTMLTestRunner.HTMLTestRunner(
-    #                 stream=outfile,
-    #                 title='Semester Smoke Test Report',
-    #                 verbosity=1,
-    #             )
-    #             runner1.run(smoke_test)
-    #             outfile.close()
+    def test_issue04(self):
+            self.data.page_loading(self.driver)
+            self.data.navigate_to_semester_report()
+            if 'No data found' in self.driver.page_source:
+                print('Semester Report is showing no data found!..')
+                self.driver.close()
+            else:
+                smoke_test = unittest.TestSuite()
+                smoke_test.addTests([
+                    unittest.defaultTestLoader.loadTestsFromTestCase(semester_report_smoke_testing.cQube_Semester_Report),
+                ])
+                p = pwd()
+                outfile = open(p.get_smoke_map_report(), "a")
+
+                runner1 = HTMLTestRunner.HTMLTestRunner(
+                    stream=outfile,
+                    title='Semester Smoke Test Report',
+                    verbosity=1,
+                )
+                runner1.run(smoke_test)
+                outfile.close()
 
     def test_issue05(self):
             self.data.page_loading(self.driver)
@@ -186,29 +182,29 @@ class MyTestSuite_Smoke_map_reports(unittest.TestCase):
                 outfile.close()
 
    
-    # def test_issue09(self):
-    #         self.data.page_loading(self.driver)
-    #         self.data.navigate_to_periodic_report()
-    #         if 'No data found' in self.driver.page_source:
-    #             print('Periodic Map Report is showing no data found!..')
-    #             self.driver.close()
-    #         else:
-    #             smoke_test = unittest.TestSuite()
-    #             smoke_test.addTests([
-    #                 unittest.defaultTestLoader.loadTestsFromTestCase(
-    #                     periodic_smoke_testing.periodic_smoke)
-    #             ])
-    #             p = pwd()
-    #             outfile = open(p.get_smoke_map_report(), "a")
-    #
-    #             runner1 = HTMLTestRunner.HTMLTestRunner(
-    #                 stream=outfile,
-    #                 title='Periodic Smoke Test Report',
-    #                 verbosity=1,
-    #
-    #             )
-    #             runner1.run(smoke_test)
-    #             outfile.close()
+    def test_issue09(self):
+            self.data.page_loading(self.driver)
+            self.data.navigate_to_periodic_report()
+            if 'No data found' in self.driver.page_source:
+                print('Periodic Map Report is showing no data found!..')
+                self.driver.close()
+            else:
+                smoke_test = unittest.TestSuite()
+                smoke_test.addTests([
+                    unittest.defaultTestLoader.loadTestsFromTestCase(
+                        periodic_smoke_testing.periodic_smoke)
+                ])
+                p = pwd()
+                outfile = open(p.get_smoke_map_report(), "a")
+
+                runner1 = HTMLTestRunner.HTMLTestRunner(
+                    stream=outfile,
+                    title='Periodic Smoke Test Report',
+                    verbosity=1,
+
+                )
+                runner1.run(smoke_test)
+                outfile.close()
 
 
     def test_issue10(self):

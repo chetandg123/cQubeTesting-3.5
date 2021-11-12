@@ -70,7 +70,7 @@ class GetData():
         options = webdriver.FirefoxOptions()
         prefs = {'download.default_directory': self.p.get_download_dir()}
         options.add_argument(prefs)
-        options.add_argument("--headless")
+        # options.add_argument("--headless")
         self.driver = webdriver.Firefox(options=options, executable_path=p.get_firefox_driver_path())
         return self.driver
 

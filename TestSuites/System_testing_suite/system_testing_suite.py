@@ -1,20 +1,16 @@
 import unittest
 from HTMLTestRunner import HTMLTestRunner
 
-from CRC import crc_report_system_testing
-from Composite_report import composite_system_testing
-
 from Login import login_page
-from Periodic_Test_Reports.Periodic_report import periodic_system_suite
-from School_infrastructure.Infra_Table_Report import school_report_system_testing
-from Student_Attendance import student_attendance_system_testing
-from School_infrastructure.Infra_map_Report import school_map_system_testing
-
-from Semester import semester_report_system_testing
-from Exceptions_Reports.Semester_Exception import exception_system_testing
-from Telemetry import telemetry_system_testing
-from UDISE import udise_system_testing
-
+from cQube_Dashboard.Attendance.student_attendance import student_attendance_system_testing
+from cQube_Dashboard.CRC_Visit import crc_report_system_testing
+from cQube_Dashboard.Exception_List.sat_exception import exception_system_testing
+from cQube_Dashboard.School_Infrastructure.Infrastructure_map import school_map_system_testing
+from cQube_Dashboard.School_Infrastructure.composite_report import school_report_system_testing
+from cQube_Dashboard.School_Infrastructure.udise_report import udise_system_testing
+from cQube_Dashboard.Student_Performance.pat_map import periodic_system_suite
+from cQube_Dashboard.Student_Performance.sat_map import semester_report_system_testing
+from cQube_Dashboard.Telemetry import telemetry_system_testing
 from get_dir import pwd
 from reuse_func import GetData
 

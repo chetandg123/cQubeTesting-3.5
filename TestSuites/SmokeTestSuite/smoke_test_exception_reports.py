@@ -2,10 +2,10 @@ import unittest
 
 from HTMLTestRunner import HTMLTestRunner
 
-from Exceptions_Reports.Periodic_Exception import  smoke_pat_exception
-from Exceptions_Reports.Semester_Exception import  exception_smoke_testing
-from Exceptions_Reports.Student_Exception import  smoke_student_exception
-from Exceptions_Reports.Teacher_Exception import  smoke_teacher_exception
+from cQube_Dashboard.Exception_List.pat_exception import smoke_pat_exception
+from cQube_Dashboard.Exception_List.sat_exception import exception_smoke_testing
+from cQube_Dashboard.Exception_List.student_exception import smoke_student_exception
+from cQube_Dashboard.Exception_List.teacher_exception import smoke_teacher_exception
 from get_dir import pwd
 from reuse_func import GetData
 
