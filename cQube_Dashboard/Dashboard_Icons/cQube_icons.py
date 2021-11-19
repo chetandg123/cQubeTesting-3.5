@@ -383,6 +383,7 @@ class cQube_landing_page():
         count = 0
         self.data = GetData()
         self.driver.find_element_by_id(Data.menu_icon).click()
+        time.sleep(1)
         self.driver.find_element_by_id(Data.crc_visit).click()
         if 'crc-dashboard' not in self.driver.current_url:
             print("CRC Dashboard is not displayed")
@@ -416,12 +417,11 @@ class cQube_landing_page():
             self.driver.find_element_by_id(Data.composite_metric).click()
             time.sleep(3)
             self.data.page_loading(self.driver)
-            if 'composite-report' in self.driver.current_url:
-                print('composite-report is displayed')
+            if 'composite-report' not in self.driver.current_url:
+                print(self.driver.current_url,' - composite-report is not displayed')
             else:
                 print('entering to report',self.driver.current_url)
-                print("composite-report is not displayed")
-                count = count + 1
+                print("composite-report is  displayed")
                 self.data.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.cQube_logo).click()
                 self.data.page_loading(self.driver)
@@ -556,11 +556,10 @@ class cQube_landing_page():
             self.driver.find_element_by_id(Data.isData).click()
             time.sleep(2)
             if 'download-missing-data' not in self.driver.current_url:
-                print('download-missing-data is displayed')
+                print('download-missing-data is not displayed')
                 return count
             else:
                 print("download-missing-data is displayed in url ")
-                count = count + 1
                 self.data.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.cQube_logo).click()
                 self.data.page_loading(self.driver)

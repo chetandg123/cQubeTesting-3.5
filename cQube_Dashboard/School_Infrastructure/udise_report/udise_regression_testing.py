@@ -12,7 +12,7 @@ class cQube_udise_Report(unittest.TestCase):
     def setUpClass(self):
         self.data = GetData()
         self.driver = self.data.get_driver()
-        self.driver.implicitly_wait(60)
+        self.driver.implicitly_wait(100)
         self.data.open_cqube_appln(self.driver)
         self.data.login_cqube(self.driver)
         self.data.navigate_to_udise_report()
@@ -40,10 +40,7 @@ class cQube_udise_Report(unittest.TestCase):
     def test_hyperlink(self):
         b = udise_report(self.driver)
         res = b.test_link()
-        if "udise-report" in self.driver.current_url:
-            print("Udise map based report present")
-        else:
-            print("hyperlink is not working ")
+        self.assertEqual(0,res,msg='hyper link is not worked')
 
     def test_download_districtcsv(self):
         fn = udise_report(self.driver)

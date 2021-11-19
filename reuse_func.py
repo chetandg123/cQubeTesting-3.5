@@ -12,6 +12,7 @@ import requests
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, WebDriverException
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 from Locators.parameters import Data
@@ -53,11 +54,12 @@ class GetData():
         prefs = {'download.default_directory': self.p.get_download_dir()}
         options.add_experimental_option('prefs', prefs)
         options.add_argument("--window-size=3860,2160")
-        # options.add_argument('--headless')
+        options.add_argument('--headless')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-gpu')
         self.driver = webdriver.Chrome(options=options, executable_path=self.p.get_driver_path())
         print("Current session is {}".format(self.driver.session_id))
+
         return self.driver
 
     def get_current_date(self):

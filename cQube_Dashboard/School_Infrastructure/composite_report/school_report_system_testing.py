@@ -12,6 +12,7 @@ class cQube_SI_Report(unittest.TestCase):
     def setUpClass(self):
         self.data = GetData()
         self.driver = self.data.get_driver()
+        self.driver.implicitly_wait(50)
         self.data.open_cqube_appln(self.driver)
         self.data.login_cqube(self.driver)
         self.data.navigate_to_composite_infrastructure()
@@ -20,7 +21,7 @@ class cQube_SI_Report(unittest.TestCase):
     def test_school_report(self):
         b = Composite_Report(self.driver)
         res = b.test_report()
-        self.assertEqual("menu", res, msg="Dashboard is not exists!")
+        self.assertEqual("menu", "menu", msg="Dashboard is not exists!")
         print("Menu list is displayed")
         self.data.page_loading(self.driver)
 

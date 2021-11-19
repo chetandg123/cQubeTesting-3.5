@@ -7,6 +7,8 @@ import pandas as pd
 from selenium.webdriver.support.select import Select
 
 from Locators.parameters import Data
+from filenames import file_extention
+from get_dir import pwd
 from reuse_func import GetData
 
 
@@ -324,11 +326,9 @@ class crc_visits():
         dist = Select(self.driver.find_element_by_name("myDistrict"))
         dist.select_by_index(1)
         self.p.page_loading(self.driver)
-        self.driver.find_element_by_id(Data.homeicon).click()
+        self.driver.find_element_by_xpath(Data.hyper).click()
         self.p.page_loading(self.driver)
-        down = self.driver.find_element_by_id(Data.Download)
         time.sleep(3)
-        return down.is_displayed()
 
     def test_homebutton(self):
         self.p = GetData()
@@ -336,15 +336,15 @@ class crc_visits():
         self.driver.implicitly_wait(20)
         self.driver.find_element_by_xpath(Data.hyper).click()
         self.p.page_loading(self.driver)
-        self.driver.find_element_by_id(Data.menu_icon).click()
+        self.driver.find_element_by_id(Data.cQube_logo).click()
         self.p.page_loading(self.driver)
-        if 'dashboard' in self.driver.current_url:
-            print("home button is working fine , landing page is displayed ")
-        else:
-            print("Landing page is not displayed due to homebutton click not happened")
+        if 'infrastructure-dashboard' not in self.driver.current_url:
+            print("Landing page is not displayed due to home button click not happened")
             count = count + 1
-        self.p.navigate_to_crc_report()
-        self.p.page_loading(self.driver)
+        else:
+            print("cQube logo is working fine , landing page is displayed ")
+            self.p.navigate_to_crc_report()
+            self.p.page_loading(self.driver)
         return count
 
     def check_csv_download(self):
@@ -455,6 +455,8 @@ class crc_visits():
         self.driver.implicitly_wait(20)
         self.driver.find_element_by_xpath(Data.hyper).click()
         self.p.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+        time.sleep(1)
         self.driver.find_element_by_id(Data.logout).click()
         self.p.page_loading(self.driver)
         if "Log in to cQube" in self.driver.title:
@@ -495,6 +497,8 @@ class crc_visits():
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.p.page_loading(self.driver)
         title = self.driver.find_element_by_id(Data.cQube_logo).text
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+        time.sleep(1)
         self.p.navigate_to_crc_report()
         self.p.page_loading(self.driver)
         self.driver.find_element_by_xpath(Data.t_head).click()
@@ -533,6 +537,6 @@ class crc_visits():
         # self.driver.find_element_by_xpath(Locators.cluster_hyper).click()
         # self.p.page_loading(self.driver)
         # self.driver.find_element_by_xpath(Locators.dist_hyper).click()
-        self.driver.find_element_by_id(Data.homeicon).click()
+        self.driver.find_element_by_xpath(Data.hyper).click()
         self.p.page_loading(self.driver)
 

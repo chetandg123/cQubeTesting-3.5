@@ -1,5 +1,6 @@
 import unittest
-from Landing_Page.cQube_icons import cQube_landing_page
+
+from cQube_Dashboard.Dashboard_Icons.cQube_icons import cQube_landing_page
 from reuse_func import GetData
 
 class cQube_Home(unittest.TestCase):
@@ -8,7 +9,7 @@ class cQube_Home(unittest.TestCase):
     def setUpClass(self):
         self.data = GetData()
         self.driver = self.data.get_driver()
-        self.driver.implicitly_wait(50)
+        self.driver.implicitly_wait(30)
         self.data.open_cqube_appln(self.driver)
         self.data.login_cqube(self.driver)
         self.data.page_loading(self.driver)
