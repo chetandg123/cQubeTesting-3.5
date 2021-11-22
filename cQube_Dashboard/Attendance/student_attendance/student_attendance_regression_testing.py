@@ -134,18 +134,18 @@ class cQube_Student_Attendance_regression(unittest.TestCase):
 
     def test_total_no_of_students_and_total_no_of_schools_is_equals_at_blocks_clusters_schools(self):
         tc = student_attendance_report(self.driver,self.year,self.month)
-        student_count, Bstudents,school_count, Bschools = tc.block_total_no_of_students()
+        student_count, Bstudents,school_count,Bschools = tc.check_blocklevel_total_no_of_students()
         self.assertEqual(int(student_count), int(Bstudents), msg="Block level no of students are not equal")
         self.assertEqual(int(school_count), int(Bschools), msg="Block level no of schools are not equal to no of schools ")
 
-        # student_count, Cstudents,school_count,Cschool = tc.cluster_total_no_of_students()
-        # self.assertEqual(int(student_count), int(Cstudents), msg="Cluster level no of students are not equal")
-        # self.assertEqual(int(school_count), int(Cschool), msg="Cluster level no of schools are not equal to no of schools ")
-        #
-        # student_count, Sstudents,school_count,Sschool = tc.schools_total_no_of_students()
-        # self.assertEqual(int(student_count), int(Sstudents), msg="Cluster level no of students are not equal")
-        # self.assertEqual(int(school_count), int(Sschool), msg="Cluster level no of schools are not equal to no of schools ")
-        # print("Total number of students and school equals on clicking of blocks,clusters,schools")
+        student_count, Cstudents,school_count,Cschool = tc.check_clusterlevel_total_no_of_students()
+        self.assertEqual(int(student_count), int(Cstudents), msg="Cluster level no of students are not equal")
+        self.assertEqual(int(school_count), int(Cschool), msg="Cluster level no of schools are not equal to no of schools ")
+
+        student_count, Sstudents,school_count,Sschool = tc.check_schoollevel_total_no_of_students()
+        self.assertEqual(int(student_count), int(Sstudents), msg="Cluster level no of students are not equal")
+        self.assertEqual(int(school_count), int(Sschool), msg="Cluster level no of schools are not equal to no of schools ")
+        print("Total number of students and school equals on clicking of blocks,clusters,schools")
 
 
     def test_logout(self):

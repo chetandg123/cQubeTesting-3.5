@@ -136,7 +136,7 @@ class pat_exception_report():
                     count = count + 1
                 else:
                     df = pd.read_csv(self.filename)
-                    schools = df['Total Schools With Missing Locators'].sum()
+                    schools = df['Total Schools With Missing Data'].sum()
                     school = self.driver.find_element_by_id("schools").text
                     sc = re.sub('\D', "", school)
                     if int(sc) != int(schools):
@@ -177,7 +177,7 @@ class pat_exception_report():
                     count = count + 1
                 else:
                     df = pd.read_csv(self.filename)
-                    schools = df['Total Schools With Missing Locators'].sum()
+                    schools = df['Total Schools With Missing Data'].sum()
                     school = self.driver.find_element_by_id("schools").text
                     sc = re.sub('\D', "", school)
                     if int(sc) != int(schools):
@@ -356,7 +356,7 @@ class pat_exception_report():
                     count = count + 1
                 else:
                     df = pd.read_csv(self.filename)
-                    schools = df['Total Schools With Missing Locators'].sum()
+                    schools = df['Total Schools With Missing Data'].sum()
                     school = self.driver.find_element_by_id("schools").text
                     sc = re.sub('\D', "", school)
                     if int(sc) != int(schools):

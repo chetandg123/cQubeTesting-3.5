@@ -114,6 +114,7 @@ class teacher_exception_report():
         self.year,self.month = cal.get_student_month_and_year_values()
         select_district = Select(self.driver.find_element_by_id('choose_dist'))
         count = 0
+        marker=0
         for x in range(1, len(select_district.options)-1):
             time.sleep(1)
             select_district.select_by_index(x)
@@ -122,6 +123,7 @@ class teacher_exception_report():
             values = value[3:]+'_'
             markers = self.driver.find_elements_by_class_name(Data.dots)
             time.sleep(3)
+            marker = len(markers)-1
             if (len(markers) - 1) == 0:
                 print("District " + select_district.first_selected_option.text + " no data")
                 count = count + 1
@@ -150,7 +152,7 @@ class teacher_exception_report():
                             print("school count mismatched", int(teacher), int(ta))
                             count = count + 1
                     os.remove(self.filename)
-                return count
+        return marker,count
 
 
     def ClusterPerBlockCsvDownload(self):
@@ -165,6 +167,7 @@ class teacher_exception_report():
         select_district = Select(self.driver.find_element_by_id('choose_dist'))
         select_block = Select(self.driver.find_element_by_id('choose_block'))
         count = 0
+        markers=0
         for x in range(len(select_district.options) - 1, len(select_district.options)):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
@@ -200,7 +203,7 @@ class teacher_exception_report():
                             count = count + 1
                     os.remove(self.filename)
                 print(markers,count)
-            return count
+        return markers,count
 
     def SchoolPerClusterCsvDownload(self):
         cal = GetData()
@@ -215,6 +218,7 @@ class teacher_exception_report():
         select_block = Select(self.driver.find_element_by_id('choose_block'))
         select_cluster=Select(self.driver.find_element_by_id('choose_cluster'))
         count = 0
+        markers = 0
         if 'No data found' in self.driver.page_source:
             print("No data found showing on report")
             count = count+1
@@ -258,7 +262,7 @@ class teacher_exception_report():
                                     print("Teacher count mismatched", int(teacher), int(ta))
                                     count = count + 1
                             os.remove(self.filename)
-            return count
+        return markers,count
 
     def check_markers_on_block_map(self):
         cal = GetData()
@@ -332,9 +336,12 @@ class teacher_exception_report():
         return markers, count
 
     def check_markers_on_school_map(self):
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
+        time.sleep(3)
         self.driver.find_element_by_id('schoolbtn').click()
         cal = GetData()
         count = 0
+        time.sleep(10)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         self.fname = file_extention()
@@ -546,7 +553,8 @@ class teacher_exception_report():
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
         timeperiods = Select(self.driver.find_element_by_id('period'))
-        timeperiods.select_by_visible_text(' Overall ')
+        # timeperiods.select_by_visible_text(' Overall ')
+        timeperiods.select_by_index(1)
         self.data.page_loading(self.driver)
         if 'No data found' in self.driver.page_source:
             print("Overall is not having Locators")
@@ -586,7 +594,8 @@ class teacher_exception_report():
         self.file = file_extention()
         cal.click_on_state(self.driver)
         timeperiods = Select(self.driver.find_element_by_id('period'))
-        timeperiods.select_by_visible_text(' Last 7 Days ')
+        # timeperiods.select_by_visible_text(' Last 7 Days ')
+        timeperiods.select_by_index(3)
         cal.page_loading(self.driver)
         if 'No data found' in self.driver.page_source:
             print("Last 7 days is not having Locators")
@@ -627,7 +636,8 @@ class teacher_exception_report():
         cal.click_on_state(self.driver)
         self.year,self.month = cal.get_student_month_and_year_values()
         timeperiods = Select(self.driver.find_element_by_id('period'))
-        timeperiods.select_by_visible_text(' Last 30 Days ')
+        # timeperiods.select_by_visible_text(' Last 30 Days ')
+        timeperiods.select_by_index(2)
         cal.page_loading(self.driver)
         if 'No data found' in self.driver.page_source:
             print("Last 30 days is not having Locators")
@@ -669,7 +679,8 @@ class teacher_exception_report():
         cal.click_on_state(self.driver)
         self.year,self.month = cal.get_student_month_and_year_values()
         timeperiods = Select(self.driver.find_element_by_id('period'))
-        timeperiods.select_by_visible_text(' Last Day ')
+        # timeperiods.select_by_visible_text(' Last Day ')
+        timeperiods.select_by_index(4)
         cal.page_loading(self.driver)
         if 'No data found' in self.driver.page_source:
             print("Last Day is not having Locators")
@@ -712,7 +723,8 @@ class teacher_exception_report():
         cal.click_on_state(self.driver)
         self.year,self.month = cal.get_student_month_and_year_values()
         timeperiods = Select(self.driver.find_element_by_id('period'))
-        timeperiods.select_by_visible_text(' Year and Month ')
+        # timeperiods.select_by_visible_text(' Year and Month ')
+        timeperiods.select_by_index(5)
         cal.page_loading(self.driver)
         if 'No data found' in self.driver.page_source:
             print("Year and month is not having Locators")
@@ -754,7 +766,8 @@ class teacher_exception_report():
         self.file = file_extention()
         cal.click_on_state(self.driver)
         timeperiods = Select(self.driver.find_element_by_id('period'))
-        timeperiods.select_by_visible_text(' Year and Month ')
+        # timeperiods.select_by_visible_text(' Year and Month ')
+        timeperiods.select_by_index(5)
         cal.page_loading(self.driver)
         if 'No data found' in self.driver.page_source:
             print("Year and month is not having Locators")

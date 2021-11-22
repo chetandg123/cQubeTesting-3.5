@@ -1,37 +1,32 @@
+import re
 import time
 
-from selenium.webdriver.support.select import Select
-
+from Locators.parameters import Data
 from reuse_func import GetData
 
-cal = GetData()
-driver = cal.get_driver()
-driver.implicitly_wait(100)
-driver.get("https://uat-pds-billing-info.pdsnew.com/")
+data = GetData()
 
-driver.find_element_by_id("username").send_keys("admin")
-driver.find_element_by_id("password").send_keys("admin")
-driver.find_element_by_id("login").click()
+driver = data.get_driver()
+driver.get("https://cqube-release.tibilprojects.com/")
+data.login_cqube(driver)
+data.navigate_to_student_report()
+data.click_on_state(driver)
+data.page_loading(driver)
+total_students = driver.find_element_by_id(Data.students).text
+students = re.sub("\D", "", total_students)
+student_count = students
 
-# alert = Alert(driver)
-# alert.dismiss()
-time.sleep(20)
-a = Select(driver.find_element_by_id("selectHospitalGroup"))
+no_schools = driver.find_element_by_id(Data.schoolcount).text
+print(no_schools)
+schools = re.sub("\D", "", no_schools)
+school_count = schools
+
+
+driver.find_element_by_id(Data.SAR_Blocks_btn).click()
+data.page_loading(driver)
 time.sleep(5)
-a.select_by_visible_text("COLUMB")
-year = Select(driver.find_element_by_id("selectYear"))
-i = 0
-for i in range(1,len(year.options)):
-    year.select_by_index(i)
-    print(year.options[i].text)
-    time.sleep(8)
-    z = "No Locators Found"
-    value = "Overall Revenue v/s Transactions-" + "year.options[i].text"
-    if z in driver.page_source:
-        print(year.options[0].text, "is not having data")
-        i = i + 1
-    else:
-        if a == value:
-            assert True
-            driver.refresh()
 
+block_stds = students
+block_schs = schools
+
+print(student_count,block_stds,school_count,block_schs)

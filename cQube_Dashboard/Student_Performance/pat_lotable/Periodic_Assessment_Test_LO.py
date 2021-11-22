@@ -1,5 +1,6 @@
 import csv
 import os
+import re
 import time
 
 from selenium.webdriver.support.select import Select
@@ -22,6 +23,7 @@ class Periodic_Assessment_Test_LO_Table():
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
+        time.sleep(5)
         self.load.page_loading(self.driver)
         year = Select(self.driver.find_element_by_id('year'))
         month = Select(self.driver.find_element_by_id('month'))
@@ -187,17 +189,20 @@ class Periodic_Assessment_Test_LO_Table():
             else:
                 print(subject.options[i].text, 'is not displayed ')
                 count = count + 1
-            self.driver.find_element_by_id(Data.Download).click()
-            time.sleep(3)
-            self.filename = self.p.get_download_dir() + '/' + self.fname.patlo_subjects()+management+'_'+ gradenum + '_' + (
-                subject.options[i].text).strip() + \
-                            '_allDistricts_' + self.month + '_' + self.year + '_' + self.load.get_current_date() + '.csv'
-            print(self.filename)
-            if os.path.isfile(self.filename) != True:
-                print(subject.options[i].text, 'csv file is not downloaded')
-                count = count + 1
-            self.load.page_loading(self.driver)
-            os.remove(self.filename)
+            if 'No data found' in self.driver.page_source:
+                print("No Data found on screen")
+            else:
+                self.driver.find_element_by_id(Data.Download).click()
+                time.sleep(3)
+                self.filename = self.p.get_download_dir() + '/' + self.fname.patlo_subjects()+management+'_'+ gradenum + '_' + (
+                    subject.options[i].text).strip() + \
+                                '_allDistricts_' + self.month + '_' + self.year + '_' + self.load.get_current_date() + '.csv'
+                print(self.filename)
+                if os.path.isfile(self.filename) != True:
+                    print(subject.options[i].text, 'csv file is not downloaded')
+                    count = count + 1
+                self.load.page_loading(self.driver)
+                os.remove(self.filename)
         return count
 
     def test_homeicons(self):
@@ -207,7 +212,7 @@ class Periodic_Assessment_Test_LO_Table():
         timeseries = Select(self.driver.find_element_by_id(Data.exam_dates))
         timeseries.select_by_index(2)
         self.load.page_loading(self.driver)
-        self.driver.find_element_by_id(Data.homeicon).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.load.page_loading(self.driver)
 
     def test_homebutton(self):
@@ -232,6 +237,8 @@ class Periodic_Assessment_Test_LO_Table():
         count = 0
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+        time.sleep(1)
         self.driver.find_element_by_id(Data.logout).click()
         if 'Log in to cQube' in self.driver.title:
             print("Logout button is working ")
@@ -361,7 +368,7 @@ class Periodic_Assessment_Test_LO_Table():
                         records = int(len(tablecount)) - 2
                         time.sleep(2)
                         if row_count != records:
-                            print(dists.options[i].text, Blocks.options[j].text, clust.options[k].text,
+                            print(dists.options[i].text, Blocks.options[j].text,
                                   "records count mismatch in downloaded file and table records")
                             count = count + 1
 

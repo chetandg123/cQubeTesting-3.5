@@ -4,6 +4,7 @@ import time
 
 from selenium.webdriver.support.select import Select
 
+from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
 
@@ -21,12 +22,13 @@ class exception_list_download():
         management_types_1 = Select(self.driver.find_element_by_id('management'))
         count = 0
         for i in range(1,len(management_types_1.options)):
-
             management_types = Select(self.driver.find_element_by_id('management'))
             management_types.select_by_index(i)
             name = management_types.options[i].text
             time.sleep(4)
             print(name,'is selected')
+            self.driver.find_element_by_id('exceptList').click()
+            time.sleep(1)
             self.driver.find_element_by_id('isdata').click()
             time.sleep(4)
             print(name, 'is selected and downloading csv file')
@@ -56,7 +58,8 @@ class exception_list_download():
                     #     print(name,"selected management exception is not present in downloaded file")
                     #     count = count + 1
                     os.remove(self.filename)
-            self.driver.find_element_by_id(Data.menu_icon).click()
+            self.driver.find_element_by_id(Data.cQube_logo).click()
+
             time.sleep(5)
         return count
 

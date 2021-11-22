@@ -1,3 +1,4 @@
+import csv
 import os
 import time
 
@@ -317,6 +318,7 @@ class diksha_content_textbook_report():
         self.p = GetData()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.p.page_loading(self.driver)
+        time.sleep(3)
         self.driver.find_element_by_xpath("//*[@id='table_wrapper']/div/div[1]/div/table/thead/tr/th[1]").click()
         self.p.page_loading(self.driver)
         values = self.driver.find_elements_by_xpath("//th[2]")

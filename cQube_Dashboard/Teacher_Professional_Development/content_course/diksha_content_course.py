@@ -4,7 +4,7 @@ import time
 
 from selenium.webdriver.support.select import Select
 
-from Locators.parameters import Data
+from Data.parameters import Data
 from filenames import file_extention
 from get_dir import pwd
 from reuse_func import GetData
@@ -349,7 +349,7 @@ class content_course_report():
         self.data.page_loading(self.driver)
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(1)
-        if " No Locators Available " in self.driver.page_source:
+        if " No Data Available " in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:
@@ -375,7 +375,7 @@ class content_course_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(2)
         time.sleep(3)
-        if " No Locators Available " in self.driver.page_source:
+        if " No Data Available " in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:
@@ -402,7 +402,7 @@ class content_course_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(3)
         time.sleep(3)
-        if " No Locators Available " in self.driver.page_source:
+        if " No Data Available " in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:
@@ -429,7 +429,7 @@ class content_course_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(4)
         time.sleep(5)
-        if " No Locators Available " in self.driver.page_source:
+        if " No Data Available " in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:

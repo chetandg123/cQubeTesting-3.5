@@ -485,35 +485,11 @@ class student_attendance_report():
             cal.page_loading(self.driver)
         return count
 
-    def block_total_no_of_students(self):
+    def check_blocklevel_total_no_of_students(self):
         cal = GetData()
         cal.click_on_state(self.driver)
+        time.sleep(3)
         cal.page_loading(self.driver)
-        # self.driver.find_element_by_id()
-        # total_students = self.driver.find_element_by_id(Data.students).text
-        # print(total_students)
-        # time.sleep(1)
-        # students = re.sub("\D", "", total_students)
-        # self.student_count = students
-        #
-        # no_schools = self.driver.find_element_by_id(Data.schoolcount).text
-        # print(no_schools)
-        # schools = re.sub("\D", "", no_schools)
-        # self.school_count = schools
-        #
-        # print(students ,schools,"  -student and school -")
-        #
-        # self.driver.find_element_by_id(Data.SAR_Blocks_btn).click()
-        # cal.page_loading(self.driver)
-        # time.sleep(5)
-        # Bstudents = self.driver.find_element_by_id(Data.students).text
-        # Bstudent = re.sub("\D", "", Bstudents)
-        #
-        # Bschools = self.driver.find_element_by_id(Data.schoolcount).text
-        # Bschools = re.sub("\D", "", Bschools)
-        #
-        # print('final values',self.student_count, Bstudent, self.school_count, Bschools)
-        # return self.student_count, Bstudent, self.school_count, Bschools
         total_students = self.driver.find_element_by_id(Data.students).text
         students = re.sub("\D", "", total_students)
         student_count = students
@@ -529,34 +505,55 @@ class student_attendance_report():
 
         block_stds = students
         block_schs = schools
-        print( student_count, block_stds, school_count, block_schs)
-        return student_count, block_stds, school_count, block_schs
 
-    def cluster_total_no_of_students(self):
-        self.driver.find_element_by_id(Data.SAR_Clusters_btn).click()
+        print(student_count, block_stds, school_count, block_schs)
+
+        return student_count,block_stds,school_count,block_schs
+
+
+    def check_clusterlevel_total_no_of_students(self):
         cal = GetData()
+        cal.click_on_state(self.driver)
+        time.sleep(3)
         cal.page_loading(self.driver)
+        total_students = self.driver.find_element_by_id(Data.students).text
+        students = re.sub("\D", "", total_students)
+        student_count = students
+
+        no_schools = self.driver.find_element_by_id(Data.schoolcount).text
+        print(no_schools)
+        schools = re.sub("\D", "", no_schools)
+        school_count = schools
+
+        self.driver.find_element_by_id(Data.SAR_Clusters_btn).click()
         time.sleep(10)
-        Cstudents = self.driver.find_element_by_id(Data.students).text
-        Cstudent = re.sub("\D", "", Cstudents)
-        Cschools = self.driver.find_element_by_id(Data.schoolcount).text
-        Cschool = re.sub("\D", "", Cschools)
-        print(self.student_count, Cstudent,self.school_count,Cschool)
-        return self.student_count, Cstudent,self.school_count,Cschool
+        Cstudent = students
+        Cschool = schools
+
+        return student_count, Cstudent,school_count,Cschool
 
 
-    def schools_total_no_of_students(self):
+    def check_schoollevel_total_no_of_students(self):
+        cal = GetData()
+        cal.click_on_state(self.driver)
+        time.sleep(3)
+        cal.page_loading(self.driver)
+        total_students = self.driver.find_element_by_id(Data.students).text
+        students = re.sub("\D", "", total_students)
+        student_count = students
+
+        no_schools = self.driver.find_element_by_id(Data.schoolcount).text
+        print(no_schools)
+        schools = re.sub("\D", "", no_schools)
+        school_count = schools
         self.driver.find_element_by_id(Data.SAR_Schools_btn).click()
         cal = GetData()
         cal.page_loading(self.driver)
         time.sleep(10)
-        Sstudents = self.driver.find_element_by_id(Data.students).text
-        Sstudent = re.sub("\D", "", Sstudents)
-
-        Sschools = self.driver.find_element_by_id(Data.schoolcount).text
-        Sschool = re.sub("\D", "", Sschools)
+        Sstudent = re.sub("\D", "", total_students)
+        Sschool = re.sub("\D", "", no_schools)
         print(self.student_count, Sstudent, self.school_count, Sschool)
-        return self.student_count, Sstudent, self.school_count, Sschool
+        return student_count, Sstudent, school_count, Sschool
 
     def click_on_logout(self):
         self.driver.find_element_by_id(Data.menu_icon).click()

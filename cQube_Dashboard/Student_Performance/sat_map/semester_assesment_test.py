@@ -679,7 +679,7 @@ class sat_map_report():
                     time.sleep(3)
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(3)
-                    self.filename = p.get_download_dir() + '/' + files.sr_gradewise()+management+"_"+self.year.strip()+"_"+self.semester+"_Grade_"+gradenum.strip()+'_'+sub+'_allDistrict_' + self.data.get_current_date()+'.csv'
+                    self.filename = p.get_download_dir() + '/' + files.sr_gradewise()+management+"_"+self.year.strip()+"_"+self.semester+"_Grade_"+gradenum.strip()+'_'+sub+'_allDistricts_' + self.data.get_current_date()+'.csv'
                     print(self.filename)
                     if os.path.isfile(self.filename) != True:
                         print(files.sr_gradewise()+gradenum.strip() ,' wise csv file is not downloaded')

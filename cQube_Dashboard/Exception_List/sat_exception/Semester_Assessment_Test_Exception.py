@@ -1,6 +1,7 @@
 import os
 import re
 import time
+from datetime import date
 
 import pandas as pd
 from selenium.webdriver.support.select import Select
@@ -164,7 +165,7 @@ class Semester_Assessment_Test_Exception():
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
             p = pwd()
-            self.filename = p.get_download_dir() + "/" + self.fname.exception_districtwise()+management+'_overall_allGrades__blocks_of_district_'+value.strip()+cal.get_current_date()+'.csv'
+            self.filename = p.get_download_dir() + "/" + self.fname.exception_districtwise()+management+'_overall_allGrades__blockPerDistricts_of_district_'+value.strip()+cal.get_current_date()+'.csv'
             print(self.filename)
             if os.path.isfile(self.filename) != True:
                 print("District" + select_district.first_selected_option.text + "csv is not downloaded")
@@ -177,7 +178,7 @@ class Semester_Assessment_Test_Exception():
                 #     for row in csv.reader(fin):
                 #         schools += int(row[6].replace(',', ''))
                 data = pd.read_csv(self.filename)
-                schools = data['Total Schools With Missing Locators'].sum()
+                schools = data['Total Schools With Missing Data'].sum()
                 missingdata = self.driver.find_element_by_id('schools').text
                 md = re.sub('\D', '', missingdata)
                 if int(schools) != int(md):
@@ -199,7 +200,7 @@ class Semester_Assessment_Test_Exception():
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
         p = pwd()
-        self.filename = p.get_download_dir() + "/" + self.fname.exception_district()+management+'_overall_allGrades__allBlocks_'+cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + "/" + self.fname.exception_district()+management+'_overall_allGrades__allDistricts_'+cal.get_current_date()+'.csv'
         print(self.filename)
         cal.page_loading(self.driver)
         if not os.path.isfile(self.filename):
@@ -213,7 +214,7 @@ class Semester_Assessment_Test_Exception():
             #     for row in csv.reader(fin):
             #         schools += int(row[4])
             data = pd.read_csv(self.filename)
-            schools = data["Total Schools With Missing Locators"].sum()
+            schools = data["Total Schools With Missing Data"].sum()
             school = self.driver.find_element_by_id("schools").text
             sc = re.sub('\D', "", school)
             if int(sc) != int(schools):
@@ -227,7 +228,7 @@ class Semester_Assessment_Test_Exception():
         cal = GetData()
         count = 0
         cal.page_loading(self.driver)
-        self.driver.find_element_by_id(Data.homeicon).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         cal = GetData()
         cal.page_loading(self.driver)
         if 'sem-exception' in self.driver.current_url:
@@ -235,6 +236,21 @@ class Semester_Assessment_Test_Exception():
         else:
             print("Semester exception is not exist")
             count = count + 1
+        return count
+
+    def check_dots_on_each_districts(self):
+        cal = GetData()
+        cal.click_on_state(self.driver)
+        cal.page_loading(self.driver)
+        select_district = Select(self.driver.find_element_by_id('choose_dist'))
+        count = 0
+        for x in range(1, len(select_district.options)):
+            select_district.select_by_index(x)
+            cal.page_loading(self.driver)
+            dots = self.driver.find_elements_by_class_name(Data.dots)
+            if int(len(dots) - 1) == 0:
+                print("District" + select_district.first_selected_option.text + "Markers are not found")
+                count = count + 1
         return count
 
     def check_csv_download(self):
@@ -259,7 +275,7 @@ class Semester_Assessment_Test_Exception():
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(4)
                 p= pwd()
-                self.filename = p.get_download_dir() + "/" + self.fname.exception_blockwise()+management+'_overall_allGrades__clusters_of_block_'+value.strip()+date.today().strftime('%d-%m-%Y').strip()+'.csv'
+                self.filename = p.get_download_dir() + "/" + self.fname.exception_blockwise()+management+'_overall_allGrades__clusterPerBlocks_of_block_'+value.strip()+date.today().strftime('%d-%m-%Y').strip()+'.csv'
                 print(self.filename)
                 if os.path.isfile(self.filename) != True:
                     print("District" + select_district.first_selected_option.text + "Block " + select_block.first_selected_option.text   + "csv is not downloaded")
@@ -272,7 +288,7 @@ class Semester_Assessment_Test_Exception():
                     #     for row in csv.reader(fin):
                     #         schools += int(row[8].replace(',', ''))
                     data = pd.read_csv(self.filename)
-                    schools = data["Total Schools With Missing Locators"].sum()
+                    schools = data["Total Schools With Missing Data"].sum()
                     missingdata = self.driver.find_element_by_id('schools').text
                     md = re.sub('\D', '', missingdata)
                     if int(schools) != int(md):
@@ -283,7 +299,9 @@ class Semester_Assessment_Test_Exception():
                 os.remove(self.filename)
                 return count
     def click_on_logout(self):
-        self.driver.find_element_by_id(Data.Logout).click()
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+        time.sleep(1)
+        self.driver.find_element_by_id(Data.logout).click()
         return self.driver.title
 
     def click_on_hyperlinks(self):

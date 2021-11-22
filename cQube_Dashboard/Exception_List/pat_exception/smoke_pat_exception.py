@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
-import time
 
-from Locators.parameters import Data
-from Exceptions_Reports.Periodic_Exception.pat_scripts import pat_exception_report
+from cQube_Dashboard.Exception_List.pat_exception.pat_scripts import pat_exception_report
 from reuse_func import GetData
 
 

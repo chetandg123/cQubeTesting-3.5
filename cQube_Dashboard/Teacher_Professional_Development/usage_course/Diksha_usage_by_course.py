@@ -1,3 +1,4 @@
+import csv
 import os
 import re
 import time
@@ -211,7 +212,7 @@ class diksha_usage_course_report():
             return count
         else:
             self.driver.find_element_by_id('rawDownload').click()
-            time.sleep(35)
+            time.sleep(40)
             timeperiod = (times.first_selected_option.text).lower()
             self.filename = self.p.get_download_dir() + "/"+timeperiod+".csv"
             if os.path.isfile(self.filename) != True:
@@ -264,7 +265,7 @@ class diksha_usage_course_report():
             return count
         else:
             self.driver.find_element_by_id('rawDownload').click()
-            time.sleep(35)
+            time.sleep(40)
             timeperiod = (times.first_selected_option.text.replace("","_")).lower()
             self.filename = self.p.get_download_dir() + "/last_7_days"+".csv"
             print(self.filename)

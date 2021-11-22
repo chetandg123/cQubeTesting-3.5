@@ -209,16 +209,19 @@ class sat_heat_chart():
             else:
                 print(subject.options[i].text ,'is not displayed ')
                 count = count + 1
-            self.driver.find_element_by_id(Data.Download).click()
-            time.sleep(3)
-            self.filename = self.p.get_download_dir() + '/' + self.fname.satchart_subjects()+management+'_'+gradenum+'_'+(subject.options[i].text).strip()+\
-                            '_allDistricts_'+self.month+'_'+self.year+'_'+self.load.get_current_date()+'.csv'
-            print(self.filename)
-            if os.path.isfile(self.filename) != True:
-                print(subject.options[i].text, 'csv file is not downloaded')
-                count = count + 1
-            self.load.page_loading(self.driver)
-            os.remove(self.filename)
+            if "No data found" in self.driver.page_source:
+                print('No data found on screen...')
+            else:
+                self.driver.find_element_by_id(Data.Download).click()
+                time.sleep(3)
+                self.filename = self.p.get_download_dir() + '/' + self.fname.satchart_subjects()+management+'_'+gradenum+'_'+(subject.options[i].text).strip()+\
+                                '_allDistricts_'+self.month+'_'+self.year+'_'+self.load.get_current_date()+'.csv'
+                print(self.filename)
+                if os.path.isfile(self.filename) != True:
+                    print(subject.options[i].text, 'csv file is not downloaded')
+                    count = count + 1
+                self.load.page_loading(self.driver)
+                os.remove(self.filename)
         return count
 
 
@@ -232,7 +235,7 @@ class sat_heat_chart():
         timeseries = Select(self.driver.find_element_by_id(Data.exam_dates))
         timeseries.select_by_index(2)
         self.load.page_loading(self.driver)
-        self.driver.find_element_by_id(Data.homeicon).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.load.page_loading(self.driver)
 
     def test_homebutton(self):
@@ -242,7 +245,7 @@ class sat_heat_chart():
         self.load.page_loading(self.driver)
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.load.page_loading(self.driver)
-        self.driver.find_element_by_xpath("//div[@id='satHeatChart']").click()
+        self.load.navigate_to_sat_heatchart_report()
         self.load.page_loading(self.driver)
         if 'sat-heat-chart' in self.driver.current_url:
             print('SAT heat chart is present ')
@@ -258,6 +261,8 @@ class sat_heat_chart():
         count = 0
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+        time.sleep(1)
         self.driver.find_element_by_id(Data.logout).click()
         if 'Log in to cQube' in self.driver.title:
             print("Logout button is working ")
@@ -370,18 +375,21 @@ class sat_heat_chart():
                         self.load.page_loading(self.driver)
                         value =self.driver.find_element_by_id(Data.cluster_dropdown).get_attribute('value')
                         value = value[3:]+'_'
-                        self.driver.find_element_by_id(Data.Download).click()
-                        time.sleep(3)
-                        self.filename = self.p.get_download_dir() + '/' + self.fname.satchart_schools()+management+'_'+gradenum+"_schools_of_cluster_"+value.strip()+self.month+'_'+self.year+'_'+ \
-                        self.load.get_current_date()+'.csv'
-                        print(self.filename)
-                        file = os.path.isfile(self.filename)
-                        if file != True:
-                            print(clust.options[k].text, 'Cluster wise records csv file is not downloaded')
-                            count = count + 1
-                        self.load.page_loading(self.driver)
-                        os.remove(self.filename)
-        return count
+                        if 'No data found' in self.driver.page_source:
+                            print("No Data found for "+clust.options[k].text)
+                        else:
+                            self.driver.find_element_by_id(Data.Download).click()
+                            time.sleep(3)
+                            self.filename = self.p.get_download_dir() + '/' + self.fname.satchart_schools()+management+'_'+gradenum+"_schools_of_cluster_"+value.strip()+self.month+'_'+self.year+'_'+ \
+                            self.load.get_current_date()+'.csv'
+                            print(self.filename)
+                            file = os.path.isfile(self.filename)
+                            if file != True:
+                                print(clust.options[k].text, 'Cluster wise records csv file is not downloaded')
+                                count = count + 1
+                            self.load.page_loading(self.driver)
+                            os.remove(self.filename)
+            return count
 
     def grades_files(self):
         self.p = pwd()

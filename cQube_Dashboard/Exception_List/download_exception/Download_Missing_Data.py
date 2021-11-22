@@ -30,6 +30,8 @@ class exception_download():
             name = management_types.options[i].text
             time.sleep(4)
             print(name,'is selected')
+            self.driver.find_element_by_id('exceptList').click()
+            time.sleep(1)
             self.driver.find_element_by_id('isdata').click()
             time.sleep(4)
             print(name, 'is selected and downloading csv file')
@@ -59,6 +61,6 @@ class exception_download():
                     #     print(name,"selected management exception is not present in downloaded file")
                     #     count = count + 1
                     os.remove(self.filename)
-            self.driver.find_element_by_id(Data.menu_icon).click()
+            self.driver.find_element_by_id(Data.cQube_logo).click()
             time.sleep(5)
         return count
