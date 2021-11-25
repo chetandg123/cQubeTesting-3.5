@@ -61,6 +61,9 @@ class Data():
     content_course = "dtr"
     course_progress = "tdp-cp"
     tpd_enrollment = "tpd-enroll"
+    tpd_content_plays="tpd-comp"
+    etb_content_plays="utc"
+    content_usage="content_usage"
     completion_percentage = "tpd-comp"
     usage_textbook = "ut"
     content_textbook = "utc"
@@ -444,4 +447,8 @@ class Data():
     state_crc="//*[@id='crc']/div[2]/div/table/tbody/tr/td"
 
 
+    #TPD ContentPlays
+    time_spent_Dropdown="choose_infra"
+    legends ="legends"
 
+    dist_dropdown="choose_infra"

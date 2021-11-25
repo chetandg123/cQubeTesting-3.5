@@ -362,6 +362,33 @@ class GetData():
         self.driver.find_element_by_id(Data.tpd_enrollment).click()
         time.sleep(3)
 
+    def navigate_to_tpd_content_plays_report(self):
+        self.driver.implicitly_wait(30)
+        self.driver.find_element_by_id(Data.menu_icon).click()
+        time.sleep(1)
+        self.driver.find_element_by_id(Data.tpd_opts).click()
+        time.sleep(2)
+        self.driver.find_element_by_id(Data.tpd_content_plays).click()
+        time.sleep(3)
+
+    def navigate_to_tpd_content_usage_piechart_report(self):
+        self.driver.implicitly_wait(30)
+        self.driver.find_element_by_id(Data.menu_icon).click()
+        time.sleep(1)
+        self.driver.find_element_by_id(Data.tpd_opts).click()
+        time.sleep(2)
+        self.driver.find_element_by_id(Data.tpd_content_plays).click()
+        time.sleep(3)
+
+    def navigate_to_etb_content_plays_report(self):
+        self.driver.implicitly_wait(30)
+        self.driver.find_element_by_id(Data.menu_icon).click()
+        time.sleep(1)
+        self.driver.find_element_by_id(Data.diksha_ETB).click()
+        time.sleep(2)
+        self.driver.find_element_by_id(Data.etb_content_plays).click()
+        time.sleep(3)
+
     def navigate_to_tpd_completion_percentage(self):
         self.driver.implicitly_wait(30)
         self.driver.find_element_by_id(Data.menu_icon).click()

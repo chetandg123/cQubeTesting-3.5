@@ -4,7 +4,7 @@ import time
 
 from selenium.webdriver.support.select import Select
 
-from Data.parameters import Data
+from Locators.parameters import Data
 from filenames import file_extention
 from get_dir import pwd
 from reuse_func import GetData
