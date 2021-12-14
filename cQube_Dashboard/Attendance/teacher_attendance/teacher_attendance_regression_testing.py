@@ -22,7 +22,7 @@ class cQube_Teacher_Attendance_regression(unittest.TestCase):
         self.month = month.first_selected_option.text
 
     def test_click_on_teacher_attendence_report(self):
-        sar = Teacher_Attendance_report(self.driver)
+        sar = Teacher_Attendance_report(self.driver,self.year,self.month)
         result = sar.click_on_sar()
         if "Teacher Attendance Infra_Table_Report" in self.driver.page_source:
             print("Navigating to Student Attendance Infra_Table_Report is working")
@@ -30,19 +30,19 @@ class cQube_Teacher_Attendance_regression(unittest.TestCase):
             print("Teacher_Attendance page does not exist!...")
 
     def test_click_on_blocks(self):
-        block = Teacher_Attendance_report(self.driver)
+        block = Teacher_Attendance_report(self.driver,self.year,self.month)
         result = block.check_markers_on_block_map()
         self.assertNotEqual(0, len(result) - 1, msg="Dots are not present on map")
         print("Blocks button is working")
         print("Markers are present on the map")
 
-        cluster = Teacher_Attendance_report(self.driver)
+        cluster = Teacher_Attendance_report(self.driver,self.year,self.month)
         result = cluster.check_markers_on_clusters_map()
         self.assertNotEqual(0, len(result) - 1, msg="Dots are not present on map")
         print("Clusters button is working")
         print("Markers are present on the map")
 
-        school = Teacher_Attendance_report(self.driver)
+        school = Teacher_Attendance_report(self.driver,self.year,self.month)
         result = school.check_markers_on_school_map()
         self.assertNotEqual(0, int(len(result) - 1), msg="Dots are not present on map")
         print("Schools button is working")
@@ -112,7 +112,7 @@ class cQube_Teacher_Attendance_regression(unittest.TestCase):
             raise self.failureException("Schools per cluster csv report download is working")
 
     def test_check_hyperlinks(self):
-        hyperlinks = Teacher_Attendance_report(self.driver)
+        hyperlinks = Teacher_Attendance_report(self.driver,self.year,self.month)
         result1,result2,choose_dist= hyperlinks.click_on_hyperlinks()
         # if result1 == False and result2 == False and choose_dist == "Choose a District " :
         #     print("hyperlinks are working")
@@ -120,7 +120,7 @@ class cQube_Teacher_Attendance_regression(unittest.TestCase):
         #     raise self.failureException("hyperlinks are not working")
 
     def test_home_icon(self):
-        home = Teacher_Attendance_report(self.driver)
+        home = Teacher_Attendance_report(self.driver,self.year,self.month)
         home.click_on_blocks_click_on_home_icon()
         result = home.click_HomeButton()
         if "teacher-attendance" in result:
@@ -130,7 +130,7 @@ class cQube_Teacher_Attendance_regression(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_total_no_of_students_and_total_no_of_schools_is_equals_at_districts_blocks_clusters_schools(self):
-        tc = Teacher_Attendance_report(self.driver)
+        tc = Teacher_Attendance_report(self.driver,self.year,self.month)
         student_count, Bstudents,school_count, Bschools = tc.block_total_no_of_students()
         self.assertEqual(int(student_count), int(Bstudents), msg="Block level no of students are not equal")
         self.assertEqual(int(school_count), int(Bschools), msg="Block level no of schools are not equal to no of schools ")
@@ -146,7 +146,7 @@ class cQube_Teacher_Attendance_regression(unittest.TestCase):
 
 
     def test_logout(self):
-        logout = Teacher_Attendance_report(self.driver)
+        logout = Teacher_Attendance_report(self.driver,self.year,self.month)
         result = logout.click_on_logout()
         self.assertEqual("Log in to cQube", result, msg="login page is not exist!..")
         print("Logout Functionality is working")

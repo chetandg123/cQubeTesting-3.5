@@ -449,7 +449,7 @@ class Teacher_Attendance_report():
         self.driver.find_element_by_id(Data.SAR_Blocks_btn).click()
         cal = GetData()
         cal.page_loading(self.driver)
-        self.driver.find_element_by_id(Data.homeicon).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         cal.page_loading(self.driver)
 
 
@@ -563,7 +563,9 @@ class Teacher_Attendance_report():
         return self.student_count, Sstudent, self.school_count, Sschool
 
     def click_on_logout(self):
-        self.driver.find_element_by_id(Data.Logout).click()
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+        time.sleep(2)
+        self.driver.find_element_by_id(Data.logout).click()
         return self.driver.title
 
     def block_no_of_schools(self):

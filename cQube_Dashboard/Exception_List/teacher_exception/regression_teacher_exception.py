@@ -48,7 +48,6 @@ class cQube_teacher_exception_regression_report(unittest.TestCase):
         b = teacher_exception_report(self.driver,self.year, self.month)
         time.sleep(2)
         res2 = b.ClusterPerBlockCsvDownload()
-        # self.assertEqual(res1,0,msg='Markers are not present')
         self.assertEqual(0,res2 , msg='Some cluster level files are not downloaded')
         print('Checking each cluster markers and csv file downloading ')
         self.data.page_loading(self.driver)
