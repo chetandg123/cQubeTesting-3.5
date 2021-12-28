@@ -448,7 +448,11 @@ class Data():
 
 
     #TPD ContentPlays
-    time_spent_Dropdown="choose_infra"
+    time_spent_Dropdown="choose_type"
     legends ="legends"
+    legend_button=""
 
     dist_dropdown="choose_infra"
+    content_plays = "content_plays"
+    time_spent = "time_spent"
+    avg_time = "avg_time"

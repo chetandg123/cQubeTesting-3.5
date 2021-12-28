@@ -167,6 +167,7 @@ class cQube_landing_page():
             count = count + 1
         else:
             print("std-performance-dashboard-dashboard is displayed ...")
+            time.sleep(2)
             self.driver.find_element_by_id(Data.patheatchart).click()
             self.data.page_loading(self.driver)
             if "heat-chart" in self.driver.current_url:

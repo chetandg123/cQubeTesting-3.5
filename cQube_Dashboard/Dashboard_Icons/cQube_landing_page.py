@@ -135,11 +135,11 @@ class cQube_Home(unittest.TestCase):
         self.assertEqual(0, res, msg='Report page is not exist')
         self.data.page_loading(self.driver)
 
-    def test_diksha_completion(self):
-        b = cQube_landing_page(self.driver)
-        res = b.check_tpd_completion_report()
-        self.assertEqual(0, res, msg='Report page is not exist')
-        self.data.page_loading(self.driver)
+    # def test_diksha_completion(self):
+    #     b = cQube_landing_page(self.driver)
+    #     res = b.check_tpd_completion_report()
+    #     self.assertEqual(0, res, msg='Report page is not exist')
+    #     self.data.page_loading(self.driver)
 
     def test_diksha_course_progress(self):
         b = cQube_landing_page(self.driver)

@@ -184,4 +184,29 @@ class Files():
     enrollment_overall=""
     completion_overall=""
 
+    tpd_content_plays_file="Tpd_Total_Content_Plays.csv"
+    tpd_time_spent_file="Tpd_Total_Time_Spent.csv"
+    tpd_average_time_spent_file="Tpd_Avg_Time_Spent.csv"
+
+    etb_content_plays_file = "Etb_Total_Content_Plays.csv"
+    etb_time_spent_file = "Etb_Total_Time_Spent.csv"
+    etb_average_time_spent_file = "Etb_Avg_Time_Spent.csv"
+
+    content_preference_state="Content-usage-state.csv"
+
+    #user engengment
+    average_time_state="Average_Time_Spent_Gujarat.csv"
+    average_time_districts="Average_time_spend_"
+
+    #on boarding
+    enroll_progress_state="enrollment-progress-state.csv"
+
+    per_capita_statewise="ETB_Per_Capita_Gujarat.csv"
+
+    content_year_statewise="Total_content_play_over_years.csv"
+    content_year_districtwise="Total_content_play_"
+
+
+
+
 

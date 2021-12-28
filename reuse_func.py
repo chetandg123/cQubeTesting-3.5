@@ -362,7 +362,7 @@ class GetData():
         self.driver.find_element_by_id(Data.tpd_enrollment).click()
         time.sleep(3)
 
-    def navigate_to_tpd_content_plays_report(self):
+    def navigate_to_gps_of_learning_tpd(self):
         self.driver.implicitly_wait(30)
         self.driver.find_element_by_id(Data.menu_icon).click()
         time.sleep(1)
