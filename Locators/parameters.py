@@ -61,8 +61,9 @@ class Data():
     content_course = "dtr"
     course_progress = "tdp-cp"
     tpd_enrollment = "tpd-enroll"
-    tpd_content_plays="tpd-comp"
-    etb_content_plays="utc"
+    tpd_content_preference="tpd-content"
+    gps_tpd_map="tpd-gps"
+    gps_etb_map="etb-gps"
     content_usage="content_usage"
     completion_percentage = "tpd-comp"
     usage_textbook = "ut"
@@ -456,3 +457,9 @@ class Data():
     content_plays = "content_plays"
     time_spent = "time_spent"
     avg_time = "avg_time"
+
+    #Content preference
+    state_cp_header = "h5"
+    state_district="choose_district"
+    multi_selection="multiSelector"
+    multi_submit="multiSelectorSubmit"

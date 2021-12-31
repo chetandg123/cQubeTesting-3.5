@@ -314,6 +314,7 @@ class tpd_content_plays_map_report():
                 content_plays = df['Total Content Plays'].sum()
                 time_spent = df['Total Time Spent'].sum()
                 avg_time = df['Avg Time Spent'].sum() / size
+
                 total_cp = self.driver.find_element(By.ID,Data.content_plays).text
                 total_ts= self.driver.find_element(By.ID,Data.time_spent).text
                 avg_spent=self.driver.find_element(By.ID,avg_time).text

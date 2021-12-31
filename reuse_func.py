@@ -368,7 +368,7 @@ class GetData():
         time.sleep(1)
         self.driver.find_element_by_id(Data.tpd_opts).click()
         time.sleep(2)
-        self.driver.find_element_by_id(Data.tpd_content_plays).click()
+        self.driver.find_element_by_id(Data.gps_tpd_map).click()
         time.sleep(3)
 
     def navigate_to_tpd_content_usage_piechart_report(self):
@@ -377,7 +377,7 @@ class GetData():
         time.sleep(1)
         self.driver.find_element_by_id(Data.tpd_opts).click()
         time.sleep(2)
-        self.driver.find_element_by_id(Data.tpd_content_plays).click()
+        self.driver.find_element_by_id(Data.tpd_content_preference).click()
         time.sleep(3)
 
     def navigate_to_etb_content_plays_report(self):
@@ -386,7 +386,7 @@ class GetData():
         time.sleep(1)
         self.driver.find_element_by_id(Data.diksha_ETB).click()
         time.sleep(2)
-        self.driver.find_element_by_id(Data.etb_content_plays).click()
+        self.driver.find_element_by_id(Data.gps_etb_map).click()
         time.sleep(3)
 
     def navigate_to_tpd_completion_percentage(self):
