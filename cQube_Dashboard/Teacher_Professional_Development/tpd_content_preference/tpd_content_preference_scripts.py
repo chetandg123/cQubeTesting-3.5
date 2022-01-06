@@ -18,7 +18,8 @@ class tpd_content_usage_piechart():
     def __init__(self,driver):
         self.driver = driver
         self.data = GetData()
-
+        self.p = pwd()
+        self.fname = Files()
     def check_navigation_to_content_usage_report(self):
         count = 0
         self.data.click_on_state(self.driver)
@@ -34,7 +35,8 @@ class tpd_content_usage_piechart():
 
     def check_hyperlink_functionality(self):
         count = 0
-        self.data.click_on_state(self.driver)
+        self.driver.find_element(By.XPATH,Data.hyper_link).click()
+        time.sleep(3)
         districts = Select(self.driver.find_element(By.ID,Data.dist_dropdown))
         districts.select_by_index(2)
         print(districts.options[2].text,'is selected')
@@ -54,7 +56,8 @@ class tpd_content_usage_piechart():
         return options
 
     def check_selection_of_options(self):
-        self.data.click_on_state(self.driver)
+        self.driver.find_element(By.XPATH,Data.hyper_link).click()
+        time.sleep(3)
         district = Select(self.driver.find_element(By.ID, Data.dist_dropdown))
         spents = len(district.options) - 1
         for i in range(1,spents):
@@ -88,52 +91,63 @@ class tpd_content_usage_piechart():
                  count = count + 1
         return count
 
+
+
     def check_download_statewise_with_contentplays(self):
         count = 0
-        self.p = pwd()
-        self.fname = Files()
-        self.data.click_on_state(self.driver)
+        self.driver.find_element(By.XPATH, Data.hyper_link).click()
+        time.sleep(3)
+        self.driver.refresh()
+        self.data.page_loading(self.driver)
+        print('hyperlink click is happened')
         if 'No data found' in self.driver.page_source:
             print("Content Preference Report showing no data found ")
         else:
+
             self.driver.find_element(By.ID, Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + self.fname.content_preference_state
-            if os.path.isfile(self.filename) != False:
-                print(self.fname.tpd_content_plays_file, 'is not downloaded ')
+            print('Downlaod click is happened')
+            self.filename = self.p.get_download_dir() + '/'+self.fname.content_preference_state
+            print(os.path.isfile(self.filename), 'file is present or not ')
+            if os.path.isfile(self.filename) != True:
+                print(self.fname.content_preference_state, 'is not downloaded: ',self.filename)
                 count = count + 1
             else:
+                print(os.path.isfile(self.filename),'file is present or not ')
                 df = pd.read_csv(self.filename)
                 size = len(df)
                 content_plays = df['Total Content Plays Gujarat'].sum()
 
                 total_cp = self.driver.find_element(By.TAG_NAME, Data.state_cp_header).text
-
                 total_cp = re.sub('\D', "", total_cp)
 
-                if total_cp != content_plays:
+
+                if int(total_cp) != int(content_plays):
                     print("Total content plays is not matching with header information", total_cp, content_plays)
                     count = count + 1
                 else:
                     print(total_cp, content_plays, 'are matching with header information')
+                os.remove(self.filename)
         return count
 
     def check_download_state_with_districts_content_plays(self):
         count = 0
         self.p = pwd()
         self.fname = Files()
-        self.data.click_on_state(self.driver)
+        self.driver.find_element(By.XPATH,Data.hyper_link).click()
+        time.sleep(3)
         if 'No data found' in self.driver.page_source:
             print("Content Preference Report showing no data found ")
         else:
             dropdown = Select(self.driver.find_element(By.ID,Data.state_district))
             dropdown.select_by_index(2)
+            print(dropdown.options[2].text,'is selected')
             time.sleep(5)
             self.driver.find_element(By.ID, Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + self.fname.content_preference_state
-            if os.path.isfile(self.filename) != False:
-                print(self.fname.tpd_content_plays_file, 'is not downloaded ')
+            self.filename = self.p.get_download_dir() + '/' + self.fname.content_preference_state
+            if os.path.isfile(self.filename) != True:
+                print(self.fname.content_preference_state, 'is not downloaded ')
                 count = count + 1
             else:
                 df = pd.read_csv(self.filename)
@@ -143,8 +157,8 @@ class tpd_content_usage_piechart():
                 total_cp = self.driver.find_element(By.TAG_NAME, Data.state_cp_header).text
 
                 total_cp = re.sub('\D', "", total_cp)
-
-                if total_cp != content_plays:
+                os.remove(self.filename)
+                if int(total_cp) != int(content_plays):
                     print("Total content plays is not matching with header information", total_cp, content_plays)
                     count = count + 1
                 else:
@@ -155,7 +169,9 @@ class tpd_content_usage_piechart():
         count = 0
         self.p = pwd()
         self.fname = Files()
-        self.data.click_on_state(self.driver)
+        # self.data.click_on_state(self.driver)
+        self.driver.find_element(By.XPATH,Data.hyper_link).click()
+        time.sleep(3)
         if 'No data found' in self.driver.page_source:
             print("Content Preference Report showing no data found ")
         else:
@@ -163,7 +179,8 @@ class tpd_content_usage_piechart():
             dropdown.select_by_index(2)
             time.sleep(5)
             selection = Select(self.driver.find_element(By.ID,Data.multi_selection))
-            selection.select_by_index(1)
+            print(selection.is_multiple)
+            time.sleep(2)
             selection.select_by_index(4)
             time.sleep(2)
             self.driver.find_element(By.ID,Data.multi_submit).click()
@@ -189,8 +206,8 @@ class tpd_content_usage_piechart():
                         for row in csv.reader(fin):
                             select1 += int(row[3])
                             select2 += int(row[4])
-
-                    if  select1 not in self.driver.page_source:
+                    os.remove(self.filename)
+                    if select1 not in self.driver.page_source:
                         print("Total content plays is not matching with header information", select1)
                         count = count + 1
                     else:

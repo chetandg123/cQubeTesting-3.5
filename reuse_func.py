@@ -54,7 +54,7 @@ class GetData():
         prefs = {'download.default_directory': self.p.get_download_dir()}
         options.add_experimental_option('prefs', prefs)
         options.add_argument("--window-size=3860,2160")
-        options.add_argument('--headless')
+        # options.add_argument('--headless')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-gpu')
         self.driver = webdriver.Chrome(options=options, executable_path=self.p.get_driver_path())
@@ -378,7 +378,7 @@ class GetData():
         self.driver.find_element_by_id(Data.tpd_opts).click()
         time.sleep(2)
         self.driver.find_element_by_id(Data.tpd_content_preference).click()
-        time.sleep(3)
+        time.sleep(5)
 
     def navigate_to_etb_content_plays_report(self):
         self.driver.implicitly_wait(30)
@@ -387,6 +387,34 @@ class GetData():
         self.driver.find_element_by_id(Data.diksha_ETB).click()
         time.sleep(2)
         self.driver.find_element_by_id(Data.gps_etb_map).click()
+        time.sleep(3)
+
+    def navigate_to_etb_usage_per_capita_report(self):
+        self.driver.implicitly_wait(30)
+        self.driver.find_element_by_id(Data.menu_icon).click()
+        time.sleep(1)
+        self.driver.find_element_by_id(Data.diksha_ETB).click()
+        time.sleep(2)
+        self.driver.find_element_by_id(Data.usage_capita).click()
+        time.sleep(3)
+
+    def navigate_to_tpd_user_engagement_report(self):
+        self.driver.implicitly_wait(30)
+        self.driver.find_element_by_id(Data.menu_icon).click()
+        time.sleep(1)
+        self.driver.find_element_by_id(Data.tpd_opts).click()
+        time.sleep(2)
+        self.driver.find_element_by_id(Data.user_engage).click()
+        time.sleep(3)
+
+
+    def navigate_to_tpd_user_on_boarding_report(self):
+        self.driver.implicitly_wait(30)
+        self.driver.find_element_by_id(Data.menu_icon).click()
+        time.sleep(1)
+        self.driver.find_element_by_id(Data.tpd_opts).click()
+        time.sleep(2)
+        self.driver.find_element_by_id(Data.on_boarding).click()
         time.sleep(3)
 
     def navigate_to_tpd_completion_percentage(self):
@@ -441,6 +469,15 @@ class GetData():
         self.driver.find_element_by_id(Data.diksha_ETB).click()
         time.sleep(2)
         self.driver.find_element_by_id(Data.usage_textbook).click()
+        time.sleep(3)
+
+    def navigate_to_etb_nation_learning_report(self):
+        self.driver.implicitly_wait(30)
+        self.driver.find_element_by_id(Data.menu_icon).click()
+        time.sleep(1)
+        self.driver.find_element_by_id(Data.diksha_ETB).click()
+        time.sleep(2)
+        self.driver.find_element_by_id(Data.user_engage).click()
         time.sleep(3)
 
     def navigate_to_completion_error(self):

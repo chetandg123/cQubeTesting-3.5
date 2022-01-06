@@ -206,7 +206,15 @@ class Files():
     content_year_statewise="Total_content_play_over_years.csv"
     content_year_districtwise="Total_content_play_"
 
+    user_engagement_statewise = "Average_Time_Spent_Gujarat.csv"
+    user_engagement_districtwise="Average_time_spend_"
 
+    onboarding_program ="enrollment-progress-state.csv"
+    onboarding_course="enrollment-progress-state.csv"
+    onboarding_districts="enrollment-progress-state.csv"
+    onboarding_statewise="enrollment-progress-state.csv"
 
+    nation_learning_statewise = "Total_content_play_over_years.csv"
+    nation_learning_districtwise = "Total_content_play_"
 
-
+    etb_per_capita_statewise="ETB_Per_Capita_Gujarat.csv"

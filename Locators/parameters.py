@@ -62,9 +62,13 @@ class Data():
     course_progress = "tdp-cp"
     tpd_enrollment = "tpd-enroll"
     tpd_content_preference="tpd-content"
+    user_engage="tpd-userEngag"
+    on_boarding="tpd-userOnboard"
     gps_tpd_map="tpd-gps"
     gps_etb_map="etb-gps"
+    usage_capita="etbCapita"
     content_usage="content_usage"
+    nation_learning="etbHeartBeat"
     completion_percentage = "tpd-comp"
     usage_textbook = "ut"
     content_textbook = "utc"
@@ -453,7 +457,7 @@ class Data():
     legends ="legends"
     legend_button=""
 
-    dist_dropdown="choose_infra"
+    dist_dropdown="choose_district"
     content_plays = "content_plays"
     time_spent = "time_spent"
     avg_time = "avg_time"
@@ -463,3 +467,14 @@ class Data():
     state_district="choose_district"
     multi_selection="multiSelector"
     multi_submit="multiSelectorSubmit"
+
+    #user engagement
+    course_list = "#highcharts-bise6ww-58 > svg > g.highcharts-axis-labels.highcharts-xaxis-labels > text"
+
+    #user on boarding
+    program_dropdown = "choose_program"
+    course_dropdown ="choose_course"
+
+    etb_exp_usr="expect_user"
+    etb_act_usr="actual_user"
+    etb_play_capita="plays_capita"
