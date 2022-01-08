@@ -226,46 +226,46 @@ class MyTestSuite_smoke_chart_tables(unittest.TestCase):
                 runner1.run(smoke_test)
                 outfile.close()
 
-    def test_issue09(self):
-            self.data.page_loading(self.driver)
-            self.data.navigate_to_tpd_enrollment_report()
-            if 'No data found' in self.driver.page_source:
-                print('TPD Enrollment/Completion Report is showing no data found!..')
-                self.driver.close()
-            else:
-                smoke_test = unittest.TestSuite()
-                smoke_test.addTests([
-                    unittest.defaultTestLoader.loadTestsFromTestCase(
-                        enrollment_smoke_test.cQube_enrollment_smoketest)])
-                p = pwd()
-                outfile = open(p.get_smoke_chart_tables_report(), "a")
-                runner1 = HTMLTestRunner.HTMLTestRunner(
-                    stream=outfile,
-                    title=' TPD Enrollment/Completion Smoke Test  Report',
-                    verbosity=1,
-                )
-                runner1.run(smoke_test)
-                outfile.close()
+    # def test_issue09(self):
+    #         self.data.page_loading(self.driver)
+    #         self.data.navigate_to_tpd_enrollment_report()
+    #         if 'No data found' in self.driver.page_source:
+    #             print('TPD Enrollment/Completion Report is showing no data found!..')
+    #             self.driver.close()
+    #         else:
+    #             smoke_test = unittest.TestSuite()
+    #             smoke_test.addTests([
+    #                 unittest.defaultTestLoader.loadTestsFromTestCase(
+    #                     enrollment_smoke_test.cQube_enrollment_smoketest)])
+    #             p = pwd()
+    #             outfile = open(p.get_smoke_chart_tables_report(), "a")
+    #             runner1 = HTMLTestRunner.HTMLTestRunner(
+    #                 stream=outfile,
+    #                 title=' TPD Enrollment/Completion Smoke Test  Report',
+    #                 verbosity=1,
+    #             )
+    #             runner1.run(smoke_test)
+    #             outfile.close()
 
-    def test_issue10(self):
-            p = pwd()
-            self.data.page_loading(self.driver)
-            self.data.navigate_to_tpd_completion_percentage()
-            if 'No data found' in self.driver.page_source:
-                print('TPD Completion Report is showing no data found!..')
-                self.driver.close()
-            else:
-                smoke_test = unittest.TestSuite()
-                smoke_test.addTests([
-                    unittest.defaultTestLoader.loadTestsFromTestCase(
-                        completion_smoke_test.cQube_completion_percentage_smoke )])
-                outfile = open(p.get_smoke_chart_tables_report(), "a")
-                runner1 = HTMLTestRunner.HTMLTestRunner(
-                    stream=outfile,
-                    title='TPD Completion Percentage Smoke Test  Report',
-                    verbosity=1,)
-                runner1.run(smoke_test)
-                outfile.close()
+    # def test_issue10(self):
+    #         p = pwd()
+    #         self.data.page_loading(self.driver)
+    #         self.data.navigate_to_tpd_completion_percentage()
+    #         if 'No data found' in self.driver.page_source:
+    #             print('TPD Completion Report is showing no data found!..')
+    #             self.driver.close()
+    #         else:
+    #             smoke_test = unittest.TestSuite()
+    #             smoke_test.addTests([
+    #                 unittest.defaultTestLoader.loadTestsFromTestCase(
+    #                     completion_smoke_test.cQube_completion_percentage_smoke )])
+    #             outfile = open(p.get_smoke_chart_tables_report(), "a")
+    #             runner1 = HTMLTestRunner.HTMLTestRunner(
+    #                 stream=outfile,
+    #                 title='TPD Completion Percentage Smoke Test  Report',
+    #                 verbosity=1,)
+    #             runner1.run(smoke_test)
+    #             outfile.close()
 
     # def test_issue11(self):
     #         smoke_test = unittest.TestSuite()

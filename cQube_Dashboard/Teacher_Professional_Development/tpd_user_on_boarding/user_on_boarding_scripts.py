@@ -16,12 +16,12 @@ class user_on_boarding_report():
         self.p = pwd()
         self.fname = Files()
 
-    def check_navigation_to_user_engagement_report(self):
+    def check_navigation_to_user_on_boarding_report(self):
         count = 0
         self.data.click_on_state(self.driver)
         self.driver.find_element(By.ID, Data.cQube_logo).click()
         time.sleep(1)
-        self.data.navigate_to_tpd_user_engagement_report()
+        self.data.navigate_to_tpd_user_on_boarding_report()
         if 'enrollment-progress' not in self.driver.current_url:
             print(' User On Boarding Report is not displayed')
             count = count + 1

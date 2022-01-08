@@ -16,12 +16,12 @@ class etb_nation_learning_report():
         self.p = pwd()
         self.fname = Files()
 
-    def check_navigation_to_user_engagement_report(self):
+    def check_navigation_to_nation_learning_report(self):
         count = 0
         self.data.click_on_state(self.driver)
         self.driver.find_element(By.ID, Data.cQube_logo).click()
         time.sleep(1)
-        self.data.navigate_to_tpd_user_engagement_report()
+        self.data.navigate_to_etb_nation_learning_report()
         if 'total-content-play' not in self.driver.current_url:
             print(' Heart Beat nation of learning Report is not displayed')
             count = count + 1

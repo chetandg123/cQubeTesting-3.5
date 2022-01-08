@@ -1,3 +1,4 @@
+import unittest
 from Login import login_page
 from cQube_Dashboard.Attendance.student_attendance import student_attendance_smoke_testing
 from cQube_Dashboard.Attendance.teacher_attendance import teacher_attendance_smoke_testing

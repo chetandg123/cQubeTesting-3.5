@@ -58,6 +58,7 @@ class usage_per_capita_map():
             timespent.select_by_index(i)
             time.sleep(2)
             print(timespent.options[i].text,'is selected and displayed on markers...')
+        return spents
 
     def check_hyperlink_functionality(self):
         count = 0
