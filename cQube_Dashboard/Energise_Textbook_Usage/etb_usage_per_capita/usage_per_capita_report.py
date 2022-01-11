@@ -20,6 +20,7 @@ class usage_per_capita_map():
 
     def check_navigation_from_dashboard(self):
         data = GetData()
+        self.count = 0
         self.driver.find_element(By.XPATH,Data.hyper_link).click()
         data.page_loading(self.driver)
         self.driver.find_element(By.ID,Data.cQube_logo).click()
@@ -44,11 +45,12 @@ class usage_per_capita_map():
         values = len(markers)-1
         return count , values
 
-    def check_choose_type_dropdown(self):
-        self.data.click_on_state(self.driver)
-        timespent = Select(self.driver.find_element(By.ID,Data.time_spent_Dropdown))
-        options = len(timespent.options)-1
-        return options
+    # def check_choose_type_dropdown(self):
+    #     self.data.click_on_state(self.driver)
+    #     time.sleep(2)
+    #     timespent = Select(self.driver.find_element(By.ID,Data.time_spent_Dropdown))
+    #     options = len(timespent.options)-1
+    #     return options
 
     def check_selection_of_options(self):
         self.data.click_on_state(self.driver)
@@ -63,17 +65,9 @@ class usage_per_capita_map():
     def check_hyperlink_functionality(self):
         count = 0
         self.data.click_on_state(self.driver)
-        timespent = Select(self.driver.find_element(By.ID, Data.time_spent_Dropdown))
-        timespent.select_by_index(3)
-        time.sleep(2)
         self.driver.find_element(By.XPATH,Data.hyper_link).click()
         time.sleep(3)
-        if timespent.options[2].text in self.driver.page_source:
-            print("Hyper link is not working...")
-            count = count + 1
-        else:
-             print("Hyper link text is refreshed to home page..")
-        return count
+
 
     def check_legend_card_functionality(self):
         count = 0
@@ -85,8 +79,7 @@ class usage_per_capita_map():
             cards.click()
             time.sleep(2)
             if len(markers)-1 == 0 or 'No data found' in self.driver.page_source:
-                print(legends.text,"selected legend card does not having markers and showing no data found")
-                count = count + 1
+                print("selected legend card does not having markers and showing no data found")
             else:
                 print("Legend cards are working as expected ")
         return count
@@ -124,7 +117,7 @@ class usage_per_capita_map():
             count = count + 1
         else:
             upper_marker = len(markers)-1
-            rgb_legend =self.driver.find_element(By.ID,"0").value_of_css_property('background-color')
+            rgb_legend =self.driver.find_elements(By.ID,"0").value_of_css_property('background-color')
             rgb_markers = markers.value_of_css_property('background-color')
             if total_markers > upper_marker:
                 print('Upper Quartile Markers are showing correct ')
@@ -196,9 +189,10 @@ class usage_per_capita_map():
                 print(self.filename, 'upper quartile file is downlaoded')
                 df = pd.read_csv(self.filename)
                 size = len(df)
-                if int(len(markers)-1) != int(size):
+                if int(total_markers) != int(size):
                     print('Total no of markers information is not present in downloaded csv file',len(markers)-1,size)
                     count = count + 1
+                os.remove(self.filename)
         return count
 
     def check_download_functionality_with_inter_quartile(self):
@@ -222,9 +216,10 @@ class usage_per_capita_map():
                 print(self.filename, 'Inter quartile file is downlaoded')
                 df = pd.read_csv(self.filename)
                 size = len(df)
-                if int(len(markers)-1) != int(size):
+                if int(total_markers) != int(size):
                     print('Total no of markers information is not present in downloaded csv file',len(markers)-1,size)
                     count = count + 1
+                os.remove(self.filename)
         return count
 
     def check_download_functionality_with_bottom_quartile(self):
@@ -248,9 +243,10 @@ class usage_per_capita_map():
                 print(self.filename, 'Bottom quartile file is downlaoded')
                 df = pd.read_csv(self.filename)
                 size = len(df)
-                if int(len(markers)-1) != int(size):
+                if int(total_markers) != int(size):
                     print('Total no of markers information is not present in downloaded csv file',len(markers)-1,size)
                     count = count + 1
+                os.remove(self.filename)
         return count
 
     def check_download_functionality_per_capita_over_quartile(self):
@@ -267,25 +263,25 @@ class usage_per_capita_map():
             df = pd.read_csv(self.filename)
             size = len(df)
             etb_exp_user = df['Expected Etb Users'].sum()
-            etb_act_user = df['Actual Etb Users'].sum()
+            # etb_act_user = df['Actual Etb Users'].sum()
             content_plays = df['Total Content Plays'].sum()
             play_per_capita = df['Plays Per Capita'].sum() / size
             play_per_capita = round(play_per_capita)
 
             exp_user = self.driver.find_element(By.ID,Data.etb_exp_usr).text
-            act_user = self.driver.find_element(By.ID,Data.etb_act_usr).text
+            # act_user = self.driver.find_element(By.ID,Data.etb_act_usr).text
             plays = self.driver.find_element(By.ID,Data.etb_play_capita).text
 
             exp_user = re.sub('\D','',exp_user)
-            act_user = re.sub('\D','',act_user)
+            # act_user = re.sub('\D','',act_user)
             plays = re.sub('\D','',plays)
 
             if etb_exp_user !=exp_user:
                 print('Expected ETB Users value in file and footer value are not matching',etb_exp_user,exp_user)
                 count = count + 1
-            if etb_act_user != act_user:
-                print('Actual ETB Users value in file and footer value are not matching', etb_act_user, act_user)
-                count = count + 1
+            # if etb_act_user != act_user:
+            #     print('Actual ETB Users value in file and footer value are not matching', etb_act_user, act_user)
+            #     count = count + 1
             if plays != play_per_capita:
                 print('Plays per capita value file and footer value are not matching',plays,play_per_capita)
                 count = count + 1

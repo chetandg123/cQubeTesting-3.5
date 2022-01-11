@@ -18,6 +18,7 @@ class tpd_content_plays_map_report():
         self.driver = driver
         self.count = 0
         self.data = GetData()
+        self.p = pwd()
 
     def check_navigation_from_dashboard(self):
         data = GetData()
@@ -80,7 +81,7 @@ class tpd_content_plays_map_report():
         self.data.click_on_state(self.driver)
         markers = self.driver.find_elements(By.CLASS_NAME,Data.dots)
         legends = self.driver.find_elements(By.CLASS_NAME,Data.legends)
-        for i in range(len(legends)-1):
+        for i in range(1,len(legends)-2):
             cards = self.driver.find_element(By.ID,i)
             cards.click()
             time.sleep(2)
@@ -102,7 +103,7 @@ class tpd_content_plays_map_report():
         total_markers = len(markers) - 1
         legends = self.driver.find_elements(By.CLASS_NAME, Data.legends)
         for i in range(5):
-            cards = self.driver.find_element(By.ID, Data.legend_button + i)
+            cards = self.driver.find_element(By.ID,str(i))
             cards.click()
             time.sleep(2)
             if 'No data found' in self.driver.page_source:
@@ -113,7 +114,7 @@ class tpd_content_plays_map_report():
                 sum = sum + total_markers
                 self.driver.find_element(By.ID, Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() + self.fname.tpd_content_plays_file
+                self.filename = self.p.get_download_dir() + '/' + self.fname.tpd_content_plays_file
                 if os.path.isfile(self.filename) != False:
                     print(self.fname.tpd_content_plays_file, 'is not downloaded ')
                     count = count + 1
@@ -131,6 +132,7 @@ class tpd_content_plays_map_report():
         if total_markers != sum:
             print("No of Markers is Not Equal to sum of each legend score markers")
             count = count + 1
+        os.remove(self.filename)
         return count
 
     def check_total_time_spent_legendcard(self):
@@ -143,8 +145,8 @@ class tpd_content_plays_map_report():
         markers = self.driver.find_elements(By.CLASS_NAME, Data.dots)
         total_markers = len(markers)-1
         legends = self.driver.find_elements(By.CLASS_NAME, Data.legends)
-        for i in range(5):
-            cards = self.driver.find_element(By.ID, Data.legend_button+i)
+        for i in range(4):
+            cards = self.driver.find_element(By.ID, str(i))
             cards.click()
             time.sleep(2)
             if 'No data found' in self.driver.page_source:
@@ -155,7 +157,7 @@ class tpd_content_plays_map_report():
                 sum = sum + total_markers
                 self.driver.find_element(By.ID, Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() + self.fname.tpd_time_spent_file
+                self.filename = self.p.get_download_dir() + '/' + self.fname.tpd_time_spent_file
                 if os.path.isfile(self.filename) != False:
                     print(self.fname.tpd_time_spent_file, 'is not downloaded ')
                     count = count + 1
@@ -171,6 +173,7 @@ class tpd_content_plays_map_report():
         if total_markers != sum:
             print("No of Markers is Not Equal to sum of each legend score markers")
             count = count + 1
+        os.remove(self.filename)
         return count
 
     def check_averaage_timespent_legendcard(self):
@@ -184,7 +187,8 @@ class tpd_content_plays_map_report():
         total_markers = len(markers)-1
         legends = self.driver.find_elements(By.CLASS_NAME, Data.legends)
         for i in range(5):
-            cards = self.driver.find_element(By.ID, Data.legend_button+i)
+            self.p = pwd()
+            cards = self.driver.find_element(By.ID,str(i))
             cards.click()
             time.sleep(2)
             if 'No data found' in self.driver.page_source:
@@ -195,7 +199,7 @@ class tpd_content_plays_map_report():
                 sum = sum + total_markers
                 self.driver.find_element(By.ID, Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() + self.fname.tpd_average_time_spent_file
+                self.filename = self.p.get_download_dir() + '/' + self.fname.tpd_average_time_spent_file
                 if os.path.isfile(self.filename) != False:
                     print(self.fname.tpd_average_time_spent_file, 'is not downloaded ')
                     count = count + 1
@@ -211,6 +215,7 @@ class tpd_content_plays_map_report():
         if total_markers != sum:
             print("No of Markers is Not Equal to sum of each legend score markers")
             count = count + 1
+        os.remove(self.filename)
         return count
 
 
@@ -251,7 +256,7 @@ class tpd_content_plays_map_report():
         else:
             self.driver.find_element(By.ID,Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + self.fname.tpd_content_plays_file
+            self.filename = self.p.get_download_dir() + '/' + self.fname.tpd_content_plays_file
             if os.path.isfile(self.filename) != False:
                 print(self.fname.tpd_content_plays_file,'is not downloaded ')
                 count = count + 1
@@ -286,6 +291,7 @@ class tpd_content_plays_map_report():
                     count = count + 1
                 else:
                     print(avg_spent,avg_time,'are matching with footer information')
+        os.remove(self.filename)
         return count
 
     def check_total_timespent_plays_records(self):
@@ -304,7 +310,7 @@ class tpd_content_plays_map_report():
         else:
             self.driver.find_element(By.ID,Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + self.fname.tpd_time_spent_file
+            self.filename = self.p.get_download_dir() + '/' + self.fname.tpd_time_spent_file
             if os.path.isfile(self.filename) != False:
                 print(self.fname.tpd_content_plays_file,'is not downloaded ')
                 count = count + 1
@@ -340,6 +346,7 @@ class tpd_content_plays_map_report():
                     count = count + 1
                 else:
                     print(avg_spent,avg_time,'are matching with footer information')
+        os.remove(self.filename)
         return count
 
     def check_average_time_records(self):
@@ -358,7 +365,7 @@ class tpd_content_plays_map_report():
         else:
             self.driver.find_element(By.ID,Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + self.fname.tpd_average_time_spent_file
+            self.filename = self.p.get_download_dir() + '/'+self.fname.tpd_average_time_spent_file
             if os.path.isfile(self.filename) != False:
                 print(self.fname.tpd_content_plays_file,'is not downloaded ')
                 count = count + 1
@@ -393,5 +400,6 @@ class tpd_content_plays_map_report():
                     count = count + 1
                 else:
                     print(avg_spent,avg_time,'are matching with footer information')
+        os.remove(self.filename)
         return count
 

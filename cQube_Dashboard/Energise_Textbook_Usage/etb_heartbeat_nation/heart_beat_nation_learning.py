@@ -88,12 +88,13 @@ class etb_nation_learning_report():
                     print(self.filename, 'file is downlaoded')
                     df = pd.read_csv(self.filename)
                     size = len(df)
-                    total_enrolled = df['Total Enrolled'].sum()
-                    avg_time = df['Avg Time Spent'].sum()
-                    if int(count_of_course) != int(size):
-                        print('Course Result in UI and Downloaded files are not same  so no of courses ',
-                              count_of_course, size)
-                        count = count + 1
+                    total_enrolled = df[dist_name].sum()
+                    avg_time = df['Total Content Plays Gujarat'].sum()
+                    # if int(count_of_course) != int(size):
+                    #     print('Course Result in UI and Downloaded files are not same  so no of courses ',
+                    #           count_of_course, size)
+                    #     count = count + 1
+                    os.remove(self.filename)
                     if total_enrolled < 10 and avg_time < 0:
                         print('Total enrolled and avg time  both are not correct ')
                         count = count + 1
@@ -115,14 +116,15 @@ class etb_nation_learning_report():
             print(self.filename, 'file is downlaoded')
             df = pd.read_csv(self.filename)
             size = len(df)
-            total_enrolled = df['Total Enrolled'].sum()
-            avg_time = df['Avg Time Spent'].sum()
-            if int(count_of_course) != int(size):
-                print('Course Result in UI and Downloaded files are not same  so no of courses ', count_of_course,
-                      size)
-                count = count + 1
-            if total_enrolled < 10 and avg_time < 0:
-                print('Total enrolled and avg time  both are not correct ')
+            # total_enrolled = df['Total Enrolled'].sum()
+            content_plays = df['Total Content Plays Gujarat'].sum()
+            # if int(count_of_course) != int(size):
+            #     print('Course Result in UI and Downloaded files are not same  so no of courses ', count_of_course,
+            #           size)
+            #     count = count + 1
+            os.remove(self.filename)
+            if  content_plays < 0:
+                print('Total content plays are not correct ')
                 count = count + 1
         return count
 
@@ -139,7 +141,7 @@ class etb_nation_learning_report():
         else:
             print("Logout button is working as expected ")
             self.data.login_cqube(self.driver)
-            self.data.navigate_to_tpd_user_engagement_report()
+            self.data.navigate_to_etb_nation_learning_report()
             if 'total-content-play' in self.driver.current_url:
                 print(" Heart Beat nation of learning  report home page is displayed ")
             else:

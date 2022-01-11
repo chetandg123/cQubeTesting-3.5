@@ -477,7 +477,7 @@ class GetData():
         time.sleep(1)
         self.driver.find_element_by_id(Data.diksha_ETB).click()
         time.sleep(2)
-        self.driver.find_element_by_id(Data.user_engage).click()
+        self.driver.find_element_by_id(Data.nation_learning).click()
         time.sleep(3)
 
     def navigate_to_completion_error(self):

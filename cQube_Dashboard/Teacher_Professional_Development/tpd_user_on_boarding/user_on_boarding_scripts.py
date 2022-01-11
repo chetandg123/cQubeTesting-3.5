@@ -112,6 +112,7 @@ class user_on_boarding_report():
                     if int(total_enrolled) > 0 and int(avg_time) > 0:
                         print(total_enrolled,avg_time,'values are showing wrong!...')
                         count = count + 1
+            os.remove(self.filename)
         return count
 
     def check_download_button_on_selection_of_courses(self):
@@ -146,6 +147,7 @@ class user_on_boarding_report():
                     if int(total_enrolled) > 0 and int(avg_time) > 0:
                         print(total_enrolled,avg_time,'values are showing wrong!...')
                         count = count + 1
+            os.remove(self.filename)
         return count
 
     def check_download_button_on_selection_of_courses_and_districts(self):
@@ -184,6 +186,7 @@ class user_on_boarding_report():
                         if int(total_enrolled) > 0 and int(avg_time) > 0:
                             print(total_enrolled,avg_time,'values are showing wrong!...')
                             count = count + 1
+            os.remove(self.filename)
         return count
 
 
@@ -230,6 +233,7 @@ class user_on_boarding_report():
                             if int(total_enrolled) > 0 and int(avg_time) > 0:
                                 print(total_enrolled,avg_time,'values are showing wrong!...')
                                 count = count + 1
+                os.remove(self.filename)
         return count
 
     def check_logout_from_report(self):
@@ -277,5 +281,5 @@ class user_on_boarding_report():
             if int(total_enrolled) > 0 and int(avg_time) > 0:
                 print(total_enrolled, avg_time, 'values are showing wrong!...')
                 count = count + 1
-
+            os.remove(self.filename)
         return count

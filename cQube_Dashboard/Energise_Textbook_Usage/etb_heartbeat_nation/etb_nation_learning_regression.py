@@ -15,7 +15,7 @@ class etb_nation_learning_regression(unittest.TestCase):
         self.data.open_cqube_appln(self.driver)
         self.data.login_cqube(self.driver)
         self.data.page_loading(self.driver)
-        self.data.navigate_to_etb_usage_per_capita_report()
+        self.data.navigate_to_etb_nation_learning_report()
         self.data.page_loading(self.driver)
 
     def test_navigation_to_nation_learning_report(self):

@@ -76,12 +76,13 @@ class user_engagement_automation_scripts():
             district.select_by_index(i)
             dist_name = district.options[i].text
             time.sleep(2)
+
             if ' No Data Available ' in self.driver.page_source:
                 print(dist_name,'is not having ')
             else:
-                print(dist_name, 'is selected and chart also displayed...')
-                courses = self.driver.find_elements(By.CSS_SELECTOR,Data.course_list)
+                courses = self.driver.find_elements(By.CSS_SELECTOR, Data.course_list)
                 count_of_course = len(courses)
+                print(dist_name, 'is selected and chart also displayed...')
                 self.driver.find_element(By.ID,Data.Download).click()
                 time.sleep(3)
                 self.filename = self.p.get_download_dir() + '/' + self.fname.user_engagement_districtwise+''+dist_name+'.csv'
@@ -94,12 +95,14 @@ class user_engagement_automation_scripts():
                     size = len(df)
                     total_enrolled = df['Total Enrolled'].sum()
                     avg_time = df['Avg Time Spent'].sum()
-                    if int(count_of_course) != int(size):
-                        print('Course Result in UI and Downloaded files are not same  so no of courses ',count_of_course,size)
+
+                    if  int(size) > 2:
+                        print('Course Result in UI and Downloaded files are not same  so no of courses ',size)
                         count = count + 1
                     if total_enrolled < 10 and avg_time < 0:
                         print('Total enrolled and avg time  both are not correct ')
                         count = count + 1
+                os.remove(self.filename)
         return count
 
     def check_download_functionality_statewise(self):
@@ -120,12 +123,13 @@ class user_engagement_automation_scripts():
             size = len(df)
             total_enrolled = df['Total Enrolled'].sum()
             avg_time = df['Avg Time Spent'].sum()
-            if int(count_of_course) != int(size):
+            if  2 < int(size):
                 print('Course Result in UI and Downloaded files are not same  so no of courses ', count_of_course, size)
                 count = count + 1
             if total_enrolled < 10 and avg_time < 0:
                 print('Total enrolled and avg time  both are not correct ')
                 count = count + 1
+            os.remove(self.filename)
         return count
 
     def check_logout_from_report(self):

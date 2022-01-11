@@ -469,7 +469,7 @@ class Data():
     multi_submit="multiSelectorSubmit"
 
     #user engagement
-    course_list = "#highcharts-bise6ww-58 > svg > g.highcharts-axis-labels.highcharts-xaxis-labels > text"
+    course_list = "#highcharts-9fzy0py-111 > svg > g.highcharts-axis-labels.highcharts-xaxis-labels > text"
 
     #user on boarding
     program_dropdown = "choose_program"
