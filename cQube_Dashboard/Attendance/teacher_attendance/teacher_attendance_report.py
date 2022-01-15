@@ -4,6 +4,7 @@ import re
 import time
 
 from selenium.common.exceptions import ElementClickInterceptedException, NoSuchElementException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 from Locators.parameters import Data
@@ -523,6 +524,7 @@ class Teacher_Attendance_report():
         Bschools = self.driver.find_element_by_id(Data.schoolcount).text
         Bschools = re.sub("\D", "", Bschools)
         print('Blocklevel', self.student_count, Bstudent, self.school_count, Bschools)
+
         return self.student_count, Bstudent, self.school_count, Bschools
 
 
@@ -606,29 +608,40 @@ class Teacher_Attendance_report():
         cal = GetData()
         cal.click_on_state(self.driver)
         cal.page_loading(self.driver)
-        total_students = self.driver.find_element_by_id(Data.students).text
-        students = re.sub("\D", "", total_students)
-        self.student_count = students
+        total_teachers = self.driver.find_element_by_id(Data.students).text
+        teachers = re.sub("\D", "", total_teachers)
+        self.teacher_count = teachers
         self.driver.find_element_by_id(Data.SAR_Blocks_btn).click()
         cal.page_loading(self.driver)
-        Bstudents = self.driver.find_element_by_id(Data.students).text
-        Bstudent = re.sub("\D", "", Bstudents)
-        return self.student_count, Bstudent
+        Bteacher = self.driver.find_element_by_id(Data.students).text
+        Bteachers = re.sub("\D", "", Bteacher)
+        return self.teacher_count, Bteachers
 
     def cluster_total_no_of_teachers(self):
+        self.driver.find_element(By.XPATH,Data.hyper_link).click()
+        time.sleep(3)
+        total_teachers = self.driver.find_element_by_id(Data.students).text
+        teachers = re.sub("\D", "", total_teachers)
+        self.teacher_count = teachers
+
         self.driver.find_element_by_id(Data.SAR_Clusters_btn).click()
         cal = GetData()
         cal.page_loading(self.driver)
         time.sleep(20)
         Cstudents = self.driver.find_element_by_id(Data.students).text
         Cstudent = re.sub("\D", "", Cstudents)
-        return self.student_count, Cstudent
+        return self.teacher_count, Cstudent
 
     def schools_total_no_of_teacher(self):
+        self.driver.find_element(By.XPATH, Data.hyper_link).click()
+        time.sleep(3)
+        total_teachers = self.driver.find_element_by_id(Data.students).text
+        teachers = re.sub("\D", "", total_teachers)
+        self.teacher_count = teachers
         self.driver.find_element_by_id(Data.SAR_Schools_btn).click()
         cal = GetData()
         cal.page_loading(self.driver)
         time.sleep(20)
         Sstudents = self.driver.find_element_by_id(Data.students).text
         Sstudent = re.sub("\D", "", Sstudents)
-        return self.student_count, Sstudent
+        return self.teacher_count, Sstudent

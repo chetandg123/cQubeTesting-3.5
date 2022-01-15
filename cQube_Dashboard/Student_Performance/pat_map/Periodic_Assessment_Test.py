@@ -4,6 +4,7 @@ import re
 import time
 
 import pandas as pd
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 from Locators.parameters import Data
@@ -92,6 +93,7 @@ class Periodic_Assessment_Test():
                     count = count + 1
             os.remove(self.filename)
         return counts , count
+
     def check_with_footervalues(self):
         cal = GetData()
         files = file_extention()
@@ -369,7 +371,7 @@ class Periodic_Assessment_Test():
                         count = count + 1
 
                 os.remove(self.filename)
-                return count
+            return count
 
     def remove_csv(self):
         os.remove(self.filename)
@@ -451,7 +453,7 @@ class Periodic_Assessment_Test():
                              count = count + 1
 
                     os.remove(self.filename)
-                return count
+            return count
     def check_grade_dropdown_options(self):
         self.data = GetData()
         count = 0
@@ -467,13 +469,16 @@ class Periodic_Assessment_Test():
 
     def click_each_grades(self):
         self.data = GetData()
+        self.driver.implicitly_wait(50)
         count = 0
         p = pwd()
         files = file_extention()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
+        management = self.driver.find_element(By.ID,'name').text
+        manage = management[16:].lower()
         grade =Select(self.driver.find_element_by_id(Data.Grade))
-        for i in range(len(grade.options)):
+        for i in range(1,len(grade.options)):
             grade.select_by_index(i)
             gradename = (grade.options[i].text).strip()
             gradenum = re.sub('\D','',gradename)
@@ -482,18 +487,21 @@ class Periodic_Assessment_Test():
             self.data.page_loading(self.driver)
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = p.get_download_dir() + '/'+ files.pat_gradewise()+gradenum.strip()+'__alldistrict_'+self.data.get_current_date()+'.csv'
+            self.filename = p.get_download_dir() + '/'+ files.pat_gradewise()+manage.strip()+'_all_Grade '+gradenum.strip()+'__allDistricts_'+self.data.get_current_date()+'.csv'
             print(self.filename)
             if os.path.isfile(self.filename) != True:
                 print('District wise csv file is not downloaded')
+                count = count + 1
             else:
                 file = open(self.filename)
                 read = file.read()
-                os.remove(self.filename)
+
                 if grade.options[i].text in read:
                     print(grade.options[i].text ,"is present")
                 self.data.page_loading(self.driver)
+            os.remove(self.filename)
         self.data.page_loading(self.driver)
+        return count
 
     def select_subjects_dropdown(self):
         self.data = GetData()
@@ -522,7 +530,7 @@ class Periodic_Assessment_Test():
                 else:
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(3)
-                    self.filename = p.get_download_dir() + '/' + files.pat_gradewise()+management+'_all_Grade_'+gradenum.strip()+'_'+sub+'_allDistricts_' + self.data.get_current_date()+'.csv'
+                    self.filename = p.get_download_dir() + '/' + files.pat_gradewise()+management+'_all_Grade '+gradenum.strip()+'_'+sub+'_allDistricts_' + self.data.get_current_date()+'.csv'
                     print(self.filename)
                     if os.path.isfile(self.filename) != True:
                         print('grade wise wise csv file is not downloaded')
@@ -530,10 +538,10 @@ class Periodic_Assessment_Test():
                     else:
                         file = open(self.filename)
                         read = file.read()
-                        os.remove(self.filename)
                         if grade.options[j].text in read:
                             print(grade.options[j].text, "is present")
                         self.data.page_loading(self.driver)
+                    os.remove(self.filename)
             return count
 
     def test_options_times(self):
@@ -1451,7 +1459,8 @@ class Periodic_Assessment_Test():
         if os.path.isfile(self.filename) != True:
             return "File Not Downloaded"
         if os.path.isfile(self.filename) == True:
-            os.remove(self.filename)
+            print('Block wise csv file is downloaded')
+        os.remove(self.filename)
         return counts
 
     def click_download_icon_of_clusters(self):
@@ -1471,7 +1480,8 @@ class Periodic_Assessment_Test():
         if os.path.isfile(self.filename) != True:
             return "File Not Downloaded"
         if os.path.isfile(self.filename) == True:
-            os.remove(self.filename)
+            print('Cluster wise csv file downloaded')
+        os.remove(self.filename)
         return dots
 
     def click_download_icon_of_schools(self):
@@ -1490,7 +1500,8 @@ class Periodic_Assessment_Test():
         if os.path.isfile(self.filename) != True:
             return "File Not Downloaded"
         if os.path.isfile(self.filename) == True:
-            os.remove(self.filename)
+            print("School wise csv file is downloaded")
+        os.remove(self.filename)
         return dots
 
     def check_dots_on_each_districts(self):

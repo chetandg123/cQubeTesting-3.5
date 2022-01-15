@@ -232,6 +232,7 @@ class diksha_content_textbook_report():
                     print(districts.options[x].text ," does not last day records")
                     count = count + 1
         return count
+
     def test_districts(self):
         self.data = GetData()
         self.p = pwd()
@@ -255,6 +256,7 @@ class diksha_content_textbook_report():
                     print(districts.options[x].text ," does not last week records")
                     count = count + 1
         return count
+
     def test_districts(self):
         self.data = GetData()
         self.p = pwd()
@@ -357,7 +359,7 @@ class diksha_content_textbook_report():
         self.data.page_loading(self.driver)
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(1)
-        if " No Locators Available " in self.driver.page_source:
+        if " No Data Available " in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:
@@ -383,7 +385,7 @@ class diksha_content_textbook_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(2)
         time.sleep(3)
-        if " No Locators Available " in self.driver.page_source:
+        if " No Data Available " or "No data found"  in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:
@@ -410,7 +412,7 @@ class diksha_content_textbook_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(3)
         time.sleep(3)
-        if " No Locators Available " in self.driver.page_source:
+        if " No Data Available " or "No data found" in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:
@@ -437,7 +439,7 @@ class diksha_content_textbook_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(4)
         time.sleep(5)
-        if " No Locators Available " in self.driver.page_source:
+        if " No Data Available "  or "No data found" in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:

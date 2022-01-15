@@ -217,10 +217,11 @@ class udise_report():
         count = 0
         self.p.page_loading(self.driver)
         scores = Select(self.driver.find_element_by_id("choose_infra"))
-        for i in range(1,len(scores.options)-1):
+        for i in range(1,len(scores.options)-6):
             time.sleep(2)
             scores.select_by_index(i)
-            time.sleep(3)
+            time.sleep(5)
+            self.p.page_loading(self.driver)
             markers = self.driver.find_elements_by_class_name(Data.dots)
             dots = len(markers)-1
             if dots == 0:
@@ -241,18 +242,18 @@ class udise_report():
         self.p.page_loading(self.driver)
         time.sleep(5)
         scores = Select(self.driver.find_element_by_id("choose_infra"))
-        for i in range(1,len(scores.options)):
+        for i in range(len(scores.options)-12):
             time.sleep(2)
             scores.select_by_index(i)
+            # infra_option = scores.options[i].text
+            time.sleep(4)
             self.p.page_loading(self.driver)
             markers = self.driver.find_elements_by_class_name(Data.dots)
             dots = len(markers) - 1
             if dots == 0:
-                print(scores.options[i].text, 'does not contains markers on map ')
+                print('does not contains markers on map ')
                 count = count + 1
         self.p.page_loading(self.driver)
-        scores.select_by_index(1)
-        time.sleep(2)
         return count
 
     #indices downloading functionality
@@ -725,6 +726,7 @@ class udise_report():
         time.sleep(1)
         self.driver.find_element_by_id(Data.logout).click()
         time.sleep(3)
+        return self.driver.title
 
     def test_districtwise_schools_count(self):
         p = pwd()

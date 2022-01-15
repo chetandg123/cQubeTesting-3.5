@@ -1,3 +1,4 @@
+import os
 import time
 import unittest
 
@@ -11,6 +12,7 @@ from Locators.parameters import Data
 
 
 from cQube_Dashboard.Attendance.teacher_attendance.teacher_attendance_report import Teacher_Attendance_report
+from get_dir import pwd
 from reuse_func import GetData
 
 
@@ -31,12 +33,12 @@ class cQube_Teacher_Attendance_SmokeTest(unittest.TestCase):
 
 
     def test_click_on_student_attendence_report(self):
-        sar = Teacher_Attendance_report(self.driver)
+        sar = Teacher_Attendance_report(self.driver,self.year,self.month)
         result = sar.click_on_sar()
         if "teacher-attendance" in result:
-            print("Teacher Attendance Infra_Table_Report is Working")
+            print("Teacher Attendance Report is Working")
         else:
-            raise self.failureException("Teacher Attendance Infra_Table_Report Is Not Working")
+            raise self.failureException("Teacher Attendance Report Is Not Working")
 
     def test_click_on_blocks(self):
         state = GetData()
@@ -81,6 +83,8 @@ class cQube_Teacher_Attendance_SmokeTest(unittest.TestCase):
         self.data.page_loading(self.driver)
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+        time.sleep(2)
         self.driver.find_element_by_id(Data.logout).click()
         self.assertEqual("Log in to cQube", self.driver.title,msg="Logout is not worked")
         time.sleep(2)
@@ -91,7 +95,7 @@ class cQube_Teacher_Attendance_SmokeTest(unittest.TestCase):
 
 
     def test_check_hyperlinks(self):
-        hyperlinks = Teacher_Attendance_report(self.driver)
+        hyperlinks = Teacher_Attendance_report(self.driver,self.year,self.month)
         result1, result2, choose_dist = hyperlinks.click_on_hyperlinks()
         # if result1 == False and result2 == False and choose_dist == "Choose a District ":
         #     print("hyperlinks are working")
@@ -171,7 +175,7 @@ class cQube_Teacher_Attendance_SmokeTest(unittest.TestCase):
             raise self.failureException("Choose District,Block and Cluster is not working")
 
     def test_home_icon(self):
-        home = Teacher_Attendance_report(self.driver)
+        home = Teacher_Attendance_report(self.driver,self.year,self.month)
         home.click_on_blocks_click_on_home_icon()
         result = home.click_HomeButton()
         if "teacher-attendance" in result:
@@ -180,13 +184,20 @@ class cQube_Teacher_Attendance_SmokeTest(unittest.TestCase):
             raise self.failureException('Home Icon is not working')
 
     def test_download(self):
+        self.p = pwd()
         state = GetData()
         state.click_on_state(self.driver)
-        element = self.driver.find_element_by_id(Data.sar_download)
+        management = self.driver.find_element_by_id('name').text
+        manage = management[16:].lower()
+        element = self.driver.find_element_by_id(Data.Download)
         try:
             element.click()
             time.sleep(3)
             print("Download Button is working")
+            self.filename = self.p.get_download_dir()+'/teacher_attendance_'+manage.strip()+'_allDistricts_overall_'+self.data.get_current_date()+'.csv'
+            if self.filename != True:
+                print("District level csv file is not downloaded")
+            os.remove(self.filename)
         except WebDriverException:
             raise self.failureException("Download Button is not working")
 
@@ -200,16 +211,19 @@ class cQube_Teacher_Attendance_SmokeTest(unittest.TestCase):
             raise self.failureException("Markers are not present on the map")
 
     def test_no_of_schools_is_equals_at_districts_blocks_clusters_schools(self):
-        tc = Teacher_Attendance_report(self.driver)
-        schools, Bschools = tc.block_total_no_of_students()
-        self.assertEqual(int(schools), int(Bschools), msg="Block level no of schools are not equal to no of schools ")
+        tc = Teacher_Attendance_report(self.driver,self.year,self.month)
+        self.school_count, Bschools = tc.block_no_of_schools()
+        self.assertEqual(int(self.school_count), int(Bschools), msg="Block level no of schools are not equal to no of schools ")
+
+
         schools, Cschools = tc.cluster_no_of_schools()
         self.assertEqual(int(schools), int(Cschools), msg="Cluster level no of schools are not equal to no of schools ")
+
         schools, Sschools = tc.schools_no_of_schools()
         self.assertEqual(int(schools), int(Sschools), msg="Cluster level no of schools are not equal to no of schools ")
 
-    def test_total_no_of_students_is_equals_at_districts_blocks_clusters_schools(self):
-        tc = Teacher_Attendance_report(self.driver)
+    def test_total_no_of_teachers_is_equals_at_districts_blocks_clusters_schools(self):
+        tc = Teacher_Attendance_report(self.driver,self.year,self.month)
         student_count, Bstudents = tc.block_total_no_of_teachers()
         self.assertEqual(int(student_count), int(Bstudents), msg="Block level no of students are not equal")
         student_count, Cstudents = tc.cluster_total_no_of_teachers()

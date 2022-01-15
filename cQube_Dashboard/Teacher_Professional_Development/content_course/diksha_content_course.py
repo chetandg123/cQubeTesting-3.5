@@ -402,7 +402,7 @@ class content_course_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(3)
         time.sleep(3)
-        if " No Data Available " in self.driver.page_source:
+        if " No Data Available " or "No data found" in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:
@@ -429,7 +429,7 @@ class content_course_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(4)
         time.sleep(5)
-        if " No Data Available " in self.driver.page_source:
+        if " No Data Available " or "No data found"in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:

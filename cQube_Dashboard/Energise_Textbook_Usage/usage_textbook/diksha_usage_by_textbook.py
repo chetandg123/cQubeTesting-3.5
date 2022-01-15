@@ -66,7 +66,7 @@ class diksha_usage_textbook_report():
         # timeperiod.select_by_visible_text(' Last 30 Days ')
         timeperiod.select_by_index(2)
         self.data.page_loading(self.driver)
-        if self.msg.no_data_available() in self.driver.page_source:
+        if self.msg.no_data_available()  or "No data found" in self.driver.page_source:
             print("Last 30 days does not having data")
         else:
             self.driver.find_element_by_id(Data.Download).click()
@@ -102,7 +102,7 @@ class diksha_usage_textbook_report():
         # timeperiod.select_by_visible_text(' Last 30 Days ')
         timeperiod.select_by_index(3)
         self.data.page_loading(self.driver)
-        if self.msg.no_data_available() in self.driver.page_source:
+        if self.msg.no_data_available()  or "No data found" in self.driver.page_source:
             print("Last 7 days does not having data")
         else:
             self.driver.find_element_by_id(Data.Download).click()
@@ -138,7 +138,7 @@ class diksha_usage_textbook_report():
         # timeperiod.select_by_visible_text(' Last 30 Days ')
         timeperiod.select_by_index(3)
         self.data.page_loading(self.driver)
-        if self.msg.no_data_available() in self.driver.page_source:
+        if self.msg.no_data_available()  or "No data found"  in self.driver.page_source:
             print("Last day does not having data")
         else:
             self.driver.find_element_by_id(Data.Download).click()
@@ -215,7 +215,7 @@ class diksha_usage_textbook_report():
         self.data.page_loading(self.driver)
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(1)
-        if " No Data Available " in self.driver.page_source:
+        if " No Data Available " or "No data found"  in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:
@@ -241,7 +241,7 @@ class diksha_usage_textbook_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(2)
         time.sleep(3)
-        if " No Data Available " in self.driver.page_source:
+        if " No Data Available "  or "No data found" in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:
@@ -268,7 +268,7 @@ class diksha_usage_textbook_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(3)
         time.sleep(3)
-        if " No Data Available " in self.driver.page_source:
+        if " No Data Available "  or "No data found" in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:
@@ -295,7 +295,7 @@ class diksha_usage_textbook_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(4)
         time.sleep(5)
-        if " No Data Available " in self.driver.page_source:
+        if " No Data Available "  or "No data found"  in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:

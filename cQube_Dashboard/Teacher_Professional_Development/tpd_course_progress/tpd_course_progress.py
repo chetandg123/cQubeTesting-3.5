@@ -166,7 +166,7 @@ class tpd_course_progress_report():
         self.load.page_loading(self.driver)
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.load.page_loading(self.driver)
-        self.driver.find_element_by_xpath("//*[@id='tdp-cp']").click()
+        self.load.navigate_to_tpd_content_progress()
         self.load.page_loading(self.driver)
         if 'tpd-course-progress' in self.driver.current_url:
             print('TPD course progress chart is present ')
@@ -433,6 +433,8 @@ class tpd_course_progress_report():
         count = 0
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+        time.sleep(2)
         self.driver.find_element_by_id(Data.logout).click()
         if 'Log in to cQube' in self.driver.title:
             print("Logout button is working ")
@@ -454,7 +456,7 @@ class tpd_course_progress_report():
         self.data.page_loading(self.driver)
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(1)
-        if " No Locators Available " in self.driver.page_source:
+        if " No Data Available " or "No data found" in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:
@@ -480,7 +482,7 @@ class tpd_course_progress_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(2)
         time.sleep(3)
-        if " No Locators Available " in self.driver.page_source:
+        if " No Data Available " or "No data found" in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:
@@ -507,7 +509,7 @@ class tpd_course_progress_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(3)
         time.sleep(3)
-        if " No Locators Available " in self.driver.page_source:
+        if " No Data Available " or "No data found" in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:
@@ -534,7 +536,7 @@ class tpd_course_progress_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(4)
         time.sleep(5)
-        if " No Locators Available " in self.driver.page_source:
+        if " No Data Available " or "No data found" in self.driver.page_source:
             print(times.first_selected_option.text,"is not having data..")
             return count
         else:

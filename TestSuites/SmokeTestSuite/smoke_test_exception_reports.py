@@ -21,7 +21,7 @@ class MyTestSuite_Exception(unittest.TestCase):
         self.data.login_cqube(self.driver)
         self.data.page_loading(self.driver)
 
-
+    @classmethod
     def test_issue01(self):
         self.data.page_loading(self.driver)
         self.data.navigate_to_semester_exception()
