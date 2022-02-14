@@ -1,6 +1,6 @@
 HTMLTestRunner-Python3
 pandas
-selenium
+selenium==3.14
 configparser
 pathlib
 psycopg2-binary
