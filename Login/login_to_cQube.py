@@ -5,6 +5,7 @@ class cQube_login():
     def __init__(self,driver):
         self.driver = driver
 
+        
     def test_login_to_cQube(self):
         self.data = GetData()
         count = 0

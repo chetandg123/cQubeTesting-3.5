@@ -79,52 +79,52 @@ class MyTestSuite_smoke_chart_tables(unittest.TestCase):
                 )
                 runner1.run(smoke_test)
                 outfile.close()
-
-    def test_issue03(self):
-            self.data.page_loading(self.driver)
-            self.data.navigate_to_diksha_content_course()
-            if 'No data found' in self.driver.page_source:
-                print('Diksha Content Course Report is showing no data found!..')
-                self.driver.close()
-            else:
-                smoke_test = unittest.TestSuite()
-                smoke_test.addTests([
-                    unittest.defaultTestLoader.loadTestsFromTestCase(
-                    content_course_smoke_testing.cQube_content_course_smoke)
-                ])
-                p = pwd()
-                outfile = open(p.get_smoke_chart_tables_report(), "a")
-
-                runner1 = HTMLTestRunner.HTMLTestRunner(
-                    stream=outfile,
-                    title='Content BY Course Smoke Test  Report',
-                    verbosity=1,
-
-                )
-                runner1.run(smoke_test)
-                outfile.close()
-
-    def test_issue04(self):
-            self.data.page_loading(self.driver)
-            self.data.navigate_to_diksha_content_textbook()
-            if 'No data found' in self.driver.page_source:
-                print('Diksha Content Textbook Report is showing no data found!..')
-                self.driver.close()
-            else:
-                smoke_test = unittest.TestSuite()
-                smoke_test.addTests([
-                    unittest.defaultTestLoader.loadTestsFromTestCase(
-                        content_textbook_smoke_suite.cQube_content_textbook_smoke
-                    )
-                ])
-                p = pwd()
-                outfile = open(p.get_smoke_chart_tables_report(), "a")
-                runner1 = HTMLTestRunner.HTMLTestRunner(
-                    stream=outfile,
-                    title='Content By Textbook report Smoke Test  Report',
-                    verbosity=1,)
-                runner1.run(smoke_test)
-                outfile.close()
+    #
+    # def test_issue03(self):
+    #         self.data.page_loading(self.driver)
+    #         self.data.navigate_to_diksha_content_course()
+    #         if 'No data found' in self.driver.page_source:
+    #             print('Diksha Content Course Report is showing no data found!..')
+    #             self.driver.close()
+    #         else:
+    #             smoke_test = unittest.TestSuite()
+    #             smoke_test.addTests([
+    #                 unittest.defaultTestLoader.loadTestsFromTestCase(
+    #                 content_course_smoke_testing.cQube_content_course_smoke)
+    #             ])
+    #             p = pwd()
+    #             outfile = open(p.get_smoke_chart_tables_report(), "a")
+    #
+    #             runner1 = HTMLTestRunner.HTMLTestRunner(
+    #                 stream=outfile,
+    #                 title='Content BY Course Smoke Test  Report',
+    #                 verbosity=1,
+    #
+    #             )
+    #             runner1.run(smoke_test)
+    #             outfile.close()
+    #
+    # def test_issue04(self):
+    #         self.data.page_loading(self.driver)
+    #         self.data.navigate_to_diksha_content_textbook()
+    #         if 'No data found' in self.driver.page_source:
+    #             print('Diksha Content Textbook Report is showing no data found!..')
+    #             self.driver.close()
+    #         else:
+    #             smoke_test = unittest.TestSuite()
+    #             smoke_test.addTests([
+    #                 unittest.defaultTestLoader.loadTestsFromTestCase(
+    #                     content_textbook_smoke_suite.cQube_content_textbook_smoke
+    #                 )
+    #             ])
+    #             p = pwd()
+    #             outfile = open(p.get_smoke_chart_tables_report(), "a")
+    #             runner1 = HTMLTestRunner.HTMLTestRunner(
+    #                 stream=outfile,
+    #                 title='Content By Textbook report Smoke Test  Report',
+    #                 verbosity=1,)
+    #             runner1.run(smoke_test)
+    #             outfile.close()
 
     def test_issue05(self):
             self.data.page_loading(self.driver)
@@ -247,25 +247,25 @@ class MyTestSuite_smoke_chart_tables(unittest.TestCase):
     #             runner1.run(smoke_test)
     #             outfile.close()
 
-    # def test_issue10(self):
-    #         p = pwd()
-    #         self.data.page_loading(self.driver)
-    #         self.data.navigate_to_tpd_completion_percentage()
-    #         if 'No data found' in self.driver.page_source:
-    #             print('TPD Completion Report is showing no data found!..')
-    #             self.driver.close()
-    #         else:
-    #             smoke_test = unittest.TestSuite()
-    #             smoke_test.addTests([
-    #                 unittest.defaultTestLoader.loadTestsFromTestCase(
-    #                     completion_smoke_test.cQube_completion_percentage_smoke )])
-    #             outfile = open(p.get_smoke_chart_tables_report(), "a")
-    #             runner1 = HTMLTestRunner.HTMLTestRunner(
-    #                 stream=outfile,
-    #                 title='TPD Completion Percentage Smoke Test  Report',
-    #                 verbosity=1,)
-    #             runner1.run(smoke_test)
-    #             outfile.close()
+    def test_issue10(self):
+            p = pwd()
+            self.data.page_loading(self.driver)
+            self.data.navigate_to_tpd_completion_percentage()
+            if 'No data found' in self.driver.page_source:
+                print('TPD Completion Report is showing no data found!..')
+                self.driver.close()
+            else:
+                smoke_test = unittest.TestSuite()
+                smoke_test.addTests([
+                    unittest.defaultTestLoader.loadTestsFromTestCase(
+                        completion_smoke_test.cQube_completion_percentage_smoke )])
+                outfile = open(p.get_smoke_chart_tables_report(), "a")
+                runner1 = HTMLTestRunner.HTMLTestRunner(
+                    stream=outfile,
+                    title='TPD Completion Percentage Smoke Test  Report',
+                    verbosity=1,)
+                runner1.run(smoke_test)
+                outfile.close()
 
     # def test_issue11(self):
     #         smoke_test = unittest.TestSuite()

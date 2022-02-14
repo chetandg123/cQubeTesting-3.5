@@ -25,6 +25,7 @@ class Data():
     dots = "leaflet-interactive"
     SAR_Details = "//div[@class='row']/div[@class='col-sm-4']/span"
     hyper_link = "//p/span"
+    refresh_link="//p[@id='dist']/span"
     directory = "//p[contains(text(),' Semester report for:')]/span"
     Download = "download1"
     Download_scator ='download1'
@@ -42,6 +43,7 @@ class Data():
     #menu_opts
     menu_icon = "menuIcon"
     cQube_logo = "cubeLogo"
+    Dashboard="menu"
     sch_infra = "SchInfra"
     std_performance = "stdPerformance"
     attendance = "attendance"
@@ -87,7 +89,7 @@ class Data():
     studentexception ="sarExcpt"
     teacherexception="tarExp"
     tele_report="telemData"
-    composite_metric="composite"
+    composite_metric="compositeReport"
 
     # school_infra_Report
     # school_infra = "si"

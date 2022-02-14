@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import unittest
 
 from cQube_Dashboard.Exception_List.pat_exception.pat_scripts import pat_exception_report
@@ -103,6 +104,7 @@ class cQube_pat_exception_smoke_report(unittest.TestCase):
         self.assertEqual(0, res, msg='last 30 days csv file is not downloaded')
         print("Checked with last 30 days time series")
         self.data.page_loading(self.driver)
+
 
     @classmethod
     def tearDownClass(cls):

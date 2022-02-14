@@ -478,7 +478,7 @@ class Periodic_Assessment_Test():
         management = self.driver.find_element(By.ID,'name').text
         manage = management[16:].lower()
         grade =Select(self.driver.find_element_by_id(Data.Grade))
-        for i in range(1,len(grade.options)):
+        for i in range(1,len(grade.options)-2):
             grade.select_by_index(i)
             gradename = (grade.options[i].text).strip()
             gradenum = re.sub('\D','',gradename)
@@ -495,7 +495,6 @@ class Periodic_Assessment_Test():
             else:
                 file = open(self.filename)
                 read = file.read()
-
                 if grade.options[i].text in read:
                     print(grade.options[i].text ,"is present")
                 self.data.page_loading(self.driver)

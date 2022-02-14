@@ -143,7 +143,7 @@ class pat_exception_report():
                         print("school count mismatched", int(sc), int(schools))
                         count = count + 1
                 os.remove(self.filename)
-                return count
+            return count
 
 
 
@@ -184,7 +184,7 @@ class pat_exception_report():
                         print("school count mismatched", int(sc), int(schools))
                         count = count + 1
                 os.remove(self.filename)
-                return count
+            return count
 
     def SchoolPerClusterCsvDownload(self):
         cal = GetData()
@@ -232,7 +232,7 @@ class pat_exception_report():
                                 print("school count mismatched", int(sc), int(row_count))
                                 count = count + 1
                         os.remove(self.filename)
-                    return count
+                return count
 
     def check_markers_on_block_map(self):
         cal = GetData()
@@ -362,8 +362,8 @@ class pat_exception_report():
                     if int(sc) != int(schools):
                         print("school count mismatched", int(sc), int(schools))
                         count = count + 1
-                os.remove(self.filename)
-                return count
+                    os.remove(self.filename)
+            return count
 
     def check_time_series_last_7_days(self):
         cal = GetData()
@@ -403,7 +403,7 @@ class pat_exception_report():
                         if int(sc) != int(schools):
                             print("school count mismatched", int(sc), int(schools))
                             count = count + 1
-                    os.remove(self.filename)
+                        os.remove(self.filename)
         return count
 
     def check_time_series_last_30_days(self):
@@ -443,5 +443,5 @@ class pat_exception_report():
                         if int(sc) != int(schools):
                             print("school count mismatched", int(sc), int(schools))
                             count = count + 1
-                    os.remove(self.filename)
+                        os.remove(self.filename)
         return count

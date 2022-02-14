@@ -169,23 +169,23 @@ class cQube_udise_Report(unittest.TestCase):
         b.remove_csv()
         self.assertNotEqual(0, School_infrastructure, msg='Failed')
 
-        School_inspection = b.School_inspection()
-        b.remove_csv()
-        self.assertNotEqual(0, School_inspection, msg='Failed')
+        # School_inspection = b.School_inspection()
+        # b.remove_csv()
+        # self.assertNotEqual(0, School_inspection, msg='Failed')
 
-        School_perfomance = b.School_perfomance()
-        b.remove_csv()
-        self.assertNotEqual(0, School_perfomance, msg='Failed')
-
-        Science_lab = b.Science_lab()
-        b.remove_csv()
-        self.assertNotEqual(0, Science_lab, msg='Failed')
-
-        Teacher_profile = b.Teacher_profile()
-        b.remove_csv()
-        self.assertNotEqual(0, Teacher_profile, msg='Failed')
-        print('selecting each indices and checking csv file is downloading or not ')
-        self.data.page_loading(self.driver)
+        # School_perfomance = b.School_perfomance()
+        # b.remove_csv()
+        # self.assertNotEqual(0, School_perfomance, msg='Failed')
+        #
+        # Science_lab = b.Science_lab()
+        # b.remove_csv()
+        # self.assertNotEqual(0, Science_lab, msg='Failed')
+        #
+        # Teacher_profile = b.Teacher_profile()
+        # b.remove_csv()
+        # self.assertNotEqual(0, Teacher_profile, msg='Failed')
+        # print('selecting each indices and checking csv file is downloading or not ')
+        # self.data.page_loading(self.driver)
 
 
 

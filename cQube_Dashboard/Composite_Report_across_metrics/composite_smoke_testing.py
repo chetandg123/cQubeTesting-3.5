@@ -1,5 +1,4 @@
-
-
+import time
 import unittest
 
 
@@ -15,7 +14,7 @@ class composite_smoke_testing(unittest.TestCase):
     def setUpClass(self):
         self.data = GetData()
         self.driver = self.data.get_driver()
-        self.driver.implicitly_wait(50)
+        self.driver.implicitly_wait(100)
         self.data.open_cqube_appln(self.driver)
         self.data.login_cqube(self.driver)
         self.data.navigate_to_composite_report()
@@ -33,7 +32,7 @@ class composite_smoke_testing(unittest.TestCase):
             print('Home button is not working ')
             count = count + 1
         self.assertEqual(0,count,msg="Home btn is not working ")
-        self.driver.find_element_by_id('composite').click()
+        self.data.navigate_to_composite_report()
         self.data.page_loading(self.driver)
 
     def test_districtwise_csv_download(self):
@@ -102,16 +101,16 @@ class composite_smoke_testing(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_logout_button(self):
-        self.driver.find_element_by_xpath(Data.hyper_link).click()
+        self.driver.find_element_by_xpath(Data.refresh_link).click()
         self.data.page_loading(self.driver)
-        self.data.click_on_logout_button()
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+        time.sleep(1)
+        self.driver.find_element_by_id(Data.logout).click()
         self.data.page_loading(self.driver)
         self.assertEqual('Log in to cQube', self.driver.title, msg="Logout button is not working ")
-        print("logout button is working fine ")
         self.data.login_cqube(self.driver)
-        self.data.page_loading(self.driver)
         self.data.navigate_to_composite_report()
-        self.data.page_loading(self.driver)
+
 
     def test_blocks_clusters_schools(self):
         b = Composite_report_across_Metric(self.driver)

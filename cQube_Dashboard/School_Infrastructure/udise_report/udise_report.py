@@ -25,15 +25,17 @@ class udise_report():
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.p.page_loading(self.driver)
         self.driver.find_element_by_id(Data.scm_block).click()
-        time.sleep(3)
-        markers = self.driver.find_elements_by(By.CLASS_NAME,Data.dots)
+        time.sleep(5)
+        markers = self.driver.find_elements(By.CLASS_NAME,Data.dots)
         count1 = len(markers)-1
-        self.driver.find_element_by_css_selector('p >span').click()
-        count2 = len(markers)-1
-        if count1 != count2:
-            print("Hyperlink is working as expected...")
+        self.driver.find_element(By.XPATH,"//p/span").click()
+        time.sleep(3)
+        marker = self.driver.find_elements(By.CLASS_NAME, Data.dots)
+        count2 = len(marker)-1
+        if count1!=count2:
+            print("Hyperlink is working as expected...",count1,count2)
         else:
-            print("Hyperlink is not working ")
+            print("Hyperlink is not working ",count1,count2)
             count = count + 1
             self.p.page_loading(self.driver)
         return count
@@ -267,6 +269,7 @@ class udise_report():
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
         chooseinfra.select_by_index(1)
         self.cal.page_loading(self.driver)
+        row_count = 0
         if "No data found" in self.driver.page_source:
             print(chooseinfra.options[1].text,'is not having data')
         else:
@@ -280,7 +283,6 @@ class udise_report():
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)
@@ -305,10 +307,11 @@ class udise_report():
             self.filename = p.get_download_dir() + "/"+'UDISE_report_'+management+'_Administration_allDistricts_'+self.cal.get_current_date()+'.csv'
             time.sleep(2)
             file = os.path.isfile(self.filename)
+            row_count = 0
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
+
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)
@@ -322,6 +325,7 @@ class udise_report():
         management = management[16:].lower().strip()
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
         chooseinfra.select_by_index(3)
+        row_count = 0
         self.cal.page_loading(self.driver)
         if "No data found" in self.driver.page_source:
             print(chooseinfra.options[3].text,'is not having data')
@@ -335,7 +339,6 @@ class udise_report():
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)
@@ -345,6 +348,7 @@ class udise_report():
             return row_count - 1
 
     def community(self):
+        row_count = 0
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
@@ -362,7 +366,7 @@ class udise_report():
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
+
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)
@@ -372,6 +376,7 @@ class udise_report():
             return row_count - 1
 
     def Enrollment(self):
+        row_count = 0
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
@@ -389,7 +394,6 @@ class udise_report():
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)
@@ -399,6 +403,7 @@ class udise_report():
             return row_count - 1
 
     def grant_expenditure(self):
+        row_count = 0
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
@@ -416,7 +421,6 @@ class udise_report():
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)
@@ -426,6 +430,7 @@ class udise_report():
             return row_count - 1
 
     def ictlab(self):
+        row_count = 0
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
@@ -443,7 +448,6 @@ class udise_report():
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)
@@ -453,6 +457,7 @@ class udise_report():
             return row_count - 1
 
     def Medical(self):
+        row_count = 0
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
@@ -470,7 +475,6 @@ class udise_report():
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)
@@ -480,6 +484,7 @@ class udise_report():
             return row_count - 1
 
     def nsqf(self):
+        row_count = 0
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
@@ -497,7 +502,6 @@ class udise_report():
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)
@@ -507,6 +511,7 @@ class udise_report():
             return row_count - 1
 
     def policy(self):
+        row_count = 0
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
@@ -524,7 +529,6 @@ class udise_report():
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)
@@ -534,6 +538,7 @@ class udise_report():
             return row_count - 1
 
     def Safety(self):
+        row_count = 0
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
@@ -551,7 +556,6 @@ class udise_report():
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)
@@ -561,6 +565,7 @@ class udise_report():
             return row_count - 1
 
     def School_infrastructure(self):
+        row_count = 0
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
@@ -578,7 +583,6 @@ class udise_report():
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)
@@ -588,6 +592,7 @@ class udise_report():
             return row_count - 1
 
     def School_inspection(self):
+        row_count = 0
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
@@ -605,7 +610,6 @@ class udise_report():
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)
@@ -615,6 +619,7 @@ class udise_report():
             return row_count - 1
 
     def School_perfomance(self):
+        row_count = 0
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
@@ -632,7 +637,7 @@ class udise_report():
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
+
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)
@@ -642,6 +647,7 @@ class udise_report():
             return row_count - 1
 
     def Science_lab(self):
+        row_count = 0
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
@@ -659,7 +665,6 @@ class udise_report():
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)
@@ -669,6 +674,7 @@ class udise_report():
             return row_count - 1
 
     def Teacher_profile(self):
+        row_count = 0
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
@@ -686,7 +692,6 @@ class udise_report():
             if True != file:
                 print('csv file not downloaded')
             else:
-                row_count = 0
                 with open(self.filename, 'rt')as f:
                     reader = csv.reader(f)
                     data = list(reader)

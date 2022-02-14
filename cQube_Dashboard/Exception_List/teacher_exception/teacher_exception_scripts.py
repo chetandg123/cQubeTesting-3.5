@@ -151,13 +151,12 @@ class teacher_exception_report():
                         if int(teacher) != int(ta):
                             print("school count mismatched", int(teacher), int(ta))
                             count = count + 1
-                    os.remove(self.filename)
+                os.remove(self.filename)
         return count
 
 
     def ClusterPerBlockCsvDownload(self):
         cal = GetData()
-        marker = 0
         self.fname = file_extention()
         cal.click_on_state(self.driver)
         cal.page_loading(self.driver)
@@ -167,7 +166,6 @@ class teacher_exception_report():
         select_district = Select(self.driver.find_element_by_id('choose_dist'))
         select_block = Select(self.driver.find_element_by_id('choose_block'))
         count = 0
-        markers=0
         for x in range(len(select_district.options) - 1, len(select_district.options)):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
@@ -179,31 +177,34 @@ class teacher_exception_report():
                 time.sleep(2)
                 dots = self.driver.find_elements_by_class_name(Data.dots)
                 markers= len(dots)-1
-                marker = marker + markers
-                self.driver.find_element_by_id(Data.Download).click()
-                time.sleep(4)
-                p = pwd()
-                self.filename = p.get_download_dir() + "/" +"teacher_attendance_exception_"+management+"_clusterPerBlocks_of_block_"+values.strip()+self.month+'_'+self.year+'_'+cal.get_current_date()+".csv"
-                print(self.filename)
-                if os.path.isfile(self.filename) != True:
-                    return "File Not Downloaded"
+                if markers == 0:
+                    print(select_block.options[y].text,"does not have markers")
+                    count = count + 1
                 else:
-                    with open(self.filename) as fin:
-                        csv_reader = csv.reader(fin, delimiter=',')
-                        header = next(csv_reader)
-                        teacher = 0
-                        for row in csv.reader(fin):
-                            teacher += int(row[6])
+                    self.driver.find_element_by_id(Data.Download).click()
+                    time.sleep(4)
+                    p = pwd()
+                    self.filename = p.get_download_dir() + "/" +"teacher_attendance_exception_"+management+"_clusterPerBlocks_of_block_"+values.strip()+self.month+'_'+self.year+'_'+cal.get_current_date()+".csv"
+                    print(self.filename)
+                    if os.path.isfile(self.filename) != True:
+                        return "File Not Downloaded"
+                    else:
+                        with open(self.filename) as fin:
+                            csv_reader = csv.reader(fin, delimiter=',')
+                            header = next(csv_reader)
+                            teacher = 0
+                            for row in csv.reader(fin):
+                                teacher += int(row[6])
 
-                        teach = self.driver.find_element_by_id("students").text
-                        ta = re.sub('\D', "", teach)
+                            teach = self.driver.find_element_by_id("students").text
+                            ta = re.sub('\D', "", teach)
 
-                        if int(teacher) != int(ta):
-                            print("Teacher count mismatched", int(teacher), int(ta))
-                            count = count + 1
-                    os.remove(self.filename)
-                print(markers,count)
-        return count
+                            if int(teacher) != int(ta):
+                                print("Teacher count mismatched", int(teacher), int(ta))
+                                count = count + 1
+                        os.remove(self.filename)
+                    print(markers,count)
+            return count
 
     def SchoolPerClusterCsvDownload(self):
         cal = GetData()
@@ -261,8 +262,8 @@ class teacher_exception_report():
                                 if int(teacher) != int(ta):
                                     print("Teacher count mismatched", int(teacher), int(ta))
                                     count = count + 1
-                            os.remove(self.filename)
-        return count
+                        os.remove(self.filename)
+            return count
 
     def check_markers_on_block_map(self):
         cal = GetData()

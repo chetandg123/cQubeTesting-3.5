@@ -358,7 +358,7 @@ class etb_content_plays_map_report():
         else:
             self.driver.find_element(By.ID,Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + self.fname.etb_average_time_spent_file
+            self.filename = self.p.get_download_dir() + '/'+ self.fname.etb_average_time_spent_file
             if os.path.isfile(self.filename) != False:
                 print(self.fname.etb_content_plays_file,'is not downloaded ')
                 count = count + 1

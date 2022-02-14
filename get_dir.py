@@ -59,12 +59,12 @@ class pwd():
 
     def get_smoke_chart_tables_report(self):
         cwd = os.path.dirname(__file__)
-        report_path = os.path.join(cwd, 'Reports/Smoke_Reports/Smoke_chart.html')
+        report_path = os.path.join(cwd, 'Reports/Smoke_Reports/Smoke_Chart.html')
         return report_path
 
     def get_functional_report_path(self):
         cwd = os.path.dirname(__file__)
-        report_path = os.path.join(cwd, 'Reports/infra_Managementwise_Result.html')
+        report_path = os.path.join(cwd, 'Reports/Functional_Reports/Report.html')
         return report_path
 
     def get_integration_report_path(self):

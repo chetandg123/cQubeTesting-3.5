@@ -166,7 +166,7 @@ class GetData():
 
     def logs_page(self):
         self.driver.implicitly_wait(20)
-        self.driver.find_element_by_id(Data.menu_icon).click()
+        self.driver.find_element_by_id(Data.Dashboard).click()
         time.sleep(2)
         self.driver.find_element_by_xpath("//a[@id='logs']").click()
         time.sleep(3)
@@ -439,7 +439,7 @@ class GetData():
         self.driver.implicitly_wait(30)
         self.driver.find_element_by_id(Data.menu_icon).click()
         time.sleep(1)
-        self.driver.find_element_by_id(Data.tpds).click()
+        self.driver.find_element_by_id(Data.tpd_opts).click()
         time.sleep(2)
         self.driver.find_element_by_id(Data.tpd_percentage).click()
         time.sleep(3)
@@ -1245,6 +1245,7 @@ class GetData():
         time.sleep(1)
         self.driver.find_element_by_id(Data.logout)
         time.sleep(3)
+        print(self.driver.title)
 
 
 
