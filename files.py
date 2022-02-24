@@ -184,9 +184,9 @@ class Files():
     enrollment_overall=""
     completion_overall=""
 
-    tpd_content_plays_file="Tpd_Total_Content_Plays.csv"
-    tpd_time_spent_file="Tpd_Total_Time_Spent.csv"
-    tpd_average_time_spent_file="Tpd_Avg_Time_Spent.csv"
+    tpd_content_plays_file="TPD_total_content_plays.csv"
+    tpd_time_spent_file="TPD_total_time_spent.csv"
+    tpd_average_time_spent_file="TPD_avg_time_spent.csv"
 
     etb_content_plays_file = "Etb_Total_Content_Plays.csv"
     etb_time_spent_file = "Etb_Total_Time_Spent.csv"

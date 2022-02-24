@@ -375,7 +375,7 @@ class GetData():
         self.driver.implicitly_wait(30)
         self.driver.find_element_by_id(Data.menu_icon).click()
         time.sleep(1)
-        self.driver.find_element_by_id(Data.tpd_opts).click()
+        self.driver.find_element_by_id(Data.other_diksha).click()
         time.sleep(2)
         self.driver.find_element_by_id(Data.tpd_content_preference).click()
         time.sleep(5)

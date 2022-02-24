@@ -48,6 +48,7 @@ class Data():
     std_performance = "stdPerformance"
     attendance = "attendance"
     tpd_opts = "tpd"
+    other_diksha="common"
     diksha_ETB = "etb"
     crc_visit = "crc"
     composite_metrics = "composite"
@@ -459,10 +460,15 @@ class Data():
     legends ="legends"
     legend_button=""
 
+    #outside
+    t_c_play="//*[@id='sidenav-container']/mat-sidenav-content/div/div/div/app-tpd-total-content-plays/div[1]/div[2]/div/div[3]/span[1]"
+    t_t_spent="//*[@id='sidenav-container']/mat-sidenav-content/div/div/div/app-tpd-total-content-plays/div[1]/div[2]/div/div[3]/span[2]"
+    t_a_spent="//*[@id='sidenav-container']/mat-sidenav-content/div/div/div/app-tpd-total-content-plays/div[1]/div[2]/div/div[3]/span[3]"
+
     dist_dropdown="choose_district"
-    content_plays = "content_plays"
-    time_spent = "time_spent"
-    avg_time = "avg_time"
+    content_plays = "contentPlays"
+    time_spent = "timeSpent"
+    avg_time = "avgTime"
 
     #Content preference
     state_cp_header = "h5"
