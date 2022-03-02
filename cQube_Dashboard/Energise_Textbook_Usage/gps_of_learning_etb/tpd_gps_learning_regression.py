@@ -4,7 +4,7 @@ from cQube_Dashboard.Energise_Textbook_Usage.gps_of_learning_etb.gps_learning_et
 from reuse_func import GetData
 
 
-class gps_learning_etb_smoke(unittest.TestCase):
+class gps_learning_etb(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
@@ -24,9 +24,8 @@ class gps_learning_etb_smoke(unittest.TestCase):
 
     def test_report_home_page(self):
         fun = etb_content_plays_map_report(self.driver)
-        method1,method2 = fun.check_report_home_page()
+        method1 = fun.check_report_home_page()
         self.assertEqual(0,method1,msg='Navigation to report is failed')
-        self.assertNotEqual(0,method2,msg='Markers are not exists')
 
     def test_check_choose_type_dropdown(self):
         fun = etb_content_plays_map_report(self.driver)
@@ -61,7 +60,7 @@ class gps_learning_etb_smoke(unittest.TestCase):
     def test_check_average_timespent_legendcard(self):
         fun = etb_content_plays_map_report(self.driver)
         method = fun.check_averaage_timespent_legendcard()
-        self.assertEqual(0,method,msg='average time spent legend card button are not working')
+        self.assertEqual(0,method,msg=' average time spent legend cards button are not working ')
 
     def test_check_logout_from_the_report(self):
         fun = etb_content_plays_map_report(self.driver)

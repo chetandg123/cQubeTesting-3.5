@@ -18,10 +18,10 @@ class user_on_boarding_line_chart_regression(unittest.TestCase):
         self.data.navigate_to_tpd_user_on_boarding_report()
         self.data.page_loading(self.driver)
 
-    def test_navigation_to_user_engagement(self):
+    def test_navigation_to_user_onboarding(self):
         fun = user_on_boarding_report(self.driver)
-        method = fun.check_hyperlink_functionality()
-        self.assertEqual(0,method,msg="Navigation to on boarding  is failed")
+        method = fun.check_navigation_to_user_on_boarding_report()
+        self.assertEqual(0,method,msg="Navigation to on boarding is failed")
 
     def test_check_hyperlink_functionality(self):
         fun = user_on_boarding_report(self.driver)
@@ -31,12 +31,12 @@ class user_on_boarding_line_chart_regression(unittest.TestCase):
     def test_check_selection_of_program_dropdown(self):
         fun = user_on_boarding_report(self.driver)
         method = fun.check_selection_of_program_dropdown()
-        self.assertNotEqual(0,method,msg="check_selection_of_program_dropdown options are not present")
+        self.assertEqual(0,method,msg="check_selection_of_program_dropdown options are not present")
 
     def test_check_selection_of_course_dropdown(self):
         fun = user_on_boarding_report(self.driver)
         method = fun.check_selection_of_course_dropdown()
-        self.assertNotEqual(0,method,msg="Selection of course dropdown options")
+        self.assertEqual(0,method,msg="Selection of course dropdown options")
 
     def test_check_download_button_on_selection_of_programs(self):
         fun = user_on_boarding_report(self.driver)

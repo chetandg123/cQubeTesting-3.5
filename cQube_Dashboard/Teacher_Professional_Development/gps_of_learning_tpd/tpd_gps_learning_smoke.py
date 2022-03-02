@@ -25,9 +25,8 @@ class gps_learning_tpd_smoke_suite(unittest.TestCase):
 
     def test_report_home_page(self):
         fun = tpd_content_plays_map_report(self.driver)
-        method1,method2 = fun.check_report_home_page()
+        method1 = fun.check_report_home_page()
         self.assertEqual(0,method1,msg='Navigation to report is failed')
-        self.assertNotEqual(0,method2,msg='Markers are not exists')
 
     def test_check_choose_type_dropdown(self):
         fun = tpd_content_plays_map_report(self.driver)

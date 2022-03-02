@@ -1,5 +1,7 @@
 import os
 import time
+from select import select
+
 import pandas as pd
 from Locators.parameters import Data
 from files import Files
@@ -34,10 +36,13 @@ class user_on_boarding_report():
         count = 0
         self.driver.find_element(By.XPATH, Data.hyper_link).click()
         time.sleep(3)
-        districts = Select(self.driver.find_element(By.ID, Data.dist_dropdown))
+        # program = Select(self.driver.find_element(By.ID,"choose_program"))
+        # program.select_by_index(2)
+        # time.sleep(2)
+        districts = Select(self.driver.find_element(By.ID,"choose_course"))
         districts.select_by_index(2)
         print(districts.options[2].text, 'is selected')
-        time.sleep(1)
+        time.sleep(3)
         self.driver.find_element(By.XPATH, Data.hyper_link).click()
         if districts.first_selected_option.text == districts.options[2].text:
             print("Hyperlink is not working ")
@@ -54,7 +59,7 @@ class user_on_boarding_report():
         time.sleep(3)
         program = Select(self.driver.find_element(By.ID, Data.program_dropdown))
         spents = len(program.options) - 1
-        if spents == 0 or spents < 1:
+        if spents == 0 :
             print('Program dropdown are not having options ')
             count = count + 1
         else:
@@ -70,7 +75,7 @@ class user_on_boarding_report():
         time.sleep(3)
         course = Select(self.driver.find_element(By.ID, Data.course_dropdown))
         spents = len(course.options) - 1
-        if spents == 0 or spents < 1 :
+        if spents == 0:
             print('Course dropdown are not having options ')
             count = count + 1
         else:
@@ -106,10 +111,10 @@ class user_on_boarding_report():
                     size = len(df)
                     total_enrolled = df['Expected Enrollment'].sum()
                     avg_time = df['Net Enrollment'].sum()
-                    if program_name not in df.values :
+                    if program_name not in df.values and size != 0:
                         print(program_name,'program is not having details in downloaded csv file')
                         count = count + 1
-                    if int(total_enrolled) > 0 and int(avg_time) > 0:
+                    if int(total_enrolled) == 0 and int(avg_time) == 0:
                         print(total_enrolled,avg_time,'values are showing wrong!...')
                         count = count + 1
             os.remove(self.filename)
@@ -141,10 +146,10 @@ class user_on_boarding_report():
                     size = len(df)
                     total_enrolled = df['Expected Enrollment'].sum()
                     avg_time = df['Net Enrollment'].sum()
-                    if course_name not in df.values :
+                    if course_name not in df.values and size > 0 :
                         print(course_name,'course is not having details in downloaded csv file')
                         count = count + 1
-                    if int(total_enrolled) > 0 and int(avg_time) > 0:
+                    if int(total_enrolled) == 0 and int(avg_time) == 0:
                         print(total_enrolled,avg_time,'values are showing wrong!...')
                         count = count + 1
             os.remove(self.filename)
@@ -166,27 +171,31 @@ class user_on_boarding_report():
                 course_name = courses.options[i].text
                 time.sleep(2)
                 print(course_name, 'is selected and chart also displayed...')
-                for j in range(1,len(districts.options-1)):
+                for j in range(len(districts.options)-10,len(districts.options)-1):
                     districts.select_by_index(j)
-                    time.sleep(2)
-                    self.driver.find_element(By.ID,Data.Download).click()
+                    print(districts.options[j].text,'is selected')
                     time.sleep(3)
-                    self.filename = self.p.get_download_dir() + '/' + self.fname.onboarding_course
-                    if os.path.isfile(self.filename) != True:
-                        print(course_name,districts.options[j].text, 'file is not downloaded')
-                        count = count + 1
+                    if 'No Data found' or ' No Data Available ' in self.driver.page_source:
+                        print(districts.options[j].text,'is selected but does not have data')
                     else:
-                        df = pd.read_csv(self.filename)
-                        size = len(df)
-                        total_enrolled = df['Expected Enrollment'].sum()
-                        avg_time = df['Net Enrollment'].sum()
-                        if course_name not in df.values and districts.options[j].text not in df.values :
-                            print(course_name,districts.options[j].text,'course and district wise is not having details in downloaded csv file')
+                        self.driver.find_element(By.ID,Data.Download).click()
+                        time.sleep(3)
+                        self.filename = self.p.get_download_dir() + '/' + self.fname.onboarding_course
+                        if os.path.isfile(self.filename) != True:
+                            print(course_name,districts.options[j].text, 'file is not downloaded')
                             count = count + 1
-                        if int(total_enrolled) > 0 and int(avg_time) > 0:
-                            print(total_enrolled,avg_time,'values are showing wrong!...')
-                            count = count + 1
-            os.remove(self.filename)
+                        else:
+                            df = pd.read_csv(self.filename)
+                            size = len(df)
+                            total_enrolled = df['Expected Enrollment'].sum()
+                            avg_time = df['Net Enrollment'].sum()
+                            if course_name not in df.values and districts.options[j].text not in df.values :
+                                print(course_name,districts.options[j].text,'course and district wise is not having details in downloaded csv file')
+                                count = count + 1
+                            if int(total_enrolled) == 0 and int(avg_time) == 0:
+                                print(total_enrolled,avg_time,'values are showing wrong!...')
+                                count = count + 1
+                        os.remove(self.filename)
         return count
 
 
@@ -198,42 +207,45 @@ class user_on_boarding_report():
         courses = Select(self.driver.find_element(By.ID, Data.course_dropdown))
         districts = Select(self.driver.find_element(By.ID,Data.dist_dropdown))
         spents = len(courses.options) - 1
-        if len(programs.options-1) == 0:
+        if int(spents) == 0:
             print('Program dropdown are not having options ')
             count = count + 1
         else:
-            for i in range(1, len(programs.options-1)):
+            for i in range(1, len(programs.options)-1):
                 programs.select_by_index(i)
                 program_name = programs.options[i].text
                 time.sleep(2)
-                for j in range(1,len(courses.options-1)):
+                for j in range(1,len(courses.options)-1):
                     courses.select_by_index(j)
                     course_name = courses.options[j].text
                     time.sleep(2)
                     print(program_name,course_name, 'is selected and chart also displayed...')
-                    for z in range(1,len(districts.options-1)):
+                    for z in range(len(districts.options)-10,len(districts.options)-1):
                         districts.select_by_index(z)
                         time.sleep(2)
                         district_name = districts.options[z].text
-                        self.driver.find_element(By.ID,Data.Download).click()
-                        time.sleep(3)
-                        self.filename = self.p.get_download_dir() + '/' + self.fname.onboarding_course
-                        if os.path.isfile(self.filename) != True:
-                            print(program_name,district_name, 'file is not downloaded')
-                            count = count + 1
+                        if 'No Data found' or ' No Data Available ' in self.driver.page_source:
+                            print(districts.options[z].text, 'is selected but does not have data')
                         else:
-                            df = pd.read_csv(self.filename)
-                            size = len(df)
-                            total_enrolled = df['Expected Enrollment'].sum()
-                            avg_time = df['Net Enrollment'].sum()
+                            self.driver.find_element(By.ID,Data.Download).click()
+                            time.sleep(3)
+                            self.filename = self.p.get_download_dir() + '/' + self.fname.onboarding_course
+                            if os.path.isfile(self.filename) != True:
+                                print(program_name,district_name, 'file is not downloaded')
+                                count = count + 1
+                            else:
+                                df = pd.read_csv(self.filename)
+                                size = len(df)
+                                total_enrolled = df['Expected Enrollment'].sum()
+                                avg_time = df['Net Enrollment'].sum()
 
-                            if program_name not in df.values or course_name not in df.values and district_name not in df.values :
-                                print(program_name,course_name,district_name.text,'Program , Course and district wise is not having details in downloaded csv file')
-                                count = count + 1
-                            if int(total_enrolled) > 0 and int(avg_time) > 0:
-                                print(total_enrolled,avg_time,'values are showing wrong!...')
-                                count = count + 1
-                os.remove(self.filename)
+                                if program_name not in df.values or course_name not in df.values and district_name not in df.values :
+                                    print(program_name,course_name,district_name.text,'Program , Course and district wise is not having details in downloaded csv file')
+                                    count = count + 1
+                                if int(total_enrolled) == 0 and int(avg_time) == 0:
+                                    print(total_enrolled,avg_time,'values are showing wrong!...')
+                                    count = count + 1
+                            os.remove(self.filename)
         return count
 
     def check_logout_from_report(self):
@@ -249,7 +261,7 @@ class user_on_boarding_report():
         else:
             print("Logout button is working as expected ")
             self.data.login_cqube(self.driver)
-            self.data.navigate_to_tpd_user_engagement_report()
+            self.data.navigate_to_tpd_user_on_boarding_report()
             if 'enrollment-progress' in self.driver.current_url:
                 print(" User OnBoarding report home page is displayed ")
             else:
@@ -274,11 +286,11 @@ class user_on_boarding_report():
             size = len(df)
             total_enrolled = df['Expected Enrollment'].sum()
             avg_time = df['Net Enrollment'].sum()
-            n = len(pd.unique(df['Program Name']))
-            if int(n) != int(spents):
-                print('all programs information is not having in downloaded csv file state wise file')
-                count = count + 1
-            if int(total_enrolled) > 0 and int(avg_time) > 0:
+            # n = len(pd.unique(df['Program Name']))
+            # if int(n) != int(spents):
+            #     print('all programs information is not having in downloaded csv file state wise file')
+            #     count = count + 1
+            if int(total_enrolled) == 0 and int(avg_time) == 0:
                 print(total_enrolled, avg_time, 'values are showing wrong!...')
                 count = count + 1
             os.remove(self.filename)

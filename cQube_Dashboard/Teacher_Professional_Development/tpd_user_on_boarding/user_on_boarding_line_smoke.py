@@ -20,7 +20,7 @@ class user_on_boarding_line_chart_smoke(unittest.TestCase):
 
     def test_navigation_to_user_engagement(self):
         fun = user_on_boarding_report(self.driver)
-        method = fun.check_hyperlink_functionality()
+        method = fun.check_navigation_to_user_on_boarding_report()
         self.assertEqual(0,method,msg="Navigation to on boarding  is failed")
 
     def test_check_hyperlink_functionality(self):
@@ -36,7 +36,7 @@ class user_on_boarding_line_chart_smoke(unittest.TestCase):
     def test_check_selection_of_course_dropdown(self):
         fun = user_on_boarding_report(self.driver)
         method = fun.check_selection_of_course_dropdown()
-        self.assertNotEqual(0,method,msg="Selection of course dropdown options")
+        self.assertEqual(0,method,msg="Selection of course dropdown options")
 
     def test_check_download_button_on_selection_of_programs(self):
         fun = user_on_boarding_report(self.driver)

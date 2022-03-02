@@ -22,6 +22,7 @@ class tpd_content_plays_map_report():
         self.data = GetData()
         self.p = pwd()
 
+
     def check_navigation_from_dashboard(self):
         data = GetData()
         self.driver.find_element(By.XPATH,Data.hyper_link).click()
@@ -44,9 +45,11 @@ class tpd_content_plays_map_report():
         if 'No data found' in self.driver.page_source:
             print("GPS of Learning- TPD Report is showing no data found!!!")
             count = count + 1
-        markers = self.driver.find_elements(By.CLASS_NAME,Data.dots)
-        values = len(markers)-1
-        return count , values
+        else:
+            markers = self.driver.find_elements(By.CLASS_NAME,Data.dots)
+            values = len(markers)-1
+
+        return count
 
     def check_choose_type_dropdown(self):
         self.data.click_on_state(self.driver)
@@ -209,13 +212,12 @@ class tpd_content_plays_map_report():
             if 'No data found' in self.driver.page_source:
                 print(i, "selected legend card does not having markers and showing no data found")
             else:
-                print(i, " Legend cards are working as expected ")
                 markers = self.driver.find_elements(By.CLASS_NAME, Data.dots)
                 total_markers = len(markers) - 1
                 sum = sum + total_markers
                 self.driver.find_element(By.ID, Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() + '/' + self.fname.tpd_time_spent_file
+                self.filename = self.p.get_download_dir() + '/' + self.fname.tpd_average_time_spent_file
                 if os.path.isfile(self.filename) != True:
                     print(self.fname.tpd_time_spent_file, 'is not downloaded ')
                     count = count + 1
@@ -226,16 +228,12 @@ class tpd_content_plays_map_report():
                         print(size, total_markers,
                               'Total markers present in screen is not equivalent to no of records in the downloaded csv file')
                         count = count + 1
-                    else:
-                        print(size, total_markers,
-                              'Total markers present in screen is equivalent to no of records in the downloaded csv file')
-
-            if tot_markers != sum:
-                print(tot_markers, sum, "No of Markers is Not Equal to sum of each legend score markers")
-                count = count + 1
-            else:
-                print("Total no of markers is equal to sum of each legend card ")
-            os.remove(self.filename)
+        if tot_markers != sum:
+            print(tot_markers, sum, "No of Markers is Not Equal to sum of each legend score markers")
+            count = count + 1
+        else:
+            print("Total no of markers is equal to sum of each legend card ")
+        os.remove(self.filename)
         return count
 
 

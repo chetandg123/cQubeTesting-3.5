@@ -188,14 +188,14 @@ class Files():
     tpd_time_spent_file="TPD_total_time_spent.csv"
     tpd_average_time_spent_file="TPD_avg_time_spent.csv"
 
-    etb_content_plays_file = "Etb_Total_Content_Plays.csv"
-    etb_time_spent_file = "Etb_Total_Time_Spent.csv"
-    etb_average_time_spent_file = "Etb_Avg_Time_Spent.csv"
+    etb_content_plays_file = "ETB_total_content_plays.csv"
+    etb_time_spent_file = "ETB_total_time_spent.csv"
+    etb_average_time_spent_file = "ETB_avg_time_spent.csv"
 
     content_preference_state="Content-usage-state.csv"
 
     #user engengment
-    average_time_state="Average_Time_Spent_Gujarat.csv"
+    average_time_state="Average_Time_Spent_"
     average_time_districts="Average_time_spend_"
 
     #on boarding
@@ -206,7 +206,7 @@ class Files():
     content_year_statewise="Total_content_play_over_years.csv"
     content_year_districtwise="Total_content_play_"
 
-    user_engagement_statewise = "Average_Time_Spent_Gujarat.csv"
+    user_engagement_statewise = "Average_Time_Spent_"
     user_engagement_districtwise="Average_time_spend_"
 
     onboarding_program ="enrollment-progress-state.csv"
