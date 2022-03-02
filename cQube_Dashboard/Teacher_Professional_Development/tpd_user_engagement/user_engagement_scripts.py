@@ -38,7 +38,7 @@ class user_engagement_automation_scripts():
         districts = Select(self.driver.find_element(By.ID, Data.dist_dropdown))
         districts.select_by_index(2)
         print(districts.options[2].text, 'is selected')
-        time.sleep(1)
+        time.sleep(3)
         self.driver.find_element(By.XPATH, Data.hyper_link).click()
         if districts.first_selected_option.text == districts.options[2].text:
             print("Hyperlink is not working ")
@@ -76,7 +76,6 @@ class user_engagement_automation_scripts():
             district.select_by_index(i)
             dist_name = district.options[i].text
             time.sleep(2)
-
             if ' No Data Available ' in self.driver.page_source:
                 print(dist_name,'is not having ')
             else:
@@ -85,6 +84,7 @@ class user_engagement_automation_scripts():
                 print(dist_name, 'is selected and chart also displayed...')
                 self.driver.find_element(By.ID,Data.Download).click()
                 time.sleep(3)
+
                 self.filename = self.p.get_download_dir() + '/' + self.fname.user_engagement_districtwise+''+dist_name+'.csv'
                 if os.path.isfile(self.filename) != True:
                     print(self.filename,'is not downlaoded so download button is not working')
@@ -96,10 +96,10 @@ class user_engagement_automation_scripts():
                     total_enrolled = df['Total Enrolled'].sum()
                     avg_time = df['Avg Time Spent'].sum()
 
-                    if  int(size) > 2:
+                    if  int(size)  == 0:
                         print('Course Result in UI and Downloaded files are not same  so no of courses ',size)
                         count = count + 1
-                    if total_enrolled < 10 and avg_time < 0:
+                    if total_enrolled == 0 and avg_time == 0:
                         print('Total enrolled and avg time  both are not correct ')
                         count = count + 1
                 os.remove(self.filename)
@@ -113,7 +113,8 @@ class user_engagement_automation_scripts():
         count_of_course = len(courses)
         self.driver.find_element(By.ID, Data.Download).click()
         time.sleep(3)
-        self.filename = self.p.get_download_dir() + '/' + self.fname.user_engagement_statewise
+        state_name=self.driver.find_element(By.XPATH,'//p/span').text
+        self.filename = self.p.get_download_dir() + '/' + self.fname.user_engagement_statewise + state_name +'.csv'
         if os.path.isfile(self.filename) != True:
             print(self.filename, 'is not downlaoded so download button is not working')
             count = count + 1
@@ -123,10 +124,10 @@ class user_engagement_automation_scripts():
             size = len(df)
             total_enrolled = df['Total Enrolled'].sum()
             avg_time = df['Avg Time Spent'].sum()
-            if  2 < int(size):
+            if count_of_course == int(size):
                 print('Course Result in UI and Downloaded files are not same  so no of courses ', count_of_course, size)
                 count = count + 1
-            if total_enrolled < 10 and avg_time < 0:
+            if total_enrolled == 0 and avg_time == 0:
                 print('Total enrolled and avg time  both are not correct ')
                 count = count + 1
             os.remove(self.filename)

@@ -466,9 +466,9 @@ class Data():
     t_a_spent="//*[@id='sidenav-container']/mat-sidenav-content/div/div/div/app-tpd-total-content-plays/div[1]/div[2]/div/div[3]/span[3]"
 
     dist_dropdown="choose_district"
-    content_plays = "contentPlays"
-    time_spent = "timeSpent"
-    avg_time = "avgTime"
+    content_plays = "etb_total_content"
+    time_spent = "etb_total_spent"
+    avg_time = "etb_avg_spent"
 
     #Content preference
     state_cp_header = "h5"
@@ -477,7 +477,7 @@ class Data():
     multi_submit="multiSelectorSubmit"
 
     #user engagement
-    course_list = "#highcharts-9fzy0py-111 > svg > g.highcharts-axis-labels.highcharts-xaxis-labels > text"
+    course_list = "g>text"
 
     #user on boarding
     program_dropdown = "choose_program"

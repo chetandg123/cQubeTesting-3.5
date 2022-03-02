@@ -106,7 +106,8 @@ class tpd_content_usage_piechart():
 
             self.driver.find_element(By.ID, Data.Download).click()
             time.sleep(3)
-            print('Downlaod click is happened')
+            print('Download click is happened')
+            state_name = self.driver.find_element(By.XPATH,'//p/span').text
             self.filename = self.p.get_download_dir() + '/'+self.fname.content_preference_state
             print(os.path.isfile(self.filename), 'file is present or not ')
             if os.path.isfile(self.filename) != True:
@@ -116,7 +117,7 @@ class tpd_content_usage_piechart():
                 print(os.path.isfile(self.filename),'file is present or not ')
                 df = pd.read_csv(self.filename)
                 size = len(df)
-                content_plays = df['Total Content Plays Gujarat'].sum()
+                content_plays = (df['Total Content Plays '+state_name]).sum()
 
                 total_cp = self.driver.find_element(By.TAG_NAME, Data.state_cp_header).text
                 total_cp = re.sub('\D', "", total_cp)
@@ -145,6 +146,7 @@ class tpd_content_usage_piechart():
             time.sleep(5)
             self.driver.find_element(By.ID, Data.Download).click()
             time.sleep(3)
+            state_name = self.driver.find_element(By.XPATH,"//p/span").text
             self.filename = self.p.get_download_dir() + '/' + self.fname.content_preference_state
             if os.path.isfile(self.filename) != True:
                 print(self.fname.content_preference_state, 'is not downloaded ')
@@ -152,7 +154,7 @@ class tpd_content_usage_piechart():
             else:
                 df = pd.read_csv(self.filename)
                 size = len(df)
-                content_plays = df['Total Content Plays Gujarat'].sum()
+                content_plays = df['Total Content Plays '+state_name].sum()
 
                 total_cp = self.driver.find_element(By.TAG_NAME, Data.state_cp_header).text
 
