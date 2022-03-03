@@ -218,3 +218,5 @@ class Files():
     nation_learning_districtwise = "Total_content_play_"
 
     etb_per_capita_statewise="ETB_Per_Capita_"
+
+    #user progress
