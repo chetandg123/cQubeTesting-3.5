@@ -34,15 +34,17 @@ class usage_per_capita_map():
 
     def check_report_home_page(self):
         count = 0
+        values = 0
         self.data.click_on_state(self.driver)
         self.driver.find_element(By.ID,Data.cQube_logo).click()
         time.sleep(1)
-        self.data.navigate_to_etb_content_plays_report()
+        self.data.navigate_to_etb_usage_per_capita_report()
         if 'No data found' in self.driver.page_source:
             print("Usage Per Capita is showing no data found!!!")
             count = count + 1
-        markers = self.driver.find_elements(By.CLASS_NAME,Data.dots)
-        values = len(markers)-1
+        else:
+            markers = self.driver.find_elements(By.CLASS_NAME,Data.dots)
+            values = len(markers)-1
         return count , values
 
     # def check_choose_type_dropdown(self):
@@ -69,12 +71,13 @@ class usage_per_capita_map():
         time.sleep(3)
 
 
+
     def check_legend_card_functionality(self):
         count = 0
         self.data.click_on_state(self.driver)
         markers = self.driver.find_elements(By.CLASS_NAME,Data.dots)
         legends = self.driver.find_elements(By.CLASS_NAME,Data.legends)
-        for i in range(1,len(legends)-1):
+        for i in range(len(legends)-2):
             cards = self.driver.find_element(By.ID,i)
             cards.click()
             time.sleep(2)
@@ -117,14 +120,21 @@ class usage_per_capita_map():
             count = count + 1
         else:
             upper_marker = len(markers)-1
-            rgb_legend =self.driver.find_elements(By.ID,"0").value_of_css_property('background-color')
-            rgb_markers = markers.value_of_css_property('background-color')
+            bottom_markers = len(markers) - 1
+            rgb_legend = upper_quartile.get_attribute('style')
+            rgb_markers = self.driver.find_element(By.XPATH, "//*[@class='leaflet-interactive'][2]").get_attribute(
+                'fill')
+            rgb_legend = self.data.get_legend_card_background_color(rgb_legend)
+            rgb_markers = self.data.get_hex_to_rgb(rgb_markers)
+
+
+            print("legendcard color :", type(rgb_legend), rgb_legend, "markers color: ", rgb_markers)
             if total_markers > upper_marker:
                 print('Upper Quartile Markers are showing correct ')
             if rgb_legend != rgb_markers:
                 print('Upper Quartile button background color and markers background color are not matching')
                 count = count + 1
-            return count
+        return count
 
     def check_with_inter_quartile_functionality(self):
         count = 0
@@ -138,8 +148,15 @@ class usage_per_capita_map():
             count = count + 1
         else:
             inter_markers = len(markers)-1
-            rgb_legend =self.driver.find_element(By.ID,'1').value_of_css_property('background-color')
-            rgb_markers = markers.value_of_css_property('background-color')
+            bottom_markers = len(markers) - 1
+            rgb_legend = inter_quartile.get_attribute('style')
+            rgb_markers = self.driver.find_element(By.XPATH, "//*[@class='leaflet-interactive'][2]").get_attribute(
+                'fill')
+            rgb_legend = self.data.get_legend_card_background_color(rgb_legend)
+
+            rgb_markers = self.data.get_hex_to_rgb(rgb_markers)
+
+            print("legendcard color :", type(rgb_legend), rgb_legend, "markers color: ", rgb_markers)
             if total_markers > inter_markers:
                 print('Inter Quartile Markers are showing correct ')
             if rgb_legend != rgb_markers:
@@ -150,17 +167,23 @@ class usage_per_capita_map():
     def check_with_bottom_quartile_functionality(self):
         count = 0
         self.data.click_on_state(self.driver)
-        markers = self.driver.find_elements(By.CLASS_NAME,Data.dots)
-        total_markers = len(markers)-1
         bottom_quartile = self.driver.find_element(By.ID,'2')
         bottom_quartile.click()
+        time.sleep(2)
         if 'No data found' in self.driver.page_source:
             print('Bottom Quartile is showing no data found on screen')
             count = count + 1
         else:
+            markers = self.driver.find_elements(By.CLASS_NAME, Data.dots)
+            total_markers = len(markers) - 1
             bottom_markers = len(markers)-1
-            rgb_legend =self.driver.find_element(By.ID,'1').value_of_css_property('background-color')
-            rgb_markers = markers.value_of_css_property('background-color')
+            rgb_legend =bottom_quartile.get_attribute('style')
+            rgb_markers = self.driver.find_element(By.XPATH,"//*[@class='leaflet-interactive'][2]").get_attribute('fill')
+            rgb_legend = self.data.get_legend_card_background_color(rgb_legend)
+
+            rgb_markers = self.data.get_hex_to_rgb(rgb_markers)
+            print("legendcard color :",type(rgb_legend),rgb_legend,"markers color: ",rgb_markers)
+
             if total_markers > bottom_markers:
                 print('Bottom Quartile Markers are showing correct ')
             if rgb_legend != rgb_markers:
@@ -171,17 +194,23 @@ class usage_per_capita_map():
     def check_download_functionality_with_upper_quartile(self):
         count = 0
         self.data.click_on_state(self.driver)
-        markers = self.driver.find_elements(By.CLASS_NAME,Data.dots)
-        total_markers = len(markers)-1
+
         upper_quartile = self.driver.find_element(By.ID,'0')
         upper_quartile.click()
+        time.sleep(2)
+
         if 'No data found' in self.driver.page_source:
             print('Upper Quartile is showing no data found on screen')
             count = count + 1
+            self.driver.find_element(By.XPATH,Data.hyper_link).click()
+            time.sleep(2)
         else:
+            markers = self.driver.find_elements(By.CLASS_NAME, Data.dots)
+            total_markers = len(markers) - 1
             self.driver.find_element(By.ID,Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + '/' + self.fname.etb_per_capita_statewise
+            state_name = self.driver.find_element(By.XPATH, "//p/span").text
+            self.filename = self.p.get_download_dir() + '/' + self.fname.etb_per_capita_statewise+state_name+'.csv'
             if os.path.isfile(self.filename) != True:
                 print('upper quartile file is not downloaded')
                 count = count + 1
@@ -192,23 +221,27 @@ class usage_per_capita_map():
                 if int(total_markers) != int(size):
                     print('Total no of markers information is not present in downloaded csv file',len(markers)-1,size)
                     count = count + 1
-                os.remove(self.filename)
+            os.remove(self.filename)
         return count
 
     def check_download_functionality_with_inter_quartile(self):
         count = 0
         self.data.click_on_state(self.driver)
-        markers = self.driver.find_elements(By.CLASS_NAME,Data.dots)
-        total_markers = len(markers)-1
         inter_quartile = self.driver.find_element(By.ID,'1')
         inter_quartile.click()
+        time.sleep(2)
         if 'No data found' in self.driver.page_source:
             print('Inter Quartile is showing no data found on screen')
             count = count + 1
+            self.driver.find_element(By.XPATH, Data.hyper_link).click()
+            time.sleep(2)
         else:
+            markers = self.driver.find_elements(By.CLASS_NAME, Data.dots)
+            total_markers = len(markers) - 1
             self.driver.find_element(By.ID,Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + '/' + self.fname.etb_per_capita_statewise
+            state_name = self.driver.find_element(By.XPATH, "//p/span").text
+            self.filename = self.p.get_download_dir() + '/' + self.fname.etb_per_capita_statewise+state_name+".csv"
             if os.path.isfile(self.filename) != True:
                 print('Inter quartile file is not downloaded')
                 count = count + 1
@@ -219,23 +252,29 @@ class usage_per_capita_map():
                 if int(total_markers) != int(size):
                     print('Total no of markers information is not present in downloaded csv file',len(markers)-1,size)
                     count = count + 1
-                os.remove(self.filename)
+            os.remove(self.filename)
         return count
 
     def check_download_functionality_with_bottom_quartile(self):
         count = 0
         self.data.click_on_state(self.driver)
-        markers = self.driver.find_elements(By.CLASS_NAME,Data.dots)
-        total_markers = len(markers)-1
+
         bottom_quartile = self.driver.find_element(By.ID,'2')
         bottom_quartile.click()
+        time.sleep(2)
         if 'No data found' in self.driver.page_source:
             print('Bottom Quartile is showing no data found on screen')
             count = count + 1
+            self.driver.find_element(By.XPATH, Data.hyper_link).click()
+            time.sleep(2)
         else:
+            markers = self.driver.find_elements(By.CLASS_NAME, Data.dots)
+            total_markers = len(markers) - 1
             self.driver.find_element(By.ID,Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + '/' + self.fname.etb_per_capita_statewise
+            state_name = self.driver.find_element(By.XPATH, "//p/span").text
+            self.filename = self.p.get_download_dir() + '/' + self.fname.etb_per_capita_statewise+state_name+'.csv'
+            print(self.filename)
             if os.path.isfile(self.filename) != True:
                 print('Bottom quartile file is not downloaded')
                 count = count + 1
@@ -246,7 +285,7 @@ class usage_per_capita_map():
                 if int(total_markers) != int(size):
                     print('Total no of markers information is not present in downloaded csv file',len(markers)-1,size)
                     count = count + 1
-                os.remove(self.filename)
+            os.remove(self.filename)
         return count
 
     def check_download_functionality_per_capita_over_quartile(self):
@@ -255,13 +294,18 @@ class usage_per_capita_map():
         self.data.page_loading(self.driver)
         self.driver.find_element(By.ID,Data.Download).click()
         time.sleep(3)
-        self.filename = self.p.get_download_dir() + '/' + self.fname.etb_per_capita_statewise
+        state_name = self.driver.find_element(By.XPATH,"//p/span").text
+        self.filename = self.p.get_download_dir() + '/' + self.fname.etb_per_capita_statewise + state_name+".csv"
+        print(self.filename)
         if os.path.isfile(self.filename) != True:
             print('Statelevel overall Per Capita Report csv file is not downloaded ')
             count = count + 1
+            self.driver.find_element(By.XPATH, Data.hyper_link).click()
+            time.sleep(2)
         else:
             df = pd.read_csv(self.filename)
             size = len(df)
+
             etb_exp_user = df['Expected Etb Users'].sum()
             # etb_act_user = df['Actual Etb Users'].sum()
             content_plays = df['Total Content Plays'].sum()
@@ -276,15 +320,16 @@ class usage_per_capita_map():
             # act_user = re.sub('\D','',act_user)
             plays = re.sub('\D','',plays)
 
-            if etb_exp_user !=exp_user:
+            if int(etb_exp_user) != int(exp_user):
                 print('Expected ETB Users value in file and footer value are not matching',etb_exp_user,exp_user)
                 count = count + 1
             # if etb_act_user != act_user:
             #     print('Actual ETB Users value in file and footer value are not matching', etb_act_user, act_user)
             #     count = count + 1
-            if plays != play_per_capita:
+            if int(plays) == 0  and int(play_per_capita) == 0:
                 print('Plays per capita value file and footer value are not matching',plays,play_per_capita)
                 count = count + 1
+        os.remove(self.filename)
         return count
 
 
