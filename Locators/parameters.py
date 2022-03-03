@@ -406,7 +406,8 @@ class Data():
     nifi_Sch ="//div[@id='nifi']"
 
     #TPD Enrollement and Completion
-    coursetype="choose_enroll"
+    coursetype="SearchDropDown"
+    program ="selectedProgram"
     coll_names ="coll_name"
 
     # Health card report
