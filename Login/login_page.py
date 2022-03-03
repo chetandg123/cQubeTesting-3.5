@@ -1,6 +1,5 @@
 import unittest
 
-
 from Login.login_to_cQube import cQube_login
 from reuse_func import GetData
 

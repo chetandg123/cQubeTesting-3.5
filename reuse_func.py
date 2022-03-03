@@ -5,6 +5,7 @@ import os
 import subprocess
 import time
 from datetime import date
+from PIL import ImageColor
 
 # import psycopg2
 import psycopg2
@@ -1247,8 +1248,21 @@ class GetData():
         time.sleep(3)
         print(self.driver.title)
 
+    #find out legend card color
 
+    def get_legend_card_background_color(self,legend_card):
+        res = []
+        for sub in legend_card.split('; '):
+            if ':' in sub:
+                res.append(map(str.strip, sub.split(":", 1)))
+        res = dict(res)
+        background_color = res.get('background-color')
+        value = ImageColor.getcolor(background_color, "RGB")
+        return value
 
-
+    def get_hex_to_rgb(self,hexvalue):
+        value = ImageColor.getcolor(hexvalue, "RGB")
+        print(value)
+        return value
 
 

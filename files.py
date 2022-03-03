@@ -217,4 +217,4 @@ class Files():
     nation_learning_statewise = "Total_content_play_over_years.csv"
     nation_learning_districtwise = "Total_content_play_"
 
-    etb_per_capita_statewise="ETB_Per_Capita_Gujarat.csv"
+    etb_per_capita_statewise="ETB_Per_Capita_"
