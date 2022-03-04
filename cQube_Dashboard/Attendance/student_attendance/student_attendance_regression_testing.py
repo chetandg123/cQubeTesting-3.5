@@ -85,6 +85,7 @@ class cQube_Student_Attendance_regression(unittest.TestCase):
             raise self.failureException("School wise csv report download is not working")
 
     def test_choose_district_block_cluster(self):
+        time.sleep(3)
         dist = student_attendance_report(self.driver, self.year, self.month)
         result = dist.check_districts_csv_download()
         if result == 0:

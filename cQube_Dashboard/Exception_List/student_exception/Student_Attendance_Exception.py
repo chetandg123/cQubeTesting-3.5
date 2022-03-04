@@ -422,7 +422,7 @@ class Student_Exceptions():
                     select_cluster.select_by_index(z)
                     cal.page_loading(self.driver)
                     value = self.driver.find_element_by_name('myCluster').get_attribute('value')
-                    value = value[3:]+'_'
+                    value = value.split(":")
                     markers = self.driver.find_elements_by_class_name(Data.dots)
                     if len(markers) - 1 == 0:
                         print(
@@ -432,7 +432,7 @@ class Student_Exceptions():
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(5)
                     p = pwd()
-                    self.filename = p.get_download_dir() + "/student_attendance_exception_"+management+"_Schools_of_cluster_"+value.strip()+ self.month + "_" + self.year+"_"+cal.get_current_date()+ ".csv"
+                    self.filename = p.get_download_dir() + "/student_attendance_exception_"+management+"_Schools_of_cluster_"+value[1].strip()+'_'+ self.month + "_" + self.year+"_"+cal.get_current_date()+ ".csv"
                     print(self.filename)
                     if not os.path.isfile(self.filename):
                         print(

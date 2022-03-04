@@ -142,8 +142,8 @@ class pat_exception_report():
                     if int(sc) != int(schools):
                         print("school count mismatched", int(sc), int(schools))
                         count = count + 1
-                os.remove(self.filename)
-            return count
+            os.remove(self.filename)
+        return count
 
 
 
@@ -183,8 +183,8 @@ class pat_exception_report():
                     if int(sc) != int(schools):
                         print("school count mismatched", int(sc), int(schools))
                         count = count + 1
-                os.remove(self.filename)
-            return count
+            os.remove(self.filename)
+        return count
 
     def SchoolPerClusterCsvDownload(self):
         cal = GetData()
@@ -231,8 +231,8 @@ class pat_exception_report():
                             if int(sc) != int(row_count):
                                 print("school count mismatched", int(sc), int(row_count))
                                 count = count + 1
-                        os.remove(self.filename)
-                return count
+                os.remove(self.filename)
+            return count
 
     def check_markers_on_block_map(self):
         cal = GetData()
@@ -337,6 +337,7 @@ class pat_exception_report():
         timeperiods = Select(self.driver.find_element_by_id('period'))
         # timeperiods.select_by_visible_text(' Overall ')
         timeperiods.select_by_index(1)
+        time.sleep(3)
         cal.page_loading(self.driver)
         if 'No data found' in self.driver.page_source:
             print('Over all is not having data')
@@ -362,8 +363,8 @@ class pat_exception_report():
                     if int(sc) != int(schools):
                         print("school count mismatched", int(sc), int(schools))
                         count = count + 1
-                    os.remove(self.filename)
-            return count
+            os.remove(self.filename)
+        return count
 
     def check_time_series_last_7_days(self):
         cal = GetData()
@@ -403,7 +404,7 @@ class pat_exception_report():
                         if int(sc) != int(schools):
                             print("school count mismatched", int(sc), int(schools))
                             count = count + 1
-                        os.remove(self.filename)
+                os.remove(self.filename)
         return count
 
     def check_time_series_last_30_days(self):
@@ -443,5 +444,5 @@ class pat_exception_report():
                         if int(sc) != int(schools):
                             print("school count mismatched", int(sc), int(schools))
                             count = count + 1
-                        os.remove(self.filename)
+                os.remove(self.filename)
         return count

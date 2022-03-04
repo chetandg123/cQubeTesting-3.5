@@ -176,6 +176,7 @@ class Composite_Report():
         self.p = GetData()
         self.driver.implicitly_wait(20)  # seconds
         self.driver.find_element_by_xpath(Data.hyper_link).click()
+        time.sleep(3)
         self.p.page_loading(self.driver)
         dist = Select(self.driver.find_element_by_name("myDistrict"))
         dist.select_by_index(1)
