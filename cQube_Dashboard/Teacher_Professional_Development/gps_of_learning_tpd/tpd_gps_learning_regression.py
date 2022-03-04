@@ -5,7 +5,7 @@ from cQube_Dashboard.Teacher_Professional_Development.gps_of_learning_tpd.gps_le
 from reuse_func import GetData
 
 
-class gps_learning_tpd(unittest.TestCase):
+class gps_learning_tpd_regression(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):

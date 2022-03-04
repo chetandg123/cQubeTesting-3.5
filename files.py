@@ -41,7 +41,7 @@ class Files():
 
 
     exception_block="semester_assessment_test_exception_"
-    exception_cluster="semester_assessment_test_exception_"+management+"_overall_allGrades__allClusters_"
+    exception_cluster="semester_assessment_test_exception_"
     exception_school="semester_assessment_test_exception_"+management+"_overall_allGrades__allSchools_"
     exception_district='semester_assessment_test_exception_'
     exception_districtwise='semester_assessment_test_exception_'

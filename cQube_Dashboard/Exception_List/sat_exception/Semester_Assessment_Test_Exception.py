@@ -4,6 +4,7 @@ import time
 from datetime import date
 
 import pandas as pd
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 from Locators.parameters import Data
@@ -111,6 +112,8 @@ class Semester_Assessment_Test_Exception():
             os.remove(self.filename)
         return markers
     def check_markers_on_clusters_map(self):
+        self.driver.find_element(By.XPATH,Data.hyper_link).click()
+        time.sleep(2)
         self.driver.find_element_by_id('clusterbtn').click()
         cal = GetData()
         self.fname = file_extention()
@@ -118,10 +121,13 @@ class Semester_Assessment_Test_Exception():
         dots = self.driver.find_elements_by_class_name(Data.dots)
         markers = len(dots)-1
         cal.page_loading(self.driver)
+        management_name = self.driver.find_element(By.ID,"name").text
+        print(management_name,'is management')
+        management = (management_name[16:].strip()).lower()
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
         p = pwd()
-        self.filename = p.get_download_dir() + "/" + self.fname.exception_cluster()+cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + "/" + self.fname.exception_cluster()+management+"_overall_allGrades__allClusters_"+cal.get_current_date()+'.csv'
         if os.path.isfile(self.filename) != True:
             os.remove(self.filename)
             return "File Not Downloaded"

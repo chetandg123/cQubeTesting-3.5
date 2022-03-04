@@ -4,7 +4,7 @@ from cQube_Dashboard.Energise_Textbook_Usage.gps_of_learning_etb.gps_learning_et
 from reuse_func import GetData
 
 
-class gps_learning_etb(unittest.TestCase):
+class gps_learning_etb_regression(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):

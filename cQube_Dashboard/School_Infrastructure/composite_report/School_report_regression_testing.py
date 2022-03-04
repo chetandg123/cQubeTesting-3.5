@@ -51,11 +51,11 @@ class cQube_SI_Report(unittest.TestCase):
         print("schoolwise csv file is downloaded")
         self.data.page_loading(self.driver)
 
-    def test_check_hyperlinks(self):
-        hyperlinks = Composite_Report(self.driver)
-        choose_dist = hyperlinks.click_on_hyperlinks()
-        print('checked with hyperlinks from district , block and cluster level ')
-        self.data.page_loading(self.driver)
+    # def test_check_hyperlinks(self):
+    #     hyperlinks = Composite_Report(self.driver)
+    #     choose_dist = hyperlinks.click_on_hyperlinks()
+    #     print('checked with hyperlinks from district , block and cluster level ')
+    #     self.data.page_loading(self.driver)
 
 
     def test_homebutton(self):

@@ -76,7 +76,7 @@ class MyTestSuite(unittest.TestCase):
         else:
             print(status,"is selected due to this unable to run suite")
 
-    def test_issue05(self):
+    def test_issue03(self):
         self.data.page_loading(self.driver)
         status = self.data.get_student_status("composite")
         if status == str(True):
@@ -104,7 +104,7 @@ class MyTestSuite(unittest.TestCase):
             print(status,"is selected due to this unable to run suite")
 
 
-    def test_issue06(self):
+    def test_issue04(self):
         self.data.page_loading(self.driver)
         status = self.data.get_student_status("pat")
         if status == str(True):
@@ -134,7 +134,7 @@ class MyTestSuite(unittest.TestCase):
             print(status,"is selected due to this unable to run suite")
 
 
-    def test_issue07(self):
+    def test_issue05(self):
         self.data.page_loading(self.driver)
         status = self.data.get_student_status("pat")
         if status == str(True):
