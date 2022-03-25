@@ -774,12 +774,12 @@ class GetData():
         config.read(self.p.get_config_ini_path())
         return config['config']['basedirpath']
 
-    # def connect_to_postgres(self):
-    #     config = configparser.ConfigParser()
-    #     config.read(self.p.get_config_ini_path())
-    #     con = psycopg2.connect(host=config['config']['host'], database=config['config']['database'],
-    #                            user=config['config']['user'], password=config['config']['db_password'])
-    #     return con
+    def connect_to_postgres(self):
+        config = configparser.ConfigParser()
+        config.read(self.p.get_config_ini_path())
+        con = psycopg2.connect(host=config['config']['host'], database=config['config']['database'],
+                               user=config['config']['user'], password=config['config']['db_password'])
+        return con
 
     def get_db_name(self):
         config = configparser.ConfigParser()
@@ -1101,10 +1101,10 @@ class GetData():
         return config['datasource']['nifi_composite']
 
 
-    def get_nifi_healthcard(self):
+    def get_nifi_progresscard(self):
         config = configparser.ConfigParser()
         config.read(self.p.get_config_ini_path())
-        return config['datasource']['nifi_healthcard']
+        return config['datasource']['nifi_progresscard']
 
     def get_nifi_teacher_attendance(self):
         config = configparser.ConfigParser()

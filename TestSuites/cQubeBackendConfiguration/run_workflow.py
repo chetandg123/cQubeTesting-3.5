@@ -1,4 +1,6 @@
-from Backend_tests.DataProcessing import static, pat
+from Backend_tests.DataProcessing import static, pat, infra, crc, student_attendance, teacher_attendance, sat, diksha, \
+    composite, progresscard
+from Backend_tests.NifiConfiguration import udise
 from get_dir import pwd
 import unittest
 from HTMLTestRunner import HTMLTestRunner
@@ -11,7 +13,6 @@ class MyTestSuite(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         self.cal  = GetData()
-        print("")
 
     def test_Issue01(self):
         if self.cal.get_nifi_static() == "true":
@@ -30,7 +31,7 @@ class MyTestSuite(unittest.TestCase):
             runner1 = HTMLTestRunner.HTMLTestRunner(
                 stream=outfile,
                 title='Static Nifi Workflow',
-                verbosity=1,
+                verbosity=2,
             )
             runner1.run(functional_test)
             outfile.close()
@@ -43,7 +44,7 @@ class MyTestSuite(unittest.TestCase):
             functional_test = unittest.TestSuite()
             functional_test.addTests([
                 # file name .class name
-                unittest.defaultTestLoader.loadTestsFromTestCase(),
+                unittest.defaultTestLoader.loadTestsFromTestCase(infra.Infrastructure),
             ])
             p = pwd()
             outfile = open(p.get_nifi_workflow_report_path(), "a")
@@ -51,7 +52,7 @@ class MyTestSuite(unittest.TestCase):
             runner1 = HTMLTestRunner.HTMLTestRunner(
                 stream=outfile,
                 title='Infra Nifi Workflow',
-                verbosity=1,
+                verbosity=2,
             )
             runner1.run(functional_test)
             outfile.close()
@@ -64,7 +65,8 @@ class MyTestSuite(unittest.TestCase):
             functional_test = unittest.TestSuite()
             functional_test.addTests([
                 # file name .class name
-                unittest.defaultTestLoader.loadTestsFromTestCase(),
+                unittest.defaultTestLoader.loadTestsFromTestCase(crc.CrcInspectionMaster),
+                unittest.defaultTestLoader.loadTestsFromTestCase(crc.CrcUserLocationMaster)
             ])
             p = pwd()
             outfile = open(p.get_nifi_workflow_report_path(), "a")
@@ -72,7 +74,7 @@ class MyTestSuite(unittest.TestCase):
             runner1 = HTMLTestRunner.HTMLTestRunner(
                 stream=outfile,
                 title='CRC Nifi Workflow',
-                verbosity=1,
+                verbosity=2,
             )
             runner1.run(functional_test)
             outfile.close()
@@ -85,7 +87,7 @@ class MyTestSuite(unittest.TestCase):
             functional_test = unittest.TestSuite()
             functional_test.addTests([
                 # file name .class name
-                unittest.defaultTestLoader.loadTestsFromTestCase(),
+                unittest.defaultTestLoader.loadTestsFromTestCase(student_attendance.SAR),
             ])
             p = pwd()
             outfile = open(p.get_nifi_workflow_report_path(), "a")
@@ -93,7 +95,7 @@ class MyTestSuite(unittest.TestCase):
             runner1 = HTMLTestRunner.HTMLTestRunner(
                 stream=outfile,
                 title='Student attendance Nifi Workflow',
-                verbosity=1,
+                verbosity=2,
             )
             runner1.run(functional_test)
             outfile.close()
@@ -106,7 +108,7 @@ class MyTestSuite(unittest.TestCase):
             functional_test = unittest.TestSuite()
             functional_test.addTests([
                 # file name .class name
-                unittest.defaultTestLoader.loadTestsFromTestCase(),
+                unittest.defaultTestLoader.loadTestsFromTestCase(teacher_attendance.TAR),
             ])
             p = pwd()
             outfile = open(p.get_nifi_workflow_report_path(), "a")
@@ -114,7 +116,7 @@ class MyTestSuite(unittest.TestCase):
             runner1 = HTMLTestRunner.HTMLTestRunner(
                 stream=outfile,
                 title='Teacher attendance Nifi Workflow',
-                verbosity=1,
+                verbosity=2,
             )
             runner1.run(functional_test)
             outfile.close()
@@ -152,7 +154,11 @@ class MyTestSuite(unittest.TestCase):
             functional_test = unittest.TestSuite()
             functional_test.addTests([
                 # file name .class name
-                unittest.defaultTestLoader.loadTestsFromTestCase(),
+                unittest.defaultTestLoader.loadTestsFromTestCase(sat.SemesterExamGradeDetails),
+                unittest.defaultTestLoader.loadTestsFromTestCase(sat.SemesterExamSubjectDetails),
+                unittest.defaultTestLoader.loadTestsFromTestCase(sat.SemesterExamMaster),
+                unittest.defaultTestLoader.loadTestsFromTestCase(sat.SemesterExamQuestionMaster),
+                unittest.defaultTestLoader.loadTestsFromTestCase(sat.SemesterExamResultTrans)
             ])
             p = pwd()
             outfile = open(p.get_nifi_workflow_report_path(), "a")
@@ -160,7 +166,7 @@ class MyTestSuite(unittest.TestCase):
             runner1 = HTMLTestRunner.HTMLTestRunner(
                 stream=outfile,
                 title='SAT Nifi Workflow',
-                verbosity=1,
+                verbosity=2,
             )
             runner1.run(functional_test)
             outfile.close()
@@ -173,7 +179,7 @@ class MyTestSuite(unittest.TestCase):
             functional_test = unittest.TestSuite()
             functional_test.addTests([
                 # file name .class name
-                unittest.defaultTestLoader.loadTestsFromTestCase(),
+                unittest.defaultTestLoader.loadTestsFromTestCase(udise.UdiseTransformer),
             ])
             p = pwd()
             outfile = open(p.get_nifi_workflow_report_path(), "a")
@@ -181,7 +187,7 @@ class MyTestSuite(unittest.TestCase):
             runner1 = HTMLTestRunner.HTMLTestRunner(
                 stream=outfile,
                 title='Udise Nifi Workflow',
-                verbosity=1,
+                verbosity=2,
             )
             runner1.run(functional_test)
             outfile.close()
@@ -194,7 +200,7 @@ class MyTestSuite(unittest.TestCase):
             functional_test = unittest.TestSuite()
             functional_test.addTests([
                 # file name .class name
-                unittest.defaultTestLoader.loadTestsFromTestCase(),
+                unittest.defaultTestLoader.loadTestsFromTestCase(diksha.Diksha),
             ])
             p = pwd()
             outfile = open(p.get_nifi_workflow_report_path(), "a")
@@ -202,7 +208,7 @@ class MyTestSuite(unittest.TestCase):
             runner1 = HTMLTestRunner.HTMLTestRunner(
                 stream=outfile,
                 title='Diksha Nifi Workflow',
-                verbosity=1,
+                verbosity=2,
             )
             runner1.run(functional_test)
             outfile.close()
@@ -215,7 +221,7 @@ class MyTestSuite(unittest.TestCase):
             functional_test = unittest.TestSuite()
             functional_test.addTests([
                 # file name .class name
-                unittest.defaultTestLoader.loadTestsFromTestCase(),
+                unittest.defaultTestLoader.loadTestsFromTestCase(composite.Composite),
             ])
             p = pwd()
             outfile = open(p.get_nifi_workflow_report_path(), "a")
@@ -223,7 +229,7 @@ class MyTestSuite(unittest.TestCase):
             runner1 = HTMLTestRunner.HTMLTestRunner(
                 stream=outfile,
                 title='Composite Nifi Workflow',
-                verbosity=1,
+                verbosity=2,
             )
             runner1.run(functional_test)
             outfile.close()
@@ -231,12 +237,12 @@ class MyTestSuite(unittest.TestCase):
             print("Nifi composite data source is disabled")
 
     def test_Issue11(self):
-        if self.cal.get_nifi_healthcard() == "true":
+        if self.cal.get_nifi_progresscard() == "true":
 
             functional_test = unittest.TestSuite()
             functional_test.addTests([
                 # file name .class name
-                unittest.defaultTestLoader.loadTestsFromTestCase(),
+                unittest.defaultTestLoader.loadTestsFromTestCase(progresscard.ProgressCard),
             ])
             p = pwd()
             outfile = open(p.get_nifi_workflow_report_path(), "a")
@@ -244,7 +250,7 @@ class MyTestSuite(unittest.TestCase):
             runner1 = HTMLTestRunner.HTMLTestRunner(
                 stream=outfile,
                 title='Progress card Nifi Workflow',
-                verbosity=1,
+                verbosity=2,
             )
             runner1.run(functional_test)
             outfile.close()
