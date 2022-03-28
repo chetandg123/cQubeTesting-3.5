@@ -230,7 +230,7 @@ class Periodic_Assessment_Test_Heat_chart():
             subject.select_by_index(i)
             self.load.page_loading(self.driver)
             if subject.options[i].text or "No data found" in  self.driver.page_source:
-                print(subject.options[i].text, 'is not displayed ')
+                print(subject.options[i].text, 'HAVING NO DATA FOUND ')
                 self.load.page_loading(self.driver)
             else:
                 print(subject.options[i].text, 'is displayed chart table ')
@@ -384,7 +384,7 @@ class Periodic_Assessment_Test_Heat_chart():
                     val = bvalue[1].strip()
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(4)
-                    self.filename = self.p.get_download_dir() + '/' + self.fname.pchart_clusters() + management + '_' + gradenum + "_schools_of_cluster_" + value +'_'+ self.month + '_' + self.year + '_' + \
+                    self.filename = self.p.get_download_dir() + '/' + self.fname.pchart_clusters() + management + '_' + gradenum + "_clusters_of_block_" + val +'_'+ self.month + '_' + self.year + '_' + \
                                     self.load.get_current_date() + '.csv'
                     print(self.filename)
                     file = os.path.isfile(self.filename)

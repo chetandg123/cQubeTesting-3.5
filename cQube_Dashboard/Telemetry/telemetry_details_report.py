@@ -55,10 +55,14 @@ class telemetry_map_report():
             markers = self.driver.find_elements_by_class_name(Data.dots)
             ccount = len(markers)
             self.data.page_loading(self.driver)
+            scount=0
             self.driver.find_element_by_id('schoolbtn').click()
-            markers = self.driver.find_elements_by_class_name(Data.dots)
-            scount = len(markers)
-            self.data.page_loading(self.driver)
+            if 'no data found' in self.driver.page_source:
+                print("School wise telemetry data is not exist!")
+            else:
+                markers = self.driver.find_elements_by_class_name(Data.dots)
+                scount = len(markers)
+                self.data.page_loading(self.driver)
             return bcount, ccount, scount
 
     def test_lastmonth_records(self):

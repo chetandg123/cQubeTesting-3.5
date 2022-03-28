@@ -4,6 +4,7 @@ import os
 import re
 import time
 
+import pandas as pd
 from selenium.common import exceptions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
@@ -156,6 +157,7 @@ class udise_report():
         management = management[16:].lower().strip()
         self.driver.find_element_by_id(Data.scm_block).click()
         self.p.page_loading(self.driver)
+        time.sleep(10)
         markers = self.driver.find_elements_by_class_name(Data.dots)
         self.p.page_loading(self.driver)
         dots = len(markers)-1
@@ -218,6 +220,7 @@ class udise_report():
         self.driver.find_element_by_id(Data.scm_block).click()
         count = 0
         self.p.page_loading(self.driver)
+        time.sleep(10)
         scores = Select(self.driver.find_element_by_id("choose_infra"))
         for i in range(1,len(scores.options)-12):
             time.sleep(2)
@@ -349,6 +352,8 @@ class udise_report():
 
     def community(self):
         row_count = 0
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
+        time.sleep(3)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         chooseinfra = Select(self.driver.find_element_by_id('choose_infra'))
@@ -358,7 +363,7 @@ class udise_report():
             print(chooseinfra.options[4].text,'is not having data')
         else:
             self.driver.find_element_by_id(Data.Download).click()
-            time.sleep(2)
+            time.sleep(3)
             p = pwd()
             self.filename = p.get_download_dir() + "/"+'UDISE_report_'+management+'_Community_Participation_allDistricts_'+self.cal.get_current_date()+'.csv'
             time.sleep(2)
@@ -838,22 +843,48 @@ class udise_report():
                             os.remove(self.filename)
             return count
 
-    def test_districtlist(self):
+    def test_each_districtwise(self):
         self.p = GetData()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.p.page_loading(self.driver)
+        managment_name = self.driver.find_element_by_id('name').text
+        name = managment_name[16:].strip().lower()
+        time.sleep(2)
         Districts = Select(self.driver.find_element_by_id('choose_dist'))
         self.p.page_loading(self.driver)
         count = 0
-        for i in range(1,len(Districts.options)):
+        for i in range(1,len(Districts.options)-10):
             Districts.select_by_index(i)
             self.p.page_loading(self.driver)
+            value = self.driver.find_element_by_id('choose_dist').get_attribute('value')
+            value = value.split(":")
+            dist_name = Districts.options[i].text
             markers = self.driver.find_elements_by_class_name(Data.dots)
-            value = len(markers)-1
+            marker_value = len(markers)-1
             self.p.page_loading(self.driver)
-            if value == 0:
+            if marker_value == 0 or 'no data found' in self.driver.page_source:
                 print(Districts.options[i].text , " does not have markers on map")
                 count = count + 1
+            else:
+                cal = pwd()
+                self.driver.find_element_by_id(Data.Download).click()
+                time.sleep(2)
+                self.filename = cal.get_download_dir() + '/' +"UDISE_report_"+name +"_Infrastructure_Score_blocks_of_district_"+value[1].strip()+'_'+self.p.get_current_date()+'.csv'
+                print(self.filename)
+                self.p.page_loading(self.driver)
+                if not os.path.isfile(self.filename):
+                    print(dist_name," csv is not downloaded")
+                    count = count + 1
+                # else:
+                #     df = pd.read_csv(self.filename)
+                #     schools = df['']
+                #     school = self.driver.find_element_by_id("schools").text
+                #     sc = re.sub('\D', "", school)
+                #     if int(sc) != int(schools):
+                #         print("school count mismatched")
+                #         count = count + 1
+                os.remove(self.filename)
+
         return count
 
     def test_map(self):

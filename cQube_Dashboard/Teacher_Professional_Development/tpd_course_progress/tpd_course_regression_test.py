@@ -8,7 +8,7 @@ from cQube_Dashboard.Teacher_Professional_Development.tpd_course_progress.tpd_co
 from reuse_func import GetData
 
 
-class cQube_lpdcontent_regression_Test(unittest.TestCase):
+class cQube_tpd_content_regression_Test(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
@@ -132,25 +132,25 @@ class cQube_lpdcontent_regression_Test(unittest.TestCase):
         print("checked with logout button is working ")
         self.data.page_loading(self.driver)
 
-    def test_download_raw_files_overall_period(self):
-        b = tpd_course_progress_report(self.driver)
-        res = b.test_overall_rawfile_download()
-        self.assertEqual(0,res,msg='Raw file is not downloaded')
-
-    def test_download_raw_files_last_30days_period(self):
-        b = tpd_course_progress_report(self.driver)
-        res = b.test_last_30_days_rawfile_download()
-        self.assertEqual(0,res,msg='Raw file is not downloaded')
-
-    def test_download_raw_files_last_7_day_period(self):
-        b = tpd_course_progress_report(self.driver)
-        res = b.test_last_7_days_rawfile_download()
-        self.assertEqual(0,res,msg='Raw file is not downloaded')
-
-    def test_download_raw_files_lastday_period(self):
-        b = tpd_course_progress_report(self.driver)
-        res = b.test_last_day_rawfile_download()
-        self.assertEqual(0,res,msg='Raw file is not downloaded')
+    # def test_download_raw_files_overall_period(self):
+    #     b = tpd_course_progress_report(self.driver)
+    #     res = b.test_overall_rawfile_download()
+    #     self.assertEqual(0,res,msg='Raw file is not downloaded')
+    #
+    # def test_download_raw_files_last_30days_period(self):
+    #     b = tpd_course_progress_report(self.driver)
+    #     res = b.test_last_30_days_rawfile_download()
+    #     self.assertEqual(0,res,msg='Raw file is not downloaded')
+    #
+    # def test_download_raw_files_last_7_day_period(self):
+    #     b = tpd_course_progress_report(self.driver)
+    #     res = b.test_last_7_days_rawfile_download()
+    #     self.assertEqual(0,res,msg='Raw file is not downloaded')
+    #
+    # def test_download_raw_files_lastday_period(self):
+    #     b = tpd_course_progress_report(self.driver)
+    #     res = b.test_last_day_rawfile_download()
+    #     self.assertEqual(0,res,msg='Raw file is not downloaded')
 
     @classmethod
     def tearDownClass(cls):

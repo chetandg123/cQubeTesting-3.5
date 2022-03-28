@@ -23,9 +23,9 @@ class cQube_Teacher_Attendance_regression(unittest.TestCase):
 
     def test_click_on_teacher_attendence_report(self):
         sar = Teacher_Attendance_report(self.driver,self.year,self.month)
-        result = sar.click_on_sar()
-        if "Teacher Attendance Infra_Table_Report" in self.driver.page_source:
-            print("Navigating to Student Attendance Infra_Table_Report is working")
+        result = sar.click_on_tar()
+        if "Teacher Attendance Report" in self.driver.page_source:
+            print("Navigating to Teacher Attendance Report is working")
         else:
             print("Teacher_Attendance page does not exist!...")
 

@@ -114,8 +114,8 @@ class MyTestSuite_Exception(unittest.TestCase):
             outfile.close()
 
     @classmethod
-    def tearDownClass(self):
-        self.driver.close()
+    def tearDownClass(cls):
+        cls.driver.quit()
 
 if __name__ == '__main__':
     unittest.main()

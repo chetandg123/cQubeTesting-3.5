@@ -293,15 +293,15 @@ class etb_content_plays_map_report():
                 avg_spent = re.sub('\D',"",avg_spent)
 
                 #outside
-                t_contet_plays = self.driver.find_element(By.XPATH,Data.t_c_play).text
-                t_t_spent = self.driver.find_element(By.XPATH,Data.t_t_spent).text
-                t_a_spent = self.driver.find_element(By.XPATH,Data.t_a_spent).text
-
-                tcp = re.sub('\D',"",t_contet_plays)
-                tts = re.sub('\D',"",t_t_spent)
-                tas = re.sub('\D',"",t_a_spent)
-
-                tc = round(int(tcp) / 1000)
+                # t_contet_plays = self.driver.find_element(By.XPATH,Data.t_c_play).text
+                # t_t_spent = self.driver.find_element(By.XPATH,Data.t_t_spent).text
+                # t_a_spent = self.driver.find_element(By.XPATH,Data.t_a_spent).text
+                #
+                # tcp = re.sub('\D',"",t_contet_plays)
+                # tts = re.sub('\D',"",t_t_spent)
+                # tas = re.sub('\D',"",t_a_spent)
+                #
+                # tc = round(int(tcp) / 1000)
 
 
 
@@ -365,16 +365,16 @@ class etb_content_plays_map_report():
                 total_ts = re.sub('\D',"",total_ts)
                 avg_spent = re.sub('\D',"",avg_spent)
 
-                # outside
-                t_contet_plays = self.driver.find_element(By.XPATH, Data.t_c_play).text
-                t_t_spent = self.driver.find_element(By.XPATH, Data.t_t_spent).text
-                t_a_spent = self.driver.find_element(By.XPATH, Data.t_a_spent).text
-
-                tcp = re.sub('\D', "", t_contet_plays)
-                tts = re.sub('\D', "", t_t_spent)
-                tas = re.sub('\D', "", t_a_spent)
-
-                tc = round(int(tcp) / 1000)
+                # # outside
+                # t_contet_plays = self.driver.find_element(By.XPATH, Data.t_c_play).text
+                # t_t_spent = self.driver.find_element(By.XPATH, Data.t_t_spent).text
+                # t_a_spent = self.driver.find_element(By.XPATH, Data.t_a_spent).text
+                #
+                # tcp = re.sub('\D', "", t_contet_plays)
+                # tts = re.sub('\D', "", t_t_spent)
+                # tas = re.sub('\D', "", t_a_spent)
+                #
+                # tc = round(int(tcp) / 1000)
 
                 if int(total_cp) != 0 and int(time_spent) != 0 and int(avg_spent) != 0:
                     print("Footer information is showing as expected")
@@ -436,16 +436,16 @@ class etb_content_plays_map_report():
                 total_ts = re.sub('\D',"",total_ts)
                 avg_spent = re.sub('\D',"",avg_spent)
 
-                # outside
-                t_contet_plays = self.driver.find_element(By.XPATH, Data.t_c_play).text
-                t_t_spent = self.driver.find_element(By.XPATH, Data.t_t_spent).text
-                t_a_spent = self.driver.find_element(By.XPATH, Data.t_a_spent).text
-
-                tcp = re.sub('\D', "", t_contet_plays)
-                tts = re.sub('\D', "", t_t_spent)
-                tas = re.sub('\D', "", t_a_spent)
-
-                tc = round(int(tcp) / 1000)
+                # # outside
+                # t_contet_plays = self.driver.find_element(By.XPATH, Data.t_c_play).text
+                # t_t_spent = self.driver.find_element(By.XPATH, Data.t_t_spent).text
+                # t_a_spent = self.driver.find_element(By.XPATH, Data.t_a_spent).text
+                #
+                # tcp = re.sub('\D', "", t_contet_plays)
+                # tts = re.sub('\D', "", t_t_spent)
+                # tas = re.sub('\D', "", t_a_spent)
+                #
+                # tc = round(int(tcp) / 1000)
 
                 if int(total_cp) != 0 and int(time_spent) != 0 and int(avg_spent) != 0:
                     print("Footer information is showing as expected")

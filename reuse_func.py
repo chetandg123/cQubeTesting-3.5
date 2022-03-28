@@ -6,6 +6,7 @@ import subprocess
 import time
 from datetime import date
 from PIL import ImageColor
+from selenium.webdriver.firefox.options import Options
 
 # import psycopg2
 import psycopg2
@@ -50,6 +51,11 @@ class GetData():
         config.read(self.p.get_config_ini_path())
         return config['config']['password']
 
+    def get_current_date(self):
+        today = date.today()
+        dates = today.strftime('%d-%m-%Y')
+        return dates
+
     def get_driver(self):
         options = webdriver.ChromeOptions()
         prefs = {'download.default_directory': self.p.get_download_dir()}
@@ -59,23 +65,22 @@ class GetData():
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-gpu')
         self.driver = webdriver.Chrome(options=options, executable_path=self.p.get_driver_path())
+        self.driver.set_window_size(3860, 2160)
+        print('window size :',self.driver.get_window_size())
         print("Current session is {}".format(self.driver.session_id))
-
         return self.driver
-
-    def get_current_date(self):
-        today = date.today()
-        dates = today.strftime('%d-%m-%Y')
-        return dates
 
     def get_firefox_driver(self):
         p = pwd()
-        options = webdriver.FirefoxOptions()
+        options = Options()
+        options.headless = True
+        driver = webdriver.Firefox(firefox_options=options, executable_path=p.get_firefox_driver_path())
+        driver.set_window_size(3860, 2160)
+        print('Screen Resolutions : ', driver.get_window_size())
         prefs = {'download.default_directory': self.p.get_download_dir()}
         options.add_argument(prefs)
-        # options.add_argument("--headless")
-        self.driver = webdriver.Firefox(options=options, executable_path=p.get_firefox_driver_path())
-        return self.driver
+        return driver
+
 
     def open_cqube_appln(self, driver):
         self.driver = driver
@@ -174,14 +179,14 @@ class GetData():
 
     def page_loading(self, driver):
         try:
-            driver.implicitly_wait(5)
+            driver.implicitly_wait(20)
             self.driver = driver
             for x in range(1, 10):
                 elem = self.driver.find_element_by_id('loader').text
                 if str(elem) == "Loading…":
-                    time.sleep(1)
+                    time.sleep(5)
                 if str(elem) != "Loading…":
-                    time.sleep(1)
+                    time.sleep(5)
                     break
         except NoSuchElementException:
             pass

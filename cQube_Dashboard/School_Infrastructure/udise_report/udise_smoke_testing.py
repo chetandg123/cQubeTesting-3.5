@@ -77,6 +77,11 @@ class cQube_udise_Report(unittest.TestCase):
         print('Schoolwise csv file download is working')
         self.data.page_loading(self.driver)
 
+    def test_test_each_districtwise(self):
+        b = udise_report(self.driver)
+        res = b.test_each_districtwise()
+        self.assertEqual(0,res,msg="Some district csv file is not downloaded...")
+
     def test_Block_cluster_school_for_udise(self):
         b = udise_report(self.driver)
         res, res1, res2, res3 = b.test_check_total_schoolvalue()

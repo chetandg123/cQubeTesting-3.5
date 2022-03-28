@@ -219,4 +219,4 @@ class cQube_Semester_Report(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        cls.driver.close()
+        cls.driver.quit()

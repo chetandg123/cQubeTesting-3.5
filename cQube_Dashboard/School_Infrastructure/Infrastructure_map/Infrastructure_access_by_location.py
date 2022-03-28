@@ -367,6 +367,7 @@ class Infrastructure_access_by_location():
         management_name = self.p.get_management_selected_option()
         self.driver.find_element_by_id(Data.scm_block).click()
         self.p.page_loading(self.driver)
+        time.sleep(10)
         dots = self.driver.find_elements_by_class_name(Data.dots)
         count = len(dots) - 1
         self.p.page_loading(self.driver)
@@ -389,7 +390,7 @@ class Infrastructure_access_by_location():
         management_name = self.p.get_management_selected_option()
         self.driver.find_element_by_id(Data.scm_cluster).click()
         self.p.page_loading(self.driver)
-        time.sleep(20)
+        time.sleep(30)
         dots = self.driver.find_elements_by_class_name(Data.dots)
         count = len(dots)-1
         self.driver.find_element_by_id(Data.Download).click()
@@ -415,7 +416,7 @@ class Infrastructure_access_by_location():
         dots = self.driver.find_elements_by_class_name(Data.dots)
         count = len(dots)-1
         self.driver.find_element_by_id(Data.Download).click()
-        time.sleep(20)
+        time.sleep(30)
         self.filename = cal.get_download_dir() + '/' +self.fname.scmap_school()+management_name+'_allSchools_'+self.p.get_current_date()+".csv"
         print(self.filename)
         self.p.page_loading(self.driver)
@@ -462,6 +463,7 @@ class Infrastructure_access_by_location():
         self.p.page_loading(self.driver)
         self.driver.find_element_by_id('blockbtn').click()
         self.p.page_loading(self.driver)
+        time.sleep(10)
         scores = Select(self.driver.find_element_by_id("choose_infra"))
         for i in range(len(scores.options)):
             time.sleep(1)

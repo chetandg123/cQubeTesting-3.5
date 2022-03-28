@@ -44,6 +44,7 @@ class user_on_boarding_report():
         print(districts.options[2].text, 'is selected')
         time.sleep(3)
         self.driver.find_element(By.XPATH, Data.hyper_link).click()
+        time.sleep(2)
         if districts.first_selected_option.text == districts.options[2].text:
             print("Hyperlink is not working ")
             count = count + 1

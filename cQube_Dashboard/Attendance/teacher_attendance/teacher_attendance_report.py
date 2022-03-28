@@ -26,11 +26,14 @@ class Teacher_Attendance_report():
 
     global student_count
 
-    def click_on_sar(self):
+    def click_on_tar(self):
         try:
             cal = GetData()
-            cal.click_on_state(self.driver)
+            self.driver.find_element_by_xpath(Data.hyper_link).click()
+            time.sleep(3)
             cal.page_loading(self.driver)
+            self.driver.find_element_by_id('cubeLogo').click()
+            time.sleep(2)
             cal.navigate_to_teacher_attendance_report()
             cal.page_loading(self.driver)
             return self.driver.current_url
@@ -41,6 +44,7 @@ class Teacher_Attendance_report():
     def check_markers_on_block_map(self):
         self.driver.find_element_by_id(Data.SAR_Blocks_btn).click()
         cal = GetData()
+        time.sleep(15)
         cal.page_loading(self.driver)
         dots = self.driver.find_elements_by_class_name(Data.dots)
         return dots
@@ -49,14 +53,14 @@ class Teacher_Attendance_report():
         self.driver.find_element_by_id(Data.SAR_Clusters_btn).click()
         cal = GetData()
         cal.page_loading(self.driver)
-        time.sleep(5)
+        time.sleep(20)
         dots = self.driver.find_elements_by_class_name(Data.dots)
         return dots
 
     def check_markers_on_school_map(self):
         self.driver.find_element_by_id(Data.SAR_Schools_btn).click()
         cal = GetData()
-        time.sleep(2)
+        time.sleep(15)
         cal.page_loading(self.driver)
         result = self.driver.find_elements_by_class_name(Data.dots)
         return result
@@ -176,7 +180,7 @@ class Teacher_Attendance_report():
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
             value = self.driver.find_element_by_name('myDistrict').get_attribute('value')
-            value = value[4:]+'_'
+            value = value.split(":")
             markers = self.driver.find_elements_by_class_name(Data.dots)
             if len(markers) - 1 == 0:
                 print("District" + select_district.first_selected_option.text + "no data")
@@ -185,10 +189,10 @@ class Teacher_Attendance_report():
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
             p = pwd()
-            self.filename = p.get_download_dir() +'/'+files.teacher_districtwise_download()+name+"_blockPerDistricts_of_district_"+value.strip()+ self.month + "_" + self.year+'_'+cal.get_current_date() + ".csv"
+            self.filename = p.get_download_dir() +'/'+files.teacher_districtwise_download()+name+"_blockPerDistricts_of_district_"+value[1].strip()+'_'+ self.month + "_" + self.year+'_'+cal.get_current_date() + ".csv"
             print(self.filename)
             if not os.path.isfile(self.filename):
-                print("District" + select_district.first_selected_option.text + "csv is not downloaded")
+                print("District - " + select_district.first_selected_option.text + " csv is not downloaded")
                 count = count + 1
             else:
                 with open(self.filename) as fin:
@@ -244,11 +248,11 @@ class Teacher_Attendance_report():
         for x in range(len(select_district.options)-2, len(select_district.options)):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
-            for y in range(1, len(select_block.options)):
+            for y in range(len(select_block.options)-2, len(select_block.options)):
                 select_block.select_by_index(y)
                 cal.page_loading(self.driver)
                 value = self.driver.find_element_by_name('myBlock').get_attribute('value')
-                value = value[4:]+'_'
+                value = value.split(":")
                 time.sleep(2)
                 markers = self.driver.find_elements_by_class_name(Data.dots)
                 if len(markers) - 1 == 0:
@@ -259,11 +263,11 @@ class Teacher_Attendance_report():
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(4)
                 p = pwd()
-                self.filename = p.get_download_dir()+'/'+files.teacher_blockwise_download()+name+'_clusterPerBlocks_of_block_' +value.strip()+self.month + "_" + self.year+'_'+cal.get_current_date()+ ".csv"
+                self.filename = p.get_download_dir()+'/'+files.teacher_blockwise_download()+name+'_clusterPerBlocks_of_block_' +value[1].strip()+'_'+self.month + "_" + self.year+'_'+cal.get_current_date()+ ".csv"
                 print(self.filename)
                 if not os.path.isfile(self.filename):
                     print(
-                        "District" + select_district.first_selected_option.text + "Block" + select_block.first_selected_option.text + "csv is not downloaded")
+                        "District " + select_district.first_selected_option.text + " Block" + select_block.first_selected_option.text + " csv is not downloaded")
                     count = count + 1
                 else:
                     with open(self.filename) as fin:
@@ -302,7 +306,7 @@ class Teacher_Attendance_report():
         for x in range(len(select_district.options)-1, len(select_district.options)):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
-            for y in range(1, len(select_block.options)):
+            for y in range(len(select_block.options)-1, len(select_block.options)):
                 select_block.select_by_index(y)
                 cal.page_loading(self.driver)
                 time.sleep(2)
@@ -313,8 +317,8 @@ class Teacher_Attendance_report():
                     markers = self.driver.find_elements_by_class_name(Data.dots)
                     if len(markers) - 1 == 0:
                         print(
-                            "District" + select_district.first_selected_option.text + "Block" + select_block.first_selected_option.text +
-                            "cluster"+select_cluster.first_selected_option.text +"No Locators")
+                            "District -" + select_district.first_selected_option.text + " Block " + select_block.first_selected_option.text +
+                            " cluster - "+select_cluster.first_selected_option.text +" No Locators")
                         count = count + 1
                     time.sleep(2)
                     self.driver.find_element_by_id(Data.Download).click()
