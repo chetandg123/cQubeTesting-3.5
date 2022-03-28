@@ -58,7 +58,7 @@ class cQube_CRC_Report(unittest.TestCase):
 
     def test_crc_districtwise(self):
         b = crc_visits(self.driver)
-        result = b.test_districtwise()
+        result = b.test_each_district_wise()
         self.assertEqual(0, result, msg="File is not downloaded")
         print('checked with districts records')
         self.data.page_loading(self.driver)

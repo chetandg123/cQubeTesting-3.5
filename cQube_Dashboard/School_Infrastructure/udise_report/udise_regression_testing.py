@@ -64,6 +64,11 @@ class cQube_udise_Report(unittest.TestCase):
         self.assertEqual(res,res3,msg="School level school is same")
         self.data.page_loading(self.driver)
 
+    def test_test_each_districtwise(self):
+        b = udise_report(self.driver)
+        res = b.test_each_districtwise()
+        self.assertEqual(0,res,msg="Some district csv file is not downloaded...")
+
     def test_block_wise_download(self):
         b = udise_report(self.driver)
         res, res1 = b.test_download_blockwise()

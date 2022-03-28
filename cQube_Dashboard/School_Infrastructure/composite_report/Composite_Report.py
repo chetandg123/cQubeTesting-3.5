@@ -72,6 +72,7 @@ class Composite_Report():
         time.sleep(1)
         self.driver.find_element_by_id(Data.composite).click()
         self.p.page_loading(self.driver)
+
     def test_block(self):
         self.p = GetData()
         self.driver.implicitly_wait(20)
@@ -85,7 +86,7 @@ class Composite_Report():
         District_wise.select_by_index(2)
         self.p.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download_scator).click()
-        time.sleep(10)
+        time.sleep(15)
         count=0
         self.filename = p.get_download_dir() + "/"+ self.fname.sc_block()+management+'_allBlocks_'+self.p.get_current_date()+'.csv'
         print(self.filename)
@@ -113,6 +114,7 @@ class Composite_Report():
         self.cal.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download_scator).click()
         self.cal.page_loading(self.driver)
+        time.sleep(10)
         self.filename = p.get_download_dir() + "/" + self.fname.sc_district()+management+'_allDistricts_'+self.cal.get_current_date()+'.csv'
         if os.path.isfile(self.filename) != True:
             print('File is not downloaded ')
@@ -134,7 +136,7 @@ class Composite_Report():
         District_wise.select_by_index(3)
         self.p.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download_scator).click()
-        time.sleep(5)
+        time.sleep(15)
         count = 0
         self.filename = p.get_download_dir() + "/" + self.fname.sc_cluster()+management+'_allClusters_'+self.p.get_current_date()+'.csv'
         if os.path.isfile(self.filename) != True:
@@ -144,6 +146,7 @@ class Composite_Report():
             print('Block level file is downloaded')
             os.remove(self.filename)
         return count
+
     def test_schoolwise(self):
         self.data = GetData()
         self.fname =file_extention()
@@ -157,7 +160,7 @@ class Composite_Report():
             District_wise.select_by_index(4)
             self.data.page_loading(self.driver)
             self.driver.find_element_by_id(Data.Download_scator).click()
-            time.sleep(15)
+            time.sleep(30)
             self.filename = p.get_download_dir() + "/" + self.fname.sc_school()+management+'_allSchools_'+self.data.get_current_date()+'.csv'
             time.sleep(10)
             count = 0
@@ -221,6 +224,7 @@ class Composite_Report():
         self.data.navigate_to_composite_infrastructure()
         self.data.page_loading(self.driver)
         return count
+
     def test_tablevalue(self):
         self.p = GetData()
         self.driver.find_element_by_xpath(Data.hyper).click()
@@ -240,6 +244,7 @@ class Composite_Report():
 
     def remove_csv1(self):
         os.remove(self.filename)
+
     def check_csv_download1(self):
         p = pwd()
         self.cal = GetData()
@@ -257,7 +262,7 @@ class Composite_Report():
             select_district.select_by_index(x)
             self.cal.page_loading(self.driver)
             print(select_district.options[x].text)
-            for y in range(len(select_block.options)-1, len(select_block.options)):
+            for y in range(len(select_block.options)-3, len(select_block.options)):
                 select_block.select_by_index(y)
                 self.cal.page_loading(self.driver)
                 for z in range(1, len(select_cluster.options)):
@@ -293,7 +298,7 @@ class Composite_Report():
             try:
                 select_district = Select(self.driver.find_element_by_name('myDistrict'))
                 count = 0
-                for k in range(len(select_district.options)-2, len(select_district.options)):
+                for k in range(len(select_district.options)-5, len(select_district.options)):
                     select_district.select_by_index(k)
                     self.p.page_loading(self.driver)
                     table_data = []

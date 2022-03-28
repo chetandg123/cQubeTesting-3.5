@@ -194,11 +194,11 @@ class tpd_course_progress_report():
             dists.select_by_index(i)
             time.sleep(2)
             value = self.driver.find_element_by_id(Data.district_dropdown).get_attribute('value')
-            value = value[4:]+'_'
+            value = value.split(":")
             self.load.page_loading(self.driver)
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() +"/" + self.fname.tpd_all_districtwise()+value.strip()+self.load.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() +"/" + self.fname.tpd_all_districtwise()+value[1].strip()+'_'+self.load.get_current_date()+'.csv'
             file = os.path.isfile(self.filename)
             if file != True:
                 print(dists.options[i].text, 'District wise records csv file is not downloaded')
@@ -238,11 +238,11 @@ class tpd_course_progress_report():
                 dists.select_by_index(i)
                 time.sleep(2)
                 value = self.driver.find_element_by_id(Data.district_dropdown).get_attribute('value')
-                value = value[4:] + '_'
+                value = value.split(":")
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() +"/" + self.fname.tpd_lastday_districtwise()+value.strip()+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() +"/" + self.fname.tpd_lastday_districtwise()+value[1].strip()+'_'+self.load.get_current_date()+'.csv'
                 print(self.filename)
                 file = os.path.isfile(self.filename)
                 if file != True:
@@ -264,7 +264,6 @@ class tpd_course_progress_report():
     def test_last_7_days_districtwise(self):
         self.p = pwd()
         self.load = GetData()
-        self.driver.implicitly_wait(100)
         count = 0
         self.fname = file_extention()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
@@ -274,19 +273,18 @@ class tpd_course_progress_report():
         # period.select_by_visible_text(' Last 7 Days ')
         period.select_by_index(3)
         self.load.page_loading(self.driver)
-        if self.fname.no_data_found() in self.driver.page_source:
+        if "No data found" in self.driver.page_source:
             print("Last 7 days does not have records ")
         else:
-
             for i in range(1, len(dists.options)):
                 dists.select_by_index(i)
                 time.sleep(2)
                 value = self.driver.find_element_by_id(Data.district_dropdown).get_attribute('value')
-                value = value[4:] + '_'
+                value = value.split(":")
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() +"/"+ self.fname.tpd_lastweek_districtwise()+value.strip()+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() +"/"+ self.fname.tpd_lastweek_districtwise()+value[1].strip()+'_'+self.load.get_current_date()+'.csv'
                 print(self.filename)
                 file = os.path.isfile(self.filename)
                 if file != True:

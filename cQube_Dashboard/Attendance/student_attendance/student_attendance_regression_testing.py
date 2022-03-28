@@ -12,7 +12,6 @@ class cQube_Student_Attendance_regression(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         self.data = GetData()
-
         self.driver = self.data.get_driver()
         self.data.open_cqube_appln(self.driver)
         self.data.login_cqube(self.driver)
@@ -161,4 +160,4 @@ class cQube_Student_Attendance_regression(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        cls.driver.close()
+        cls.driver.quit()

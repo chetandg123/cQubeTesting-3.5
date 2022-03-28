@@ -220,7 +220,7 @@ class crc_visits():
         District_wise.select_by_index(4)
         self.cal.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
-        time.sleep(5)
+        time.sleep(25)
         self.cal.page_loading(self.driver)
         self.filename = p.get_download_dir() + '/' + self.fname.crc_school()+name+'_overall_allSchools_'+self.cal.get_current_date()+'.csv'
         self.cal.page_loading(self.driver)
@@ -259,7 +259,7 @@ class crc_visits():
             os.remove(self.filename)
         return count
 
-    def test_districtwise(self):
+    def test_each_district_wise(self):
         p = pwd()
         self.cal = GetData()
         self.driver.implicitly_wait(20)
@@ -272,7 +272,7 @@ class crc_visits():
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
         count = 0
         self.fname=file_extention()
-        for x in range(1, len(select_district.options)):
+        for x in range(len(select_district.options)- 10, len(select_district.options)):
             select_district.select_by_index(x)
             self.cal.page_loading(self.driver)
             value = self.driver.find_element_by_name('myDistrict').get_attribute('value')
@@ -363,7 +363,7 @@ class crc_visits():
         for x in range(int(len(select_district.options))-1, int(len(select_district.options))):
             select_district.select_by_index(x)
             self.cal.page_loading(self.driver)
-            for y in range(1, len(select_block.options)):
+            for y in range(len(select_block.options)-3, len(select_block.options)):
                 select_block.select_by_index(y)
                 self.cal.page_loading(self.driver)
                 cluval = self.driver.find_element_by_name('myBlock').get_attribute('value')

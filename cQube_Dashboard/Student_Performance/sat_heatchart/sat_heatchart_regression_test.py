@@ -1,12 +1,6 @@
-
-
-
-
 import unittest
-
 from cQube_Dashboard.Student_Performance.sat_heatchart.sat_heatchart_scripts import sat_heat_chart
 from reuse_func import GetData
-
 
 class cQube_satchart_regression_test(unittest.TestCase):
 

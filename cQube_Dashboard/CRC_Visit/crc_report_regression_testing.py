@@ -11,11 +11,12 @@ class cQube_CRC_Report(unittest.TestCase):
     def setUpClass(self):
             self.data = GetData()
             self.driver = self.data.get_driver()
+            self.driver.implicitly_wait(100)
             self.data.open_cqube_appln(self.driver)
             self.data.login_cqube(self.driver)
             self.data.navigate_to_crc_report()
             self.data.page_loading(self.driver)
-            self.driver.implicitly_wait(100)
+
 
     def test_navigate_crc(self):
         b = crc_visits(self.driver)
@@ -28,7 +29,7 @@ class cQube_CRC_Report(unittest.TestCase):
 
     def test_download_districtwise(self):
         b = crc_visits(self.driver)
-        result = b.test_districtwise()
+        result = b.test_each_district_wise()
         self.assertEqual(0, result, msg="File is not downloaded")
         print("district wise csv file is downloaded ")
         self.data.page_loading(self.driver)

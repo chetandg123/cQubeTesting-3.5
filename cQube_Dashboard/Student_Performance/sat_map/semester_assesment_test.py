@@ -679,7 +679,7 @@ class sat_map_report():
                     time.sleep(3)
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(3)
-                    self.filename = p.get_download_dir() + '/' + files.sr_gradewise()+management+"_"+self.year.strip()+"_"+self.semester+"_Grade_"+gradenum.strip()+'_'+sub+'_allDistricts_' + self.data.get_current_date()+'.csv'
+                    self.filename = p.get_download_dir() + '/' + files.sr_gradewise()+management+"_"+self.year.strip()+"_"+self.semester+"_Grade "+gradenum.strip()+'_'+sub+'_allDistricts_' + self.data.get_current_date()+'.csv'
                     print(self.filename)
                     if os.path.isfile(self.filename) != True:
                         print(files.sr_gradewise()+gradenum.strip() ,' wise csv file is not downloaded')
@@ -763,17 +763,16 @@ class sat_map_report():
                 select_block.select_by_index(y)
                 cal.page_loading(self.driver)
                 value = self.driver.find_element_by_id('choose_block').get_attribute('value')
-                value = value[4:]+'_'
+                value = value.split(":")
                 markers = self.driver.find_elements_by_class_name(Data.dots)
                 if len(markers) - 1 == 0:
                     print("District" + select_district.first_selected_option.text +"Block"+ select_block.first_selected_option.text +"No Data")
                     count = count + 1
                 else:
-                    time.sleep(2)
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(2)
                     p = pwd()
-                    self.filename = p.get_download_dir() + "/" + self.fname.sr_blockwise()+management+'_'+self.year.strip()+'_'+self.semester+'_allGrades__clusters_of_block_'+value.strip()+cal.get_current_date()+'.csv'
+                    self.filename = p.get_download_dir() + "/" + self.fname.sr_blockwise()+management+'_'+self.year.strip()+'_'+self.semester+'_allGrades__clusters_of_block_'+value[1].strip()+'_'+cal.get_current_date()+'.csv'
                     print(self.filename)
                     if not os.path.isfile(self.filename):
                         print("District " + select_district.first_selected_option.text +"Block "+ select_block.first_selected_option.text+"csv is not downloaded")

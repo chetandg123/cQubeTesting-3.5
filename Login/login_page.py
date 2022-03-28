@@ -21,6 +21,7 @@ class login(unittest.TestCase):
         result = function.test_login_to_cQube()
         self.assertEqual(0,result,msg='Login is failed!')
         self.data.page_loading(self.driver)
+        self.driver.quit()
 
 
 

@@ -1,3 +1,4 @@
+
 from Login import login_page
 from cQube_Dashboard.Attendance.student_attendance import student_attendance_regression_testing
 from cQube_Dashboard.Attendance.teacher_attendance import teacher_attendance_regression_testing
@@ -61,90 +62,89 @@ class MyTestSuite_cQube_map_reports(unittest.TestCase):
 
 
     def test_issue03(self):
-                self.data.page_loading(self.driver)
-                status = self.data.get_student_status("student")
-                if status == str(True):
-                    self.data.navigate_to_student_report()
-                    if 'No data found' in self.driver.page_source:
-                        print('Student Attendance Report is showing no data found!..')
-                        self.driver.close()
-                    else:
-                        regression_test = unittest.TestSuite()
-                        regression_test.addTests([
-                            # file name .class name
-                            unittest.defaultTestLoader.loadTestsFromTestCase(student_attendance_regression_testing.cQube_Student_Attendance_regression),
+        self.data.page_loading(self.driver)
+        status = self.data.get_student_status("student")
+        if status == str(True):
+            self.data.navigate_to_student_report()
+            if 'No data found' in self.driver.page_source:
+                print('Student Attendance Report is showing no data found!..')
+                self.driver.close()
+            else:
+                regression_test = unittest.TestSuite()
+                regression_test.addTests([
+                    # file name .class name
+                    unittest.defaultTestLoader.loadTestsFromTestCase(
+                        student_attendance_regression_testing.cQube_Student_Attendance_regression),
 
+                ])
+                p = pwd()
+                outfile = open(p.get_regression_map_reports(), "a")
 
-                        ])
-                        p = pwd()
-                        outfile = open(p.get_regression_map_reports(), "a")
-
-                        runner1 = HTMLTestRunner.HTMLTestRunner(
-                            stream=outfile,
-                            title='Student Attendance regression Test Report',
-                            verbosity=1,)
-                        runner1.run(regression_test)
-                        outfile.close()
-                else:
-                     print(status,"is selected due to this unable to run suite")
+                runner1 = HTMLTestRunner.HTMLTestRunner(
+                    stream=outfile,
+                    title='Student Attendance regression Test Report',
+                    verbosity=1, )
+                runner1.run(regression_test)
+                outfile.close()
+        else:
+            print(status, "is selected due to this unable to run suite")
 
 
     def test_issue04(self):
-                self.data.page_loading(self.driver)
-                status = self.data.get_student_status("sat")
-                if status == str(True):
-                    self.data.page_loading(self.driver)
-                    self.data.navigate_to_semester_report()
-                    if 'No data found' in self.driver.page_source:
-                        print('Semester Report is showing no data found!..')
-                        self.driver.close()
-                    else:
-                        regression_test = unittest.TestSuite()
-                        regression_test.addTests([
-                            unittest.defaultTestLoader.loadTestsFromTestCase(semester_report_regression_testing.cQube_Semester_Report),
-                        ])
-                        p = pwd()
-                        outfile = open(p.get_regression_map_reports(), "a")
+        self.data.page_loading(self.driver)
+        status = self.data.get_student_status("sat")
+        if status == str(True):
+            self.data.page_loading(self.driver)
+            self.data.navigate_to_semester_report()
+            if 'No data found' in self.driver.page_source:
+                print('Semester Report is showing no data found!..')
+                self.driver.close()
+            else:
+                regression_test = unittest.TestSuite()
+                regression_test.addTests([
+                    unittest.defaultTestLoader.loadTestsFromTestCase(
+                        semester_report_regression_testing.cQube_Semester_Report),
+                ])
+                p = pwd()
+                outfile = open(p.get_regression_map_reports(), "a")
 
-                        runner1 = HTMLTestRunner.HTMLTestRunner(
-                            stream=outfile,
-                            title='Semester regression Test Report',
-                            verbosity=1,)
-                        runner1.run(regression_test)
-                        outfile.close()
-                else:
-                     print(status,"is selected due to this unable to run suite")
+                runner1 = HTMLTestRunner.HTMLTestRunner(
+                    stream=outfile,
+                    title='Semester regression Test Report',
+                    verbosity=1, )
+                runner1.run(regression_test)
+                outfile.close()
+        else:
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue05(self):
+        self.data.page_loading(self.driver)
+        status = self.data.get_student_status("infrastructure")
+        if status == str(True):
             self.data.page_loading(self.driver)
-            status = self.data.get_student_status("infrastructure")
-            if status == str(True):
-                self.data.page_loading(self.driver)
-                self.data.navigate_to_school_infrastructure_map()
-                if 'No data found' in self.driver.page_source:
-                    print('School infrastructure Map Report is showing no data found!..')
-                    self.driver.close()
-                else:
-                    regression_test = unittest.TestSuite()
-                    regression_test.addTests([
-                        # file name .class name
-                        unittest.defaultTestLoader.loadTestsFromTestCase(School_Map_regression_testing.cQube_SI_Map_Report),
-
-                    ])
-                    p = pwd()
-                    outfile = open(p.get_regression_map_reports(), "a")
-
-                    runner1 = HTMLTestRunner.HTMLTestRunner(
-                        stream=outfile,
-                        title='School Infrastructure Map regression Test Report',
-                        verbosity=1,
-                    )
-                    runner1.run(regression_test)
-                    outfile.close()
+            self.data.navigate_to_school_infrastructure_map()
+            if 'No data found' in self.driver.page_source:
+                print('School infrastructure Map Report is showing no data found!..')
+                self.driver.close()
             else:
-                print(status,"is selected due to this unable to run suite")
+                regression_test = unittest.TestSuite()
+                regression_test.addTests([
+                    # file name .class name
+                    unittest.defaultTestLoader.loadTestsFromTestCase(School_Map_regression_testing.cQube_SI_Map_Report),
 
+                ])
+                p = pwd()
+                outfile = open(p.get_regression_map_reports(), "a")
 
+                runner1 = HTMLTestRunner.HTMLTestRunner(
+                    stream=outfile,
+                    title='School Infrastructure Map regression Test Report',
+                    verbosity=1,
+                )
+                runner1.run(regression_test)
+                outfile.close()
+        else:
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue07(self):
             self.data.page_loading(self.driver)
@@ -256,8 +256,8 @@ class MyTestSuite_cQube_map_reports(unittest.TestCase):
                 print(status,"is selected due to this unable to run suite")
 
     @classmethod
-    def tearDownClass(self):
-        self.driver.close()
+    def tearDownClass(cls):
+        cls.driver.quit()
 
 if __name__ == '__main__':
     unittest.main()
