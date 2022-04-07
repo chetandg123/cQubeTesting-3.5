@@ -1,3 +1,4 @@
+import time
 import unittest
 
 from Locators.parameters import Data
@@ -22,8 +23,9 @@ class composite_regression_report(unittest.TestCase):
     def test_composite_icon(self):
         self.data.page_loading(self.driver)
         count = 0
-        self.driver.find_element_by_id('hamburger').click()
-
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+        self.driver.find_element_by_id('composite').click()
+        time.sleep(1)
         self.data.page_loading(self.driver)
         if 'composite-dashboard' in self.driver.current_url:
             print("composite-Dashboard page is displayed ")
@@ -31,7 +33,7 @@ class composite_regression_report(unittest.TestCase):
             print('Hamburger - composite-Dashboard is not working ')
             count = count + 1
         self.assertEqual(0,count,msg="Home btn is not working ")
-        self.driver.find_element_by_id('composite').click()
+        self.driver.find_element_by_id('compositeReport').click()
         self.data.page_loading(self.driver)
 
     def test_districtwise_csv_download(self):
@@ -86,9 +88,11 @@ class composite_regression_report(unittest.TestCase):
     def test_logout_button(self):
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
-        self.data.click_on_logout_button()
-        self.data.page_loading(self.driver)
-        self.assertEqual('Log in to cQube', self.driver.title, msg="Logout button is not working ")
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+        time.sleep(1)
+        self.driver.find_element_by_id(Data.logout).click()
+        time.sleep(3)
+        self.assertIn('cQube', self.driver.title, msg="Logout button is not working ")
         print("logout button is working fine ")
         self.data.login_cqube(self.driver)
         self.data.page_loading(self.driver)

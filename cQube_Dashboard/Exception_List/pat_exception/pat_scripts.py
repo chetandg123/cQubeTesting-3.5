@@ -139,10 +139,11 @@ class pat_exception_report():
                     schools = df['Total Schools With Missing Data'].sum()
                     school = self.driver.find_element_by_id("schools").text
                     sc = re.sub('\D', "", school)
+                    os.remove(self.filename)
                     if int(sc) != int(schools):
                         print("school count mismatched", int(sc), int(schools))
                         count = count + 1
-            os.remove(self.filename)
+
         return count
 
 
@@ -226,12 +227,12 @@ class pat_exception_report():
                             header = next(csv_reader)
                             data = list(csv_reader)
                             row_count = len(data)
+                            os.remove(self.filename)
                             school = self.driver.find_element_by_id("schools").text
                             sc = re.sub('\D', "", school)
                             if int(sc) != int(row_count):
                                 print("school count mismatched", int(sc), int(row_count))
                                 count = count + 1
-                os.remove(self.filename)
             return count
 
     def check_markers_on_block_map(self):
@@ -370,13 +371,14 @@ class pat_exception_report():
         cal = GetData()
         self.p = pwd()
         count = 0
+        cal.click_on_state(self.driver)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         self.file = file_extention()
-        cal.click_on_state(self.driver)
         timeperiods = Select(self.driver.find_element_by_id('period'))
         # timeperiods.select_by_visible_text(' Last 7 Days ')
         timeperiods.select_by_index(3)
+        timepd = (timeperiods.first_selected_option.text).lower()
         cal.page_loading(self.driver)
         if 'No data found' in self.driver.page_source:
             print('Last 7 Days is not having data')
@@ -389,21 +391,18 @@ class pat_exception_report():
             else:
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() + '/' + self.file.exception_district()+cal.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + '/' +"periodic_assesment_test_exception_"+management+'_'+timepd.replace(' ','_')+'_allGrades__allBlocks_'+cal.get_current_date()+'.csv'
+                print(self.filename)
                 if os.path.isfile(self.filename) != True:
                     print(" Last 7 Days time series csv file is not downloaded")
                 else:
-                    with open(self.filename) as fin:
-                        csv_reader = csv.reader(fin, delimiter=',')
-                        header = next(csv_reader)
-                        schools = 0
-                        for row in csv.reader(fin):
-                            schools += int(row[3])
-                        school = self.driver.find_element_by_id("schools").text
-                        sc = re.sub('\D', "", school)
-                        if int(sc) != int(schools):
-                            print("school count mismatched", int(sc), int(schools))
-                            count = count + 1
+                    df = pd.read_csv(self.filename)
+                    total_mis = df['Total Schools With Missing Data'].sum()
+                    school = self.driver.find_element_by_id("schools").text
+                    sc = re.sub('\D', "", school)
+                    if int(sc) != int(total_mis):
+                        print("school count mismatched", int(sc), int(total_mis))
+                        count = count + 1
                 os.remove(self.filename)
         return count
 
@@ -412,10 +411,13 @@ class pat_exception_report():
         self.p = pwd()
         count = 0
         self.file = file_extention()
+        management = self.driver.find_element_by_id('name').text
+        management = management[16:].lower().strip()
         cal.click_on_state(self.driver)
         timeperiods = Select(self.driver.find_element_by_id('period'))
         # timeperiods.select_by_visible_text(' Last 30 Days ')
         timeperiods.select_by_index(2)
+        timepd = (timeperiods.first_selected_option.text).lower()
         cal.page_loading(self.driver)
         if 'No data found' in self.driver.page_source:
             print('Last 30 Days is not having data')
@@ -429,20 +431,17 @@ class pat_exception_report():
                 cal.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(5)
-                self.filename = self.p.get_download_dir() + '/' + self.file.exception_district()
+                self.filename = self.p.get_download_dir() + '/' +"periodic_assesment_test_exception_"+management+'_'+timepd.replace(' ','_')+'_allGrades__allBlocks_'+cal.get_current_date()+'.csv'
+                print(self.filename)
                 if os.path.isfile(self.filename) != True:
                     print(" Last 30 Days time series csv file is not downloaded")
                 else:
-                    with open(self.filename) as fin:
-                        csv_reader = csv.reader(fin, delimiter=',')
-                        header = next(csv_reader)
-                        schools = 0
-                        for row in csv.reader(fin):
-                            schools += int(row[3])
-                        school = self.driver.find_element_by_id("schools").text
-                        sc = re.sub('\D', "", school)
-                        if int(sc) != int(schools):
-                            print("school count mismatched", int(sc), int(schools))
-                            count = count + 1
+                    df = pd.read_csv(self.filename)
+                    total_mis = df['Total Schools With Missing Data'].sum()
+                    school = self.driver.find_element_by_id("schools").text
+                    sc = re.sub('\D', "", school)
+                    if int(sc) != int(total_mis):
+                        print("school count mismatched", int(sc), int(total_mis))
+                        count = count + 1
                 os.remove(self.filename)
         return count

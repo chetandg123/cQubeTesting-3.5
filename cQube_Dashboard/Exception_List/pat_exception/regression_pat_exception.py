@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import unittest
-import time
 
 from cQube_Dashboard.Exception_List.pat_exception.pat_scripts import pat_exception_report
 from reuse_func import GetData
