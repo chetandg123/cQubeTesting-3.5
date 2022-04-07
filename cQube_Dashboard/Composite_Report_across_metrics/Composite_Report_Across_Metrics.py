@@ -20,7 +20,7 @@ class Composite_report_across_Metric():
         self.fname = file_extention()
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        self.driver.find_element_by_xpath(Data.refresh_link).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         time.sleep(3)
         self.cal.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
@@ -38,7 +38,7 @@ class Composite_report_across_Metric():
         self.cal  = GetData()
         self.fname = file_extention()
         self.driver.implicitly_wait(20)
-        self.driver.find_element_by_xpath(Data.refresh_link).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.cal.page_loading(self.driver)
         time.sleep(3)
         management = self.driver.find_element_by_id('name').text
@@ -60,7 +60,7 @@ class Composite_report_across_Metric():
         self.fname = file_extention()
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        self.driver.find_element_by_xpath(Data.refresh_link).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.cal.page_loading(self.driver)
         time.sleep(3)
         self.driver.find_element_by_id('allCluster').click()
@@ -75,7 +75,7 @@ class Composite_report_across_Metric():
     def test_hyperlink(self):
         self.p = GetData()
         self.driver.implicitly_wait(30)
-        self.driver.find_element_by_xpath(Data.refresh_link).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.p.page_loading(self.driver)
         time.sleep(3)
         dist = Select(self.driver.find_element_by_name("myDistrict"))
@@ -93,10 +93,12 @@ class Composite_report_across_Metric():
         self.p.page_loading(self.driver)
         self.driver.find_element_by_xpath(Data.dist_hyper).click()
         self.p.page_loading(self.driver)
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
+        time.sleep(3)
 
     def test_xaxis(self):
         self.p = GetData()
-        self.driver.find_element_by_xpath(Data.refresh_link).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.p.page_loading(self.driver)
         xaxis_lists = Select(self.driver.find_element_by_id('x_axis'))
         self.p.page_loading(self.driver)
@@ -115,7 +117,7 @@ class Composite_report_across_Metric():
     def test_xplots(self):
         self.driver.implicitly_wait(30)
         self.p = GetData()
-        self.driver.find_element_by_xpath(Data.refresh_link).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.p.page_loading(self.driver)
         time.sleep(3)
         dist = Select(self.driver.find_element_by_id("choose_district1"))
@@ -131,7 +133,7 @@ class Composite_report_across_Metric():
     def test_yplots(self):
         self.driver.implicitly_wait(30)
         self.p = GetData()
-        self.driver.find_element_by_xpath(Data.refresh_link).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         time.sleep(3)
         dist = Select(self.driver.find_element_by_id("choose_district1"))
         dist.select_by_index(3)
@@ -146,7 +148,7 @@ class Composite_report_across_Metric():
     def test_homeicon(self):
         self.p = GetData()
         self.driver.implicitly_wait(20)
-        self.driver.find_element_by_xpath(Data.refresh_link).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.p.page_loading(self.driver)
         dist = Select(self.driver.find_element_by_name("myDistrict"))
         dist.select_by_index(1)
@@ -158,7 +160,7 @@ class Composite_report_across_Metric():
         self.p = GetData()
         count = 0
         self.driver.implicitly_wait(20)
-        self.driver.find_element_by_xpath(Data.refresh_link).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         time.sleep(3)
         self.p.page_loading(self.driver)
         self.driver.find_element_by_id(Data.cQube_logo).click()
@@ -166,7 +168,7 @@ class Composite_report_across_Metric():
         if 'dashboard' in self.driver.current_url:
             print("home button is working fine , landing page is displayed ")
         else:
-            print("Landing page is not displayed due to homebutton click not happened")
+            print("Landing page is not displayed due to home button click not happened")
             count = count + 1
         self.p.navigate_to_composite_report()
         self.p.page_loading(self.driver)
@@ -175,7 +177,7 @@ class Composite_report_across_Metric():
     def click_on_blocks_button(self):
         count = 0
         self.data  = GetData()
-        self.driver.find_element_by_xpath(Data.refresh_link).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         time.sleep(3)
         self.driver.find_element_by_id('allBlock').click()
         self.data.page_loading(self.driver)
@@ -200,7 +202,7 @@ class Composite_report_across_Metric():
     def click_on_clusters_button(self):
         count = 0
         self.data  = GetData()
-        self.driver.find_element_by_xpath(Data.refresh_link).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id('allCluster').click()
         self.data.page_loading(self.driver)
@@ -225,7 +227,8 @@ class Composite_report_across_Metric():
         p = pwd()
         self.cal = GetData()
         self.driver.implicitly_wait(60)
-        self.driver.find_element_by_xpath(Data.refresh_link).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
+        time.sleep(3)
         self.cal.page_loading(self.driver)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
@@ -255,11 +258,10 @@ class Composite_report_across_Metric():
     def check_csv_download(self):
         p = pwd()
         self.cal = GetData()
-        self.driver.implicitly_wait(60)
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
+        self.cal.page_loading(self.driver)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        self.driver.find_element_by_xpath(Data.refresh_link).click()
-        self.cal.page_loading(self.driver)
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
         select_block = Select(self.driver.find_element_by_name('myBlock'))
         select_cluster = Select(self.driver.find_element_by_name('myCluster'))
@@ -297,7 +299,7 @@ class Composite_report_across_Metric():
         self.driver.implicitly_wait(60)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        self.driver.find_element_by_xpath(Data.refresh_link).click()
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.cal.page_loading(self.driver)
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
         select_block = Select(self.driver.find_element_by_name('myBlock'))
