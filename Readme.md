@@ -21,6 +21,17 @@
 
    Note: Based on the chrome browser version need to download chrome driver 
    https://sites.google.com/chromium.org/driver/
+   
+  - AWS S3 must be configured
+  ```
+  sudo apt-get install awscli
+  aws configure
+  AWS Access Key ID : #Fill the AWS Access key
+  AWS Secret Access Key : #Fill the AWS Secret Access Key
+  Default region name [None]: #Fill the Default region (Note:Not manadatory to fill)
+  Default output format [None]: #Fill the Default output format (Note:Not manadatory to fill)
+  ```
+  
  
 # Steps to execute the test script
 
@@ -36,6 +47,7 @@
  - Fill the config.ini file (config.ini file present in the cQubeTesting-3.5 Folder).
  
 # Mandatory fields for installation and upgradation of backend configuration testing
+ - Note: Nifi Port must be opend(ie: 8096)
 ```		
 [config]
 domain= #domain name provided in the config.yml file ex: https://domain_name
@@ -74,6 +86,10 @@ nifi_progresscard= true
 nifi_teacher_attendance= true
 nifi_data_replay= true
 nifi_sat= true
+
+storage_type= #storage type which is specified in the config.yml while installation ex: s3 or local
+bucket_name= #emission bucket name which is specified in the config.yml while installation ex: cqube-test-emission Note: if your using storage_type as local then no need to fill the bucket_name
+emission_directory= #emission directory which is specified in the config.yml while installation ex: /home/ubuntu/emission/ Note: if your using storage_type as s3 then no need to fill the emission_directory
 
 [filepath]
 #Fill the absolute path ex: /home/ubuntu/district_mst.zip
