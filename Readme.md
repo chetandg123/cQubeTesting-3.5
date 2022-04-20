@@ -11,7 +11,7 @@
    Check chrome brower version using command -> google-chrome -version
   ```
 - Navigate to the directory where cQubeTesting has been downloaded or cloned 
-  ```
+```
   cd cQubeTesting/
   git checkout cQubeTesting-3.5
   git pull
@@ -22,14 +22,14 @@
    Note: Based on the chrome browser version need to download chrome driver 
    https://sites.google.com/chromium.org/driver/
    
-  - AWS S3 must be configured
-  ```
+  - AWS S3 Configuration
+```
   sudo apt-get install awscli
   aws configure
   AWS Access Key ID : #Fill the AWS Access key
   AWS Secret Access Key : #Fill the AWS Secret Access Key
-  Default region name [None]: #Fill the Default region (Note:Not manadatory to fill)
-  Default output format [None]: #Fill the Default output format (Note:Not manadatory to fill)
+  Default region name [None]: #Fill the Default region (Not manadatory to fill)
+  Default output format [None]: #Fill the Default output format (Not manadatory to fill)
   ```
   
  
