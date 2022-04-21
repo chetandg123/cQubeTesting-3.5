@@ -10,7 +10,7 @@
    sudo apt install ./google-chrome-stable_current_amd64.deb
    Check chrome brower version using command -> google-chrome -version
   ```
-- Navigate to the directory where cQubeTesting has been downloaded or cloned 
+ - Navigate to the directory where cQubeTesting has been downloaded or cloned 
 ```
   cd cQubeTesting/
   git checkout cQubeTesting-3.5
@@ -19,10 +19,9 @@
  - Chrome driver need to be downloaded and placed in the cQubeTesting-3.5/Driver/ folder.
  - Steps to Download the chrome driver 
 
- ### Note: Based on the chrome browser version need to download chrome driver 
-   https://sites.google.com/chromium.org/driver/
+ - Note: Based on the chrome browser version need to download chrome driver https://sites.google.com/chromium.org/driver/
    
-  - AWS S3 Configuration
+ - AWS S3 Configuration
 ```
   sudo apt-get install awscli
   aws configure
