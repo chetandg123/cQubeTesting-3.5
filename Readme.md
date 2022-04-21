@@ -25,8 +25,8 @@
 ```
   sudo apt-get install awscli
   aws configure
-  AWS Access Key ID : #Fill the AWS Access key
-  AWS Secret Access Key : #Fill the AWS Secret Access Key
+  AWS Access Key ID : #Fill the AWS Access key provided in the config.yml
+  AWS Secret Access Key : #Fill the AWS Secret Access Key provided in the config.yml
   Default region name [None]: #Fill the Default region (Not manadatory to fill)
   Default output format [None]: #Fill the Default output format (Not manadatory to fill)
   ```
