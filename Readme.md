@@ -42,7 +42,7 @@
     
  - Execute the Requirement.txt in the terminal (Requirement.txt file is present in the cQubeTesting-3.5 Folder) [mandatory]
  ```
- sudo pip3 install -r Requirement.txt
+  sudo pip3 install -r Requirement.txt
  ```
  - Fill the config.ini file (config.ini file present in the cQubeTesting-3.5 Folder).
  
