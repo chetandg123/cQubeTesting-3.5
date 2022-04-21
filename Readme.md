@@ -3,7 +3,7 @@
 
 ###  Prerequisites:
  - Open the Terminal
- - Google Chrome need to be installed in the server or local machine.
+ - Google Chrome need to be installed in the server.
  - Steps to install the google chrome
  ```
    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
