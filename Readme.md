@@ -42,12 +42,12 @@
     
  - Execute the Requirement.txt in the terminal (Requirement.txt file is present in the cQubeTesting-3.5 Folder) [mandatory]
  ```
-     sudo pip3 install -r Requirement.txt
+ sudo pip3 install -r Requirement.txt
  ```
  - Fill the config.ini file (config.ini file present in the cQubeTesting-3.5 Folder).
  
 # Mandatory fields for installation and upgradation of backend configuration testing
- # Note: Nifi Port must be opened(ie: 8096)
+### Note: Nifi Port must be opened(ie: 8096)
 ```		
 [config]
 domain= #Fill the domain name provided in the config.yml file ex: https://domain_name
