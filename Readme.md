@@ -127,7 +127,7 @@ semester_exam_result_trans=
  ``` python3 -m unittest TestSuites/cQubeBackendConfiguration/run_workflow.py ```
  
 # Mandatory fields for cQube UI application                    
-### Before running Regression and System test suites please fill the data_sources.ini file to run customized suite run
+### Before running Regression and System test suites please fill the data_source.ini file to run customized suite run
 ```
 [data_source]		
 #Implemented customized suite running - Enable or disable data source while running scripts [True or False] -
