@@ -19,7 +19,7 @@
  - Chrome driver need to be downloaded and placed in the cQubeTesting-3.5/Driver/ folder.
  - Steps to Download the chrome driver 
 
-   Note: Based on the chrome browser version need to download chrome driver 
+ ### Note: Based on the chrome browser version need to download chrome driver 
    https://sites.google.com/chromium.org/driver/
    
   - AWS S3 Configuration
