@@ -41,35 +41,37 @@
      sudo apt install python3-pip
     
  - Execute the Requirement.txt in the terminal (Requirement.txt file is present in the cQubeTesting-3.5 Folder) [mandatory]
-     ```
+ ```
      sudo pip3 install -r Requirement.txt
-     ```
+ ```
  - Fill the config.ini file (config.ini file present in the cQubeTesting-3.5 Folder).
  
 # Mandatory fields for installation and upgradation of backend configuration testing
- - Note: Nifi Port must be opend(ie: 8096)
+ # Note: Nifi Port must be opened(ie: 8096)
 ```		
 [config]
-domain= #domain name provided in the config.yml file ex: https://domain_name
-username= #username for cQube login
-password= #password for cQube login
-basedirpath= #installation directory provided in the config.yml file ex:/opt
+domain= #Fill the domain name provided in the config.yml file ex: https://domain_name
+username= #Fill the username for cQube login
+password= #Fill the password for cQube login
+basedirpath= #Fill the installation directory provided in the config.yml file ex:/opt
 host=localhost
 port=5432
-database= #db name which is provided in the config.yml file
-user= #db user which is provided in the config.yml file
-db_password= #db user which is provided in the config.yml file                  
+database= #Fill the db name which is provided in the config.yml file
+user= #Fill the db user which is provided in the config.yml file
+db_password= #Fill the db user which is provided in the config.yml file                  
 ```                  
 # Execution of automation testscripts for both installation and upgradation of backend configuration
 
- ``` python3 -m unittest TestSuites/cQubeBackendConfiguration/run_configuration.py ```
+ ``` 
+ python3 -m unittest TestSuites/cQubeBackendConfiguration/run_configuration.py 
+ ```
  
  
 # Mandatory fields for installation and upgradation of Data Processing
 
 ```
 [config]
-domain= #domain name provided in the config.yml file ex: https://domain_name
+domain= #Fill the domain name provided in the config.yml file ex: https://domain_name
 
 [datasource]
 #Implemented customized suite running - Enable or disable data source while running scripts [true or false]
@@ -87,9 +89,9 @@ nifi_teacher_attendance= true
 nifi_data_replay= true
 nifi_sat= true
 
-storage_type= #storage type which is specified in the config.yml while installation ex: s3 or local
-bucket_name= #emission bucket name which is specified in the config.yml while installation ex: cqube-test-emission Note: if your using storage_type as local then no need to fill the bucket_name
-emission_directory= #emission directory which is specified in the config.yml while installation ex: /home/ubuntu/emission/ Note: if your using storage_type as s3 then no need to fill the emission_directory
+storage_type= #Fill the storage type which is specified in the config.yml while installation ex: s3 or local
+bucket_name= #Fill the emission bucket_name which is specified in the config.yml while installation ex: cqube-test-emission Note: if your using storage_type as 'local' then no need to fill the bucket_name
+emission_directory= #Fill the emission_directory which is specified in the config.yml while installation ex: /home/ubuntu/emission/ Note: if your using storage_type as 's3' then no need to fill the emission_directory
 
 [filepath]
 #Fill the absolute path ex: /home/ubuntu/district_mst.zip
