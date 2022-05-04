@@ -8,7 +8,7 @@ from datetime import date
 from PIL import ImageColor
 from selenium.webdriver.firefox.options import Options
 
-# import psycopg2
+#import psycopg2
 import psycopg2
 import requests
 from selenium import webdriver
