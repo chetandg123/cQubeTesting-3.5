@@ -16,3 +16,6 @@ class Data_retention(unittest.TestCase):
         self.data.open_cqube_appln(self.driver)
         self.data.login_to_adminconsole(self.driver)
         time.sleep(2)
+
+
+

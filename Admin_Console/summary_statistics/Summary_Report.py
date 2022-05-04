@@ -106,38 +106,6 @@ class Test_summaryreport(unittest.TestCase):
         self.driver.find_element_by_id(Data.menu_icon).click()
         self.data.page_loading(self.driver)
 
-    def test_homebtn(self):
-        count =0
-        self.driver.find_element_by_xpath(Data.summary_icon).click()
-        self.data.page_loading(self.driver)
-        self.driver.find_element_by_id(Data.cQube_logo).click()
-        self.data.page_loading(self.driver)
-        if 'admin-dashboard' in self.driver.current_url:
-            print('Home button is working ')
-        else:
-            print('Home button is not worked')
-            count = count + 1
-        self.assertEqual(count,0,msg='homebutton is not working ')
-        self.data.page_loading(self.driver)
-
-    def test_logoutbtn(self):
-        count = 0
-        self.driver.find_element_by_xpath(Data.summary_icon).click()
-        self.data.page_loading(self.driver)
-        self.driver.find_element_by_id(Data.logout).click()
-        self.data.page_loading(self.driver)
-        if 'Log in to cQube' in self.driver.title:
-            print('Logout btn is working fine')
-        else:
-            print('Logout btn is not working')
-            count = count + 1
-        self.data.page_loading(self.driver)
-        self.data.login_to_adminconsole(self.driver)
-        self.data.page_loading(self.driver)
-        self.assertEqual(0,count,msg='Login page is not displayed ')
-        self.data.page_loading(self.driver)
-
-
     @classmethod
     def tearDownClass(cls):
         cls.driver.close()

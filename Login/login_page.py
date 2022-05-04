@@ -1,11 +1,10 @@
 import unittest
 
-from Login.login_to_cQube import cQube_login
+from Login.login_to_cQube import cQube_Login
 from reuse_func import GetData
 
+
 class login(unittest.TestCase):
-
-
     driver = None
     data = None
 
@@ -17,16 +16,12 @@ class login(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_login_page(self):
-        function = cQube_login(self.driver)
+        function = cQube_Login(self.driver)
         result = function.test_login_to_cQube()
-        self.assertEqual(0,result,msg='Login is failed!')
+        self.assertEqual(0, result, msg='Login is failed!')
         self.data.page_loading(self.driver)
         self.driver.quit()
-
-
 
     @classmethod
     def tearDownClass(cls):
         cls.driver.quit()
-
-
