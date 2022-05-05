@@ -16,6 +16,7 @@ from reuse_func import GetData
 class user_progress():
 
     def __init__(self,driver):
+        self.data = None
         self.driver = driver
 
         self.fname= ''
@@ -412,7 +413,9 @@ class user_progress():
                     self.filename = self.p.get_download_dir() + "/" + "enrollment_completion_enrollment"+ '_overall_' + value.strip() + self.data.get_current_date() + ".csv"
                     print(self.filename)
                     if os.path.isfile(self.filename) != True:
-                        print(Districts.options[j].text, Blocks.options[k].text,Cluster.options[m].text, 'csv file not downloaded')
+                        print(Districts.options[j].text, Blocks.options[k].text,Cluster.options[m].text, 'csv file '
+                                                                                                         'not '
+                                                                                                         'downloaded')
                         count = count + 1
                         self.data.page_loading(self.driver)
                     else:
@@ -442,7 +445,7 @@ class user_progress():
         self.data.page_loading(self.driver)
         Districts = Select(self.driver.find_element_by_id(Data.sar_district))
         program_type = Select(self.driver.find_element_by_name(Data.program))
-        time = (self.driver.find_element_by_id('time_range').text).strip()
+        (self.driver.find_element_by_id('time_range').text).strip()
         for i in range(1, len(program_type.options)):
             program_type.select_by_index(i)
             self.data.page_loading(self.driver)

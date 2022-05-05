@@ -8,6 +8,8 @@ from reuse_func import GetData
 
 
 class cQube_SI_Map_Report(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -20,7 +22,6 @@ class cQube_SI_Map_Report(unittest.TestCase):
         self.data.navigate_to_school_infrastructure_map()
         time.sleep(3)
 
-
     def test_hyperlink(self):
         b = Infrastructure_access_by_location(self.driver)
         res = b.test_link()
@@ -32,7 +33,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
     def test_districtwise_download(self):
         b = Infrastructure_access_by_location(self.driver)
         res = b.test_donwload()
-        self.assertEqual(0,res,msg="mismatch found at no of school values")
+        self.assertEqual(0, res, msg="mismatch found at no of school values")
         self.data.page_loading(self.driver)
 
     def test_schools_per_cluster_csv_download1(self):
@@ -45,8 +46,6 @@ class cQube_SI_Map_Report(unittest.TestCase):
             print("equals to downloaded file")
         else:
             raise self.failureException("Schools per cluster csv report download1 is working")
-
-
 
     def test_logout(self):
         self.driver.find_element_by_xpath(Data.hyper_link).click()
@@ -61,7 +60,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
         else:
             print("logout button is not working ")
             count = count + 1
-        self.assertEqual(0,count,msg='logout button is not worked')
+        self.assertEqual(0, count, msg='logout button is not worked')
         self.data.login_cqube(self.driver)
         self.data.page_loading(self.driver)
         self.data.navigate_to_school_infrastructure_map()
@@ -121,9 +120,9 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_click_on_block_cluster_school(self):
         b = Infrastructure_access_by_location(self.driver)
-        res1,res2 = b.test_blocks_button()
+        res1, res2 = b.test_blocks_button()
         self.assertNotEqual(0, res1, msg="Records are not present on map ")
-        self.assertTrue(res2,msg='Block wise file downloading is not working ')
+        self.assertTrue(res2, msg='Block wise file downloading is not working ')
         print("Block buttons is working...")
 
         b = Infrastructure_access_by_location(self.driver)
@@ -133,7 +132,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
         print("cluster button is working ")
 
         b = Infrastructure_access_by_location(self.driver)
-        res1,res2 = b.test_click_on_school_btn()
+        res1, res2 = b.test_click_on_school_btn()
         self.assertNotEqual(0, res1, msg="Records are not present on map ")
         self.assertTrue(res2, msg='School wise file downloading is not working ')
         print("school button is working ")
@@ -147,21 +146,20 @@ class cQube_SI_Map_Report(unittest.TestCase):
         self.data.page_loading(self.driver)
         print("checked with comapared with footer values ")
 
-
     def test_block_cluster_schools_infrascores(self):
         b = Infrastructure_access_by_location(self.driver)
-        result = b.test_click_blocks()
+        b.test_click_blocks()
         self.data.page_loading(self.driver)
         print("block button is worked and infra scores is working ")
 
         b = Infrastructure_access_by_location(self.driver)
-        result = b.test_click_clusters()
+        b.test_click_clusters()
         self.data.page_loading(self.driver)
         print("cluster button is worked and infra scores is working ")
 
         b = Infrastructure_access_by_location(self.driver)
         self.driver.implicitly_wait(30)
-        res = b.test_click_schools()
+        b.test_click_schools()
         self.data.page_loading(self.driver)
         print("school button is worked and infra scores is working ")
 
@@ -179,14 +177,11 @@ class cQube_SI_Map_Report(unittest.TestCase):
         else:
             print('cQube logo home button is not working ')
             count = count + 1
-        self.assertEqual(0,count,msg='Landing page does not exists')
+        self.assertEqual(0, count, msg='Landing page does not exists')
         self.driver.find_element_by_id(Data.inframap).click()
         time.sleep(2)
         self.data.page_loading(self.driver)
 
-
-
     @classmethod
     def tearDownClass(cls):
         cls.driver.close()
-

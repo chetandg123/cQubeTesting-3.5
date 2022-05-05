@@ -5,9 +5,9 @@ from cQube_Dashboard.School_Infrastructure.udise_report.udise_report import udis
 from reuse_func import GetData
 
 
-
-
 class cQube_udise_Report(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -20,7 +20,7 @@ class cQube_udise_Report(unittest.TestCase):
         time.sleep(3)
 
     def test_udise_icon(self):
-        count =0
+        count = 0
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
         if 'dashboard' in self.driver.current_url:
@@ -35,7 +35,7 @@ class cQube_udise_Report(unittest.TestCase):
         else:
             print("Udise report is not exists ")
             count = count + 1
-        self.assertEqual(0,count,msg='Udise report icon not working ')
+        self.assertEqual(0, count, msg='Udise report icon not working ')
         self.data.page_loading(self.driver)
 
     # def test_hyperlink(self):
@@ -49,7 +49,7 @@ class cQube_udise_Report(unittest.TestCase):
     def test_download_districtcsv(self):
         fn = udise_report(self.driver)
         res = fn.test_districtwise()
-        self.assertEqual(0,res,msg='Districtwise csv is not downloaded')
+        self.assertEqual(0, res, msg='Districtwise csv is not downloaded')
         self.data.page_loading(self.driver)
 
     def test_block_wise_download(self):
@@ -80,7 +80,7 @@ class cQube_udise_Report(unittest.TestCase):
     def test_test_each_districtwise(self):
         b = udise_report(self.driver)
         res = b.test_each_districtwise()
-        self.assertEqual(0,res,msg="Some district csv file is not downloaded...")
+        self.assertEqual(0, res, msg="Some district csv file is not downloaded...")
 
     def test_Block_cluster_school_for_udise(self):
         b = udise_report(self.driver)
@@ -89,7 +89,6 @@ class cQube_udise_Report(unittest.TestCase):
         self.assertEqual(res, res2, msg="Cluster level school is same")
         self.assertEqual(res, res3, msg="School level school is same")
         self.data.page_loading(self.driver)
-
 
     def test_indices_download(self):
         self.data.page_loading(self.driver)
@@ -175,11 +174,10 @@ class cQube_udise_Report(unittest.TestCase):
         print('Checking cluster level with indices score dropdown')
         self.data.page_loading(self.driver)
 
-
     def test_test_school_map_schoollevel_records(self):
         b = udise_report(self.driver)
         res = b.check_download_csv1()
-        self.assertEqual(0,res,msg="Some school level csv file not downloaded")
+        self.assertEqual(0, res, msg="Some school level csv file not downloaded")
         self.data.page_loading(self.driver)
 
     def test_homebtn(self):
@@ -202,9 +200,9 @@ class cQube_udise_Report(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_logout(self):
-        b =udise_report(self.driver)
+        b = udise_report(self.driver)
         res = b.check_logout()
-        self.assertEqual('Log in to cQube',res,msg='Logout button is not workig')
+        self.assertEqual('Log in to cQube', res, msg='Logout button is not workig')
         self.data.page_loading(self.driver)
         self.data.login_cqube(self.driver)
         self.data.navigate_to_udise_report()
@@ -215,5 +213,3 @@ class cQube_udise_Report(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.driver.close()
-
-

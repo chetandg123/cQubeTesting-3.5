@@ -12,11 +12,14 @@ from reuse_func import GetData
 
 
 class sat_map_report():
-    def __init__(self,driver):
+    def __init__(self, driver):
+        self.fname = None
+        self.data = None
+        self.semester = None
         self.driver = driver
+
     def check_semester_landing_page(self):
         return self.driver.current_url
-
 
     def click_download_icon_of_schools(self):
         cal = GetData()
@@ -32,7 +35,7 @@ class sat_map_report():
         time.sleep(15)
         p = pwd()
         count = 0
-        self.filename = p.get_download_dir() + "/" + self.fname.sr_school()+management+'_all_allGrades__allSchools_'+cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + "/" + self.fname.sr_school() + management + '_all_allGrades__allSchools_' + cal.get_current_date() + '.csv'
         if os.path.isfile(self.filename) != True:
             print('School level csv file is not download')
             count = count + 1
@@ -50,7 +53,7 @@ class sat_map_report():
         count = 0
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         cal.page_loading(self.driver)
-        times= Select(self.driver.find_element_by_id('period'))
+        times = Select(self.driver.find_element_by_id('period'))
         times.select_by_index(2)
         print(times.first_selected_option.text)
         time.sleep(3)
@@ -173,7 +176,7 @@ class sat_map_report():
         print(times.first_selected_option.text)
         time.sleep(3)
         if 'No data found' in self.driver.page_source:
-            print(times.first_selected_option.text,"is not having Data..")
+            print(times.first_selected_option.text, "is not having Data..")
         else:
             schools = self.driver.find_element_by_id('schools').text
             students = self.driver.find_element_by_id('students').text
@@ -290,13 +293,13 @@ class sat_map_report():
         self.fname = file_extention()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         cal.page_loading(self.driver)
-        times= Select(self.driver.find_element_by_id('period'))
+        times = Select(self.driver.find_element_by_id('period'))
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        for i in range(2,len(times.options)):
+        for i in range(2, len(times.options)):
             times.select_by_index(i)
             timeseries = times.options[i].text
-            timeseries = timeseries.replace(' ','_')
+            timeseries = timeseries.replace(' ', '_')
             time.sleep(3)
             select_district = Select(self.driver.find_element_by_id('choose_dist'))
             count = 0
@@ -313,7 +316,7 @@ class sat_map_report():
                     self.driver.find_element_by_id(Data.Download).click()
                     p = pwd()
                     time.sleep(5)
-                    self.filename = p.get_download_dir() + "/" + self.fname.sr_districtwise() +management+'_'+timeseries.lower()+'_allGrades__blocks_of_district_' + value.strip() + cal.get_current_date() + '.csv'
+                    self.filename = p.get_download_dir() + "/" + self.fname.sr_districtwise() + management + '_' + timeseries.lower() + '_allGrades__blocks_of_district_' + value.strip() + cal.get_current_date() + '.csv'
                     print(self.filename)
                     if not os.path.isfile(self.filename):
                         print("District " + select_district.first_selected_option.text + " csv is not downloaded")
@@ -328,8 +331,8 @@ class sat_map_report():
                             for row in csv.reader(fin):
                                 # student += int(row[5])
                                 schools += int(row[6])
-                                attended +=int(row[5])
-                            print(self.filename ,':', student,schools,attended)
+                                attended += int(row[5])
+                            print(self.filename, ':', student, schools, attended)
 
                             # students = self.driver.find_element_by_id("students").text
                             # studs = re.sub('\D', "", students)
@@ -350,11 +353,14 @@ class sat_map_report():
 
                             if int(sc) != int(schools):
                                 print(
-                                    "District " + select_district.first_selected_option.text + " school count mismatched",int(sc) , int(schools))
+                                    "District " + select_district.first_selected_option.text + " school count mismatched",
+                                    int(sc), int(schools))
                                 count = count + 1
 
                             if int(atd) != int(attended):
-                                print("District " + select_district.first_selected_option.text + " student attended mismatched",int(atd) , int(attended))
+                                print(
+                                    "District " + select_district.first_selected_option.text + " student attended mismatched",
+                                    int(atd), int(attended))
                                 count = count + 1
 
                         os.remove(self.filename)
@@ -373,7 +379,7 @@ class sat_map_report():
             times.select_by_index(i)
             timeseries = times.options[i].text
             if 'No data found' in self.driver.page_source:
-                print(timeseries,'is not having Data...')
+                print(timeseries, 'is not having Data...')
                 return count
             else:
                 timeseries = timeseries.replace(' ', '_')
@@ -394,7 +400,7 @@ class sat_map_report():
                         self.driver.find_element_by_id(Data.Download).click()
                         p = pwd()
                         time.sleep(5)
-                        self.filename = p.get_download_dir() + "/" + self.fname.sr_districtwise()+management+'_'+timeseries.lower() + '_allGrades__blocks_of_district_' + values+'_' + cal.get_current_date() + '.csv'
+                        self.filename = p.get_download_dir() + "/" + self.fname.sr_districtwise() + management + '_' + timeseries.lower() + '_allGrades__blocks_of_district_' + values + '_' + cal.get_current_date() + '.csv'
                         print(self.filename)
                         if not os.path.isfile(self.filename):
                             print("District " + select_district.first_selected_option.text + " csv is not downloaded")
@@ -451,12 +457,13 @@ class sat_map_report():
         cal.page_loading(self.driver)
         dots = self.driver.find_elements_by_class_name(Data.dots)
         return dots
+
     def check_markers_on_school_map(self):
         self.driver.find_element_by_id(Data.schoolbtn).click()
         cal = GetData()
         cal.page_loading(self.driver)
         time.sleep(15)
-        result= self.driver.find_elements_by_class_name(Data.dots)
+        result = self.driver.find_elements_by_class_name(Data.dots)
         return result
 
     def click_on_logout(self):
@@ -489,8 +496,8 @@ class sat_map_report():
         result2 = self.driver.find_element_by_id('choose_cluster').is_displayed()
         time.sleep(2)
         dist = Select(self.driver.find_element_by_id('choose_dist'))
-        choose_dist= dist.first_selected_option.text
-        return result1,result2,choose_dist
+        choose_dist = dist.first_selected_option.text
+        return result1, result2, choose_dist
 
     def click_download_icon_of_district(self):
         cal = GetData()
@@ -504,10 +511,10 @@ class sat_map_report():
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
         p = pwd()
-        self.filename = p.get_download_dir() + "/" + self.fname.sr_district()+management+'_all_allGrades__allDistricts_'+cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + "/" + self.fname.sr_district() + management + '_all_allGrades__allDistricts_' + cal.get_current_date() + '.csv'
         print(self.filename)
         if os.path.isfile(self.filename) != True:
-           return "File Not Downloaded"
+            return "File Not Downloaded"
         else:
             with open(self.filename) as fin:
                 csv_reader = csv.reader(fin, delimiter=',')
@@ -528,7 +535,7 @@ class sat_map_report():
         cal.page_loading(self.driver)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        year =Select(self.driver.find_element_by_id('year'))
+        year = Select(self.driver.find_element_by_id('year'))
         self.year = year.first_selected_option.text
         semester = self.driver.find_element_by_id('choose_semester').get_attribute('value')
         value = semester.split(":")
@@ -538,7 +545,7 @@ class sat_map_report():
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(5)
         p = pwd()
-        self.filename = p.get_download_dir() + "/" + self.fname.sr_block()+management+'_'+self.year.strip()+'_'+self.semester+'_allGrades__allBlocks_'+cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + "/" + self.fname.sr_block() + management + '_' + self.year.strip() + '_' + self.semester + '_allGrades__allBlocks_' + cal.get_current_date() + '.csv'
         print(self.filename)
         if os.path.isfile(self.filename) != True:
             return "File Not Downloaded"
@@ -562,7 +569,7 @@ class sat_map_report():
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(10)
         p = pwd()
-        self.filename = p.get_download_dir() + "/" + self.fname.sr_cluster()+management+'_'+self.year.strip()+'_'+self.semester+'_allGrades__allClusters_'+cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + "/" + self.fname.sr_cluster() + management + '_' + self.year.strip() + '_' + self.semester + '_allGrades__allClusters_' + cal.get_current_date() + '.csv '
         print(self.filename)
         if os.path.isfile(self.filename) != True:
             return "File Not Downloaded"
@@ -575,10 +582,10 @@ class sat_map_report():
         cal.page_loading(self.driver)
 
     def click_HomeButton(self):
-            self.driver.find_element_by_xpath(Data.hyper_link).click()
-            cal = GetData()
-            cal.page_loading(self.driver)
-            return self.driver.current_url
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
+        cal = GetData()
+        cal.page_loading(self.driver)
+        return self.driver.current_url
 
     def check_grade_dropdown_options(self):
         self.data = GetData()
@@ -590,9 +597,9 @@ class sat_map_report():
         semester = self.driver.find_element_by_id('choose_semester').get_attribute('value')
         value = semester.split(":")
         self.semester = value[1].strip()
-        grade =Select(self.driver.find_element_by_id(Data.Grade))
+        grade = Select(self.driver.find_element_by_id(Data.Grade))
         counter = len(grade.options)
-        for i in range(1,len(grade.options)):
+        for i in range(1, len(grade.options)):
             grade.select_by_index(i)
             print(grade.options[i].text)
             time.sleep(2)
@@ -614,29 +621,29 @@ class sat_map_report():
         management = management[16:].lower().strip()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
-        grade =Select(self.driver.find_element_by_id(Data.Grade))
-        for i in range(1,len(grade.options)):
+        grade = Select(self.driver.find_element_by_id(Data.Grade))
+        for i in range(1, len(grade.options)):
             grade.select_by_index(i)
             time.sleep(3)
             gradename = (grade.options[i].text).strip()
-            gradenum = re.sub('\D','',gradename)
+            gradenum = re.sub('\D', '', gradename)
             self.data.page_loading(self.driver)
             dots = self.driver.find_elements_by_class_name(Data.dots)
-            markers = len(dots)-1
+            markers = len(dots) - 1
             self.data.page_loading(self.driver)
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(4)
-            self.filename = p.get_download_dir() + '/'+ files.sr_gradewise()+management+"_"+self.year.strip()+"_"+self.semester+"_Grade "+gradenum.strip()+'__allDistricts_'+self.data.get_current_date()+'.csv'
+            self.filename = p.get_download_dir() + '/' + files.sr_gradewise() + management + "_" + self.year.strip() + "_" + self.semester + "_Grade " + gradenum.strip() + '__allDistricts_' + self.data.get_current_date() + '.csv'
             print(self.filename)
             time.sleep(1)
             if os.path.isfile(self.filename) != True:
-                print('Grade '+gradenum.strip()+'wise csv file is not downloaded')
+                print('Grade ' + gradenum.strip() + 'wise csv file is not downloaded')
                 count = count + 1
             else:
                 file = open(self.filename)
                 read = file.read()
                 if grade.options[i].text in read:
-                    print(grade.options[i].text ,"is present")
+                    print(grade.options[i].text, "is present")
                 self.data.page_loading(self.driver)
                 os.remove(self.filename)
         return count
@@ -656,22 +663,22 @@ class sat_map_report():
         management = management[16:].lower().strip()
         grade = Select(self.driver.find_element_by_id(Data.Grade))
         subjects = Select(self.driver.find_element_by_id(Data.Subject))
-        subcount = len(subjects.options)-1
+        subcount = len(subjects.options) - 1
         files = file_extention()
-        for i in range(1,len(grade.options)-1):
+        for i in range(1, len(grade.options) - 1):
             grade.select_by_index(i)
             time.sleep(2)
             print(grade.options[i].text)
             self.data.page_loading(self.driver)
             gradename = (grade.options[i].text).strip()
-            gradenum = re.sub('\D','',gradename)
-            for j in range(1,len(subjects.options)-1):
+            gradenum = re.sub('\D', '', gradename)
+            for j in range(1, len(subjects.options) - 1):
                 time.sleep(1)
                 subjects.select_by_index(j)
                 time.sleep(2)
                 print(subjects.options[j].text)
                 if 'No data found' in self.driver.page_source:
-                    print(grade.options[i].text+', '+subjects.options[j].text+" is not having data")
+                    print(grade.options[i].text + ', ' + subjects.options[j].text + " is not having data")
                     return count
                 else:
                     self.data.page_loading(self.driver)
@@ -679,10 +686,10 @@ class sat_map_report():
                     time.sleep(3)
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(3)
-                    self.filename = p.get_download_dir() + '/' + files.sr_gradewise()+management+"_"+self.year.strip()+"_"+self.semester+"_Grade "+gradenum.strip()+'_'+sub+'_allDistricts_' + self.data.get_current_date()+'.csv'
+                    self.filename = p.get_download_dir() + '/' + files.sr_gradewise() + management + "_" + self.year.strip() + "_" + self.semester + "_Grade " + gradenum.strip() + '_' + sub + '_allDistricts_' + self.data.get_current_date() + '.csv'
                     print(self.filename)
                     if os.path.isfile(self.filename) != True:
-                        print(files.sr_gradewise()+gradenum.strip() ,' wise csv file is not downloaded')
+                        print(files.sr_gradewise() + gradenum.strip(), ' wise csv file is not downloaded')
                         count = count + 1
 
                     os.remove(self.filename)
@@ -714,15 +721,15 @@ class sat_map_report():
             val = value[1].strip()
             markers = self.driver.find_elements_by_class_name(Data.dots)
             time.sleep(3)
-            if (len(markers) - 1) == 0 :
-                print("District" + select_district.first_selected_option.text +"no data")
+            if (len(markers) - 1) == 0:
+                print("District" + select_district.first_selected_option.text + "no data")
                 count = count + 1
             else:
                 time.sleep(2)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
                 p = pwd()
-                self.filename = p.get_download_dir() + "/" + self.fname.sr_districtwise()+management+'_'+self.year.strip()+'_'+self.semester+'_allGrades__blocks_of_district_'+val+'_'+cal.get_current_date()+'.csv'
+                self.filename = p.get_download_dir() + "/" + self.fname.sr_districtwise() + management + '_' + self.year.strip() + '_' + self.semester + '_allGrades__blocks_of_district_' + val + '_' + cal.get_current_date() + '.csv'
                 print(self.filename)
                 if not os.path.isfile(self.filename):
                     print("District " + select_district.first_selected_option.text + " csv is not downloaded")
@@ -733,9 +740,9 @@ class sat_map_report():
                         header = next(csv_reader)
                         data = list(csv_reader)
                         row_count = len(data)
-                        dots = len(markers)-1
+                        dots = len(markers) - 1
                         if dots != row_count:
-                            print('Markers records and csv file records are not matching ',dots,row_count)
+                            print('Markers records and csv file records are not matching ', dots, row_count)
                             count = count + 1
                     self.remove_csv()
 
@@ -756,26 +763,29 @@ class sat_map_report():
         select_district = Select(self.driver.find_element_by_id('choose_dist'))
         select_block = Select(self.driver.find_element_by_id('choose_block'))
         count = 0
-        for x in range(len(select_district.options)-1, len(select_district.options)):
+        for x in range(len(select_district.options) - 1, len(select_district.options)):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
-            for y in range(len(select_block.options)-2, len(select_block.options)):
+            for y in range(len(select_block.options) - 2, len(select_block.options)):
                 select_block.select_by_index(y)
                 cal.page_loading(self.driver)
                 value = self.driver.find_element_by_id('choose_block').get_attribute('value')
                 value = value.split(":")
                 markers = self.driver.find_elements_by_class_name(Data.dots)
                 if len(markers) - 1 == 0:
-                    print("District" + select_district.first_selected_option.text +"Block"+ select_block.first_selected_option.text +"No Data")
+                    print(
+                        "District" + select_district.first_selected_option.text + "Block" + select_block.first_selected_option.text + "No Data")
                     count = count + 1
                 else:
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(2)
                     p = pwd()
-                    self.filename = p.get_download_dir() + "/" + self.fname.sr_blockwise()+management+'_'+self.year.strip()+'_'+self.semester+'_allGrades__clusters_of_block_'+value[1].strip()+'_'+cal.get_current_date()+'.csv'
+                    self.filename = p.get_download_dir() + "/" + self.fname.sr_blockwise() + management + '_' + self.year.strip() + '_' + self.semester + '_allGrades__clusters_of_block_' + \
+                                    value[1].strip() + '_' + cal.get_current_date() + '.csv'
                     print(self.filename)
                     if not os.path.isfile(self.filename):
-                        print("District " + select_district.first_selected_option.text +"Block "+ select_block.first_selected_option.text+"csv is not downloaded")
+                        print(
+                            "District " + select_district.first_selected_option.text + "Block " + select_block.first_selected_option.text + "csv is not downloaded")
                         count = count + 1
                     else:
                         with open(self.filename) as fin:
@@ -798,10 +808,10 @@ class sat_map_report():
         cal.page_loading(self.driver)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        period =Select(self.driver.find_element_by_id('period'))
+        period = Select(self.driver.find_element_by_id('period'))
         period.select_by_index(2)
         timeseries = period.first_selected_option.text
-        timeseries = timeseries.lower().replace(" ",'_')
+        timeseries = timeseries.lower().replace(" ", '_')
         time.sleep(3)
         select_district = Select(self.driver.find_element_by_id('choose_dist'))
         select_block = Select(self.driver.find_element_by_id('choose_block'))
@@ -825,7 +835,7 @@ class sat_map_report():
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(2)
                     p = pwd()
-                    self.filename = p.get_download_dir() + "/" + self.fname.sr_blockwise()+management+'_'+timeseries+'_allGrades__clusters_of_block_' + values+'_' + cal.get_current_date() + '.csv'
+                    self.filename = p.get_download_dir() + "/" + self.fname.sr_blockwise() + management + '_' + timeseries + '_allGrades__clusters_of_block_' + values + '_' + cal.get_current_date() + '.csv'
                     print(self.filename)
                     if not os.path.isfile(self.filename):
                         print(
@@ -859,7 +869,7 @@ class sat_map_report():
         time.sleep(3)
         count = 0
         if 'No data found' in self.driver.page_source:
-            print(timeseries,'is not having Data..')
+            print(timeseries, 'is not having Data..')
             return count
         else:
             select_district = Select(self.driver.find_element_by_id('choose_dist'))
@@ -867,7 +877,7 @@ class sat_map_report():
             for x in range(len(select_district.options) - 1, len(select_district.options)):
                 select_district.select_by_index(x)
                 cal.page_loading(self.driver)
-                for y in range(len(select_block.options)-3, len(select_block.options)):
+                for y in range(len(select_block.options) - 3, len(select_block.options)):
                     select_block.select_by_index(y)
                     cal.page_loading(self.driver)
                     value = self.driver.find_element_by_id('choose_block').get_attribute('value')
@@ -883,7 +893,7 @@ class sat_map_report():
                         self.driver.find_element_by_id(Data.Download).click()
                         time.sleep(4)
                         p = pwd()
-                        self.filename = p.get_download_dir() + "/" + self.fname.sr_blockwise() + management +"_"+timeseries + '_allGrades__clusters_of_block_' + values+"_"+ cal.get_current_date() + '.csv'
+                        self.filename = p.get_download_dir() + "/" + self.fname.sr_blockwise() + management + "_" + timeseries + '_allGrades__clusters_of_block_' + values + "_" + cal.get_current_date() + '.csv'
                         print(self.filename)
                         if not os.path.isfile(self.filename):
                             print(
@@ -901,6 +911,7 @@ class sat_map_report():
                                     count = count + 1
                             self.remove_csv()
                     return count
+
     def check_district_block_cluster(self):
         cal = GetData()
         self.fname = file_extention()
@@ -916,10 +927,10 @@ class sat_map_report():
         select_block = Select(self.driver.find_element_by_id('choose_block'))
         select_cluster = Select(self.driver.find_element_by_id('choose_cluster'))
         count = 0
-        for x in range(len(select_district.options)-1, len(select_district.options)):
+        for x in range(len(select_district.options) - 1, len(select_district.options)):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
-            for y in range(len(select_block.options)-1, len(select_block.options)):
+            for y in range(len(select_block.options) - 1, len(select_block.options)):
                 select_block.select_by_index(y)
                 cal.page_loading(self.driver)
                 for z in range(1, len(select_cluster.options)):
@@ -936,7 +947,7 @@ class sat_map_report():
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(4)
                     p = pwd()
-                    self.filename = p.get_download_dir() +"/" + self.fname.sr_clusterwise()+management+'_'+self.year.strip()+'_'+self.semester+'_allGrades__schools_of_cluster_'+value.strip()+'_'+cal.get_current_date()+'.csv'
+                    self.filename = p.get_download_dir() + "/" + self.fname.sr_clusterwise() + management + '_' + self.year.strip() + '_' + self.semester + '_allGrades__schools_of_cluster_' + value.strip() + '_' + cal.get_current_date() + '.csv'
                     print(self.filename)
                     if not os.path.isfile(self.filename):
                         print(
@@ -945,7 +956,7 @@ class sat_map_report():
                     else:
                         with open(self.filename) as fin:
                             csv_reader = csv.reader(fin, delimiter=',')
-                            header = next(csv_reader)
+                            next(csv_reader)
                             data = list(csv_reader)
                             row_count = len(data)
                             dots = len(markers) - 1
@@ -965,7 +976,7 @@ class sat_map_report():
         period.select_by_index(2)
         time.sleep(3)
         if 'No Data found' in self.driver.page_source:
-            print(period.first_selected_option.text ,' is not having data')
+            print(period.first_selected_option.text, ' is not having data')
         else:
             timeseries = period.first_selected_option.text
             timeseries = timeseries.lower().replace(" ", '_')
@@ -995,7 +1006,7 @@ class sat_map_report():
                         self.driver.find_element_by_id(Data.Download).click()
                         time.sleep(3)
                         p = pwd()
-                        self.filename = p.get_download_dir() + "/" + self.fname.sr_clusterwise() + management+'_'+timeseries+ '_allGrades__schools_of_cluster_' + values+ cal.get_current_date() + '.csv'
+                        self.filename = p.get_download_dir() + "/" + self.fname.sr_clusterwise() + management + '_' + timeseries + '_allGrades__schools_of_cluster_' + values + cal.get_current_date() + '.csv'
                         print(self.filename)
                         if not os.path.isfile(self.filename):
                             print(
@@ -1056,7 +1067,7 @@ class sat_map_report():
                         self.driver.find_element_by_id(Data.Download).click()
                         time.sleep(3)
                         p = pwd()
-                        self.filename = p.get_download_dir() + "/" + self.fname.sr_clusterwise() + management + '_' + timeseries + '_allGrades__schools_of_cluster_' +values+ cal.get_current_date() + '.csv'
+                        self.filename = p.get_download_dir() + "/" + self.fname.sr_clusterwise() + management + '_' + timeseries + '_allGrades__schools_of_cluster_' + values + cal.get_current_date() + '.csv'
                         print(self.filename)
                         if not os.path.isfile(self.filename):
                             print(

@@ -10,6 +10,9 @@ from reuse_func import GetData
 
 class composite_smoke_testing(unittest.TestCase):
 
+    driver = None
+    data = None
+
     @classmethod
     def setUpClass(self):
         self.data = GetData()
@@ -19,7 +22,6 @@ class composite_smoke_testing(unittest.TestCase):
         self.data.login_cqube(self.driver)
         self.data.navigate_to_composite_report()
         self.data.page_loading(self.driver)
-
 
     def test_composite_icon(self):
         self.data.page_loading(self.driver)
@@ -31,7 +33,7 @@ class composite_smoke_testing(unittest.TestCase):
         else:
             print('Home button is not working ')
             count = count + 1
-        self.assertEqual(0,count,msg="Home btn is not working ")
+        self.assertEqual(0, count, msg="Home btn is not working ")
         self.data.navigate_to_composite_report()
         self.data.page_loading(self.driver)
 
@@ -110,7 +112,6 @@ class composite_smoke_testing(unittest.TestCase):
         self.assertEqual('Log in to cQube', self.driver.title, msg="Logout button is not working ")
         self.data.login_cqube(self.driver)
         self.data.navigate_to_composite_report()
-
 
     def test_blocks_clusters_schools(self):
         b = Composite_report_across_Metric(self.driver)

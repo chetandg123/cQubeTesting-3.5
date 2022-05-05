@@ -14,14 +14,13 @@ from reuse_func import GetData
 
 class Student_Exceptions():
 
-    def __init__(self,driver,year,month):
+    def __init__(self, driver, year, month):
+        self.file = None
         self.driver = driver
         self.year = year.strip()
         self.month = month.strip()
         self.school_count = ''
         self.student_count = ''
-
-
 
     def click_on_sar_exception(self):
         try:
@@ -57,12 +56,12 @@ class Student_Exceptions():
         cal.page_loading(self.driver)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        self.year,self.month= cal.get_student_month_and_year_values()
+        self.year, self.month = cal.get_student_month_and_year_values()
         dots = self.driver.find_elements_by_class_name(Data.dots)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(5)
         p = pwd()
-        self.filename = p.get_download_dir() + "/student_attendance_exception_"+management+"_allBlocks_"+self.month + "_" + self.year+'_'+cal.get_current_date() + ".csv"
+        self.filename = p.get_download_dir() + "/student_attendance_exception_" + management + "_allBlocks_" + self.month + "_" + self.year + '_' + cal.get_current_date() + ".csv"
         print(self.filename)
         if os.path.isfile(self.filename) != True:
             return "Block wise csv file not downloaded"
@@ -76,7 +75,7 @@ class Student_Exceptions():
                 misdata = self.driver.find_element_by_id("students").text
                 res = re.sub('\D', "", misdata)
 
-                if int(res) !=int(missing):
+                if int(res) != int(missing):
                     print("Number of schools with missing data count mismatched")
                     count = count + 1
             os.remove(self.filename)
@@ -90,12 +89,12 @@ class Student_Exceptions():
         count = 0
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        self.year,self.month = cal.get_student_month_and_year_values()
-        dots = self.driver.find_elements_by_class_name(Data.dots)
+        self.year, self.month = cal.get_student_month_and_year_values()
+        self.driver.find_elements_by_class_name(Data.dots)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(5)
         p = pwd()
-        self.filename = p.get_download_dir() + "/student_attendance_exception_"+management+"_allClusters_" + self.month + "_" + self.year+'_'+cal.get_current_date()+ ".csv"
+        self.filename = p.get_download_dir() + "/student_attendance_exception_" + management + "_allClusters_" + self.month + "_" + self.year + '_' + cal.get_current_date() + ".csv"
         print(self.filename)
         if os.path.isfile(self.filename) != True:
             return "Cluster wise csv file not downloaded"
@@ -122,14 +121,14 @@ class Student_Exceptions():
         cal.page_loading(self.driver)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        self.year,self.month = cal.get_student_month_and_year_values()
+        self.year, self.month = cal.get_student_month_and_year_values()
         result = self.driver.find_elements_by_class_name(Data.dots)
         time.sleep(5)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(5)
-        count=0
+        count = 0
         p = pwd()
-        self.filename = p.get_download_dir() + "/student_attendance_exception_"+management+"_allSchools_" + self.month + "_" + self.year+'_'+cal.get_current_date()+ ".csv"
+        self.filename = p.get_download_dir() + "/student_attendance_exception_" + management + "_allSchools_" + self.month + "_" + self.year + '_' + cal.get_current_date() + ".csv"
         print(self.filename)
         if os.path.isfile(self.filename) != True:
             return "School wise csv file not downloaded"
@@ -188,11 +187,11 @@ class Student_Exceptions():
         cal.page_loading(self.driver)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        self.year,self.month = cal.get_student_month_and_year_values()
+        self.year, self.month = cal.get_student_month_and_year_values()
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
         p = pwd()
-        self.filename = p.get_download_dir() + "/" + "student_attendance_exception_"+management+"allDistricts_overall_"+cal.get_current_date()+".csv"
+        self.filename = p.get_download_dir() + "/" + "student_attendance_exception_" + management + "allDistricts_overall_" + cal.get_current_date() + ".csv"
         print(self.filename)
         if not os.path.isfile(self.filename):
             print("Districtwise csv is not downloaded")
@@ -282,8 +281,6 @@ class Student_Exceptions():
         Sstudent = re.sub("\D", "", Sstudents)
         return self.student_count, Sstudent
 
-
-
     def click_HomeButton(self):
         count = 0
         self.driver.find_element_by_id(Data.cQube_logo).click()
@@ -295,7 +292,7 @@ class Student_Exceptions():
             count = count + 1
         cal.page_loading(self.driver)
         cal.navigate_to_student_exception()
-        return count,self.driver.current_url
+        return count, self.driver.current_url
 
     def click_on_blocks_click_on_home_icon(self):
         cal = GetData()
@@ -305,7 +302,7 @@ class Student_Exceptions():
         cal.page_loading(self.driver)
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         cal.page_loading(self.driver)
-        return  self.driver.page_source
+        return self.driver.page_source
 
     def check_districts_csv_download(self):
         cal = GetData()
@@ -313,14 +310,14 @@ class Student_Exceptions():
         cal.page_loading(self.driver)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        self.year,self.month = cal.get_student_month_and_year_values()
+        self.year, self.month = cal.get_student_month_and_year_values()
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
         count = 0
         for x in range(1, len(select_district.options)):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
             value = self.driver.find_element_by_name('myDistrict').get_attribute('value')
-            value = value[3:]+'_'
+            value = value[3:] + '_'
             markers = self.driver.find_elements_by_class_name(Data.dots)
             if len(markers) - 1 == 0:
                 print("District" + select_district.first_selected_option.text + "no data")
@@ -329,7 +326,7 @@ class Student_Exceptions():
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(2)
             p = pwd()
-            self.filename = p.get_download_dir() + "/student_attendance_exception_"+management+"_Blocks_of_district_"+value.strip()+ self.month + "_" + self.year+'_'+cal.get_current_date() + ".csv"
+            self.filename = p.get_download_dir() + "/student_attendance_exception_" + management + "_Blocks_of_district_" + value.strip() + self.month + "_" + self.year + '_' + cal.get_current_date() + ".csv"
             print(self.filename)
             if not os.path.isfile(self.filename):
                 print("District" + select_district.first_selected_option.text + "csv is not downloaded")
@@ -356,7 +353,7 @@ class Student_Exceptions():
         cal.page_loading(self.driver)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        self.year,self.month = cal.get_student_month_and_year_values()
+        self.year, self.month = cal.get_student_month_and_year_values()
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
         select_block = Select(self.driver.find_element_by_name('myBlock'))
         count = 0
@@ -367,7 +364,7 @@ class Student_Exceptions():
                 select_block.select_by_index(y)
                 cal.page_loading(self.driver)
                 value = self.driver.find_element_by_name('myBlock').get_attribute('value')
-                value = value[3:].strip()+'_'
+                value = value[3:].strip() + '_'
                 time.sleep(2)
                 markers = self.driver.find_elements_by_class_name(Data.dots)
                 if len(markers) - 1 == 0:
@@ -378,7 +375,7 @@ class Student_Exceptions():
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(5)
                 p = pwd()
-                self.filename = p.get_download_dir() + "/student_attendance_exception_"+management+"_Clusters_of_block_"+value.strip()+ self.month + "_" + self.year+"_"+cal.get_current_date()+ ".csv"
+                self.filename = p.get_download_dir() + "/student_attendance_exception_" + management + "_Clusters_of_block_" + value.strip() + self.month + "_" + self.year + "_" + cal.get_current_date() + ".csv"
                 print(self.filename)
                 if not os.path.isfile(self.filename):
                     print(
@@ -418,7 +415,7 @@ class Student_Exceptions():
                 select_block.select_by_index(y)
                 cal.page_loading(self.driver)
                 time.sleep(2)
-                for z in range(1,len(select_cluster.options)):
+                for z in range(1, len(select_cluster.options)):
                     select_cluster.select_by_index(z)
                     cal.page_loading(self.driver)
                     value = self.driver.find_element_by_name('myCluster').get_attribute('value')
@@ -432,7 +429,9 @@ class Student_Exceptions():
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(5)
                     p = pwd()
-                    self.filename = p.get_download_dir() + "/student_attendance_exception_"+management+"_Schools_of_cluster_"+value[1].strip()+'_'+ self.month + "_" + self.year+"_"+cal.get_current_date()+ ".csv"
+                    self.filename = p.get_download_dir() + "/student_attendance_exception_" + management + "_Schools_of_cluster_" + \
+                                    value[
+                                        1].strip() + '_' + self.month + "_" + self.year + "_" + cal.get_current_date() + ".csv"
                     print(self.filename)
                     if not os.path.isfile(self.filename):
                         print(
@@ -483,7 +482,8 @@ class Student_Exceptions():
                     cal.page_loading(self.driver)
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(5)
-                    self.filename = self.p.get_download_dir() + '/'+"student_attendance_exception_"+management+"allDistricts_"+month.options[j].text +"_"+year.options[i].text+".csv"
+                    self.filename = self.p.get_download_dir() + '/' + "student_attendance_exception_" + management + "allDistricts_" + \
+                                    month.options[j].text + "_" + year.options[i].text + ".csv"
                     print(self.filename)
                     if os.path.isfile(self.filename) != True:
                         print(year.options[i].text, month.options[j].text, "time series csv file is not downloaded")
@@ -503,4 +503,3 @@ class Student_Exceptions():
                                 count = count + 1
                         os.remove(self.filename)
         return count
-

@@ -11,22 +11,21 @@ from reuse_func import GetData
 
 class exception_list_download():
 
-    def __init__(self,driver):
+    def __init__(self, driver):
         self.driver = driver
-
 
     def get_exceptions(self):
 
-        self.data  = GetData()
+        self.data = GetData()
         self.driver.implicitly_wait(200)
         management_types_1 = Select(self.driver.find_element_by_id('management'))
         count = 0
-        for i in range(1,len(management_types_1.options)):
+        for i in range(1, len(management_types_1.options)):
             management_types = Select(self.driver.find_element_by_id('management'))
             management_types.select_by_index(i)
             name = management_types.options[i].text
             time.sleep(4)
-            print(name,'is selected')
+            print(name, 'is selected')
             self.driver.find_element_by_id('exceptList').click()
             time.sleep(1)
             self.driver.find_element_by_id('isdata').click()
@@ -47,7 +46,7 @@ class exception_list_download():
                     row_count = len(data)
                     overall = row_count
                     if int(row_count) > 0:
-                        print(name, row_count ,  'Exception records are present ')
+                        print(name, row_count, 'Exception records are present ')
                     else:
                         print(name, 'exception records are not present')
                         count = count + 1
@@ -65,9 +64,8 @@ class exception_list_download():
 
     def get_each_management_wise_exception_list(self):
 
-        self.data  = GetData()
+        self.data = GetData()
         self.driver.implicitly_wait(200)
-
 
         management_types = Select(self.driver.find_element_by_id('management'))
         # count = len(management_types.options)-1
@@ -93,7 +91,7 @@ class exception_list_download():
                 row_count = len(data)
                 overall = row_count
                 if int(row_count) > 0:
-                    print(name, row_count ,  'Exception records are present ')
+                    print(name, row_count, 'Exception records are present ')
                 else:
                     print(name, 'exception records are not present')
                     count = count + 1
@@ -129,7 +127,7 @@ class exception_list_download():
                 row_count = len(data)
                 central = row_count
                 if int(row_count) > 0:
-                    print(name, row_count ,  'Exception records are present ')
+                    print(name, row_count, 'Exception records are present ')
                 else:
                     print(name, 'exception records are not present')
                     count = count + 1
@@ -165,7 +163,7 @@ class exception_list_download():
                 row_count = len(data)
                 Govt = row_count
                 if int(row_count) > 0:
-                    print(name, row_count ,  'Exception records are present ')
+                    print(name, row_count, 'Exception records are present ')
                 else:
                     print(name, 'exception records are not present')
                     count = count + 1
@@ -201,7 +199,7 @@ class exception_list_download():
                 row_count = len(data)
                 granted = row_count
                 if int(row_count) > 0:
-                    print(name, row_count ,  'Exception records are present ')
+                    print(name, row_count, 'Exception records are present ')
                 else:
                     print(name, 'exception records are not present')
                     count = count + 1
@@ -237,7 +235,7 @@ class exception_list_download():
                 row_count = len(data)
                 model = row_count
                 if int(row_count) > 0:
-                    print(name, row_count ,  'Exception records are present ')
+                    print(name, row_count, 'Exception records are present ')
                 else:
                     print(name, 'exception records are not present')
                     count = count + 1
@@ -273,7 +271,7 @@ class exception_list_download():
                 row_count = len(data)
                 private = row_count
                 if int(row_count) > 0:
-                    print(name, row_count ,  'Exception records are present ')
+                    print(name, row_count, 'Exception records are present ')
                 else:
                     print(name, 'exception records are not present')
                     count = count + 1
@@ -309,7 +307,7 @@ class exception_list_download():
                 row_count = len(data)
                 social = row_count
                 if int(row_count) > 0:
-                    print(name, row_count ,  'Exception records are present ')
+                    print(name, row_count, 'Exception records are present ')
                 else:
                     print(name, 'exception records are not present')
                     count = count + 1
@@ -345,7 +343,7 @@ class exception_list_download():
                 row_count = len(data)
                 tribal = row_count
                 if int(row_count) > 0:
-                    print(name, row_count ,  'Exception records are present ')
+                    print(name, row_count, 'Exception records are present ')
                 else:
                     print(name, 'exception records are not present')
                     count = count + 1
@@ -360,7 +358,6 @@ class exception_list_download():
             time.sleep(5)
         total_managemnt = int(social + tribal + granted + Govt + central + private + model)
         if int(overall) != total_managemnt:
-            print(overall,total_managemnt , 'exceptions list are not equal to all other management' )
-            count = count+1
+            print(overall, total_managemnt, 'exceptions list are not equal to all other management')
+            count = count + 1
         return count
-

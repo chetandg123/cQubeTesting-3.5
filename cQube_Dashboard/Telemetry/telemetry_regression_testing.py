@@ -15,6 +15,8 @@ from reuse_func import GetData
 
 
 class Test_Telemetry(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -34,7 +36,7 @@ class Test_Telemetry(unittest.TestCase):
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
-        self.driver.find_element(By.ID,'telemetry').click()
+        self.driver.find_element(By.ID, 'telemetry').click()
         time.sleep(1)
         self.driver.find_element_by_id('telemData').click()
         if 'telemetry' in self.driver.current_url:
@@ -42,13 +44,13 @@ class Test_Telemetry(unittest.TestCase):
         else:
             print("Telemetry page is not present ")
             count = count + 1
-        self.assertEqual(0,count,msg='Telemetry page is not displayed')
+        self.assertEqual(0, count, msg='Telemetry page is not displayed')
         self.data.navigate_to_telemetry()
 
     def test_click_on_blocks_cluster_school(self):
         self.data.page_loading(self.driver)
         p = pwd()
-        count =0
+        count = 0
         files = file_extention()
         self.driver.find_element_by_id(Data.block_btn).click()
         self.data.page_loading(self.driver)
@@ -58,21 +60,21 @@ class Test_Telemetry(unittest.TestCase):
         else:
             dots = self.driver.find_elements_by_class_name(Data.dots)
             markers = len(dots) - 1
-            self.assertNotEqual(0, markers  , msg="Markers not present on block level ")
+            self.assertNotEqual(0, markers, msg="Markers not present on block level ")
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = p.get_download_dir() +'/'+ files.telemtry_block()+self.data.get_current_date()+'.csv'
+            self.filename = p.get_download_dir() + '/' + files.telemtry_block() + self.data.get_current_date() + '.csv'
             print(self.filename)
             if os.path.isfile(self.filename) != True:
                 print('Block wise csv file is not download')
                 count = count + 1
             else:
-                print( files.telemtry_block()+' csv file downloaded')
+                print(files.telemtry_block() + ' csv file downloaded')
             os.remove(self.filename)
         self.assertEqual(count, 0, msg='Block level csv file not downloaded ')
         self.driver.find_element_by_id('home').click()
 
-        #cluster function
+        # cluster function
 
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.cluster_btn).click()
@@ -92,12 +94,12 @@ class Test_Telemetry(unittest.TestCase):
                 print('Cluster wise csv file is not download')
                 count = count + 1
             else:
-                print(files.telemetry_cluster()+'  csv file downloaded ')
+                print(files.telemetry_cluster() + '  csv file downloaded ')
             os.remove(self.filename)
         self.assertEqual(count, 0, msg='Cluster level csv file not downloaded ')
         self.driver.find_element_by_id('home').click()
 
-        #School Function
+        # School Function
 
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.schoolbtn).click()
@@ -112,15 +114,14 @@ class Test_Telemetry(unittest.TestCase):
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
             self.filename = p.get_download_dir() + '/' + files.telemetry_school() + self.data.get_current_date() + '.csv'
-            if os.path.isfile(self.filename) != True:
+            if not os.path.isfile(self.filename):
                 print('School wise csv file is not download')
                 count = count + 1
             else:
-                print(files.telemetry_school()+'is downloaded csv file')
+                print(files.telemetry_school() + 'is downloaded csv file')
             os.remove(self.filename)
-        self.assertEqual(0,count,msg='File is not downloaded')
+        self.assertEqual(0, count, msg='File is not downloaded')
         self.driver.find_element_by_id('home').click()
-
 
     def test_check_with_lastday(self):
         b = telemetry_map_report(self.driver)
@@ -179,7 +180,6 @@ class Test_Telemetry(unittest.TestCase):
         self.assertTrue(res, msg="last7day's csv file is not downloaded")
         self.data.navigate_to_telemetry()
 
-
     def test_homeicon(self):
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.block_btn).click()
@@ -190,7 +190,6 @@ class Test_Telemetry(unittest.TestCase):
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id('home').click()
         self.data.navigate_to_telemetry()
-
 
     def test_clickon_homebtn(self):
         count = 0
@@ -208,15 +207,13 @@ class Test_Telemetry(unittest.TestCase):
         self.data.page_loading(self.driver)
         self.data.navigate_to_telemetry()
 
-
-
     def test_logout(self):
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.cQube_logo).click()
         time.sleep(2)
         self.driver.find_element_by_id(Data.logout).click()
         time.sleep(3)
-        self.assertEqual('Log in to cQube',self.driver.title,msg="logout is not working ")
+        self.assertEqual('Log in to cQube', self.driver.title, msg="logout is not working ")
         self.data.login_cqube(self.driver)
         time.sleep(2)
         self.data.navigate_to_telemetry()
@@ -227,11 +224,9 @@ class Test_Telemetry(unittest.TestCase):
         else:
             print('Failed to navigate to telemetry report page ')
             count = count + 1
-        self.assertEqual(0,count,msg='Navigation is failed ')
+        self.assertEqual(0, count, msg='Navigation is failed ')
         self.data.page_loading(self.driver)
-
 
     @classmethod
     def tearDownClass(cls):
         cls.driver.close()
-

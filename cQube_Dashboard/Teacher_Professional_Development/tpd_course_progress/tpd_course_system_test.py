@@ -3,11 +3,12 @@ import unittest
 from Locators.parameters import Data
 from cQube_Dashboard.Teacher_Professional_Development.tpd_course_progress.tpd_course_progress import \
     tpd_course_progress_report
-
 from reuse_func import GetData
 
 
 class cQube_lpdcontent_system_Test(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -37,15 +38,13 @@ class cQube_lpdcontent_system_Test(unittest.TestCase):
         else:
             print('LPD Content progress report is not displayed')
             count = count + 1
-        self.assertEqual(0,count,msg='Navigation failed in landing page')
+        self.assertEqual(0, count, msg='Navigation failed in landing page')
         self.data.page_loading(self.driver)
-
-
 
     def test_lastday_csv_download(self):
         b = tpd_course_progress_report(self.driver)
         res = b.check_last_day_districtwise_download()
-        self.assertEqual(0,res,msg='Csv file is not downloaded')
+        self.assertEqual(0, res, msg='Csv file is not downloaded')
         print('Last Day content progress district wise csv file is downloaded')
         self.data.page_loading(self.driver)
 
@@ -73,24 +72,22 @@ class cQube_lpdcontent_system_Test(unittest.TestCase):
     def test_all_districts(self):
         b = tpd_course_progress_report(self.driver)
         res = b.test_all_districtwise()
-        self.assertEqual(0,res,msg='All type some district wise csv file not downloaded')
+        self.assertEqual(0, res, msg='All type some district wise csv file not downloaded')
         print('checked with all period all districts')
         self.data.page_loading(self.driver)
 
     def test_Cluster_wise_records(self):
         b = tpd_course_progress_report(self.driver)
         res = b.Blocks_select_box()
-        self.assertEqual(0,res,msg="some cluster csv file not downloaded")
+        self.assertEqual(0, res, msg="some cluster csv file not downloaded")
         print("checked with cluster wise records")
 
     def test_School_wise_records(self):
         b = tpd_course_progress_report(self.driver)
         res = b.Clusters_select_box()
-        self.assertEqual(0,res,msg="School wise csv file is not downloaded")
+        self.assertEqual(0, res, msg="School wise csv file is not downloaded")
         print("checked school wise records")
         self.data.page_loading(self.driver)
-
-
 
     @classmethod
     def tearDownClass(cls):

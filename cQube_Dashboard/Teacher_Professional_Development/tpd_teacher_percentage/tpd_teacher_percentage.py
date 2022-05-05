@@ -11,8 +11,10 @@ from reuse_func import GetData
 
 
 class tpd_teacher_percentage():
-    def __init__(self,driver):
+    def __init__(self, driver):
+        self.fname = None
         self.driver = driver
+
     def check_last_day_districtwise_download(self):
         self.data = GetData()
         self.p = pwd()
@@ -29,7 +31,7 @@ class tpd_teacher_percentage():
         else:
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_teacher_lastday()+self.data.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_teacher_lastday() + self.data.get_current_date() + '.csv'
             print(self.filename)
             if os.path.isfile(self.filename) != True:
                 print('Last Day Districtwise csv file is not downloaded ')
@@ -64,7 +66,7 @@ class tpd_teacher_percentage():
         else:
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + "/"+self.fname.tpd_teacherlastmonth()+self.data.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_teacherlastmonth() + self.data.get_current_date() + '.csv'
             print(self.filename)
             if os.path.isfile(self.filename) != True:
                 print('Last Day Districtwise csv file is not downloaded ')
@@ -73,7 +75,7 @@ class tpd_teacher_percentage():
                 print('Last day districtwise csv file is downloaded')
                 with open(self.filename) as fin:
                     csv_reader = csv.reader(fin, delimiter=',')
-                    header = next(csv_reader)
+                    next(csv_reader)
                     data = list(csv_reader)
                     row_count = len(data)
                 os.remove(self.filename)
@@ -99,7 +101,7 @@ class tpd_teacher_percentage():
         else:
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_teacher_lastweek()+self.data.get_current_date()+".csv"
+            self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_teacher_lastweek() + self.data.get_current_date() + ".csv"
             print(self.filename)
             if os.path.isfile(self.filename) != True:
                 print('Last Day Districtwise csv file is not downloaded ')
@@ -130,7 +132,7 @@ class tpd_teacher_percentage():
         else:
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_teacher_district()+self.data.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_teacher_district() + self.data.get_current_date() + '.csv'
             print(self.filename)
             if os.path.isfile(self.filename) != True:
                 print('All Districtwise csv file is not downloaded ')
@@ -175,6 +177,7 @@ class tpd_teacher_percentage():
             count = count + 1
         self.load.page_loading(self.driver)
         return count
+
     def test_hypers(self):
         self.p = GetData()
         self.driver.implicitly_wait(20)
@@ -224,11 +227,11 @@ class tpd_teacher_percentage():
                 dists.select_by_index(i)
                 time.sleep(2)
                 value = self.driver.find_element_by_id(Data.district_dropdown).get_attribute('value')
-                value=value[4:]+'_'
+                value = value[4:] + '_'
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() +"/"+ self.fname.tpd_teacher_all_districtwise()+value.strip()+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_teacher_all_districtwise() + value.strip() + self.load.get_current_date() + '.csv'
                 print(self.filename)
                 file = os.path.isfile(self.filename)
                 if file != True:
@@ -265,7 +268,7 @@ class tpd_teacher_percentage():
         if self.fname.no_data_found() in self.driver.page_source:
             print('Last day does not having records')
         else:
-            for i in range( 1, len(dists.options)):
+            for i in range(1, len(dists.options)):
                 dists.select_by_index(i)
                 time.sleep(2)
                 value = self.driver.find_element_by_id(Data.district_dropdown).get_attribute('value')
@@ -273,7 +276,7 @@ class tpd_teacher_percentage():
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() +"/"+ self.fname.tpd_teacher_lastday_districtwise()+value.strip()+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_teacher_lastday_districtwise() + value.strip() + self.load.get_current_date() + '.csv'
                 file = os.path.isfile(self.filename)
                 if file != True:
                     print(dists.options[i].text, 'District wise records csv file is not downloaded')
@@ -315,7 +318,7 @@ class tpd_teacher_percentage():
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() +"/"+ self.fname.tpd_teacher_lastweek_districtwise()+value.strip()+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_teacher_lastweek_districtwise() + value.strip() + self.load.get_current_date() + '.csv'
                 print(self.filename)
                 file = os.path.isfile(self.filename)
                 if file != True:
@@ -358,7 +361,7 @@ class tpd_teacher_percentage():
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() +"/"+ self.fname.tpd_teacher_lastmonth_districtwise()+value.strip()+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_teacher_lastmonth_districtwise() + value.strip() + self.load.get_current_date() + '.csv'
                 print(self.filename)
                 file = os.path.isfile(self.filename)
                 if file != True:
@@ -377,6 +380,7 @@ class tpd_teacher_percentage():
                         count = count + 1
                     self.load.page_loading(self.driver)
         return count
+
     def test_all_districtwise(self):
         self.p = pwd()
         self.load = GetData()
@@ -397,11 +401,11 @@ class tpd_teacher_percentage():
                 dists.select_by_index(i)
                 time.sleep(2)
                 value = self.driver.find_element_by_id(Data.district_dropdown).get_attribute('value')
-                value=value[4:]+'_'
+                value = value[4:] + '_'
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() +"/"+ self.fname.tpd_teacher_all_districtwise()+value.strip()+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_teacher_all_districtwise() + value.strip() + self.load.get_current_date() + '.csv'
                 print(self.filename)
                 file = os.path.isfile(self.filename)
                 if file != True:
@@ -438,7 +442,7 @@ class tpd_teacher_percentage():
         if self.fname.no_data_found() in self.driver.page_source:
             print('Last day does not having records')
         else:
-            for i in range( 1, len(dists.options)):
+            for i in range(1, len(dists.options)):
                 dists.select_by_index(i)
                 time.sleep(2)
                 value = self.driver.find_element_by_id(Data.district_dropdown).get_attribute('value')
@@ -446,7 +450,7 @@ class tpd_teacher_percentage():
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() +"/"+ self.fname.tpd_teacher_lastday_districtwise()+value.strip()+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_teacher_lastday_districtwise() + value.strip() + self.load.get_current_date() + '.csv'
                 file = os.path.isfile(self.filename)
                 if file != True:
                     print(dists.options[i].text, 'District wise records csv file is not downloaded')
@@ -488,7 +492,7 @@ class tpd_teacher_percentage():
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() +"/"+ self.fname.tpd_teacher_lastweek_districtwise()+value.strip()+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_teacher_lastweek_districtwise() + value.strip() + self.load.get_current_date() + '.csv'
                 print(self.filename)
                 file = os.path.isfile(self.filename)
                 if file != True:
@@ -531,7 +535,7 @@ class tpd_teacher_percentage():
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() +"/"+ self.fname.tpd_teacher_lastmonth_districtwise()+value.strip()+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_teacher_lastmonth_districtwise() + value.strip() + self.load.get_current_date() + '.csv'
                 print(self.filename)
                 file = os.path.isfile(self.filename)
                 if file != True:
@@ -551,7 +555,6 @@ class tpd_teacher_percentage():
                     self.load.page_loading(self.driver)
         return count
 
-
     def Blocks_select_box(self):
         self.p = pwd()
         self.load = GetData()
@@ -561,21 +564,22 @@ class tpd_teacher_percentage():
         self.load.page_loading(self.driver)
         dists = Select(self.driver.find_element_by_id(Data.district_dropdown))
         Blocks = Select(self.driver.find_element_by_id(Data.blocks_dropdown))
-        for i in range(len(dists.options)-1, len(dists.options)):
+        for i in range(len(dists.options) - 1, len(dists.options)):
             dists.select_by_index(i)
             self.load.page_loading(self.driver)
-            for j in range( len(Blocks.options), len(Blocks.options)):
+            for j in range(len(Blocks.options), len(Blocks.options)):
                 Blocks.select_by_index(j)
                 self.load.page_loading(self.driver)
                 value = self.driver.find_element_by_id(Data.blocks_dropdown).get_attribute('value')
-                value = value[5:]+'_'
+                value = value[5:] + '_'
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() + '/' + self.fname.tpd_teacher_cluster()+value.strip()+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + '/' + self.fname.tpd_teacher_cluster() + value.strip() + self.load.get_current_date() + '.csv'
                 print(self.filename)
                 file = os.path.isfile(self.filename)
                 if file != True:
-                    print(dists.options[i].text,Blocks.options[j].text,'Cluster wise records csv file is not downloaded ')
+                    print(dists.options[i].text, Blocks.options[j].text,
+                          'Cluster wise records csv file is not downloaded ')
                     count = count + 1
                 else:
                     with open(self.filename) as fin:
@@ -601,25 +605,26 @@ class tpd_teacher_percentage():
         clust = Select(self.driver.find_element_by_id(Data.cluster_dropdown))
         dists = Select(self.driver.find_element_by_id(Data.district_dropdown))
         Blocks = Select(self.driver.find_element_by_id(Data.blocks_dropdown))
-        for i in range(len(dists.options)-2, len(dists.options)-30):
+        for i in range(len(dists.options) - 2, len(dists.options) - 30):
             dists.select_by_index(i)
             self.load.page_loading(self.driver)
-            for j in range(len(Blocks.options)-1, len(Blocks.options)):
+            for j in range(len(Blocks.options) - 1, len(Blocks.options)):
                 Blocks.select_by_index(j)
                 self.load.page_loading(self.driver)
                 for k in range(1, len(clust.options)):
                     clust.select_by_index(k)
                     self.load.page_loading(self.driver)
                     value = self.driver.find_element_by_id(Data.blocks_dropdown).get_attribute('value')
-                    value = value[3:]+'_'
+                    value = value[3:] + '_'
                     print(value)
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(3)
-                    self.filename = self.p.get_download_dir() + '/' + self.fname.tpd_teacher_school()+value.strip()+self.load.get_current_date()+'.csv'
+                    self.filename = self.p.get_download_dir() + '/' + self.fname.tpd_teacher_school() + value.strip() + self.load.get_current_date() + '.csv'
                     print(self.filename)
                     file = os.path.isfile(self.filename)
                     if file != True:
-                        print(dists.options[i].text,Blocks.options[j].text,clust.options[k].text, 'School wise records csv file is not downloaded')
+                        print(dists.options[i].text, Blocks.options[j].text, clust.options[k].text,
+                              'School wise records csv file is not downloaded')
                         count = count + 1
                     else:
                         with open(self.filename) as fin:

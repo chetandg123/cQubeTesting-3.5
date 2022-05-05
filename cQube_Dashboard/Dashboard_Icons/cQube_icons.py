@@ -5,12 +5,12 @@ from reuse_func import GetData
 
 
 class cQube_landing_page():
-    def __init__(self,driver):
+    def __init__(self, driver):
         self.driver = driver
 
-    #School infrastructure reports
+    # School infrastructure reports
     def test_school_infrastructure_map(self):
-        count=0
+        count = 0
         self.data = GetData()
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.menu_icon).click()
@@ -49,8 +49,6 @@ class cQube_landing_page():
             self.data.page_loading(self.driver)
         return count
 
-
-
     def test_udise_report(self):
         self.data = GetData()
         count = 0
@@ -72,7 +70,8 @@ class cQube_landing_page():
             self.data.page_loading(self.driver)
         return count
 
-    #Student Performance Reports
+    # Student Performance Reports
+
     def test_Semester_map(self):
         count = 0
         self.data = GetData()

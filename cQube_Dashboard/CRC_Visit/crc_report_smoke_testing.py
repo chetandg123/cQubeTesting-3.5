@@ -1,14 +1,13 @@
 
-import time
 import unittest
-
-
-
 from cQube_Dashboard.CRC_Visit.CRC_Report import crc_visits
 from reuse_func import GetData
 
 
 class cQube_CRC_Report(unittest.TestCase):
+
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -65,7 +64,7 @@ class cQube_CRC_Report(unittest.TestCase):
 
     def test_homeicon(self):
         b = crc_visits(self.driver)
-        result = b.test_homeicon()
+        b.test_homeicon()
         print("checking with home icon and it is working ")
         self.data.page_loading(self.driver)
 
@@ -106,7 +105,6 @@ class cQube_CRC_Report(unittest.TestCase):
     #     self.assertEqual(result, "menu", msg="Menu is not exist")
     #     print("check order of table records is working ")
     #     self.data.page_loading(self.driver)
-
 
     def test_homebutton(self):
         b = crc_visits(self.driver)

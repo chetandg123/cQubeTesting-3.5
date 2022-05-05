@@ -1,5 +1,3 @@
-
-
 import unittest
 
 from cQube_Dashboard.School_Infrastructure.composite_report.Composite_Report import Composite_Report
@@ -7,6 +5,8 @@ from reuse_func import GetData
 
 
 class cQube_SI_Report(unittest.TestCase):
+    data = None
+    driver = None
 
     @classmethod
     def setUpClass(self):
@@ -32,25 +32,24 @@ class cQube_SI_Report(unittest.TestCase):
         print("districtwise csv file is downloaded")
         self.data.page_loading(self.driver)
 
-
     def test_download_blockwise(self):
         b = Composite_Report(self.driver)
         res = b.test_block()
-        self.assertEqual(res,0, msg="File is not downloaded")
+        self.assertEqual(res, 0, msg="File is not downloaded")
         print("blockwise csv file downloaded")
         self.data.page_loading(self.driver)
 
     def test_schoolwise_download(self):
         b = Composite_Report(self.driver)
         res = b.test_schoolwise()
-        self.assertEqual(res,0, msg="File is not downloaded")
+        self.assertEqual(res, 0, msg="File is not downloaded")
         print("school wise csv file is downloaded")
         self.data.page_loading(self.driver)
 
     def test_clusterwise_download(self):
         b = Composite_Report(self.driver)
         res = b.test_clusterwise()
-        self.assertEqual(res,0, msg="File is not downloaded")
+        self.assertEqual(res, 0, msg="File is not downloaded")
         print("cluster wise csv file is downloaded")
         self.data.page_loading(self.driver)
 

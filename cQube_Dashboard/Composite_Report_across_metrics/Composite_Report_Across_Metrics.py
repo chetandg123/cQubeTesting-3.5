@@ -10,11 +10,11 @@ from reuse_func import GetData
 
 
 class Composite_report_across_Metric():
-    def __init__(self,driver):
+    def __init__(self, driver):
         self.driver = driver
 
     def test_districtwise(self):
-        p =pwd()
+        p = pwd()
         self.cal = GetData()
         self.driver.implicitly_wait(20)
         self.fname = file_extention()
@@ -25,7 +25,7 @@ class Composite_report_across_Metric():
         self.cal.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(10)
-        self.filename = p.get_download_dir() + "/"+self.fname.composite_district()+management+"_allDistricts_"+self.cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + "/" + self.fname.composite_district() + management + "_allDistricts_" + self.cal.get_current_date() + '.csv'
         print(self.filename)
         self.cal.page_loading(self.driver)
         return os.path.isfile(self.filename)
@@ -34,8 +34,8 @@ class Composite_report_across_Metric():
         os.remove(self.filename)
 
     def test_blockwise(self):
-        p =pwd()
-        self.cal  = GetData()
+        p = pwd()
+        self.cal = GetData()
         self.fname = file_extention()
         self.driver.implicitly_wait(20)
         self.driver.find_element_by_xpath(Data.hyper_link).click()
@@ -47,10 +47,11 @@ class Composite_report_across_Metric():
         self.cal.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(5)
-        self.filename = p.get_download_dir() + "/" + self.fname.composite_block()+management+'_allBlocks_'+self.cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + "/" + self.fname.composite_block() + management + '_allBlocks_' + self.cal.get_current_date() + '.csv'
         time.sleep(3)
         print(self.filename)
         return os.path.isfile(self.filename)
+
     def remove_file(self):
         os.remove(self.filename)
 
@@ -67,7 +68,7 @@ class Composite_report_across_Metric():
         self.cal.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(15)
-        self.filename = p.get_download_dir() + "/" + self.fname.composite_cluster()+management+'_allClusters_'+self.cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + "/" + self.fname.composite_cluster() + management + '_allClusters_' + self.cal.get_current_date() + '.csv'
         self.cal.page_loading(self.driver)
         print(self.filename)
         return os.path.isfile(self.filename)
@@ -176,7 +177,7 @@ class Composite_report_across_Metric():
 
     def click_on_blocks_button(self):
         count = 0
-        self.data  = GetData()
+        self.data = GetData()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         time.sleep(3)
         self.driver.find_element_by_id('allBlock').click()
@@ -188,12 +189,12 @@ class Composite_report_across_Metric():
             print("Block level graph is not displayed ")
             count = count + 1
         xaxis_lists = Select(self.driver.find_element_by_id('x_axis'))
-        for i in range(1,len(xaxis_lists.options)-10):
+        for i in range(1, len(xaxis_lists.options) - 10):
             time.sleep(2)
             xaxis_lists.select_by_index(i)
             self.data.page_loading(self.driver)
         yaxis_lists = Select(self.driver.find_element_by_id('y_axis'))
-        for i in range(1,len(yaxis_lists.options)-10):
+        for i in range(1, len(yaxis_lists.options) - 10):
             time.sleep(2)
             yaxis_lists.select_by_index(i)
             self.data.page_loading(self.driver)
@@ -201,7 +202,7 @@ class Composite_report_across_Metric():
 
     def click_on_clusters_button(self):
         count = 0
-        self.data  = GetData()
+        self.data = GetData()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id('allCluster').click()
@@ -212,12 +213,12 @@ class Composite_report_across_Metric():
             print("Cluster level graph is not displayed ")
             count = count + 1
         xaxis_lists = Select(self.driver.find_element_by_id('x_axis'))
-        for i in range(1,len(xaxis_lists.options)-10):
+        for i in range(1, len(xaxis_lists.options) - 10):
             time.sleep(2)
             xaxis_lists.select_by_index(i)
             self.data.page_loading(self.driver)
         yaxis_lists = Select(self.driver.find_element_by_id('y_axis'))
-        for i in range(1,len(yaxis_lists.options)-10):
+        for i in range(1, len(yaxis_lists.options) - 10):
             time.sleep(2)
             yaxis_lists.select_by_index(i)
             self.data.page_loading(self.driver)
@@ -236,7 +237,7 @@ class Composite_report_across_Metric():
         count = 0
 
         self.fname = file_extention()
-        for x in range(int(len(select_district.options))-5, int(len(select_district.options))):
+        for x in range(int(len(select_district.options)) - 5, int(len(select_district.options))):
             select_district.select_by_index(x)
             self.cal.page_loading(self.driver)
             value = self.driver.find_element_by_name('myDistrict').get_attribute('value')
@@ -248,7 +249,7 @@ class Composite_report_across_Metric():
             else:
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = p.get_download_dir() +"/"+ self.fname.composite_districtwise()+management+'_blocks_of_district_'+value.strip()+self.cal.get_current_date()+'.csv'
+                self.filename = p.get_download_dir() + "/" + self.fname.composite_districtwise() + management + '_blocks_of_district_' + value.strip() + self.cal.get_current_date() + '.csv'
                 print(self.filename)
                 self.cal.page_loading(self.driver)
                 self.file = os.path.isfile(self.filename)
@@ -267,7 +268,7 @@ class Composite_report_across_Metric():
         select_cluster = Select(self.driver.find_element_by_name('myCluster'))
         count = 0
         self.fname = file_extention()
-        for x in range(1, int(len(select_district.options))-30):
+        for x in range(1, int(len(select_district.options)) - 30):
             select_district.select_by_index(x)
             self.cal.page_loading(self.driver)
             for y in range(1, len(select_block.options)):
@@ -281,12 +282,13 @@ class Composite_report_across_Metric():
                     val = dvalue[1].strip()
                     nodata = self.driver.find_element_by_id("errMsg").text
                     if nodata == "No data found":
-                        print(select_district.options[x].text,select_block.options[y].text,select_cluster.options[z].text,"no data found!")
+                        print(select_district.options[x].text, select_block.options[y].text,
+                              select_cluster.options[z].text, "no data found!")
                         count = count + 1
                     else:
                         self.driver.find_element_by_id(Data.Download).click()
                         time.sleep(3)
-                        self.filename = p.get_download_dir() + "/" + self.fname.composite_clusterwise()+management+'_schools_of_cluster_'+val+'_'+self.cal.get_current_date()+'.csv'
+                        self.filename = p.get_download_dir() + "/" + self.fname.composite_clusterwise() + management + '_schools_of_cluster_' + val + '_' + self.cal.get_current_date() + '.csv'
                         print(self.filename)
                         self.cal.page_loading(self.driver)
                         self.file = os.path.isfile(self.filename)
@@ -317,26 +319,27 @@ class Composite_report_across_Metric():
                 nodata = self.driver.find_element_by_id("errMsg").text
                 if nodata == "No data found":
                     print(select_district.options[x].text, select_block.options[y].text,
-                           "no data found!")
+                          "no data found!")
                     count = count + 1
                 else:
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(3)
-                    self.filename = p.get_download_dir() + "/" + self.fname.composite_blockwise() + management + '_clusters_of_block_' + val+'_' + self.cal.get_current_date() + '.csv'
+                    self.filename = p.get_download_dir() + "/" + self.fname.composite_blockwise() + management + '_clusters_of_block_' + val + '_' + self.cal.get_current_date() + '.csv'
                     print(self.filename)
                     self.cal.page_loading(self.driver)
                     self.file = os.path.isfile(self.filename)
                     os.remove(self.filename)
                 return self.file
+
     def test_schoolwise(self):
         self.cal = GetData()
         self.fname = file_extention()
         self.driver.find_element_by_xpath(Data.hyper).click()
         self.cal.page_loading(self.driver)
-        p =pwd()
+        p = pwd()
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        dist =Select(self.driver.find_element_by_name('myDistrict'))
+        dist = Select(self.driver.find_element_by_name('myDistrict'))
         dist.select_by_index(1)
         self.cal.page_loading(self.driver)
         blk = Select(self.driver.find_element_by_name('myBlock'))
@@ -345,13 +348,12 @@ class Composite_report_across_Metric():
         clu = Select(self.driver.find_element_by_name('myCluster'))
         clu.select_by_index(1)
         value = self.driver.find_element_by_name('myCluster').get_attribute('value')
-        value = value[3:]+'_'
+        value = value[3:] + '_'
         self.cal.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(5)
         self.cal.page_loading(self.driver)
-        self.filename = p.get_download_dir() + "/" + self.fname.composite_clusterwise()+management+"_"+'schools_of_cluster_'+value.strip()+self.cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + "/" + self.fname.composite_clusterwise() + management + "_" + 'schools_of_cluster_' + value.strip() + self.cal.get_current_date() + '.csv'
         print(self.filename)
         self.cal.page_loading(self.driver)
         return os.path.isfile(self.filename)
-

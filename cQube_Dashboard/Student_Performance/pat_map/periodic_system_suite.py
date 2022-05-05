@@ -7,6 +7,9 @@ import unittest
 
 class periodic_system_testing(unittest.TestCase):
 
+    driver = None
+    data = None
+
     @classmethod
     def setUpClass(self):
         self.data = GetData()
@@ -25,14 +28,14 @@ class periodic_system_testing(unittest.TestCase):
 
     def test_grades_selection(self):
         b = Periodic_Assessment_Test(self.driver)
-        res = b.click_each_grades()
+        b.click_each_grades()
         print("selected each grade options ")
         self.data.page_loading(self.driver)
         time.sleep(4)
 
     def test_select_each_subjects(self):
         b = Periodic_Assessment_Test(self.driver)
-        res = b.select_subjects_dropdown()
+        b.select_subjects_dropdown()
         print("selected each grade with all the subjects")
         self.data.page_loading(self.driver)
 

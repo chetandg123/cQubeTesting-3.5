@@ -12,7 +12,12 @@ from reuse_func import GetData
 
 class Semester_Assessment_Test_Heat_Chart():
 
-    def __init__(self,driver):
+    def __init__(self, driver):
+        self.year = None
+        self.p = None
+        self.fname = None
+        self.load = None
+        self.month = None
         self.driver = driver
 
     def viewbys_options(self):
@@ -34,7 +39,7 @@ class Semester_Assessment_Test_Heat_Chart():
         grades.select_by_index(2)
         time.sleep(4)
         gradename = grades.options[2].text
-        gradenum = re.sub('\D','',gradename).strip()
+        gradenum = re.sub('\D', '', gradename).strip()
         self.load.page_loading(self.driver)
 
         view_by = Select(self.driver.find_element_by_id(Data.view_by))
@@ -43,11 +48,11 @@ class Semester_Assessment_Test_Heat_Chart():
         self.load.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(5)
-        self.filename = self.p.get_download_dir() + "/" + self.fname.satchart_views() + management+'_'+gradenum + '_' + Data.question_id + self.month + '_' \
-                        + self.year +'_'+self.load.get_current_date()+'.csv'
+        self.filename = self.p.get_download_dir() + "/" + self.fname.satchart_views() + management + '_' + gradenum + '_' + Data.question_id + self.month + '_' \
+                        + self.year + '_' + self.load.get_current_date() + '.csv'
         print(self.filename)
         if os.path.isfile(self.filename) != True:
-            print(Data.question_id,'csv file is not downloaded')
+            print(Data.question_id, 'csv file is not downloaded')
             count = count + 1
         # view_by.select_by_visible_text(' Indicator ')
         os.remove(self.filename)
@@ -55,16 +60,14 @@ class Semester_Assessment_Test_Heat_Chart():
         time.sleep(3)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(5)
-        self.file = self.p.get_download_dir() + "/" + self.fname.satchart_views()+management+'_'+ gradenum + '_' + Data.indicator_id + self.month + '_' \
-                    + self.year + '_' + self.load.get_current_date()+'.csv'
+        self.file = self.p.get_download_dir() + "/" + self.fname.satchart_views() + management + '_' + gradenum + '_' + Data.indicator_id + self.month + '_' \
+                    + self.year + '_' + self.load.get_current_date() + '.csv'
         print(self.file)
         if os.path.isfile(self.file) != True:
             print(Data.indicator_id, 'csv file is not downloaded')
             count = count + 1
         os.remove(self.file)
         return count
-
-
 
     def test_questions_records(self):
         self.p = pwd()
@@ -131,7 +134,7 @@ class Semester_Assessment_Test_Heat_Chart():
         cal = GetData()
         count = 0
         self.fname = file_extention()
-        management= self.driver.find_element_by_id('name').text
+        management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         year = Select(self.driver.find_element_by_id('year'))
         month = Select(self.driver.find_element_by_id('month'))
@@ -142,7 +145,7 @@ class Semester_Assessment_Test_Heat_Chart():
         cal.navigate_to_sat_heatchart_report()
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
-        self.filename = self.p.get_download_dir() + '/' + self.fname.satchart_all_districts()+management+'_overall_allDistricts_'+ self.month + '_' + self.year + '_' + cal.get_current_date() + '.csv'
+        self.filename = self.p.get_download_dir() + '/' + self.fname.satchart_all_districts() + management + '_overall_allDistricts_' + self.month + '_' + self.year + '_' + cal.get_current_date() + '.csv'
         print(self.filename)
         if os.path.isfile(self.filename) != True:
             print("Districtwise csv file is not downloaded")
@@ -151,7 +154,6 @@ class Semester_Assessment_Test_Heat_Chart():
         os.remove(self.filename)
         cal.page_loading(self.driver)
         return count
-
 
     def exams_dates(self):
         self.p = pwd()
@@ -168,14 +170,13 @@ class Semester_Assessment_Test_Heat_Chart():
             examdates.select_by_index(i)
             self.load.page_loading(self.driver)
             if examdates.options[i].text in self.driver.page_source:
-                print(examdates.options[i].text ,'is displaying chart table ')
+                print(examdates.options[i].text, 'is displaying chart table ')
                 self.load.page_loading(self.driver)
             else:
-                print(examdates.options[i].text ,'is not displayed ')
+                print(examdates.options[i].text, 'is not displayed ')
                 count = count + 1
         self.load.page_loading(self.driver)
         return count
-
 
     def subjects_types(self):
         self.p = pwd()
@@ -194,23 +195,24 @@ class Semester_Assessment_Test_Heat_Chart():
         self.month = (month.first_selected_option.text).strip()
         grade = Select(self.driver.find_element_by_id(Data.grade))
         grade.select_by_index(4)
-        gradename =(grade.options[4].text).strip()
-        gradenum = re.sub('\D','',gradename)
+        gradename = (grade.options[4].text).strip()
+        gradenum = re.sub('\D', '', gradename)
         self.load.page_loading(self.driver)
         subject = Select(self.driver.find_element_by_id(Data.subjects))
         for i in range(2, len(subject.options)):
             subject.select_by_index(i)
             self.load.page_loading(self.driver)
             if subject.options[i].text in self.driver.page_source:
-                print(subject.options[i].text ,'is displayed chart table ')
+                print(subject.options[i].text, 'is displayed chart table ')
                 self.load.page_loading(self.driver)
             else:
-                print(subject.options[i].text ,'is not displayed ')
+                print(subject.options[i].text, 'is not displayed ')
                 count = count + 1
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + '/' + self.fname.satchart_subjects()+management+'_'+gradenum+'_'+(subject.options[i].text).strip()+\
-                            '_allDistricts_'+self.month+'_'+self.year+'_'+self.load.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + '/' + self.fname.satchart_subjects() + management + '_' + gradenum + '_' + (
+                subject.options[i].text).strip() + \
+                            '_allDistricts_' + self.month + '_' + self.year + '_' + self.load.get_current_date() + '.csv '
             print(self.filename)
             if os.path.isfile(self.filename) != True:
                 print(subject.options[i].text, 'csv file is not downloaded')
@@ -219,9 +221,8 @@ class Semester_Assessment_Test_Heat_Chart():
             os.remove(self.filename)
         return count
 
-
     def test_homeicons(self):
-        self.load =GetData()
+        self.load = GetData()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.load.page_loading(self.driver)
         grade = Select(self.driver.find_element_by_id(Data.grade))
@@ -250,7 +251,6 @@ class Semester_Assessment_Test_Heat_Chart():
         self.load.page_loading(self.driver)
         return count
 
-
     def test_logoutbtn(self):
         self.data = GetData()
         count = 0
@@ -264,7 +264,6 @@ class Semester_Assessment_Test_Heat_Chart():
             count = count + 1
         self.data.page_loading(self.driver)
         return count
-
 
     def test_year_dropdown(self):
         self.p = pwd()
@@ -286,7 +285,6 @@ class Semester_Assessment_Test_Heat_Chart():
         self.load.page_loading(self.driver)
         return count
 
-
     def District_select_box(self):
         self.p = pwd()
         self.load = GetData()
@@ -303,14 +301,14 @@ class Semester_Assessment_Test_Heat_Chart():
         grades = Select(self.driver.find_element_by_id(Data.grade))
         grades.select_by_index(2)
         gradename = (grades.options[2].text).strip()
-        gradenum =re.sub('\D','',gradename).strip()
+        gradenum = re.sub('\D', '', gradename).strip()
         dists = Select(self.driver.find_element_by_id(Data.district_dropdown))
         view_by = Select(self.driver.find_element_by_id(Data.view_by))
         for j in range(len(view_by.options)):
             view_by.select_by_index(j)
             viewname = view_by.options[j].text
             self.load.page_loading(self.driver)
-            for i in range( len(dists.options)-4, len(dists.options)):
+            for i in range(len(dists.options) - 4, len(dists.options)):
                 dists.select_by_index(i)
                 print(dists.options[i].text)
                 value = self.driver.find_element_by_id(Data.district_dropdown).get_attribute('value')
@@ -318,13 +316,13 @@ class Semester_Assessment_Test_Heat_Chart():
                 values = value[1].strip()
                 self.load.page_loading(self.driver)
                 if 'No data found' in self.driver.page_source:
-                    print(dists.options[i].text,viewname,'is not having data')
+                    print(dists.options[i].text, viewname, 'is not having data')
 
                 else:
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(3)
-                    self.filename = self.p.get_download_dir() + '/' + self.fname.satchart_blocks()+management+'_'+gradenum+ \
-                    "_blocks_of_district_"+values+'_'+self.month+'_'+self.year+'_'+self.load.get_current_date()+'.csv'
+                    self.filename = self.p.get_download_dir() + '/' + self.fname.satchart_blocks() + management + '_' + gradenum + \
+                                    "_blocks_of_district_" + values + '_' + self.month + '_' + self.year + '_' + self.load.get_current_date() + '.csv'
                     print(self.filename)
                     file = os.path.isfile(self.filename)
                     if file != True:
@@ -335,7 +333,6 @@ class Semester_Assessment_Test_Heat_Chart():
 
             return count
 
-
     def Clusters_select_box(self):
         self.p = pwd()
         self.load = GetData()
@@ -345,7 +342,7 @@ class Semester_Assessment_Test_Heat_Chart():
         self.load.page_loading(self.driver)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        self.year , self.month = self.load.get_pat_month_and_year_values()
+        self.year, self.month = self.load.get_pat_month_and_year_values()
         clust = Select(self.driver.find_element_by_id(Data.cluster_dropdown))
         dists = Select(self.driver.find_element_by_id(Data.district_dropdown))
         Blocks = Select(self.driver.find_element_by_id(Data.blocks_dropdown))
@@ -354,24 +351,24 @@ class Semester_Assessment_Test_Heat_Chart():
         for m in range(2, len(grade.options)):
             grade.select_by_index(m)
             gradename = grade.options[m].text
-            gradenum = re.sub('\D','',gradename).strip()
+            gradenum = re.sub('\D', '', gradename).strip()
             self.load.page_loading(self.driver)
-            for i in range(len(dists.options)-1, len(dists.options)):
+            for i in range(len(dists.options) - 1, len(dists.options)):
                 dists.select_by_index(i)
                 self.load.page_loading(self.driver)
-                for j in range(len(Blocks.options)-1, len(Blocks.options)):
+                for j in range(len(Blocks.options) - 1, len(Blocks.options)):
                     Blocks.select_by_index(j)
                     self.load.page_loading(self.driver)
                     for k in range(1, len(clust.options)):
                         clust.select_by_index(k)
                         time.sleep(2)
                         self.load.page_loading(self.driver)
-                        value =self.driver.find_element_by_id(Data.cluster_dropdown).get_attribute('value')
-                        value = value[3:]+'_'
+                        value = self.driver.find_element_by_id(Data.cluster_dropdown).get_attribute('value')
+                        value = value[3:] + '_'
                         self.driver.find_element_by_id(Data.Download).click()
                         time.sleep(3)
-                        self.filename = self.p.get_download_dir() + '/' + self.fname.satchart_schools()+management+'_'+gradenum+"_schools_of_cluster_"+value.strip()+self.month+'_'+self.year+'_'+ \
-                        self.load.get_current_date()+'.csv'
+                        self.filename = self.p.get_download_dir() + '/' + self.fname.satchart_schools() + management + '_' + gradenum + "_schools_of_cluster_" + value.strip() + self.month + '_' + self.year + '_' + \
+                                        self.load.get_current_date() + '.csv'
                         print(self.filename)
                         file = os.path.isfile(self.filename)
                         if file != True:
@@ -410,7 +407,7 @@ class Semester_Assessment_Test_Heat_Chart():
                 count = count + 1
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + "/" + self.fname.satchart_grades()+management+'_' + gradenum + '_' + 'allDistricts_' + self.month + '_' + self.year + '_' + self.load.get_current_date() + '.csv'
+            self.filename = self.p.get_download_dir() + "/" + self.fname.satchart_grades() + management + '_' + gradenum + '_' + 'allDistricts_' + self.month + '_' + self.year + '_' + self.load.get_current_date() + '.csv'
             print(self.filename)
             if os.path.isfile(self.filename) != True:
                 print(grades.options[i].text, 'csv file is not downloaded ')
@@ -420,7 +417,6 @@ class Semester_Assessment_Test_Heat_Chart():
             os.remove(self.filename)
         self.load.page_loading(self.driver)
         return count
-
 
     def test_randoms(self):
         self.p = pwd()

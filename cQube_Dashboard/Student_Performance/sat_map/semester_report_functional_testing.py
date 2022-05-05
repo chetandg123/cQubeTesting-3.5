@@ -5,7 +5,10 @@ from Locators.parameters import Data
 from cQube_Dashboard.Student_Performance.sat_map.semester_assesment_test import sat_map_report
 from reuse_func import GetData
 
+
 class cQube_Semester_FunctionalTest(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -33,7 +36,6 @@ class cQube_Semester_FunctionalTest(unittest.TestCase):
     #     print('Semester 2 is working ')
     #     self.data.page_loading(self.driver)
 
-
     def test_click_on_blocks(self):
         block = sat_map_report(self.driver)
         result = block.check_markers_on_block_map()
@@ -44,19 +46,18 @@ class cQube_Semester_FunctionalTest(unittest.TestCase):
     def test_click_on_blocks_cluster_schools(self):
         block = sat_map_report(self.driver)
         result = block.check_last_30_days()
-        self.assertEqual(0,result,msg='Footer mismatch found')
-        self.data.page_loading(self.driver)
-
-        res = block.check_last_7_days()
         self.assertEqual(0, result, msg='Footer mismatch found')
         self.data.page_loading(self.driver)
 
+        block.check_last_7_days()
+        self.assertEqual(0, result, msg='Footer mismatch found')
+        self.data.page_loading(self.driver)
 
     def test_last30_districts(self):
         block = sat_map_report(self.driver)
         result = block.check_last_30_days_districts()
-        self.assertEqual(0,result,msg='Some footer value mismatch found ')
-        self.assertEqual(0,result,msg='Files are not downloaded')
+        self.assertEqual(0, result, msg='Some footer value mismatch found ')
+        self.assertEqual(0, result, msg='Files are not downloaded')
 
     def test_last7days_districts(self):
         block = sat_map_report(self.driver)
@@ -85,7 +86,7 @@ class cQube_Semester_FunctionalTest(unittest.TestCase):
     def test_last7days_district_blockwise_clusterwise(self):
         block = sat_map_report(self.driver)
         result = block.check_last7days_districts_block()
-        self.assertEqual(result,0,msg="Cluster per block csv report download not is working")
+        self.assertEqual(result, 0, msg="Cluster per block csv report download not is working")
 
         schools = sat_map_report(self.driver)
         result = schools.check_last7_district_block_cluster()
@@ -96,7 +97,6 @@ class cQube_Semester_FunctionalTest(unittest.TestCase):
             print("equals to downloaded file")
         else:
             raise self.failureException("Schools per cluster csv report download not is working")
-
 
     def test_click_on_clusters(self):
         cluster = sat_map_report(self.driver)
@@ -136,8 +136,6 @@ class cQube_Semester_FunctionalTest(unittest.TestCase):
         else:
             print("District wise csv report download is working")
 
-
-
     def test_blockwise_csv_download(self):
         csv = sat_map_report(self.driver)
         result = csv.click_download_icon_of_blocks()
@@ -153,6 +151,7 @@ class cQube_Semester_FunctionalTest(unittest.TestCase):
             raise self.failureException(result)
         else:
             print("Cluster wise csv report download is working")
+
     #
     # def test_schoolwise_csv_download(self):
     #     csv = SchoolwiseCsv(self.driver)
@@ -168,7 +167,6 @@ class cQube_Semester_FunctionalTest(unittest.TestCase):
         else:
             raise self.failureException('test_home_button is not working')
 
-
     def test_home_icon(self):
         home = sat_map_report(self.driver)
         home.click_on_blocks_click_on_home_icon()
@@ -181,18 +179,18 @@ class cQube_Semester_FunctionalTest(unittest.TestCase):
     def test_gradewise_csv_downloading(self):
         tc = sat_map_report(self.driver)
         res = tc.check_grade_dropdown_options()
-        self.assertNotEqual(0,res,msg="Grade options are not present ")
+        self.assertNotEqual(0, res, msg="Grade options are not present ")
         print("Checked with grade options in sat map report")
         self.data.page_loading(self.driver)
 
-        fun =  sat_map_report(self.driver)
+        fun = sat_map_report(self.driver)
         res1 = fun.click_each_grades()
-        self.assertEqual(0,res1,msg="gradewise csv file is not downloaded")
+        self.assertEqual(0, res1, msg="gradewise csv file is not downloaded")
 
     def test_subjectwise_csv_downloading(self):
         tc = sat_map_report(self.driver)
         res = tc.select_subjects_dropdown()
-        self.assertEqual(0,res,msg="Subjectwise csv file is not downloaded")
+        self.assertEqual(0, res, msg="Subjectwise csv file is not downloaded")
 
     def test_choose_district_block_cluster(self):
         dist = sat_map_report(self.driver)
@@ -213,7 +211,7 @@ class cQube_Semester_FunctionalTest(unittest.TestCase):
             raise self.failureException("Cluster per block csv report download not is working")
         schools = sat_map_report(self.driver)
         result = schools.check_district_block_cluster()
-        self.assertEqual(0,result,msg='School of cluster csv file downloaded')
+        self.assertEqual(0, result, msg='School of cluster csv file downloaded')
 
     @classmethod
     def tearDownClass(cls):

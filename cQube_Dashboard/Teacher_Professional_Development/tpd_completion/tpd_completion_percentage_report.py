@@ -1,5 +1,8 @@
+import csv
 import os
 import time
+
+from selenium.webdriver.support.select import Select
 
 from Locators.parameters import Data
 from filenames import file_extention
@@ -8,7 +11,7 @@ from reuse_func import GetData
 
 
 class tpd_completion_percentage_report():
-    def __init__(self,driver):
+    def __init__(self, driver):
         self.driver = driver
 
     def test_completion_percentage_icon(self):
@@ -54,10 +57,11 @@ class tpd_completion_percentage_report():
             count = count + 1
         self.data.page_loading(self.driver)
         return count
+
     def test_homeicon_functionality(self):
         self.data = GetData()
         self.p = pwd()
-        count = 0
+        0
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
         timeseries = Select(self.driver.find_element_by_id(Data.sar_district))
@@ -85,7 +89,7 @@ class tpd_completion_percentage_report():
         self.data.page_loading(self.driver)
         self.data.navigate_to_tpd_completion_percentage()
         self.data.page_loading(self.driver)
-        return  count
+        return count
 
     def test_hyperlink_function(self):
         self.data = GetData()
@@ -105,7 +109,7 @@ class tpd_completion_percentage_report():
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
-        self.filename =self.p.get_download_dir() + '/'+"completion_percentage_all_district_overall_"+self.data.get_current_date()+'.csv'
+        self.filename = self.p.get_download_dir() + '/' + "completion_percentage_all_district_overall_" + self.data.get_current_date() + '.csv'
         if os.path.isfile(self.filename) != True:
             print('Districtwise csv file is not downloaded')
             count = count + 1
@@ -121,29 +125,30 @@ class tpd_completion_percentage_report():
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
         districts = Select(self.driver.find_element_by_id(Data.sar_district))
-        collections =Select(self.driver.find_element_by_id(Data.coll_names))
-        coll_count = len(collections.options)-1
-        for i in range(1,len(districts.options)-28):
+        collections = Select(self.driver.find_element_by_id(Data.coll_names))
+        coll_count = len(collections.options) - 1
+        for i in range(1, len(districts.options) - 28):
             districts.select_by_index(i)
-            name =self.driver.find_element_by_id(Data.sar_district).get_attribute('value')
-            value = name[4:]+'_'
+            name = self.driver.find_element_by_id(Data.sar_district).get_attribute('value')
+            value = name[4:] + '_'
 
             self.data.page_loading(self.driver)
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + "/"+"completion_percentage_overall_"+value.strip()+self.data.get_current_date()+".csv"
+            self.filename = self.p.get_download_dir() + "/" + "completion_percentage_overall_" + value.strip() + self.data.get_current_date() + ".csv"
             print(self.filename)
             if os.path.isfile(self.filename) != True:
-                print(districts.options[i].text,'csv file is not downloaded')
+                print(districts.options[i].text, 'csv file is not downloaded')
                 count = count + 1
             self.data.page_loading(self.driver)
             os.remove(self.filename)
-            for j in range(len(collections.options)-2,len(collections.options)):
+            for j in range(len(collections.options) - 2, len(collections.options)):
                 time.sleep(1)
                 collections.select_by_index(j)
                 self.data.page_loading(self.driver)
 
-        return count,coll_count
+        return count, coll_count
+
     def test_blocks_selectbox(self):
         self.driver.implicitly_wait(100)
         self.data = GetData()
@@ -153,20 +158,20 @@ class tpd_completion_percentage_report():
         self.data.page_loading(self.driver)
         districts = Select(self.driver.find_element_by_id(Data.sar_district))
         blocks = Select(self.driver.find_element_by_id(Data.sar_block))
-        collections =Select(self.driver.find_element_by_id(Data.coll_names))
+        collections = Select(self.driver.find_element_by_id(Data.coll_names))
         coll_count = len(collections.options) - 1
-        for i in range(len(districts.options)-1,len(districts.options)):
+        for i in range(len(districts.options) - 1, len(districts.options)):
             districts.select_by_index(i)
             self.data.page_loading(self.driver)
-            for j in range(1,len(blocks.options)):
+            for j in range(1, len(blocks.options)):
                 blocks.select_by_index(j)
-                name= self.driver.find_element_by_id(Data.sar_block).get_attribute('value')
-                value = name[3:]+'_'
+                name = self.driver.find_element_by_id(Data.sar_block).get_attribute('value')
+                value = name[3:] + '_'
                 self.data.page_loading(self.driver)
                 time.sleep(2)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() + "/completion_percentage_overall_"+value.strip()+self.data.get_current_date()+".csv"
+                self.filename = self.p.get_download_dir() + "/completion_percentage_overall_" + value.strip() + self.data.get_current_date() + ".csv"
                 print(self.filename)
                 if os.path.isfile(self.filename) != True:
                     print(districts.options[i].text, 'csv file is not downloaded')
@@ -188,17 +193,17 @@ class tpd_completion_percentage_report():
         districts = Select(self.driver.find_element_by_id(Data.sar_district))
         blocks = Select(self.driver.find_element_by_id(Data.sar_block))
         clusters = Select(self.driver.find_element_by_id(Data.sar_cluster))
-        collections =Select(self.driver.find_element_by_id(Data.coll_names))
+        collections = Select(self.driver.find_element_by_id(Data.coll_names))
         coll_count = len(collections.options) - 1
-        for i in range(len(districts.options)-1,len(districts.options)):
+        for i in range(len(districts.options) - 1, len(districts.options)):
             districts.select_by_index(i)
             print(districts.options[i].text)
             self.data.page_loading(self.driver)
-            for j in range(1,len(blocks.options)):
+            for j in range(1, len(blocks.options)):
                 blocks.select_by_index(j)
                 print(blocks.options[j].text)
                 self.data.page_loading(self.driver)
-                for k in range(len(clusters.options)-1, len(clusters.options)):
+                for k in range(len(clusters.options) - 1, len(clusters.options)):
                     clusters.select_by_index(k)
                     name = self.driver.find_element_by_id(Data.sar_cluster).get_attribute('value')
                     value = name.split(":")
@@ -206,10 +211,11 @@ class tpd_completion_percentage_report():
                     self.data.page_loading(self.driver)
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(3)
-                    self.filename = self.p.get_download_dir() + "/"+'completion_percentage_overall_'+val+'_'+self.data.get_current_date()+".csv"
+                    self.filename = self.p.get_download_dir() + "/" + 'completion_percentage_overall_' + val + '_' + self.data.get_current_date() + ".csv"
                     print(self.filename)
                     if os.path.isfile(self.filename) != True:
-                        print(districts.options[i].text,blocks.options[j].text,clusters.options[k].text,'csv file is not downloaded')
+                        print(districts.options[i].text, blocks.options[j].text, clusters.options[k].text,
+                              'csv file is not downloaded')
                         count = count + 1
                     else:
                         with open(self.filename) as fin:
@@ -226,6 +232,7 @@ class tpd_completion_percentage_report():
                     os.remove(self.filename)
                     self.data.page_loading(self.driver)
         return count
+
     def click_on_logout_btn(self):
         self.data = GetData()
         count = 0
@@ -252,8 +259,8 @@ class tpd_completion_percentage_report():
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
         colls = Select(self.driver.find_element_by_id(Data.coll_names))
-        colcount = len(colls.options)-1
-        for i in range(1,len(colls.options)-1):
+        colcount = len(colls.options) - 1
+        for i in range(1, len(colls.options) - 1):
             time.sleep(1)
             colls.select_by_index(i)
             time.sleep(5)
@@ -268,7 +275,7 @@ class tpd_completion_percentage_report():
             #     count = count + 1
             #     self.data.page_loading(self.driver)
             # os.remove(self.filename)
-        return colcount,count
+        return colcount, count
 
     def test_districtwise_collections(self):
         self.data = GetData()
@@ -280,7 +287,7 @@ class tpd_completion_percentage_report():
         colls = Select(self.driver.find_element_by_id(Data.coll_names))
         colcount = len(colls.options) - 1
         self.data.page_loading(self.driver)
-        for j in range(1,len(district.options)-28):
+        for j in range(1, len(district.options) - 28):
             district.select_by_index(j)
             self.data.page_loading(self.driver)
             value = self.driver.find_element_by_id(Data.sar_district).get_attribute('value')
@@ -311,13 +318,13 @@ class tpd_completion_percentage_report():
         colls = Select(self.driver.find_element_by_id(Data.coll_names))
         colcount = len(colls.options) - 1
         self.data.page_loading(self.driver)
-        for j in range(1,len(district.options)-32):
+        for j in range(1, len(district.options) - 32):
             district.select_by_index(j)
-            for k in range(1, len(block.options)-2):
+            for k in range(1, len(block.options) - 2):
                 block.select_by_index(k)
                 self.data.page_loading(self.driver)
                 value = self.driver.find_element_by_id(Data.sar_block).get_attribute('value')
-                value = value[5:]+'_'
+                value = value[5:] + '_'
                 for i in range(1, len(colls.options)):
                     colls.select_by_index(i)
                     self.data.page_loading(self.driver)
@@ -345,15 +352,15 @@ class tpd_completion_percentage_report():
         colls = Select(self.driver.find_element_by_id(Data.coll_names))
         colcount = len(colls.options) - 1
         self.data.page_loading(self.driver)
-        for j in range(1, len(district.options)-32):
+        for j in range(1, len(district.options) - 32):
             district.select_by_index(j)
-            for k in range(1, len(block.options)-3):
+            for k in range(1, len(block.options) - 3):
                 block.select_by_index(k)
                 for m in range(1, len(cluster.options)):
                     cluster.select_by_index(m)
                     self.data.page_loading(self.driver)
                     value = self.driver.find_element_by_id(Data.sar_cluster).get_attribute('value')
-                    value = value[5:]+'_'
+                    value = value[5:] + '_'
                     for i in range(1, len(colls.options)):
                         colls.select_by_index(i)
                         self.data.page_loading(self.driver)
@@ -386,7 +393,6 @@ class tpd_completion_percentage_report():
                 print('Downlaod raw file is not downloaded')
                 count = count + 1
             else:
-                 print('Download raw file is downloaded..')
-                 os.remove(self.filename)
+                print('Download raw file is downloaded..')
+                os.remove(self.filename)
             return count
-

@@ -15,6 +15,7 @@ from reuse_func import GetData
 class Composite_Report():
 
     def __init__(self,driver):
+        self.p = None
         self.driver = driver
 
     def test_report(self):

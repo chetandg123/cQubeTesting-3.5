@@ -10,6 +10,9 @@ from reuse_func import GetData
 
 class cQube_lpdcontent_smoke_Test(unittest.TestCase):
 
+    driver = None
+    data = None
+
     @classmethod
     def setUpClass(self):
         self.data = GetData()

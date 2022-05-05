@@ -8,14 +8,14 @@ from reuse_func import GetData
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
-class user_engagement_automation_scripts():
 
-    def __init__(self,driver):
+class user_engagement_automation_scripts:
+
+    def __init__(self, driver):
         self.driver = driver
         self.data = GetData()
         self.p = pwd()
         self.fname = Files()
-
 
     def check_navigation_to_user_engagement_report(self):
         count = 0
@@ -29,7 +29,6 @@ class user_engagement_automation_scripts():
         else:
             print("User Engagement Report Report is displayed")
         return count
-
 
     def check_hyperlink_functionality(self):
         count = 0
@@ -47,13 +46,11 @@ class user_engagement_automation_scripts():
             print("Hyper link is working as expected ")
         return count
 
-
     def check_dropdown_options(self):
         self.data.click_on_state(self.driver)
         districts = Select(self.driver.find_element(By.ID, Data.dist_dropdown))
         options = len(districts.options) - 1
         return options
-
 
     def check_selection_of_options(self):
         self.driver.find_element(By.XPATH, Data.hyper_link).click()
@@ -77,27 +74,27 @@ class user_engagement_automation_scripts():
             dist_name = district.options[i].text
             time.sleep(2)
             if ' No Data Available ' in self.driver.page_source:
-                print(dist_name,'is not having ')
+                print(dist_name, 'is not having ')
             else:
                 courses = self.driver.find_elements(By.CSS_SELECTOR, Data.course_list)
                 count_of_course = len(courses)
                 print(dist_name, 'is selected and chart also displayed...')
-                self.driver.find_element(By.ID,Data.Download).click()
+                self.driver.find_element(By.ID, Data.Download).click()
                 time.sleep(3)
 
-                self.filename = self.p.get_download_dir() + '/' + self.fname.user_engagement_districtwise+''+dist_name+'.csv'
+                self.filename = self.p.get_download_dir() + '/' + self.fname.user_engagement_districtwise + '' + dist_name + '.csv'
                 if os.path.isfile(self.filename) != True:
-                    print(self.filename,'is not downlaoded so download button is not working')
+                    print(self.filename, 'is not downlaoded so download button is not working')
                     count = count + 1
                 else:
-                    print(self.filename,'file is downlaoded')
+                    print(self.filename, 'file is downlaoded')
                     df = pd.read_csv(self.filename)
                     size = len(df)
                     total_enrolled = df['Total Enrolled'].sum()
                     avg_time = df['Avg Time Spent'].sum()
 
-                    if  int(size)  == 0:
-                        print('Course Result in UI and Downloaded files are not same  so no of courses ',size)
+                    if int(size) == 0:
+                        print('Course Result in UI and Downloaded files are not same  so no of courses ', size)
                         count = count + 1
                     if total_enrolled == 0 and avg_time == 0:
                         print('Total enrolled and avg time  both are not correct ')
@@ -113,8 +110,8 @@ class user_engagement_automation_scripts():
         count_of_course = len(courses)
         self.driver.find_element(By.ID, Data.Download).click()
         time.sleep(3)
-        state_name=self.driver.find_element(By.XPATH,'//p/span').text
-        self.filename = self.p.get_download_dir() + '/' + self.fname.user_engagement_statewise + state_name +'.csv'
+        state_name = self.driver.find_element(By.XPATH, '//p/span').text
+        self.filename = self.p.get_download_dir() + '/' + self.fname.user_engagement_statewise + state_name + '.csv'
         if os.path.isfile(self.filename) != True:
             print(self.filename, 'is not downlaoded so download button is not working')
             count = count + 1
@@ -153,5 +150,3 @@ class user_engagement_automation_scripts():
                 print("Navigation to User Engagement Report is failed !")
                 count = count + 1
         return count
-
-    

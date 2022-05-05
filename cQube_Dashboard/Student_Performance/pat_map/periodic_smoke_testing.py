@@ -6,6 +6,8 @@ from reuse_func import GetData
 
 
 class periodic_smoke(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -37,14 +39,14 @@ class periodic_smoke(unittest.TestCase):
         b = Periodic_Assessment_Test(self.driver)
         res = b.click_each_grades()
         print("selected each grade options ")
-        self.assertEqual(0,res,msg='Soem grade wise file not downloaded')
+        self.assertEqual(0, res, msg='Soem grade wise file not downloaded')
         time.sleep(5)
         self.data.page_loading(self.driver)
 
     def test_select_each_subjects(self):
         b = Periodic_Assessment_Test(self.driver)
         res = b.select_subjects_dropdown()
-        self.assertEqual(0,res,msg='Subject wise csv file is not downloaded')
+        self.assertEqual(0, res, msg='Subject wise csv file is not downloaded')
         print("selected each grade with all the subjects")
         self.data.page_loading(self.driver)
 
@@ -108,11 +110,9 @@ class periodic_smoke(unittest.TestCase):
 
     def test_Homeicon(self):
         b = Periodic_Assessment_Test(self.driver)
-        res = b.click_on_blocks_click_on_home_icon()
+        b.click_on_blocks_click_on_home_icon()
         print('Home icon is working')
         self.data.page_loading(self.driver)
-
-
 
     def test_check_hyperlinks(self):
         hyperlinks = Periodic_Assessment_Test(self.driver)
@@ -132,9 +132,6 @@ class periodic_smoke(unittest.TestCase):
         self.data.login_cqube(self.driver)
         self.data.navigate_to_periodic_report()
         self.data.page_loading(self.driver)
-
-
-
 
     @classmethod
     def tearDownClass(cls):

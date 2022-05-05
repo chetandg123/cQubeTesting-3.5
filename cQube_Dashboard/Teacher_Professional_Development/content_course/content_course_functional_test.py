@@ -5,17 +5,18 @@ from reuse_func import GetData
 
 
 class cQube_content_course_functional(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
-            self.data = GetData()
-            self.driver = self.data.get_driver()
-            self.driver.implicitly_wait(100)
-            self.data.open_cqube_appln(self.driver)
-            self.data.login_cqube(self.driver)
-            self.data.navigate_to_diksha_content_course()
-            self.data.page_loading(self.driver)
-
+        self.data = GetData()
+        self.driver = self.data.get_driver()
+        self.driver.implicitly_wait(100)
+        self.data.open_cqube_appln(self.driver)
+        self.data.login_cqube(self.driver)
+        self.data.navigate_to_diksha_content_course()
+        self.data.page_loading(self.driver)
 
     def test_diksha_page(self):
         b = content_course_report(self.driver)
@@ -77,7 +78,7 @@ class cQube_content_course_functional(unittest.TestCase):
 
     def test_homeicon(self):
         b = content_course_report(self.driver)
-        res = b.test_homeicon()
+        b.test_homeicon()
         print('Home icon is working ')
         self.data.page_loading(self.driver)
 
@@ -96,26 +97,25 @@ class cQube_content_course_functional(unittest.TestCase):
         self.data.navigate_to_diksha_content_course()
         self.data.page_loading(self.driver)
 
-
     def test_download_raw_files_overall_period(self):
         b = content_course_report(self.driver)
         res = b.test_overall_rawfile_download()
-        self.assertEqual(0,res,msg='Raw file is not downloaded')
+        self.assertEqual(0, res, msg='Raw file is not downloaded')
 
     def test_download_raw_files_last_30days_period(self):
         b = content_course_report(self.driver)
         res = b.test_last_30_days_rawfile_download()
-        self.assertEqual(0,res,msg='Raw file is not downloaded')
+        self.assertEqual(0, res, msg='Raw file is not downloaded')
 
     def test_download_raw_files_last_7_day_period(self):
         b = content_course_report(self.driver)
         res = b.test_last_7_days_rawfile_download()
-        self.assertEqual(0,res,msg='Raw file is not downloaded')
+        self.assertEqual(0, res, msg='Raw file is not downloaded')
 
     def test_download_raw_files_lastday_period(self):
         b = content_course_report(self.driver)
         res = b.test_last_day_rawfile_download()
-        self.assertEqual(0,res,msg='Raw file is not downloaded')
+        self.assertEqual(0, res, msg='Raw file is not downloaded')
 
     @classmethod
     def tearDownClass(cls):

@@ -8,15 +8,17 @@ from reuse_func import GetData
 
 
 class cQube_semester_exception_report(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
-            self.data = GetData()
-            self.driver = self.data.get_driver()
-            self.data.open_cqube_appln(self.driver)
-            self.data.login_cqube(self.driver)
-            self.data.navigate_to_semester_exception()
-            self.data.page_loading(self.driver)
+        self.data = GetData()
+        self.driver = self.data.get_driver()
+        self.data.open_cqube_appln(self.driver)
+        self.data.login_cqube(self.driver)
+        self.data.navigate_to_semester_exception()
+        self.data.page_loading(self.driver)
 
     def test_DotsOnDistrictwise_map(self):
         b = Semester_Assessment_Test_Exception(self.driver)

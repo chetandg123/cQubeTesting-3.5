@@ -12,7 +12,10 @@ from reuse_func import GetData
 
 
 class Periodic_Assessment_Test_LO_Table():
-    def __init__(self,driver):
+    def __init__(self, driver):
+        self.fname = None
+        self.year = None
+        self.month = None
         self.driver = driver
 
     def viewbys_options(self):
@@ -43,7 +46,7 @@ class Periodic_Assessment_Test_LO_Table():
         self.load.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
-        self.filename = self.p.get_download_dir() + "/" + self.fname.patlo_views()+management+'_' + gradenum + '_' + Data.question_id + self.month + '_' \
+        self.filename = self.p.get_download_dir() + "/" + self.fname.patlo_views() + management + '_' + gradenum + '_' + Data.question_id + self.month + '_' \
                         + self.year + '_' + self.load.get_current_date() + '.csv'
         print(self.filename)
         if os.path.isfile(self.filename) != True:
@@ -53,7 +56,7 @@ class Periodic_Assessment_Test_LO_Table():
         view_by.select_by_index(2)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
-        self.file = self.p.get_download_dir() + "/" + self.fname.patlo_views()+management+'_'+ gradenum + '_' + Data.indicator_id + self.month + '_' \
+        self.file = self.p.get_download_dir() + "/" + self.fname.patlo_views() + management + '_' + gradenum + '_' + Data.indicator_id + self.month + '_' \
                     + self.year + '_' + self.load.get_current_date() + '.csv'
         print(self.file)
         if os.path.isfile(self.file) != True:
@@ -128,10 +131,10 @@ class Periodic_Assessment_Test_LO_Table():
         self.load.page_loading(self.driver)
         self.load.navigate_to_lo_table_report()
         self.load.page_loading(self.driver)
-        self.year,self.month = self.load.get_pat_month_and_year_values()
+        self.year, self.month = self.load.get_pat_month_and_year_values()
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
-        self.filename = self.p.get_download_dir() + '/' + self.fname.patlo_all_districts()+management+'_overall_allDistricts_'+self.month+'_'+self.year+'_'+self.load.get_current_date()+'.csv'
+        self.filename = self.p.get_download_dir() + '/' + self.fname.patlo_all_districts() + management + '_overall_allDistricts_' + self.month + '_' + self.year + '_' + self.load.get_current_date() + '.csv'
         print(self.filename)
         if os.path.isfile(self.filename) != True:
             print('Districtwise csv file is not downloaded ')
@@ -154,10 +157,10 @@ class Periodic_Assessment_Test_LO_Table():
             examdates.select_by_index(i)
             self.load.page_loading(self.driver)
             if examdates.options[i].text in self.driver.page_source:
-                print(examdates.options[i].text ,'is displaying chart table ')
+                print(examdates.options[i].text, 'is displaying chart table ')
                 self.load.page_loading(self.driver)
             else:
-                print(examdates.options[i].text ,'is not displayed ')
+                print(examdates.options[i].text, 'is not displayed ')
                 count = count + 1
         self.load.page_loading(self.driver)
         return count
@@ -173,7 +176,7 @@ class Periodic_Assessment_Test_LO_Table():
         self.load.page_loading(self.driver)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
-        self.year ,self.month = self.load.get_pat_month_and_year_values()
+        self.year, self.month = self.load.get_pat_month_and_year_values()
         grade = Select(self.driver.find_element_by_id(Data.grade))
         grade.select_by_index(4)
         gradename = (grade.options[4].text).strip()
@@ -194,7 +197,7 @@ class Periodic_Assessment_Test_LO_Table():
             else:
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() + '/' + self.fname.patlo_subjects()+management+'_'+ gradenum + '_' + (
+                self.filename = self.p.get_download_dir() + '/' + self.fname.patlo_subjects() + management + '_' + gradenum + '_' + (
                     subject.options[i].text).strip() + \
                                 '_allDistricts_' + self.month + '_' + self.year + '_' + self.load.get_current_date() + '.csv'
                 print(self.filename)
@@ -206,7 +209,7 @@ class Periodic_Assessment_Test_LO_Table():
         return count
 
     def test_homeicons(self):
-        self.load =GetData()
+        self.load = GetData()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.load.page_loading(self.driver)
         timeseries = Select(self.driver.find_element_by_id(Data.exam_dates))
@@ -298,11 +301,11 @@ class Periodic_Assessment_Test_LO_Table():
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(4)
-                self.filename = self.p.get_download_dir() + '/' + self.fname.patlo_blocks()+management+'_' + gradenum + \
+                self.filename = self.p.get_download_dir() + '/' + self.fname.patlo_blocks() + management + '_' + gradenum + \
                                 "_blocks_of_district_" + value.strip() + self.month + '_' + self.year + '_' + self.load.get_current_date() + '.csv'
                 print(self.filename)
                 if self.filename != True:
-                    print(dists.options[i].text,'csv file is not downloaded')
+                    print(dists.options[i].text, 'csv file is not downloaded')
                     count = count + 0
                 else:
                     with open(self.filename) as fin:
@@ -404,10 +407,10 @@ class Periodic_Assessment_Test_LO_Table():
                         clust.select_by_index(k)
                         self.load.page_loading(self.driver)
                         value = self.driver.find_element_by_id(Data.cluster_dropdown).get_attribute('value')
-                        values = value[3:]+'_'
+                        values = value[3:] + '_'
                         self.driver.find_element_by_id(Data.Download).click()
                         time.sleep(3)
-                        self.filename = self.p.get_download_dir() + '/' + self.fname.patlo_schools()+management+'_' + gradenum + "_schools_of_cluster_" + values.strip() + self.month + '_' + self.year + '_' + \
+                        self.filename = self.p.get_download_dir() + '/' + self.fname.patlo_schools() + management + '_' + gradenum + "_schools_of_cluster_" + values.strip() + self.month + '_' + self.year + '_' + \
                                         self.load.get_current_date() + '.csv'
                         print(self.filename)
                         file = os.path.isfile(self.filename)
@@ -425,7 +428,7 @@ class Periodic_Assessment_Test_LO_Table():
                             records = int(len(tablecount)) - 2
                             time.sleep(2)
                             if row_count != records:
-                                print(dists.options[i].text,Blocks.options[j].text,clust.options[k].text,
+                                print(dists.options[i].text, Blocks.options[j].text, clust.options[k].text,
                                       "records count mismatch in downloaded file and table records")
                                 count = count + 1
 
@@ -460,7 +463,7 @@ class Periodic_Assessment_Test_LO_Table():
                 count = count + 1
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + "/" + self.fname.patlo_grades()+management+'_' + gradenum + '_' + 'allDistricts_' + self.month + '_' + self.year + '_' + self.load.get_current_date() + '.csv'
+            self.filename = self.p.get_download_dir() + "/" + self.fname.patlo_grades() + management + '_' + gradenum + '_' + 'allDistricts_' + self.month + '_' + self.year + '_' + self.load.get_current_date() + '.csv'
             print(self.filename)
             if os.path.isfile(self.filename) != True:
                 print(grades.options[i].text, 'csv file is not downloaded ')

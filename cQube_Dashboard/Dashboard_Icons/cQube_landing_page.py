@@ -3,7 +3,10 @@ import unittest
 from cQube_Dashboard.Dashboard_Icons.cQube_icons import cQube_landing_page
 from reuse_func import GetData
 
+
 class cQube_Home(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -14,48 +17,46 @@ class cQube_Home(unittest.TestCase):
         self.data.login_cqube(self.driver)
         self.data.page_loading(self.driver)
 
-
     def test_sar_icon(self):
-        b =cQube_landing_page(self.driver)
+        b = cQube_landing_page(self.driver)
         result = b.test_SAR()
         self.data.page_loading(self.driver)
 
     def test_crc_icon(self):
-        b =cQube_landing_page(self.driver)
+        b = cQube_landing_page(self.driver)
         result = b.test_crc_visit_report()
-        self.assertEqual(0,result,msg='Report page is not exist')
+        self.assertEqual(0, result, msg='Report page is not exist')
         self.data.page_loading(self.driver)
 
     def test_semester_icon(self):
-        b =cQube_landing_page(self.driver)
+        b = cQube_landing_page(self.driver)
         result = b.test_Semester_map()
         self.assertEqual(0, result, msg='Report page is not exist')
         self.data.page_loading(self.driver)
 
     def test_semester_heatchart_icon(self):
-        b =cQube_landing_page(self.driver)
+        b = cQube_landing_page(self.driver)
         result = b.test_Semester_heatchart()
         self.assertEqual(0, result, msg='Report page is not exist')
         self.data.page_loading(self.driver)
 
-
     def test_tar_icon(self):
-        b =cQube_landing_page(self.driver)
+        b = cQube_landing_page(self.driver)
         result = b.test_TAR()
         self.assertEqual(0, result, msg='Report page is not exist')
         self.data.page_loading(self.driver)
 
     def test_school_map_icon(self):
-        b =cQube_landing_page(self.driver)
+        b = cQube_landing_page(self.driver)
         result = b.test_school_infrastructure_map()
         self.data.page_loading(self.driver)
+
     #
     def test_school_chart_icon(self):
-        b =cQube_landing_page(self.driver)
+        b = cQube_landing_page(self.driver)
         result = b.test_composite_chart_map()
         self.assertEqual(0, result, msg='Report page is not exist')
         self.data.page_loading(self.driver)
-
 
     def test_sem_exception(self):
         b = cQube_landing_page(self.driver)

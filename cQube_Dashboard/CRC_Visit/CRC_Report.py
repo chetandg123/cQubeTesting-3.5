@@ -13,12 +13,14 @@ from reuse_func import GetData
 
 
 class crc_visits():
-    def __init__(self,driver):
+    def __init__(self, driver):
+        self.p = None
         self.driver = driver
-        self.filename=''
+        self.filename = ''
 
     def remove_file(self):
         os.remove(self.filename)
+
     def test_blocklevel(self):
         self.cal = GetData()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
@@ -50,22 +52,22 @@ class crc_visits():
         self.p.page_loading(self.driver)
 
     def test_districtwise(self):
-        p =pwd()
+        p = pwd()
         count = 0
         self.cal = GetData()
         self.driver.implicitly_wait(20)
-        self.fname =file_extention()
+        self.fname = file_extention()
         self.driver.find_element_by_xpath(Data.hyper).click()
         management_name = self.driver.find_element_by_id('name').text
         name = management_name[16:].strip().lower()
         self.cal.page_loading(self.driver)
-        District_wise=Select(self.driver.find_element_by_id("downloader"))
+        District_wise = Select(self.driver.find_element_by_id("downloader"))
         # District_wise.select_by_visible_text(" District Wise Report ")
         District_wise.select_by_index(1)
         self.cal.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
-        self.filename = p.get_download_dir() + '/' + self.fname.crc_district()+name+'_overall_allDistricts_'+self.cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + '/' + self.fname.crc_district() + name + '_overall_allDistricts_' + self.cal.get_current_date() + '.csv'
         if not os.path.isfile(self.filename):
             print("District wise csv file not downloaded")
         else:
@@ -102,22 +104,22 @@ class crc_visits():
         return count
 
     def test_blockwise(self):
-        p =pwd()
+        p = pwd()
         count = 0
-        self.cal  = GetData()
+        self.cal = GetData()
         self.fname = file_extention()
         self.driver.implicitly_wait(20)
         self.driver.find_element_by_xpath(Data.hyper).click()
         self.cal.page_loading(self.driver)
         management_name = self.driver.find_element_by_id('name').text
         name = management_name[16:].strip().lower()
-        District_wise=Select(self.driver.find_element_by_id("downloader"))
+        District_wise = Select(self.driver.find_element_by_id("downloader"))
         # District_wise.select_by_visible_text(" Block Wise Report ")
         District_wise.select_by_index(2)
         self.cal.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(4)
-        self.filename = p.get_download_dir() + '/' + self.fname.crc_block()+name+'_overall_allBlocks_'+self.cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + '/' + self.fname.crc_block() + name + '_overall_allBlocks_' + self.cal.get_current_date() + '.csv'
         print(self.filename)
         if not os.path.isfile(self.filename):
             print("District wise csv file not downloaded")
@@ -158,7 +160,7 @@ class crc_visits():
         p = pwd()
         count = 0
         self.cal = GetData()
-        self.fname=file_extention()
+        self.fname = file_extention()
         self.driver.find_element_by_xpath(Data.hyper).click()
         self.cal.page_loading(self.driver)
         management_name = self.driver.find_element_by_id('name').text
@@ -169,7 +171,7 @@ class crc_visits():
         self.cal.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(5)
-        self.filename = p.get_download_dir() + '/' + self.fname.crc_cluster()+name+'_overall_allClusters_'+self.cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + '/' + self.fname.crc_cluster() + name + '_overall_allClusters_' + self.cal.get_current_date() + '.csv'
         print(self.filename)
         if not os.path.isfile(self.filename):
             print("District wise csv file not downloaded")
@@ -209,20 +211,20 @@ class crc_visits():
     def test_schoolwise(self):
         count = 0
         self.cal = GetData()
-        self.fname=file_extention()
+        self.fname = file_extention()
         self.driver.find_element_by_xpath(Data.hyper).click()
         self.cal.page_loading(self.driver)
         management_name = self.driver.find_element_by_id('name').text
         name = management_name[16:].strip().lower()
-        p =pwd()
-        District_wise=Select(self.driver.find_element_by_id("downloader"))
+        p = pwd()
+        District_wise = Select(self.driver.find_element_by_id("downloader"))
         # District_wise.select_by_visible_text(" School Wise Report ")
         District_wise.select_by_index(4)
         self.cal.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(25)
         self.cal.page_loading(self.driver)
-        self.filename = p.get_download_dir() + '/' + self.fname.crc_school()+name+'_overall_allSchools_'+self.cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + '/' + self.fname.crc_school() + name + '_overall_allSchools_' + self.cal.get_current_date() + '.csv'
         self.cal.page_loading(self.driver)
         if not os.path.isfile(self.filename):
             print("District wise csv file not downloaded")
@@ -265,19 +267,19 @@ class crc_visits():
         self.driver.implicitly_wait(20)
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.cal.page_loading(self.driver)
-        self.year , self.month = self.cal.get_crc_month_and_year_values()
-        print(self.year,self.month , type(self.year),type(self.month))
+        self.year, self.month = self.cal.get_crc_month_and_year_values()
+        print(self.year, self.month, type(self.year), type(self.month))
         management_name = self.driver.find_element_by_id('name').text
         name = management_name[16:].strip().lower()
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
         count = 0
-        self.fname=file_extention()
-        for x in range(len(select_district.options)- 10, len(select_district.options)):
+        self.fname = file_extention()
+        for x in range(len(select_district.options) - 10, len(select_district.options)):
             select_district.select_by_index(x)
             self.cal.page_loading(self.driver)
             value = self.driver.find_element_by_name('myDistrict').get_attribute('value')
-            value=value.split(":")
-            distval= value[1].strip()
+            value = value.split(":")
+            distval = value[1].strip()
             nodata = self.driver.find_element_by_id("errMsg").text
             if nodata == "No data found":
                 print(select_district.options[x].text, "no data found!")
@@ -285,11 +287,12 @@ class crc_visits():
             else:
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(4)
-                self.filename = p.get_download_dir() + "/" + self.fname.crc_districtwise()+name+"_"+self.year+"_"+str(self.month)+'_blocks_of_district_'+distval+'_'+self.cal.get_current_date()+'.csv'
+                self.filename = p.get_download_dir() + "/" + self.fname.crc_districtwise() + name + "_" + self.year + "_" + str(
+                    self.month) + '_blocks_of_district_' + distval + '_' + self.cal.get_current_date() + '.csv'
 
                 print(self.filename)
                 if os.path.isfile(self.filename) != True:
-                    print(select_district.options[x].text,'csv file is not downloaded')
+                    print(select_district.options[x].text, 'csv file is not downloaded')
                     count = count + 1
                 else:
                     with open(self.filename) as fin:
@@ -300,18 +303,20 @@ class crc_visits():
                         vstd = 0
                         for row in csv.reader(fin):
                             tschools += int(row[0])
-                            vsts +=int(row[2])
-                            vstd +=int(row[1])
+                            vsts += int(row[2])
+                            vstd += int(row[1])
                         totalschools = self.driver.find_element_by_id("schools").text
                         visited = self.driver.find_element_by_id("visited").text
                         visits = self.driver.find_element_by_id("visits").text
-                        tsc = re.sub('\D',"",totalschools)
-                        vs = re.sub('\D',"",visits)
-                        vd= re.sub('\D', "",visited)
+                        tsc = re.sub('\D', "", totalschools)
+                        vs = re.sub('\D', "", visits)
+                        vd = re.sub('\D', "", visited)
                         if int(tsc) != tschools:
-                            print(select_district.options[x].text, ":", "total no of schools  :",tschools, int(tsc),"records are mismatch found")
+                            print(select_district.options[x].text, ":", "total no of schools  :", tschools, int(tsc),
+                                  "records are mismatch found")
                         if int(vs) != vsts:
-                            print(select_district.options[x].text, ":", "total no of visits  :",int(vs) , vsts,"records are mismatch found")
+                            print(select_district.options[x].text, ":", "total no of visits  :", int(vs), vsts,
+                                  "records are mismatch found")
                         if int(vd) != vstd:
                             print(select_district.options[x].text, ":", "total no of visits  :", int(vd), vstd,
                                   "records are mismatch found")
@@ -350,20 +355,20 @@ class crc_visits():
     def check_csv_download(self):
         p = pwd()
         self.cal = GetData()
-        self.fname =file_extention()
+        self.fname = file_extention()
         self.driver.implicitly_wait(60)
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.cal.page_loading(self.driver)
-        self.year,self.month = self.cal.get_crc_month_and_year_values()
+        self.year, self.month = self.cal.get_crc_month_and_year_values()
         management_name = self.driver.find_element_by_id('name').text
         name = management_name[16:].strip().lower()
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
         select_block = Select(self.driver.find_element_by_name('myBlock'))
         count = 0
-        for x in range(int(len(select_district.options))-1, int(len(select_district.options))):
+        for x in range(int(len(select_district.options)) - 1, int(len(select_district.options))):
             select_district.select_by_index(x)
             self.cal.page_loading(self.driver)
-            for y in range(len(select_block.options)-3, len(select_block.options)):
+            for y in range(len(select_block.options) - 3, len(select_block.options)):
                 select_block.select_by_index(y)
                 self.cal.page_loading(self.driver)
                 cluval = self.driver.find_element_by_name('myBlock').get_attribute('value')
@@ -371,12 +376,13 @@ class crc_visits():
                 value = cluval[1].strip()
                 nodata = self.driver.find_element_by_id("errMsg").text
                 if nodata == "No data found":
-                    print(select_district.options[x].text, select_block.options[y].text,"no data found!")
+                    print(select_district.options[x].text, select_block.options[y].text, "no data found!")
                     count = count + 1
                 else:
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(3)
-                    self.filename = p.get_download_dir() + '/' + self.fname.crc_blockwise()+name+"_"+self.year+"_"+str(self.month)+'_clusters_of_block_' + value.strip() +"_"+ self.cal.get_current_date() + '.csv'
+                    self.filename = p.get_download_dir() + '/' + self.fname.crc_blockwise() + name + "_" + self.year + "_" + str(
+                        self.month) + '_clusters_of_block_' + value.strip() + "_" + self.cal.get_current_date() + '.csv'
                     print(self.filename)
                     if not os.path.isfile(self.filename):
                         print(select_block.options[y].text, " csv file not downloaded")
@@ -411,6 +417,7 @@ class crc_visits():
                                 count = count + 1
                         os.remove(self.filename)
             return count
+
     def test_table_data(self):
         self.p = GetData()
         self.driver.implicitly_wait(20)
@@ -478,8 +485,8 @@ class crc_visits():
         self.p.page_loading(self.driver)
         xaxis_lists = Select(self.driver.find_element_by_id('x-axis'))
         yaxis_lists = Select(self.driver.find_element_by_id('y-axis'))
-        count1 = len(xaxis_lists.options)-1
-        count2 = len(yaxis_lists.options)-1
+        count1 = len(xaxis_lists.options) - 1
+        count2 = len(yaxis_lists.options) - 1
         for i in range(len(xaxis_lists.options)):
             time.sleep(2)
             xaxis_lists.select_by_index(i)
@@ -489,10 +496,10 @@ class crc_visits():
             time.sleep(2)
             yaxis_lists.select_by_index(i)
             self.p.page_loading(self.driver)
-        return count1,count2
+        return count1, count2
 
     def test_order(self):
-        self.p =GetData()
+        self.p = GetData()
         self.driver.implicitly_wait(20)
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.p.page_loading(self.driver)
@@ -539,4 +546,3 @@ class crc_visits():
         # self.driver.find_element_by_xpath(Locators.dist_hyper).click()
         self.driver.find_element_by_xpath(Data.hyper).click()
         self.p.page_loading(self.driver)
-

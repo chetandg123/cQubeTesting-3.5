@@ -1,22 +1,22 @@
 import unittest
 
-
-
 from cQube_Dashboard.CRC_Visit.CRC_Report import crc_visits
 from reuse_func import GetData
 
+
 class cQube_CRC_Report(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
-            self.data = GetData()
-            self.driver = self.data.get_driver()
-            self.driver.implicitly_wait(100)
-            self.data.open_cqube_appln(self.driver)
-            self.data.login_cqube(self.driver)
-            self.data.navigate_to_crc_report()
-            self.data.page_loading(self.driver)
-
+        self.data = GetData()
+        self.driver = self.data.get_driver()
+        self.driver.implicitly_wait(100)
+        self.data.open_cqube_appln(self.driver)
+        self.data.login_cqube(self.driver)
+        self.data.navigate_to_crc_report()
+        self.data.page_loading(self.driver)
 
     def test_navigate_crc(self):
         b = crc_visits(self.driver)
@@ -37,7 +37,7 @@ class cQube_CRC_Report(unittest.TestCase):
     def test_download_blockwise_csv(self):
         b = crc_visits(self.driver)
         result = b.test_blockwise()
-        self.assertEqual(0,result, msg="File is not downloaded")
+        self.assertEqual(0, result, msg="File is not downloaded")
         print("blockwise csv file is downloaded ")
         self.data.page_loading(self.driver)
 
@@ -71,7 +71,7 @@ class cQube_CRC_Report(unittest.TestCase):
     def test_schools_per_cluster_csv_download1(self):
         school = crc_visits(self.driver)
         result = school.check_csv_download()
-        self.assertEqual(result,0,msg='csv file is not downloaded')
+        self.assertEqual(result, 0, msg='csv file is not downloaded')
         self.data.page_loading(self.driver)
 
     def test_districtwise_tabledata(self):
@@ -99,13 +99,6 @@ class cQube_CRC_Report(unittest.TestCase):
         self.data.page_loading(self.driver)
         print("checked graph x and y axis options")
 
-    # def test_orderwise_tabledata(self):
-    #     b = crc_visits(self.driver)
-    #     result = b.test_order()
-    #     self.assertEqual(result, "menu", msg="Menu is not exist")
-    #     print("check order of table records is working ")
-    #     self.data.page_loading(self.driver)
-
     def test_on_clusterlevel_to_hyperlinks(self):
         b = crc_visits(self.driver)
         result = b.test_hyperlink()
@@ -115,87 +108,10 @@ class cQube_CRC_Report(unittest.TestCase):
     def test_homebutton(self):
         b = crc_visits(self.driver)
         result = b.test_homebutton()
-        self.assertEqual(0,result,msg="Home button is not working ")
+        self.assertEqual(0, result, msg="Home button is not working ")
         print("checking with home icon and it is working ")
         self.data.page_loading(self.driver)
 
     @classmethod
     def tearDownClass(cls):
         cls.driver.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

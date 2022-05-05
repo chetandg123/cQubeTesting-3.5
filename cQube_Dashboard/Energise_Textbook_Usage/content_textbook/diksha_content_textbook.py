@@ -12,8 +12,11 @@ from reuse_func import GetData
 
 class diksha_content_textbook_report():
 
-    def __init__(self,driver):
+    def __init__(self, driver):
+        self.p = None
+        self.data = None
         self.driver = driver
+
     def test_navigation(self):
         self.data = GetData()
         count = 0
@@ -30,12 +33,13 @@ class diksha_content_textbook_report():
             count = count + 1
         self.data.page_loading(self.driver)
         return count
+
     def test_hyperlink(self):
         self.data = GetData()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
         time.sleep(5)
-        district  =Select(self.driver.find_element_by_id('choose_dist'))
+        district = Select(self.driver.find_element_by_id('choose_dist'))
         district.select_by_index(5)
         self.data.page_loading(self.driver)
         self.driver.find_element_by_xpath(Data.hyper_link).click()
@@ -49,7 +53,7 @@ class diksha_content_textbook_report():
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
-        self.filename = self.p.get_download_dir() + "/" + 'usage_by_textbook_content_all_'+self.data.get_current_date()+'.csv'
+        self.filename = self.p.get_download_dir() + "/" + 'usage_by_textbook_content_all_' + self.data.get_current_date() + '.csv'
         print(self.filename)
         file = os.path.isfile(self.filename)
         self.data.page_loading(self.driver)
@@ -60,7 +64,7 @@ class diksha_content_textbook_report():
             row_count = len(data)
         os.remove(self.filename)
         tablecount = self.driver.find_elements_by_tag_name('tr')
-        records = int(len(tablecount)) - 2
+        int(len(tablecount)) - 2
         time.sleep(2)
         # if row_count != records:
         #     print("records count mismatch in downloaded file and table records")
@@ -80,9 +84,9 @@ class diksha_content_textbook_report():
         if self.msg.no_data_found() in self.driver.page_source:
             print("Last 7 days showing no records")
         else:
-            districts  =Select(self.driver.find_element_by_id('choose_dist'))
+            districts = Select(self.driver.find_element_by_id('choose_dist'))
             i = 0
-            for x in range(len(districts.options)-2, len(districts.options)):
+            for x in range(len(districts.options) - 2, len(districts.options)):
                 time.sleep(1)
                 districts.select_by_index(x)
                 name = districts.options[x].text
@@ -94,7 +98,7 @@ class diksha_content_textbook_report():
                 else:
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(3)
-                    self.filename = self.p.get_download_dir() + "/"+'usage_by_textbook_content_last_7_days_'+self.data.get_current_date()+".csv"
+                    self.filename = self.p.get_download_dir() + "/" + 'usage_by_textbook_content_last_7_days_' + self.data.get_current_date() + ".csv"
                     print(self.filename)
                     file = os.path.isfile(self.filename)
                     self.data.page_loading(self.driver)
@@ -112,6 +116,7 @@ class diksha_content_textbook_report():
                     #     count = count + 1
                     # i = i + 1
         return count
+
     def test_each_districts(self):
         self.data = GetData()
         self.p = pwd()
@@ -128,21 +133,21 @@ class diksha_content_textbook_report():
         if self.msg.no_data_found() in self.driver.page_source:
             print("Last days showing no records")
         else:
-            districts  =Select(self.driver.find_element_by_id('choose_dist'))
+            districts = Select(self.driver.find_element_by_id('choose_dist'))
             i = 0
-            for x in range(len(districts.options)-2,len(districts.options)):
+            for x in range(len(districts.options) - 2, len(districts.options)):
                 time.sleep(1)
                 districts.select_by_index(x)
                 name = districts.options[x].text
                 names = name.strip()
                 self.data.page_loading(self.driver)
                 time.sleep(2)
-                if  self.msg.no_data_found() in self.driver.page_source:
-                    print(districts.options[x].text ," does not last day records")
+                if self.msg.no_data_found() in self.driver.page_source:
+                    print(districts.options[x].text, " does not last day records")
                 else:
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(3)
-                    self.filename = self.p.get_download_dir() + "/"+'usage_by_textbook_content_last_day_'+self.data.get_current_date()+".csv"
+                    self.filename = self.p.get_download_dir() + "/" + 'usage_by_textbook_content_last_day_' + self.data.get_current_date() + ".csv"
                     print(self.filename)
                     file = os.path.isfile(self.filename)
                     self.data.page_loading(self.driver)
@@ -176,9 +181,9 @@ class diksha_content_textbook_report():
         if self.msg.no_data_found() in self.driver.page_source:
             print("Last 30 day showing no records")
         else:
-            districts  =Select(self.driver.find_element_by_id('choose_dist'))
+            districts = Select(self.driver.find_element_by_id('choose_dist'))
             i = 0
-            for x in range(len(districts.options)-10, len(districts.options)):
+            for x in range(len(districts.options) - 10, len(districts.options)):
                 time.sleep(1)
                 districts.select_by_index(x)
                 name = districts.options[x].text
@@ -189,7 +194,7 @@ class diksha_content_textbook_report():
                 else:
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(3)
-                    self.filename = self.p.get_download_dir() + "/"+'usage_by_textbook_content_last_30_days_'+self.data.get_current_date()+".csv"
+                    self.filename = self.p.get_download_dir() + "/" + 'usage_by_textbook_content_last_30_days_' + self.data.get_current_date() + ".csv"
                     print(self.driver)
                     file = os.path.isfile(self.filename)
                     self.data.page_loading(self.driver)
@@ -223,20 +228,20 @@ class diksha_content_textbook_report():
         if self.msg.no_data_found() in self.driver.page_source:
             print("Last days records")
         else:
-            districts  =Select(self.driver.find_element_by_id('choose_dist'))
-            for x in range(len(districts.options)-3,len(districts.options)):
+            districts = Select(self.driver.find_element_by_id('choose_dist'))
+            for x in range(len(districts.options) - 3, len(districts.options)):
                 time.sleep(1)
                 districts.select_by_index(x)
                 self.data.page_loading(self.driver)
-                if  self.msg.no_data_found() in self.driver.page_source:
-                    print(districts.options[x].text ," does not last day records")
+                if self.msg.no_data_found() in self.driver.page_source:
+                    print(districts.options[x].text, " does not last day records")
                     count = count + 1
         return count
 
     def test_districts(self):
         self.data = GetData()
         self.p = pwd()
-        self.msg =file_extention()
+        self.msg = file_extention()
         count = 0
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
@@ -247,13 +252,13 @@ class diksha_content_textbook_report():
         if self.msg.no_data_found() in self.driver.page_source:
             print("Last 7 days records")
         else:
-            districts  =Select(self.driver.find_element_by_id('choose_dist'))
-            for x in range(len(districts.options)-3,len(districts.options)):
+            districts = Select(self.driver.find_element_by_id('choose_dist'))
+            for x in range(len(districts.options) - 3, len(districts.options)):
                 time.sleep(1)
                 districts.select_by_index(x)
                 self.data.page_loading(self.driver)
-                if  self.msg.no_data_found() in self.driver.page_source:
-                    print(districts.options[x].text ," does not last week records")
+                if self.msg.no_data_found() in self.driver.page_source:
+                    print(districts.options[x].text, " does not last week records")
                     count = count + 1
         return count
 
@@ -271,13 +276,13 @@ class diksha_content_textbook_report():
         if self.msg.no_data_found() in self.driver.page_source:
             print("Last 30 days records")
         else:
-            districts  =Select(self.driver.find_element_by_id('choose_dist'))
-            for x in range(len(districts.options)-3,len(districts.options)):
+            districts = Select(self.driver.find_element_by_id('choose_dist'))
+            for x in range(len(districts.options) - 3, len(districts.options)):
                 time.sleep(1)
                 districts.select_by_index(x)
                 self.data.page_loading(self.driver)
-                if  self.msg.no_data_found() in self.driver.page_source:
-                    print(districts.options[x].text ," does not last month records")
+                if self.msg.no_data_found() in self.driver.page_source:
+                    print(districts.options[x].text, " does not last month records")
                     count = count + 1
             self.data.page_loading(self.driver)
         return count
@@ -288,7 +293,7 @@ class diksha_content_textbook_report():
         self.driver.implicitly_wait(20)
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.data.page_loading(self.driver)
-        district  =Select(self.driver.find_element_by_id('choose_dist'))
+        district = Select(self.driver.find_element_by_id('choose_dist'))
         district.select_by_index(4)
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.homeicon).click()
@@ -360,19 +365,19 @@ class diksha_content_textbook_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(1)
         if " No Data Available " in self.driver.page_source:
-            print(times.first_selected_option.text,"is not having data..")
+            print(times.first_selected_option.text, "is not having data..")
             return count
         else:
             self.driver.find_element_by_id('rawDownload').click()
             time.sleep(35)
             timeperiod = (times.first_selected_option.text).lower()
-            self.filename = self.p.get_download_dir() + "/"+timeperiod+".csv"
+            self.filename = self.p.get_download_dir() + "/" + timeperiod + ".csv"
             if os.path.isfile(self.filename) != True:
-                print(timeperiod,'raw file is not downloaded')
+                print(timeperiod, 'raw file is not downloaded')
                 count = count + 1
             else:
-                 print(timeperiod,'raw file is downloaded..')
-                 os.remove(self.filename)
+                print(timeperiod, 'raw file is downloaded..')
+                os.remove(self.filename)
             return count
 
     def test_last_30_days_rawfile_download(self):
@@ -385,21 +390,21 @@ class diksha_content_textbook_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(2)
         time.sleep(3)
-        if " No Data Available " or "No data found"  in self.driver.page_source:
-            print(times.first_selected_option.text,"is not having data..")
+        if " No Data Available " or "No data found" in self.driver.page_source:
+            print(times.first_selected_option.text, "is not having data..")
             return count
         else:
             self.driver.find_element_by_id('rawDownload').click()
             time.sleep(35)
-            timeperiod = (times.first_selected_option.text.replace("","_")).lower()
-            self.filename = self.p.get_download_dir() + "/last_30_days"+".csv"
+            timeperiod = (times.first_selected_option.text.replace("", "_")).lower()
+            self.filename = self.p.get_download_dir() + "/last_30_days" + ".csv"
             print(self.filename)
             if os.path.isfile(self.filename) != True:
-                print(timeperiod,'raw file is not downloaded')
+                print(timeperiod, 'raw file is not downloaded')
                 count = count + 1
             else:
-                 print(timeperiod,'raw file is downloaded..')
-                 os.remove(self.filename)
+                print(timeperiod, 'raw file is downloaded..')
+                os.remove(self.filename)
             return count
 
     def test_last_7_days_rawfile_download(self):
@@ -413,20 +418,20 @@ class diksha_content_textbook_report():
         times.select_by_index(3)
         time.sleep(3)
         if " No Data Available " or "No data found" in self.driver.page_source:
-            print(times.first_selected_option.text,"is not having data..")
+            print(times.first_selected_option.text, "is not having data..")
             return count
         else:
             self.driver.find_element_by_id('rawDownload').click()
             time.sleep(35)
-            timeperiod = (times.first_selected_option.text.replace("","_")).lower()
-            self.filename = self.p.get_download_dir() + "/last_7_days"+".csv"
+            timeperiod = (times.first_selected_option.text.replace("", "_")).lower()
+            self.filename = self.p.get_download_dir() + "/last_7_days" + ".csv"
             print(self.filename)
             if os.path.isfile(self.filename) != True:
-                print(timeperiod,'raw file is not downloaded')
+                print(timeperiod, 'raw file is not downloaded')
                 count = count + 1
             else:
-                 print(timeperiod,'raw file is downloaded..')
-                 os.remove(self.filename)
+                print(timeperiod, 'raw file is downloaded..')
+                os.remove(self.filename)
             return count
 
     def test_last_day_rawfile_download(self):
@@ -439,25 +444,19 @@ class diksha_content_textbook_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(4)
         time.sleep(5)
-        if " No Data Available "  or "No data found" in self.driver.page_source:
-            print(times.first_selected_option.text,"is not having data..")
+        if " No Data Available " or "No data found" in self.driver.page_source:
+            print(times.first_selected_option.text, "is not having data..")
             return count
         else:
             self.driver.find_element_by_id('rawDownload').click()
             time.sleep(35)
-            timeperiod = (times.first_selected_option.text.replace("","_")).lower()
-            self.filename = self.p.get_download_dir() + "/last_day"+".csv"
+            timeperiod = (times.first_selected_option.text.replace("", "_")).lower()
+            self.filename = self.p.get_download_dir() + "/last_day" + ".csv"
             print(self.filename)
             if os.path.isfile(self.filename) != True:
-                print(timeperiod,'raw file is not downloaded')
+                print(timeperiod, 'raw file is not downloaded')
                 count = count + 1
             else:
-                 print(timeperiod,'raw file is downloaded..')
-                 os.remove(self.filename)
+                print(timeperiod, 'raw file is downloaded..')
+                os.remove(self.filename)
             return count
-
-
-
-
-
-

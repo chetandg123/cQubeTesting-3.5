@@ -9,6 +9,9 @@ from reuse_func import GetData
 
 class composite_regression_report(unittest.TestCase):
 
+    driver = None
+    data = None
+
     @classmethod
     def setUpClass(self):
         self.data = GetData()
@@ -18,7 +21,6 @@ class composite_regression_report(unittest.TestCase):
         self.data.login_cqube(self.driver)
         self.data.navigate_to_composite_report()
         self.data.page_loading(self.driver)
-
 
     def test_composite_icon(self):
         self.data.page_loading(self.driver)
@@ -32,7 +34,7 @@ class composite_regression_report(unittest.TestCase):
         else:
             print('Hamburger - composite-Dashboard is not working ')
             count = count + 1
-        self.assertEqual(0,count,msg="Home btn is not working ")
+        self.assertEqual(0, count, msg="Home btn is not working ")
         self.driver.find_element_by_id('compositeReport').click()
         self.data.page_loading(self.driver)
 
@@ -62,19 +64,19 @@ class composite_regression_report(unittest.TestCase):
 
     def test_hyperlink(self):
         b = Composite_report_across_Metric(self.driver)
-        res = b.test_hyperlink()
+        b.test_hyperlink()
         print("Checked with hyper link ")
         self.data.page_loading(self.driver)
 
     def test_xaxis_options(self):
         b = Composite_report_across_Metric(self.driver)
-        res = b.test_xplots()
+        b.test_xplots()
         print("Checked with all xaxis options are selectable")
         self.data.page_loading(self.driver)
 
     def test_yaxis_options(self):
         b = Composite_report_across_Metric(self.driver)
-        res = b.test_yplots()
+        b.test_yplots()
         print("Checked with all yaxis options are selectable")
         self.data.page_loading(self.driver)
 
@@ -113,7 +115,6 @@ class composite_regression_report(unittest.TestCase):
         print("Cluster wise graph is displayed ")
         self.data.page_loading(self.driver)
 
-
     def test_composite_schoolwise_records(self):
         b = Composite_report_across_Metric(self.driver)
         res = b.check_csv_download()
@@ -134,7 +135,6 @@ class composite_regression_report(unittest.TestCase):
         self.assertTrue(res, msg="Some of clusters csv file is not downloaded ")
         print("Checked with cluster wise csv file downloading ")
         self.data.page_loading(self.driver)
-
 
     @classmethod
     def tearDownClass(cls):

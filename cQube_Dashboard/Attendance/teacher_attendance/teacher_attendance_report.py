@@ -22,10 +22,6 @@ class Teacher_Attendance_report():
         self.driver = driver
         self.student_count = ''
 
-    global student_count
-
-    global student_count
-
     def click_on_tar(self):
         try:
             cal = GetData()
@@ -77,7 +73,7 @@ class Teacher_Attendance_report():
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
         p = pwd()
-        self.filename = p.get_download_dir()+'/'+files.teacher_download()+name+'_allDistricts_overall_'+cal.get_current_date()+".csv"
+        self.filename = p.get_download_dir() + '/' + files.teacher_download() + name + '_allDistricts_overall_' + cal.get_current_date() + ".csv"
         print(self.filename)
         if not os.path.isfile(self.filename):
             print("Districtwise csv is not downloaded")
@@ -89,21 +85,21 @@ class Teacher_Attendance_report():
                 total = 0
                 schools = 0
                 for row in csv.reader(fin):
-                    total += int(row[3].replace(',',''))
-                    schools += int(row[4].replace(',',''))
+                    total += int(row[3].replace(',', ''))
+                    schools += int(row[4].replace(',', ''))
                 students = self.driver.find_element_by_id("students").text
                 res = re.sub('\D', "", students)
 
                 school = self.driver.find_element_by_id("schools").text
                 sc = re.sub('\D', "", school)
                 if int(res) != total:
-                    print(int(res) , total,"Teacher count mismatched")
+                    print(int(res), total, "Teacher count mismatched")
                     count = count + 1
                 if int(sc) != schools:
-                    print(int(sc) ,schools,"school count mismatched")
+                    print(int(sc), schools, "school count mismatched")
                     count = count + 1
             os.remove(self.filename)
-        return  count
+        return count
 
     def click_download_icon_of_blocks(self):
         cal = GetData()
@@ -119,7 +115,7 @@ class Teacher_Attendance_report():
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(5)
         p = pwd()
-        self.filename = p.get_download_dir() +'/'+files.teacher_block_download()+name+"_allBlocks_overall_"+cal.get_current_date()+".csv"
+        self.filename = p.get_download_dir() + '/' + files.teacher_block_download() + name + "_allBlocks_overall_" + cal.get_current_date() + ".csv"
         print(self.filename)
         return os.path.isfile(self.filename)
 
@@ -133,7 +129,7 @@ class Teacher_Attendance_report():
         cal.page_loading(self.driver)
         management_name = self.driver.find_element_by_id('name').text
         name = management_name[16:].strip().lower()
-        self.year,self.month = cal.get_student_month_and_year_values()
+        self.year, self.month = cal.get_student_month_and_year_values()
         self.driver.find_element_by_id(Data.SAR_Clusters_btn).click()
         cal.page_loading(self.driver)
         time.sleep(5)
@@ -141,13 +137,14 @@ class Teacher_Attendance_report():
         time.sleep(5)
         p = pwd()
         count = 0
-        self.filename = p.get_download_dir() +'/'+files.teacher_cluster_download()+name+'_allClusters_'+self.month+"_"+self.year+'_'+cal.get_current_date()+".csv"
+        self.filename = p.get_download_dir() + '/' + files.teacher_cluster_download() + name + '_allClusters_' + self.month + "_" + self.year + '_' + cal.get_current_date() + ".csv"
         print(self.filename)
-        if os.path.isfile(self.filename) !=True:
+        if os.path.isfile(self.filename) != True:
             count = count + 1
         else:
             os.remove(self.filename)
         return count
+
     def click_download_icon_of_schools(self):
         cal = GetData()
         files = file_extention()
@@ -155,14 +152,14 @@ class Teacher_Attendance_report():
         cal.page_loading(self.driver)
         management_name = self.driver.find_element_by_id('name').text
         name = management_name[16:].strip().lower()
-        self.year,self.month =cal.get_student_month_and_year_values()
+        self.year, self.month = cal.get_student_month_and_year_values()
         self.driver.find_element_by_id(Data.SAR_Schools_btn).click()
         cal.page_loading(self.driver)
         time.sleep(5)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(5)
         p = pwd()
-        self.filename = p.get_download_dir()+'/'+files.teacher_school_download()+name+'_allSchools_'+self.month +'_'+self.year+'_'+cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + '/' + files.teacher_school_download() + name + '_allSchools_' + self.month + '_' + self.year + '_' + cal.get_current_date() + '.csv'
         print(self.filename)
         return os.path.isfile(self.filename)
 
@@ -172,11 +169,11 @@ class Teacher_Attendance_report():
         cal.page_loading(self.driver)
         management_name = self.driver.find_element_by_id('name').text
         name = management_name[16:].strip().lower()
-        self.year,self.month = cal.get_student_month_and_year_values()
+        self.year, self.month = cal.get_student_month_and_year_values()
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
         count = 0
         files = file_extention()
-        for x in range(1, len(select_district.options)-26):
+        for x in range(1, len(select_district.options) - 26):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
             value = self.driver.find_element_by_name('myDistrict').get_attribute('value')
@@ -189,7 +186,9 @@ class Teacher_Attendance_report():
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
             p = pwd()
-            self.filename = p.get_download_dir() +'/'+files.teacher_districtwise_download()+name+"_blockPerDistricts_of_district_"+value[1].strip()+'_'+ self.month + "_" + self.year+'_'+cal.get_current_date() + ".csv"
+            self.filename = p.get_download_dir() + '/' + files.teacher_districtwise_download() + name + "_blockPerDistricts_of_district_" + \
+                            value[
+                                1].strip() + '_' + self.month + "_" + self.year + '_' + cal.get_current_date() + ".csv"
             print(self.filename)
             if not os.path.isfile(self.filename):
                 print("District - " + select_district.first_selected_option.text + " csv is not downloaded")
@@ -201,8 +200,8 @@ class Teacher_Attendance_report():
                     total = 0
                     schools = 0
                     for row in csv.reader(fin):
-                        total += int(row[5].replace(',',''))
-                        schools += int(row[6].replace(',',''))
+                        total += int(row[5].replace(',', ''))
+                        schools += int(row[6].replace(',', ''))
                     students = self.driver.find_element_by_id("students").text
                     res = re.sub('\D', "", students)
 
@@ -218,6 +217,7 @@ class Teacher_Attendance_report():
                 self.remove_csv()
 
         return count
+
     def check_dots_on_each_districts(self):
         cal = GetData()
         cal.click_on_state(self.driver)
@@ -240,15 +240,15 @@ class Teacher_Attendance_report():
         cal.page_loading(self.driver)
         management_name = self.driver.find_element_by_id('name').text
         name = management_name[16:].strip().lower()
-        self.year,self.month = cal.get_student_month_and_year_values()
+        self.year, self.month = cal.get_student_month_and_year_values()
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
         select_block = Select(self.driver.find_element_by_name('myBlock'))
         count = 0
         files = file_extention()
-        for x in range(len(select_district.options)-2, len(select_district.options)):
+        for x in range(len(select_district.options) - 2, len(select_district.options)):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
-            for y in range(len(select_block.options)-2, len(select_block.options)):
+            for y in range(len(select_block.options) - 2, len(select_block.options)):
                 select_block.select_by_index(y)
                 cal.page_loading(self.driver)
                 value = self.driver.find_element_by_name('myBlock').get_attribute('value')
@@ -263,7 +263,9 @@ class Teacher_Attendance_report():
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(4)
                 p = pwd()
-                self.filename = p.get_download_dir()+'/'+files.teacher_blockwise_download()+name+'_clusterPerBlocks_of_block_' +value[1].strip()+'_'+self.month + "_" + self.year+'_'+cal.get_current_date()+ ".csv"
+                self.filename = p.get_download_dir() + '/' + files.teacher_blockwise_download() + name + '_clusterPerBlocks_of_block_' + \
+                                value[
+                                    1].strip() + '_' + self.month + "_" + self.year + '_' + cal.get_current_date() + ".csv"
                 print(self.filename)
                 if not os.path.isfile(self.filename):
                     print(
@@ -276,8 +278,8 @@ class Teacher_Attendance_report():
                         total = 0
                         schools = 0
                         for row in csv.reader(fin):
-                            total += int(row[7].replace(',',''))
-                            schools += int(row[8].replace(',',''))
+                            total += int(row[7].replace(',', ''))
+                            schools += int(row[8].replace(',', ''))
                         students = self.driver.find_element_by_id("students").text
                         res = re.sub('\D', "", students)
 
@@ -285,7 +287,8 @@ class Teacher_Attendance_report():
                         sc = re.sub('\D', "", school)
                         if int(res) != total:
                             print(
-                                "District" + select_district.first_selected_option.text + "Block" + select_block.first_selected_option.text , int(res) , total, "student count mismatched")
+                                "District" + select_district.first_selected_option.text + "Block" + select_block.first_selected_option.text,
+                                int(res), total, "student count mismatched")
                             count = count + 1
                         if int(sc) != schools:
                             print(
@@ -301,16 +304,16 @@ class Teacher_Attendance_report():
         cal.page_loading(self.driver)
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
         select_block = Select(self.driver.find_element_by_name('myBlock'))
-        select_cluster=Select(self.driver.find_element_by_name('myCluster'))
+        select_cluster = Select(self.driver.find_element_by_name('myCluster'))
         count = 0
-        for x in range(len(select_district.options)-1, len(select_district.options)):
+        for x in range(len(select_district.options) - 1, len(select_district.options)):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
-            for y in range(len(select_block.options)-1, len(select_block.options)):
+            for y in range(len(select_block.options) - 1, len(select_block.options)):
                 select_block.select_by_index(y)
                 cal.page_loading(self.driver)
                 time.sleep(2)
-                for z in range(1,len(select_cluster.options)):
+                for z in range(1, len(select_cluster.options)):
                     select_cluster.select_by_index(z)
                     cal.page_loading(self.driver)
                     time.sleep(2)
@@ -318,7 +321,7 @@ class Teacher_Attendance_report():
                     if len(markers) - 1 == 0:
                         print(
                             "District -" + select_district.first_selected_option.text + " Block " + select_block.first_selected_option.text +
-                            " cluster - "+select_cluster.first_selected_option.text +" No Locators")
+                            " cluster - " + select_cluster.first_selected_option.text + " No Locators")
                         count = count + 1
                     time.sleep(2)
                     self.driver.find_element_by_id(Data.Download).click()
@@ -327,7 +330,7 @@ class Teacher_Attendance_report():
                     self.filename = p.get_download_dir() + "/Schools_per_cluster_report_" + self.month + "_" + self.year + ".csv"
                     if not os.path.isfile(self.filename):
                         print(
-                            "District" + select_district.first_selected_option.text + "Block" + select_block.first_selected_option.text + "cluster"+select_cluster.first_selected_option.text + "csv is not downloaded")
+                            "District" + select_district.first_selected_option.text + "Block" + select_block.first_selected_option.text + "cluster" + select_cluster.first_selected_option.text + "csv is not downloaded")
                         count = count + 1
                     else:
                         with open(self.filename) as fin:
@@ -336,7 +339,7 @@ class Teacher_Attendance_report():
                             total = 0
                             schools = 0
                             for row in csv.reader(fin):
-                                total += int(row[9].replace(',',''))
+                                total += int(row[9].replace(',', ''))
                             students = self.driver.find_element_by_id("students").text
                             res = re.sub('\D', "", students)
 
@@ -344,9 +347,10 @@ class Teacher_Attendance_report():
                             sc = re.sub('\D', "", school)
                             if int(res) != total:
                                 print(
-                                    "District" + select_district.first_selected_option.text + "Block" + select_block.first_selected_option.text , int(res) , total, "student count mismatched")
+                                    "District" + select_district.first_selected_option.text + "Block" + select_block.first_selected_option.text,
+                                    int(res), total, "student count mismatched")
                                 count = count + 1
-                            if int(sc) != len(markers)-1:
+                            if int(sc) != len(markers) - 1:
                                 print(
                                     "District" + select_district.first_selected_option.text + "Block" + select_block.first_selected_option.text + "school count mismatched")
                                 count = count + 1
@@ -359,16 +363,16 @@ class Teacher_Attendance_report():
         cal.page_loading(self.driver)
         management_name = self.driver.find_element_by_id('name').text
         name = management_name[16:].strip().lower()
-        self.year,self.month = cal.get_student_month_and_year_values()
+        self.year, self.month = cal.get_student_month_and_year_values()
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
         select_block = Select(self.driver.find_element_by_name('myBlock'))
         select_cluster = Select(self.driver.find_element_by_name('myCluster'))
         count = 0
         file = file_extention()
-        for x in range(len(select_district.options)-1, len(select_district.options)):
+        for x in range(len(select_district.options) - 1, len(select_district.options)):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
-            for y in range(len(select_block.options)-1, len(select_block.options)):
+            for y in range(len(select_block.options) - 1, len(select_block.options)):
                 select_block.select_by_index(y)
                 cal.page_loading(self.driver)
                 for z in range(1, len(select_cluster.options)):
@@ -386,7 +390,9 @@ class Teacher_Attendance_report():
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(4)
                     p = pwd()
-                    self.filename =  p.get_download_dir() + '/'+file.teacher_clusterwise_download()+name+'_schoolPerClusters_of_cluster_'+value[1].strip()+'_'+ self.month + "_" + self.year +"_"+ cal.get_current_date()+".csv"
+                    self.filename = p.get_download_dir() + '/' + file.teacher_clusterwise_download() + name + '_schoolPerClusters_of_cluster_' + \
+                                    value[
+                                        1].strip() + '_' + self.month + "_" + self.year + "_" + cal.get_current_date() + ".csv"
                     print(self.filename)
                     if not os.path.isfile(self.filename):
                         print(
@@ -418,6 +424,7 @@ class Teacher_Attendance_report():
                         self.remove_csv()
 
         return count
+
     def click_on_hyperlinks(self):
         cal = GetData()
         cal.click_on_state(self.driver)
@@ -444,11 +451,11 @@ class Teacher_Attendance_report():
         return result1, result2, choose_dist
 
     def click_HomeButton(self):
-            self.driver.find_element_by_id(Data.cQube_logo).click()
-            cal = GetData()
-            cal.page_loading(self.driver)
-            cal.navigate_to_teacher_attendance_report()
-            return self.driver.current_url
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+        cal = GetData()
+        cal.page_loading(self.driver)
+        cal.navigate_to_teacher_attendance_report()
+        return self.driver.current_url
 
     def click_on_blocks_click_on_home_icon(self):
         self.driver.find_element_by_id(Data.SAR_Blocks_btn).click()
@@ -457,8 +464,7 @@ class Teacher_Attendance_report():
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         cal.page_loading(self.driver)
 
-
-    #Teacher_Acedemic dropdown
+    # Teacher_Acedemic dropdown
 
     def check_academic_dropdown_is_present(self):
         cal = GetData()
@@ -466,7 +472,7 @@ class Teacher_Attendance_report():
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         cal.page_loading(self.driver)
         academic = Select(self.driver.find_element_by_id('academicYear'))
-        options = len(academic.options)-1
+        options = len(academic.options) - 1
         return options
 
     def check_academic_dropdown_options(self):
@@ -477,9 +483,9 @@ class Teacher_Attendance_report():
         cal.page_loading(self.driver)
         academic = Select(self.driver.find_element_by_id('academicYear'))
         options = len(academic.options) - 1
-        for i in range(1,len(academic.options)):
+        for i in range(1, len(academic.options)):
             academic.select_by_index(i)
-            print(academic.options[i].text,'is selected')
+            print(academic.options[i].text, 'is selected')
             count = count + 1
             time.sleep(2)
         cal.page_loading(self.driver)
@@ -500,13 +506,15 @@ class Teacher_Attendance_report():
             print(academic.options[i].text, 'is selected')
             self.driver.find_element_by_id('downloadRaw').click()
             time.sleep(5)
-            self.filename = p.get_download_dir() +"/" + file.teacher_academic_file()+(academic.options[i].text).strip()+'.csv'
+            self.filename = p.get_download_dir() + "/" + file.teacher_academic_file() + (
+                academic.options[i].text).strip() + '.csv'
             print(self.filename)
             if os.path.isfile(self.filename) != True:
-                print(academic.options[i].text,"academic csv file is not download")
+                print(academic.options[i].text, "academic csv file is not download")
                 count = count + 1
             cal.page_loading(self.driver)
         return count
+
     def block_total_no_of_students(self):
         cal = GetData()
         cal.click_on_state(self.driver)
@@ -531,7 +539,6 @@ class Teacher_Attendance_report():
 
         return self.student_count, Bstudent, self.school_count, Bschools
 
-
     def cluster_total_no_of_students(self):
         cal = GetData()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
@@ -544,9 +551,8 @@ class Teacher_Attendance_report():
         Cstudent = re.sub("\D", "", Cstudents)
         Cschools = self.driver.find_element_by_id(Data.schoolcount).text
         Cschool = re.sub("\D", "", Cschools)
-        print("Cluster level",self.student_count, Cstudent,self.school_count,Cschool)
-        return self.student_count, Cstudent,self.school_count,Cschool
-
+        print("Cluster level", self.student_count, Cstudent, self.school_count, Cschool)
+        return self.student_count, Cstudent, self.school_count, Cschool
 
     def schools_total_no_of_students(self):
         global Sstudent, Sschool
@@ -565,7 +571,7 @@ class Teacher_Attendance_report():
 
             Sschools = self.driver.find_element_by_id(Data.schoolcount).text
             Sschool = re.sub("\D", "", Sschools)
-            print('School level',self.student_count, Sstudent, self.school_count, Sschool)
+            print('School level', self.student_count, Sstudent, self.school_count, Sschool)
         return self.student_count, Sstudent, self.school_count, Sschool
 
     def click_on_logout(self):
@@ -622,7 +628,7 @@ class Teacher_Attendance_report():
         return self.teacher_count, Bteachers
 
     def cluster_total_no_of_teachers(self):
-        self.driver.find_element(By.XPATH,Data.hyper_link).click()
+        self.driver.find_element(By.XPATH, Data.hyper_link).click()
         time.sleep(3)
         total_teachers = self.driver.find_element_by_id(Data.students).text
         teachers = re.sub("\D", "", total_teachers)

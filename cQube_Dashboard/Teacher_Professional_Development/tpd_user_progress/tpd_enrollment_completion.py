@@ -12,7 +12,9 @@ from reuse_func import GetData
 
 
 class tpd_enrollment_completion_reports():
-    def __init__(self,driver):
+    def __init__(self, driver):
+        self.msg = None
+        self.data = None
         self.driver = driver
 
     def test_enrollment_icon(self):
@@ -74,19 +76,19 @@ class tpd_enrollment_completion_reports():
         # timeseries.select_by_visible_text(' Overall ')
         timeseries.select_by_index(1)
         self.data.page_loading(self.driver)
-        times=(self.driver.find_element_by_name(Data.timeperiods).text).strip()
+        times = (self.driver.find_element_by_name(Data.timeperiods).text).strip()
         if self.msg.no_data_available() in self.driver.page_source:
             print('No Data Available for overall')
             count = 0
         else:
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + '/'+'enrollment_completion_enrollment_all_district_overall_'+self.data.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + '/' + 'enrollment_completion_enrollment_all_district_overall_' + self.data.get_current_date() + '.csv'
             print(self.filename)
             self.data.page_loading(self.driver)
             collnames = Select(self.driver.find_element_by_id(Data.coll_names))
-            counter = len(collnames.options)-1
-            for i in range(len(collnames.options),len(collnames.options)-5):
+            counter = len(collnames.options) - 1
+            for i in range(len(collnames.options), len(collnames.options) - 5):
                 collnames.select_by_index(i)
                 self.data.page_loading(self.driver)
             if os.path.isfile(self.filename) != True:
@@ -119,11 +121,11 @@ class tpd_enrollment_completion_reports():
             time.sleep(3)
             times = (self.driver.find_element_by_name(Data.timeperiods).text).strip()
             # ctype = (self.driver.find_element_by_id(Data.coursetype).text).strip()
-            self.filename = self.p.get_download_dir() + '/'+'tpd_enrollment_all_district_last_day_'+self.data.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + '/' + 'tpd_enrollment_all_district_last_day_' + self.data.get_current_date() + '.csv'
             self.data.page_loading(self.driver)
             collnames = Select(self.driver.find_element_by_id(Data.coll_names))
-            counter = len(collnames.options)-1
-            for i in range(len(collnames.options)-5,len(collnames.options)-1):
+            counter = len(collnames.options) - 1
+            for i in range(len(collnames.options) - 5, len(collnames.options) - 1):
                 collnames.select_by_index(i)
                 self.data.page_loading(self.driver)
             if os.path.isfile(self.filename) != True:
@@ -155,7 +157,7 @@ class tpd_enrollment_completion_reports():
             time.sleep(3)
             times = (self.driver.find_element_by_name(Data.timeperiods).text).strip()
             # ctype = (self.driver.find_element_by_id(Data.coursetype).text).strip()
-            self.filename = self.p.get_download_dir() + '/'+'tpd_enrollment_all_district_last_7_days_'+self.data.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + '/' + 'tpd_enrollment_all_district_last_7_days_' + self.data.get_current_date() + '.csv'
             self.data.page_loading(self.driver)
             collnames = Select(self.driver.find_element_by_id(Data.coll_names))
             counter = len(collnames.options) - 1
@@ -190,7 +192,7 @@ class tpd_enrollment_completion_reports():
             time.sleep(3)
             times = (self.driver.find_element_by_name(Data.timeperiods).text).strip()
             # ctype = (self.driver.find_element_by_id(Data.coursetype).text).strip()
-            self.filename = self.p.get_download_dir() + '/'+'enrollment_completion_enrollment_all_district_last_30_days_'+self.data.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + '/' + 'enrollment_completion_enrollment_all_district_last_30_days_' + self.data.get_current_date() + '.csv'
             print(self.filename)
             self.data.page_loading(self.driver)
             print(self.filename)
@@ -205,6 +207,7 @@ class tpd_enrollment_completion_reports():
             self.data.page_loading(self.driver)
             os.remove(self.filename)
             # return counter, count
+
     def test_completion_overall(self):
         self.data = GetData()
         self.p = pwd()
@@ -226,12 +229,12 @@ class tpd_enrollment_completion_reports():
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(5)
             times = (self.driver.find_element_by_name(Data.timeperiods).text).strip()
-            self.filename = self.p.get_download_dir() + '/'+'enrollment_completion_completion_all_district_overall_'+self.data.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + '/' + 'enrollment_completion_completion_all_district_overall_' + self.data.get_current_date() + '.csv'
             print(self.filename)
             self.data.page_loading(self.driver)
             collnames = Select(self.driver.find_element_by_id(Data.coll_names))
-            counter = len(collnames.options)-1
-            for i in range(1,len(collnames.options)-1):
+            counter = len(collnames.options) - 1
+            for i in range(1, len(collnames.options) - 1):
                 collnames.select_by_index(i)
                 self.data.page_loading(self.driver)
             if os.path.isfile(self.filename) != True:
@@ -239,7 +242,7 @@ class tpd_enrollment_completion_reports():
                 count = count + 1
             self.data.page_loading(self.driver)
             os.remove(self.filename)
-            return counter,count
+            return counter, count
 
     def test_completion_last_day(self):
         self.data = GetData()
@@ -263,12 +266,12 @@ class tpd_enrollment_completion_reports():
             time.sleep(3)
             times = (self.driver.find_element_by_name(Data.timeperiods).text).strip()
             ctype = (self.driver.find_element_by_id(Data.coursetype).text).strip()
-            self.filename = self.p.get_download_dir() + '/'+'tpd_'+ctype+'_all_district_last_day'+'_'+self.data.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + '/' + 'tpd_' + ctype + '_all_district_last_day' + '_' + self.data.get_current_date() + '.csv'
             print(self.filename)
             self.data.page_loading(self.driver)
             collnames = Select(self.driver.find_element_by_id(Data.coll_names))
-            counter = len(collnames.options)-1
-            for i in range(1,len(collnames.options)-1):
+            counter = len(collnames.options) - 1
+            for i in range(1, len(collnames.options) - 1):
                 collnames.select_by_index(i)
                 self.data.page_loading(self.driver)
             if os.path.isfile(self.filename) != True:
@@ -300,7 +303,7 @@ class tpd_enrollment_completion_reports():
             time.sleep(4)
             times = (self.driver.find_element_by_name(Data.timeperiods).text).strip()
             ctype = (self.driver.find_element_by_id(Data.coursetype).text).strip()
-            self.filename = self.p.get_download_dir() + '/'+'tpd_'+ctype+'_all_district_last_7_days'+'_'+self.data.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + '/' + 'tpd_' + ctype + '_all_district_last_7_days' + '_' + self.data.get_current_date() + '.csv'
             print(self.filename)
             self.data.page_loading(self.driver)
             collnames = Select(self.driver.find_element_by_id(Data.coll_names))
@@ -337,7 +340,7 @@ class tpd_enrollment_completion_reports():
             time.sleep(3)
             times = (self.driver.find_element_by_name(Data.timeperiods).text).strip()
             ctype = course_type.first_selected_option
-            self.filename = self.p.get_download_dir() + '/'+'enrollment_completion_completion_all_district_last_30_days_'+self.data.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + '/' + 'enrollment_completion_completion_all_district_last_30_days_' + self.data.get_current_date() + '.csv'
             print(self.filename)
             self.data.page_loading(self.driver)
             collnames = Select(self.driver.find_element_by_id(Data.coll_names))
@@ -350,7 +353,7 @@ class tpd_enrollment_completion_reports():
                 count = count + 1
             self.data.page_loading(self.driver)
             os.remove(self.filename)
-        return  count
+        return count
 
     def test_homeicon_functionality(self):
         self.data = GetData()
@@ -384,7 +387,7 @@ class tpd_enrollment_completion_reports():
         self.data.page_loading(self.driver)
         self.data.navigate_to_tpd_enrollment_report()
         self.data.page_loading(self.driver)
-        return  count
+        return count
 
     def test_hyperlink_function(self):
         self.data = GetData()
@@ -408,7 +411,7 @@ class tpd_enrollment_completion_reports():
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
-        self.filename =self.p.get_download_dir() + '/'+"enrollment_completion_enrollment_all_district_overall_"+self.data.get_current_date()+'.csv'
+        self.filename = self.p.get_download_dir() + '/' + "enrollment_completion_enrollment_all_district_overall_" + self.data.get_current_date() + '.csv'
         print(self.filename)
         if os.path.isfile(self.filename) != True:
             print('Districtwise csv file is not downloaded')
@@ -419,7 +422,7 @@ class tpd_enrollment_completion_reports():
                 header = next(csv_reader)
                 enrolls = 0
                 for row in csv.reader(fin):
-                    enrolls += int(row[6].replace(',',''))
+                    enrolls += int(row[6].replace(',', ''))
                 totalenrollment = self.driver.find_element_by_id("totalCount").text
                 enrol = re.sub('\D', "", totalenrollment)
                 if int(enrol) != int(enrolls):
@@ -443,7 +446,7 @@ class tpd_enrollment_completion_reports():
             self.data.page_loading(self.driver)
             cname = course_type.options[i].text
             course = cname.strip()
-            for j in range(len(Districts.options)-5,len(Districts.options)):
+            for j in range(len(Districts.options) - 5, len(Districts.options)):
                 Districts.select_by_index(j)
                 self.data.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
@@ -451,7 +454,7 @@ class tpd_enrollment_completion_reports():
                 dname = self.driver.find_element_by_id(Data.sar_district).get_attribute('value')
                 value = dname[4:] + '_'
 
-                self.filename = self.p.get_download_dir()+"/"+"enrollment_completion_"+course.lower()+'_overall'+'_'+value.strip()+self.data.get_current_date()+".csv"
+                self.filename = self.p.get_download_dir() + "/" + "enrollment_completion_" + course.lower() + '_overall' + '_' + value.strip() + self.data.get_current_date() + ".csv"
                 print(self.filename)
                 if os.path.isfile(self.filename) != True:
                     print(course_type.options[i].text, Districts.options[j].text, 'csv file not downloaded')
@@ -463,11 +466,11 @@ class tpd_enrollment_completion_reports():
                         header = next(csv_reader)
                         enrolls = 0
                         for row in csv.reader(fin):
-                            enrolls += int(row[8].replace(',',''))
+                            enrolls += int(row[8].replace(',', ''))
                         totalenrollment = self.driver.find_element_by_id("totalCount").text
                         enrol = re.sub('\D', "", totalenrollment)
                         if int(enrol) != int(enrolls):
-                            print(int(enrol) != int(enrolls),'mis match found at enrollment count')
+                            print(int(enrol) != int(enrolls), 'mis match found at enrollment count')
                             count = count + 1
                 os.remove(self.filename)
         return count
@@ -487,10 +490,10 @@ class tpd_enrollment_completion_reports():
             cname = course_type.options[i].text
             course = cname.strip()
             self.data.page_loading(self.driver)
-            for j in range(len(Districts.options)-1,len(Districts.options)):
+            for j in range(len(Districts.options) - 1, len(Districts.options)):
                 Districts.select_by_index(j)
                 self.data.page_loading(self.driver)
-                for k in range(1,len(Blocks.options)):
+                for k in range(1, len(Blocks.options)):
                     Blocks.select_by_index(k)
                     name = Blocks.options[k].text
                     bname = name.strip()
@@ -501,19 +504,20 @@ class tpd_enrollment_completion_reports():
                     value = dname[3:] + '_'
                     # times = (self.driver.find_element_by_id('time_range').text).strip()
 
-                    self.filename = self.p.get_download_dir() + "/" + "enrollment_completion_"+course.lower()+"_"+"overall_" + value.strip() + self.data.get_current_date() + ".csv"
+                    self.filename = self.p.get_download_dir() + "/" + "enrollment_completion_" + course.lower() + "_" + "overall_" + value.strip() + self.data.get_current_date() + ".csv "
                     print(self.filename)
                     if os.path.isfile(self.filename) != True:
-                        print(course_type.options[i].text,Districts.options[j].text,Blocks.options[k].text,'csv file not downloaded')
+                        print(course_type.options[i].text, Districts.options[j].text, Blocks.options[k].text,
+                              'csv file not downloaded')
                         count = count + 1
                         self.data.page_loading(self.driver)
                     else:
                         with open(self.filename) as fin:
                             csv_reader = csv.reader(fin, delimiter=',')
-                            header = next(csv_reader)
+                            next(csv_reader)
                             enrolls = 0
                             for row in csv.reader(fin):
-                                enrolls += int(row[10].replace(',',''))
+                                enrolls += int(row[10].replace(',', ''))
                             totalenrollment = self.driver.find_element_by_id("totalCount").text
                             enrol = re.sub('\D', "", totalenrollment)
                             if int(enrol) != int(enrolls):
@@ -555,10 +559,11 @@ class tpd_enrollment_completion_reports():
                     value = dname[3:] + '_'
                     # times = (self.driver.find_element_by_id('time_range').text).strip()
 
-                    self.filename = self.p.get_download_dir() + "/" + "enrollment_completion_enrollment"+ '_overall_' + value.strip() + self.data.get_current_date() + ".csv"
+                    self.filename = self.p.get_download_dir() + "/" + "enrollment_completion_enrollment" + '_overall_' + value.strip() + self.data.get_current_date() + ".csv"
                     print(self.filename)
                     if os.path.isfile(self.filename) != True:
-                        print(Districts.options[j].text, Blocks.options[k].text,Cluster.options[m].text, 'csv file not downloaded')
+                        print(Districts.options[j].text, Blocks.options[k].text, Cluster.options[m].text,
+                              'csv file not downloaded')
                         count = count + 1
                         self.data.page_loading(self.driver)
                     else:
@@ -604,19 +609,19 @@ class tpd_enrollment_completion_reports():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(1)
         if " No Data Available " in self.driver.page_source:
-            print(times.first_selected_option.text,"is not having data..")
+            print(times.first_selected_option.text, "is not having data..")
             return count
         else:
             self.driver.find_element_by_id('rawDownload').click()
             time.sleep(35)
             timeperiod = (times.first_selected_option.text).lower()
-            self.filename = self.p.get_download_dir() + "/"+timeperiod+".csv"
+            self.filename = self.p.get_download_dir() + "/" + timeperiod + ".csv"
             if os.path.isfile(self.filename) != True:
-                print(timeperiod,'raw file is not downloaded')
+                print(timeperiod, 'raw file is not downloaded')
                 count = count + 1
             else:
-                 print(timeperiod,'raw file is downloaded..')
-                 os.remove(self.filename)
+                print(timeperiod, 'raw file is downloaded..')
+                os.remove(self.filename)
             return count
 
     def test_last_30_days_rawfile_download(self):
@@ -630,20 +635,20 @@ class tpd_enrollment_completion_reports():
         times.select_by_index(2)
         time.sleep(3)
         if " No Data Available " in self.driver.page_source:
-            print(times.first_selected_option.text,"is not having data..")
+            print(times.first_selected_option.text, "is not having data..")
             return count
         else:
             self.driver.find_element_by_id('rawDownload').click()
             time.sleep(35)
-            timeperiod = (times.first_selected_option.text.replace("","_")).lower()
-            self.filename = self.p.get_download_dir() + "/last_30_days"+".csv"
+            timeperiod = (times.first_selected_option.text.replace("", "_")).lower()
+            self.filename = self.p.get_download_dir() + "/last_30_days" + ".csv"
             print(self.filename)
             if os.path.isfile(self.filename) != True:
-                print(timeperiod,'raw file is not downloaded')
+                print(timeperiod, 'raw file is not downloaded')
                 count = count + 1
             else:
-                 print(timeperiod,'raw file is downloaded..')
-                 os.remove(self.filename)
+                print(timeperiod, 'raw file is downloaded..')
+                os.remove(self.filename)
             return count
 
     def test_last_7_days_rawfile_download(self):
@@ -657,20 +662,20 @@ class tpd_enrollment_completion_reports():
         times.select_by_index(3)
         time.sleep(3)
         if " No Data Available " in self.driver.page_source:
-            print(times.first_selected_option.text,"is not having data..")
+            print(times.first_selected_option.text, "is not having data..")
             return count
         else:
             self.driver.find_element_by_id('rawDownload').click()
             time.sleep(35)
-            timeperiod = (times.first_selected_option.text.replace("","_")).lower()
-            self.filename = self.p.get_download_dir() + "/last_7_days"+".csv"
+            timeperiod = (times.first_selected_option.text.replace("", "_")).lower()
+            self.filename = self.p.get_download_dir() + "/last_7_days" + ".csv"
             print(self.filename)
             if os.path.isfile(self.filename) != True:
-                print(timeperiod,'raw file is not downloaded')
+                print(timeperiod, 'raw file is not downloaded')
                 count = count + 1
             else:
-                 print(timeperiod,'raw file is downloaded..')
-                 os.remove(self.filename)
+                print(timeperiod, 'raw file is downloaded..')
+                os.remove(self.filename)
             return count
 
     def test_last_day_rawfile_download(self):
@@ -684,19 +689,18 @@ class tpd_enrollment_completion_reports():
         times.select_by_index(4)
         time.sleep(5)
         if " No Data Available " in self.driver.page_source:
-            print(times.first_selected_option.text,"is not having data..")
+            print(times.first_selected_option.text, "is not having data..")
             return count
         else:
             self.driver.find_element_by_id('rawDownload').click()
             time.sleep(35)
-            timeperiod = (times.first_selected_option.text.replace("","_")).lower()
-            self.filename = self.p.get_download_dir() + "/last_day"+".csv"
+            timeperiod = (times.first_selected_option.text.replace("", "_")).lower()
+            self.filename = self.p.get_download_dir() + "/last_day" + ".csv"
             print(self.filename)
             if os.path.isfile(self.filename) != True:
-                print(timeperiod,'raw file is not downloaded')
+                print(timeperiod, 'raw file is not downloaded')
                 count = count + 1
             else:
-                 print(timeperiod,'raw file is downloaded..')
-                 os.remove(self.filename)
+                print(timeperiod, 'raw file is downloaded..')
+                os.remove(self.filename)
             return count
-

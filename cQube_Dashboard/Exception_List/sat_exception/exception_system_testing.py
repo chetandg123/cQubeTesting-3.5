@@ -4,16 +4,19 @@ from cQube_Dashboard.Exception_List.sat_exception.Semester_Assessment_Test_Excep
     Semester_Assessment_Test_Exception
 from reuse_func import GetData
 
+
 class cQube_semester_exception_report(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
-            self.data = GetData()
-            self.driver = self.data.get_driver()
-            self.data.open_cqube_appln(self.driver)
-            self.data.login_cqube(self.driver)
-            self.data.navigate_to_semester_exception()
-            self.data.page_loading(self.driver)
+        self.data = GetData()
+        self.driver = self.data.get_driver()
+        self.data.open_cqube_appln(self.driver)
+        self.data.login_cqube(self.driver)
+        self.data.navigate_to_semester_exception()
+        self.data.page_loading(self.driver)
 
     def test_Semester_Blocks(self):
         b = Semester_Assessment_Test_Exception(self.driver)
@@ -38,12 +41,12 @@ class cQube_semester_exception_report(unittest.TestCase):
     def test_ClusterPerBlockCsvDownload(self):
         b = Semester_Assessment_Test_Exception(self.driver)
         res = b.check_csv_download()
-        self.assertEqual(0,res , msg='Some cluster level files are not downloaded')
+        self.assertEqual(0, res, msg='Some cluster level files are not downloaded')
 
     def test_options(self):
         d = Semester_Assessment_Test_Exception(self.driver)
         res = d.sem_exception_options_test()
-        self.assertEqual(0,res,msg='Csv file is downloaded')
+        self.assertEqual(0, res, msg='Csv file is downloaded')
         self.data.page_loading(self.driver)
 
     @classmethod

@@ -11,7 +11,9 @@ from reuse_func import GetData
 
 
 class tpd_course_progress_report():
-    def __init__(self,driver):
+    def __init__(self, driver):
+        self.fname = None
+        self.data = None
         self.driver = driver
 
     def check_last_day_districtwise_download(self):
@@ -30,7 +32,7 @@ class tpd_course_progress_report():
         else:
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_lastday()+self.data.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_lastday() + self.data.get_current_date() + '.csv'
             print(self.filename)
             if os.path.isfile(self.filename) != True:
                 print('Last Day Districtwise csv file is not downloaded ')
@@ -65,7 +67,7 @@ class tpd_course_progress_report():
         else:
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_lastmonth()+self.data.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_lastmonth() + self.data.get_current_date() + '.csv'
             print(self.filename)
             if os.path.isfile(self.filename) != True:
                 print('Last Day Districtwise csv file is not downloaded ')
@@ -100,7 +102,7 @@ class tpd_course_progress_report():
         else:
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_lastweek()+self.data.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_lastweek() + self.data.get_current_date() + '.csv'
             print(self.filename)
             if os.path.isfile(self.filename) != True:
                 print('Last Day Districtwise csv file is not downloaded ')
@@ -128,7 +130,7 @@ class tpd_course_progress_report():
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
-        self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_districts()+self.data.get_current_date()+'.csv'
+        self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_districts() + self.data.get_current_date() + '.csv'
         if os.path.isfile(self.filename) != True:
             print('All Districtwise csv file is not downloaded ')
             count = count + 1
@@ -147,7 +149,7 @@ class tpd_course_progress_report():
         return count
 
     def test_homeicons(self):
-        self.load =GetData()
+        self.load = GetData()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.load.page_loading(self.driver)
         timeseries = Select(self.driver.find_element_by_id(Data.timeperiods))
@@ -157,7 +159,6 @@ class tpd_course_progress_report():
         self.load.page_loading(self.driver)
         self.load.navigate_to_tpd_content_progress()
         self.load.page_loading(self.driver)
-
 
     def test_homebutton(self):
         self.load = GetData()
@@ -198,7 +199,8 @@ class tpd_course_progress_report():
             self.load.page_loading(self.driver)
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() +"/" + self.fname.tpd_all_districtwise()+value[1].strip()+'_'+self.load.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_all_districtwise() + value[
+                1].strip() + '_' + self.load.get_current_date() + '.csv'
             file = os.path.isfile(self.filename)
             if file != True:
                 print(dists.options[i].text, 'District wise records csv file is not downloaded')
@@ -242,7 +244,8 @@ class tpd_course_progress_report():
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() +"/" + self.fname.tpd_lastday_districtwise()+value[1].strip()+'_'+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_lastday_districtwise() + value[
+                    1].strip() + '_' + self.load.get_current_date() + '.csv'
                 print(self.filename)
                 file = os.path.isfile(self.filename)
                 if file != True:
@@ -284,7 +287,8 @@ class tpd_course_progress_report():
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() +"/"+ self.fname.tpd_lastweek_districtwise()+value[1].strip()+'_'+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_lastweek_districtwise() + value[
+                    1].strip() + '_' + self.load.get_current_date() + '.csv'
                 print(self.filename)
                 file = os.path.isfile(self.filename)
                 if file != True:
@@ -327,7 +331,7 @@ class tpd_course_progress_report():
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() +"/"+self.fname.tpd_lastmonth_districtwise()+value.strip()+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + "/" + self.fname.tpd_lastmonth_districtwise() + value.strip() + self.load.get_current_date() + '.csv'
                 print(self.filename)
                 file = os.path.isfile(self.filename)
                 if file != True:
@@ -346,6 +350,7 @@ class tpd_course_progress_report():
                         count = count + 1
                     self.load.page_loading(self.driver)
         return count
+
     def Blocks_select_box(self):
         self.p = pwd()
         self.load = GetData()
@@ -355,7 +360,7 @@ class tpd_course_progress_report():
         self.load.page_loading(self.driver)
         dists = Select(self.driver.find_element_by_id(Data.district_dropdown))
         Blocks = Select(self.driver.find_element_by_id(Data.blocks_dropdown))
-        for i in range(len(dists.options)-1, len(dists.options)):
+        for i in range(len(dists.options) - 1, len(dists.options)):
             dists.select_by_index(i)
             self.load.page_loading(self.driver)
             for j in range(len(Blocks.options), len(Blocks.options)):
@@ -363,11 +368,12 @@ class tpd_course_progress_report():
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() + '/' + self.fname.tpd_cluster()+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + '/' + self.fname.tpd_cluster() + self.load.get_current_date() + '.csv'
                 print(self.filename)
                 file = os.path.isfile(self.filename)
                 if file != True:
-                    print(dists.options[i].text,Blocks.options[j].text,'Cluster wise records csv file is not downloaded ')
+                    print(dists.options[i].text, Blocks.options[j].text,
+                          'Cluster wise records csv file is not downloaded ')
                     count = count + 1
                 else:
                     with open(self.filename) as fin:
@@ -393,24 +399,25 @@ class tpd_course_progress_report():
         clust = Select(self.driver.find_element_by_id(Data.cluster_dropdown))
         dists = Select(self.driver.find_element_by_id(Data.district_dropdown))
         Blocks = Select(self.driver.find_element_by_id(Data.blocks_dropdown))
-        for i in range( len(dists.options)-1, len(dists.options)):
+        for i in range(len(dists.options) - 1, len(dists.options)):
             dists.select_by_index(i)
             self.load.page_loading(self.driver)
-            for j in range(len(Blocks.options)-1, len(Blocks.options)):
+            for j in range(len(Blocks.options) - 1, len(Blocks.options)):
                 Blocks.select_by_index(j)
                 self.load.page_loading(self.driver)
                 for k in range(1, len(clust.options)):
                     clust.select_by_index(k)
                     self.load.page_loading(self.driver)
                     value = self.driver.find_element_by_id(Data.cluster_dropdown).get_attribute('value')
-                    value = value[3:]+'_'
+                    value = value[3:] + '_'
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(3)
-                    self.filename = self.p.get_download_dir() + '/' + self.fname.tpd_school()+value.strip()+self.load.get_current_date()+'.csv'
+                    self.filename = self.p.get_download_dir() + '/' + self.fname.tpd_school() + value.strip() + self.load.get_current_date() + '.csv'
                     print(self.filename)
                     file = os.path.isfile(self.filename)
                     if file != True:
-                        print(dists.options[i].text,Blocks.options[j].text,clust.options[k].text, 'School wise records csv file is not downloaded')
+                        print(dists.options[i].text, Blocks.options[j].text, clust.options[k].text,
+                              'School wise records csv file is not downloaded')
                         count = count + 1
                     else:
                         with open(self.filename) as fin:
@@ -455,19 +462,19 @@ class tpd_course_progress_report():
         times = Select(self.driver.find_element_by_name('timePeriod'))
         times.select_by_index(1)
         if " No Data Available " or "No data found" in self.driver.page_source:
-            print(times.first_selected_option.text,"is not having data..")
+            print(times.first_selected_option.text, "is not having data..")
             return count
         else:
             self.driver.find_element_by_id('rawDownload').click()
             time.sleep(35)
             timeperiod = (times.first_selected_option.text).lower()
-            self.filename = self.p.get_download_dir() + "/"+timeperiod+".csv"
+            self.filename = self.p.get_download_dir() + "/" + timeperiod + ".csv"
             if os.path.isfile(self.filename) != True:
-                print(timeperiod,'raw file is not downloaded')
+                print(timeperiod, 'raw file is not downloaded')
                 count = count + 1
             else:
-                 print(timeperiod,'raw file is downloaded..')
-                 os.remove(self.filename)
+                print(timeperiod, 'raw file is downloaded..')
+                os.remove(self.filename)
             return count
 
     def test_last_30_days_rawfile_download(self):
@@ -481,20 +488,20 @@ class tpd_course_progress_report():
         times.select_by_index(2)
         time.sleep(3)
         if " No Data Available " or "No data found" in self.driver.page_source:
-            print(times.first_selected_option.text,"is not having data..")
+            print(times.first_selected_option.text, "is not having data..")
             return count
         else:
             self.driver.find_element_by_id('rawDownload').click()
             time.sleep(35)
-            timeperiod = (times.first_selected_option.text.replace("","_")).lower()
-            self.filename = self.p.get_download_dir() + "/last_30_days"+".csv"
+            timeperiod = (times.first_selected_option.text.replace("", "_")).lower()
+            self.filename = self.p.get_download_dir() + "/last_30_days" + ".csv"
             print(self.filename)
             if os.path.isfile(self.filename) != True:
-                print(timeperiod,'raw file is not downloaded')
+                print(timeperiod, 'raw file is not downloaded')
                 count = count + 1
             else:
-                 print(timeperiod,'raw file is downloaded..')
-                 os.remove(self.filename)
+                print(timeperiod, 'raw file is downloaded..')
+                os.remove(self.filename)
             return count
 
     def test_last_7_days_rawfile_download(self):
@@ -508,20 +515,20 @@ class tpd_course_progress_report():
         times.select_by_index(3)
         time.sleep(3)
         if " No Data Available " or "No data found" in self.driver.page_source:
-            print(times.first_selected_option.text,"is not having data..")
+            print(times.first_selected_option.text, "is not having data..")
             return count
         else:
             self.driver.find_element_by_id('rawDownload').click()
             time.sleep(35)
-            timeperiod = (times.first_selected_option.text.replace("","_")).lower()
-            self.filename = self.p.get_download_dir() + "/last_7_days"+".csv"
+            timeperiod = (times.first_selected_option.text.replace("", "_")).lower()
+            self.filename = self.p.get_download_dir() + "/last_7_days" + ".csv"
             print(self.filename)
             if os.path.isfile(self.filename) != True:
-                print(timeperiod,'raw file is not downloaded')
+                print(timeperiod, 'raw file is not downloaded')
                 count = count + 1
             else:
-                 print(timeperiod,'raw file is downloaded..')
-                 os.remove(self.filename)
+                print(timeperiod, 'raw file is downloaded..')
+                os.remove(self.filename)
             return count
 
     def test_last_day_rawfile_download(self):
@@ -535,18 +542,18 @@ class tpd_course_progress_report():
         times.select_by_index(4)
         time.sleep(5)
         if " No Data Available " or "No data found" in self.driver.page_source:
-            print(times.first_selected_option.text,"is not having data..")
+            print(times.first_selected_option.text, "is not having data..")
             return count
         else:
             self.driver.find_element_by_id('rawDownload').click()
             time.sleep(35)
-            timeperiod = (times.first_selected_option.text.replace("","_")).lower()
-            self.filename = self.p.get_download_dir() + "/last_day"+".csv"
+            timeperiod = (times.first_selected_option.text.replace("", "_")).lower()
+            self.filename = self.p.get_download_dir() + "/last_day" + ".csv"
             print(self.filename)
             if os.path.isfile(self.filename) != True:
-                print(timeperiod,'raw file is not downloaded')
+                print(timeperiod, 'raw file is not downloaded')
                 count = count + 1
             else:
-                 print(timeperiod,'raw file is downloaded..')
-                 os.remove(self.filename)
+                print(timeperiod, 'raw file is downloaded..')
+                os.remove(self.filename)
             return count

@@ -11,8 +11,12 @@ from reuse_func import GetData
 
 
 class Periodic_Assessment_Test_Heat_chart():
-    def __init__(self,driver):
+    def __init__(self, driver):
+        self.p = None
+        self.load = None
+        self.fname = None
         self.driver = driver
+
     def Blocks_select_box(self):
         self.p = pwd()
         self.load = GetData()
@@ -24,13 +28,13 @@ class Periodic_Assessment_Test_Heat_chart():
         Blocks = Select(self.driver.find_element_by_id(Data.blocks_dropdown))
         grade = Select(self.driver.find_element_by_id(Data.grade))
         self.load.page_loading(self.driver)
-        for k in range(1,len(grade.options)):
+        for k in range(1, len(grade.options)):
             grade.select_by_index(k)
             self.load.page_loading(self.driver)
-            for i in range(len(dists.options)-1, len(dists.options)):
+            for i in range(len(dists.options) - 1, len(dists.options)):
                 dists.select_by_index(i)
                 self.load.page_loading(self.driver)
-                for j in range(len(Blocks.options)-1, len(Blocks.options)):
+                for j in range(len(Blocks.options) - 1, len(Blocks.options)):
                     Blocks.select_by_index(j)
                     self.load.page_loading(self.driver)
                     self.driver.find_element_by_id(Data.Download).click()
@@ -38,7 +42,7 @@ class Periodic_Assessment_Test_Heat_chart():
                     self.filename = self.p.get_download_dir() + '/' + self.fname.pchart_clusters()
                     file = os.path.isfile(self.filename)
                     if file != True:
-                        print(Blocks.options[i].text,'Block wise records csv file is not downloaded ')
+                        print(Blocks.options[i].text, 'Block wise records csv file is not downloaded ')
                         count = count + 1
                 os.remove(self.filename)
 
@@ -62,7 +66,7 @@ class Periodic_Assessment_Test_Heat_chart():
         grades = Select(self.driver.find_element_by_id(Data.grade))
         grades.select_by_index(2)
         gradename = grades.options[2].text
-        gradenum = re.sub('\D','',gradename).strip()
+        gradenum = re.sub('\D', '', gradename).strip()
         self.load.page_loading(self.driver)
 
         view_by = Select(self.driver.find_element_by_id(Data.view_by))
@@ -72,7 +76,7 @@ class Periodic_Assessment_Test_Heat_chart():
         self.load.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
-        self.filename = self.p.get_download_dir() + "/" + self.fname.pchart_views()+management+"_"+ gradenum + '_' + Data.question_id + self.month + '_' \
+        self.filename = self.p.get_download_dir() + "/" + self.fname.pchart_views() + management + "_" + gradenum + '_' + Data.question_id + self.month + '_' \
                         + self.year + '_' + self.load.get_current_date() + '.csv'
         print(self.filename)
         if os.path.isfile(self.filename) != True:
@@ -82,7 +86,7 @@ class Periodic_Assessment_Test_Heat_chart():
         view_by.select_by_index(2)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
-        self.file = self.p.get_download_dir() + "/" + self.fname.pchart_views()+management+"_"+gradenum + '_' + Data.indicator_id + self.month + '_' \
+        self.file = self.p.get_download_dir() + "/" + self.fname.pchart_views() + management + "_" + gradenum + '_' + Data.indicator_id + self.month + '_' \
                     + self.year + '_' + self.load.get_current_date() + '.csv'
         print(self.file)
         if os.path.isfile(self.file) != True:
@@ -172,12 +176,12 @@ class Periodic_Assessment_Test_Heat_chart():
         cal.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
-        self.filename = self.p.get_download_dir() + '/' + self.fname.pchart_all_districts()+management+'_overall_allDistricts_'+self.month+'_'+self.year+'_'+cal.get_current_date()+'.csv'
+        self.filename = self.p.get_download_dir() + '/' + self.fname.pchart_all_districts() + management + '_overall_allDistricts_' + self.month + '_' + self.year + '_' + cal.get_current_date() + '.csv '
         print(self.filename)
         if os.path.isfile(self.filename) != True:
-             print("Districtwise csv file is not downloaded")
+            print("Districtwise csv file is not downloaded")
         else:
-              print('District wise csv file is downloaded ')
+            print('District wise csv file is downloaded ')
         os.remove(self.filename)
         cal.page_loading(self.driver)
         return count
@@ -197,10 +201,10 @@ class Periodic_Assessment_Test_Heat_chart():
             examdates.select_by_index(i)
             self.load.page_loading(self.driver)
             if examdates.options[i].text in self.driver.page_source:
-                print(examdates.options[i].text ,'is displaying chart table ')
+                print(examdates.options[i].text, 'is displaying chart table ')
                 self.load.page_loading(self.driver)
             else:
-                print(examdates.options[i].text ,'is not displayed ')
+                print(examdates.options[i].text, 'is not displayed ')
                 count = count + 1
         self.load.page_loading(self.driver)
         return count
@@ -222,22 +226,23 @@ class Periodic_Assessment_Test_Heat_chart():
         self.month = (month.first_selected_option.text).strip()
         grade = Select(self.driver.find_element_by_id(Data.grade))
         grade.select_by_index(4)
-        gradename =(grade.options[4].text).strip()
-        gradenum = re.sub('\D','',gradename)
+        gradename = (grade.options[4].text).strip()
+        gradenum = re.sub('\D', '', gradename)
         self.load.page_loading(self.driver)
         subject = Select(self.driver.find_element_by_id(Data.subjects))
         for i in range(2, len(subject.options)):
             subject.select_by_index(i)
             self.load.page_loading(self.driver)
-            if subject.options[i].text or "No data found" in  self.driver.page_source:
+            if subject.options[i].text or "No data found" in self.driver.page_source:
                 print(subject.options[i].text, 'HAVING NO DATA FOUND ')
                 self.load.page_loading(self.driver)
             else:
                 print(subject.options[i].text, 'is displayed chart table ')
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() + '/' + self.fname.pchart_subjects()+management+'_'+gradenum+'_'+(subject.options[i].text).strip()+\
-                                '_allDistricts_'+self.month+'_'+self.year+'_'+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + '/' + self.fname.pchart_subjects() + management + '_' + gradenum + '_' + (
+                    subject.options[i].text).strip() + \
+                                '_allDistricts_' + self.month + '_' + self.year + '_' + self.load.get_current_date() + '.csv'
                 print(self.filename)
                 if os.path.isfile(self.filename) != True:
                     print(subject.options[i].text, 'csv file is not downloaded')
@@ -247,7 +252,7 @@ class Periodic_Assessment_Test_Heat_chart():
         return count
 
     def test_homeicons(self):
-        self.load =GetData()
+        self.load = GetData()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.load.page_loading(self.driver)
         grade = Select(self.driver.find_element_by_id(Data.grade))
@@ -276,6 +281,7 @@ class Periodic_Assessment_Test_Heat_chart():
             count = count + 1
         self.load.page_loading(self.driver)
         return count
+
     def test_logoutbtn(self):
         self.data = GetData()
         count = 0
@@ -329,13 +335,13 @@ class Periodic_Assessment_Test_Heat_chart():
         grades = Select(self.driver.find_element_by_id(Data.grade))
         grades.select_by_index(2)
         gradename = (grades.options[2].text).strip()
-        gradenum =re.sub('\D','',gradename).strip()
+        gradenum = re.sub('\D', '', gradename).strip()
         dists = Select(self.driver.find_element_by_id(Data.district_dropdown))
         view_by = Select(self.driver.find_element_by_id(Data.view_by))
         for j in range(len(view_by.options)):
             view_by.select_by_index(j)
             self.load.page_loading(self.driver)
-            for i in range( len(dists.options)-4, len(dists.options)):
+            for i in range(len(dists.options) - 4, len(dists.options)):
                 dists.select_by_index(i)
                 print(dists.options[i].text)
                 value = self.driver.find_element_by_id(Data.district_dropdown).get_attribute('value')
@@ -343,8 +349,9 @@ class Periodic_Assessment_Test_Heat_chart():
                 self.load.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(3)
-                self.filename = self.p.get_download_dir() + '/' + self.fname.pchart_blocks()+management+'_'+gradenum+ \
-                "_blocks_of_district_"+value[1].strip()+'_'+self.month+'_'+self.year+'_'+self.load.get_current_date()+'.csv'
+                self.filename = self.p.get_download_dir() + '/' + self.fname.pchart_blocks() + management + '_' + gradenum + \
+                                "_blocks_of_district_" + value[
+                                    1].strip() + '_' + self.month + '_' + self.year + '_' + self.load.get_current_date() + '.csv'
                 print(self.filename)
                 file = os.path.isfile(self.filename)
                 if file != True:
@@ -363,7 +370,7 @@ class Periodic_Assessment_Test_Heat_chart():
         management = management[16:].lower().strip()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.load.page_loading(self.driver)
-        self.year , self.month = self.load.get_pat_month_and_year_values()
+        self.year, self.month = self.load.get_pat_month_and_year_values()
         dists = Select(self.driver.find_element_by_id(Data.district_dropdown))
         Blocks = Select(self.driver.find_element_by_id(Data.blocks_dropdown))
         grade = Select(self.driver.find_element_by_id(Data.grade))
@@ -371,12 +378,12 @@ class Periodic_Assessment_Test_Heat_chart():
         for m in range(2, len(grade.options)):
             grade.select_by_index(m)
             gradename = grade.options[m].text
-            gradenum = re.sub('\D','',gradename).strip()
+            gradenum = re.sub('\D', '', gradename).strip()
             self.load.page_loading(self.driver)
-            for i in range(len(dists.options)-1, len(dists.options)):
+            for i in range(len(dists.options) - 1, len(dists.options)):
                 dists.select_by_index(i)
                 self.load.page_loading(self.driver)
-                for j in range(len(Blocks.options)-1, len(Blocks.options)):
+                for j in range(len(Blocks.options) - 1, len(Blocks.options)):
                     Blocks.select_by_index(j)
                     self.load.page_loading(self.driver)
                     value = self.driver.find_element_by_id(Data.blocks_dropdown).get_attribute('value')
@@ -384,7 +391,7 @@ class Periodic_Assessment_Test_Heat_chart():
                     val = bvalue[1].strip()
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(4)
-                    self.filename = self.p.get_download_dir() + '/' + self.fname.pchart_clusters() + management + '_' + gradenum + "_clusters_of_block_" + val +'_'+ self.month + '_' + self.year + '_' + \
+                    self.filename = self.p.get_download_dir() + '/' + self.fname.pchart_clusters() + management + '_' + gradenum + "_clusters_of_block_" + val + '_' + self.month + '_' + self.year + '_' + \
                                     self.load.get_current_date() + '.csv'
                     print(self.filename)
                     file = os.path.isfile(self.filename)
@@ -414,7 +421,7 @@ class Periodic_Assessment_Test_Heat_chart():
         management = management[16:].lower().strip()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.load.page_loading(self.driver)
-        self.year , self.month = self.load.get_pat_month_and_year_values()
+        self.year, self.month = self.load.get_pat_month_and_year_values()
         clust = Select(self.driver.find_element_by_id(Data.cluster_dropdown))
         dists = Select(self.driver.find_element_by_id(Data.district_dropdown))
         Blocks = Select(self.driver.find_element_by_id(Data.blocks_dropdown))
@@ -423,25 +430,27 @@ class Periodic_Assessment_Test_Heat_chart():
         for m in range(2, len(grade.options)):
             grade.select_by_index(m)
             gradename = grade.options[m].text
-            gradenum = re.sub('\D','',gradename).strip()
+            gradenum = re.sub('\D', '', gradename).strip()
             self.load.page_loading(self.driver)
-            for i in range(len(dists.options)-1, len(dists.options)):
+            for i in range(len(dists.options) - 1, len(dists.options)):
                 dists.select_by_index(i)
                 self.load.page_loading(self.driver)
-                for j in range(len(Blocks.options)-1, len(Blocks.options)):
+                for j in range(len(Blocks.options) - 1, len(Blocks.options)):
                     Blocks.select_by_index(j)
                     self.load.page_loading(self.driver)
                     for k in range(1, len(clust.options)):
                         clust.select_by_index(k)
                         self.load.page_loading(self.driver)
-                        value =self.driver.find_element_by_id(Data.cluster_dropdown).get_attribute('value')
+                        value = self.driver.find_element_by_id(Data.cluster_dropdown).get_attribute('value')
                         value = value.split(":")
                         if 'No data found' in self.driver.page_source:
-                            print(clust.options[k].text , "not having data ")
+                            print(clust.options[k].text, "not having data ")
                         else:
                             self.driver.find_element_by_id(Data.Download).click()
                             time.sleep(3)
-                            self.filename = self.p.get_download_dir() + '/' + self.fname.pchart_schools()+management+'_'+gradenum+"_schools_of_cluster_"+value[1].strip()+"_"+self.month+'_'+self.year+'_'+self.load.get_current_date()+'.csv'
+                            self.filename = self.p.get_download_dir() + '/' + self.fname.pchart_schools() + management + '_' + gradenum + "_schools_of_cluster_" + \
+                                            value[
+                                                1].strip() + "_" + self.month + '_' + self.year + '_' + self.load.get_current_date() + '.csv'
                             print(self.filename)
                             file = os.path.isfile(self.filename)
                             if file != True:
@@ -470,23 +479,23 @@ class Periodic_Assessment_Test_Heat_chart():
             time.sleep(2)
             grades.select_by_index(i)
             gradename = grades.options[i].text
-            gradenum = re.sub('\D','',gradename).strip()
+            gradenum = re.sub('\D', '', gradename).strip()
             self.load.page_loading(self.driver)
             if grades.options[i].text in self.driver.page_source:
-                print(grades.options[i].text ,'is displayed in chart ')
+                print(grades.options[i].text, 'is displayed in chart ')
                 self.load.page_loading(self.driver)
             else:
-                print(grades.options[i].text ,'is not displayed ')
+                print(grades.options[i].text, 'is not displayed ')
                 count = count + 1
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
-            self.filename = self.p.get_download_dir() + "/" + self.fname.pchart_grades()+management+'_'+gradenum+'_'+'allDistricts_'+self.month+'_'+self.year+'_'+self.load.get_current_date()+'.csv'
+            self.filename = self.p.get_download_dir() + "/" + self.fname.pchart_grades() + management + '_' + gradenum + '_' + 'allDistricts_' + self.month + '_' + self.year + '_' + self.load.get_current_date() + '.csv'
             print(self.filename)
             if os.path.isfile(self.filename) != True:
-                print(grades.options[i].text,'csv file is not downloaded ')
+                print(grades.options[i].text, 'csv file is not downloaded ')
                 count = count + 1
             else:
-                print(grades.options[i].text,"csv file is downloaded")
+                print(grades.options[i].text, "csv file is downloaded")
             os.remove(self.filename)
         self.load.page_loading(self.driver)
         return count

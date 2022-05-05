@@ -1,6 +1,3 @@
-
-
-
 import unittest
 
 from cQube_Dashboard.Teacher_Professional_Development.tpd_user_progress.tpd_user_progress import user_progress
@@ -8,6 +5,8 @@ from reuse_func import GetData
 
 
 class cQube_enrollment_regression(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -20,50 +19,48 @@ class cQube_enrollment_regression(unittest.TestCase):
         self.data.navigate_to_tpd_enrollment_report()
         self.data.page_loading(self.driver)
 
-
     def test_tpd_enrollment_icon(self):
         b = user_progress(self.driver)
         res = b.test_enrollment_icon()
-        self.assertEqual(0,res,msg="Completion icon is not working ")
+        self.assertEqual(0, res, msg="Completion icon is not working ")
         self.data.page_loading(self.driver)
 
     def test_tpd_enrollment_from_hamburger(self):
         b = user_progress(self.driver)
         res = b.test_dashboard_enrollment_report()
-        self.assertEqual(0,res,msg="Navigation from hamburger is failed")
+        self.assertEqual(0, res, msg="Navigation from hamburger is failed")
         self.data.page_loading(self.driver)
 
     def test_Enrollment_time_periods_overall(self):
-        b=user_progress(self.driver)
+        b = user_progress(self.driver)
         res1 = b.test_Enrollment_overall()
         # self.assertNotEqual(0,res,msg='Collection names are empty')
-        self.assertEqual(res1,0,msg="Enrollment Overall csv file is not downloaded ")
+        self.assertEqual(res1, 0, msg="Enrollment Overall csv file is not downloaded ")
         self.data.page_loading(self.driver)
 
     def test_Home_functionalities(self):
         b = user_progress(self.driver)
-        res = b.test_homeicon_functionality()
+        b.test_homeicon_functionality()
         # self.assertFalse(res,msg="Time period is not selected")
         self.data.page_loading(self.driver)
 
-
     def test_hyperlink_function(self):
-        b=user_progress(self.driver)
-        res = b.test_hyperlink_function()
+        b = user_progress(self.driver)
+        b.test_hyperlink_function()
         print("Hyper link is working ")
         self.data.page_loading(self.driver)
 
     def test_Click_download_icon(self):
-        b  = user_progress(self.driver)
+        b = user_progress(self.driver)
         res = b.test_check_download_icon()
-        self.assertEqual(res,0,msg='Districtwise csv file is not downloaded')
+        self.assertEqual(res, 0, msg='Districtwise csv file is not downloaded')
         print('Enrollment count is correctly displaying')
         self.data.page_loading(self.driver)
 
     def test_districtwise_records(self):
-        b =user_progress(self.driver)
+        b = user_progress(self.driver)
         res = b.test_coursetype_with_all_districts()
-        self.assertEqual(0,res,msg='Some district csv file is not downloaded')
+        self.assertEqual(0, res, msg='Some district csv file is not downloaded')
         print("Districtwise csv file is downloading")
         self.data.page_loading(self.driver)
 
@@ -84,13 +81,13 @@ class cQube_enrollment_regression(unittest.TestCase):
     def test_logout_button(self):
         b = user_progress(self.driver)
         res = b.check_logout_from_report()
-        self.assertEqual(0,res,msg='Logout btn is not working ')
+        self.assertEqual(0, res, msg='Logout btn is not working ')
         self.data.page_loading(self.driver)
 
     def test_time_series_90(self):
         b = user_progress(self.driver)
         res = b.test_Enrollment_last90_days()
-        self.assertEqual(0,res,msg="last 90 days csv file is not downloaded")
+        self.assertEqual(0, res, msg="last 90 days csv file is not downloaded")
 
     def test_coursetype_with_all_districts(self):
         b = user_progress(self.driver)
@@ -122,10 +119,8 @@ class cQube_enrollment_regression(unittest.TestCase):
         res = b.test_program_with_all_clusterwise()
         self.assertEqual(0, res, msg='course clusterwise csv file is not downloaded')
 
-
-
     # Download raw file removed temporary
-    
+
     # def test_download_raw_files_overall_period(self):
     #     b = user_progress(self.driver)
     #     res = b.test_overall_rawfile_download()

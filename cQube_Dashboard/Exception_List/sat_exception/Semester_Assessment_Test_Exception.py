@@ -14,7 +14,8 @@ from reuse_func import GetData
 
 
 class Semester_Assessment_Test_Exception():
-    def __init__(self,driver):
+    def __init__(self, driver):
+        self.fname = None
         self.driver = driver
 
     def test_icon(self):
@@ -32,6 +33,7 @@ class Semester_Assessment_Test_Exception():
             print("Semester exception icon is not working")
             count = count + 1
         return count
+
     def sem_exception_options_test(self):
         self.data = GetData()
         p = pwd()
@@ -67,13 +69,13 @@ class Semester_Assessment_Test_Exception():
         cal.page_loading(self.driver)
 
         school_not_recived = self.driver.find_element_by_id('schools').text
-        notcount = re.sub("\D", "",school_not_recived)
+        notcount = re.sub("\D", "", school_not_recived)
 
         self.driver.find_element_by_xpath(Data.hyper_link).click()
         self.driver.find_element_by_id('blockbtn').click()
         cal.page_loading(self.driver)
         blockcount = self.driver.find_element_by_id('schools').text
-        bcount = re.sub("\D", "",blockcount)
+        bcount = re.sub("\D", "", blockcount)
         cal.page_loading(self.driver)
 
         self.driver.find_element_by_id('clusterbtn').click()
@@ -88,11 +90,11 @@ class Semester_Assessment_Test_Exception():
         schoolcount = re.sub("\D", "", sccount)
         cal.page_loading(self.driver)
 
-        return  notcount , bcount , clustercount,schoolcount
+        return notcount, bcount, clustercount, schoolcount
 
     def check_markers_on_block_map(self):
         cal = GetData()
-        self.fname =file_extention()
+        self.fname = file_extention()
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
@@ -104,30 +106,31 @@ class Semester_Assessment_Test_Exception():
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(2)
         p = pwd()
-        self.filename = p.get_download_dir() + "/" + self.fname.exception_block()+management+"_overall_allGrades__allBlocks_"+cal.get_current_date()+".csv"
+        self.filename = p.get_download_dir() + "/" + self.fname.exception_block() + management + "_overall_allGrades__allBlocks_" + cal.get_current_date() + ".csv"
         if os.path.isfile(self.filename) != True:
             os.remove(self.filename)
             return "File Not Downloaded"
         if os.path.isfile(self.filename) == True:
             os.remove(self.filename)
         return markers
+
     def check_markers_on_clusters_map(self):
-        self.driver.find_element(By.XPATH,Data.hyper_link).click()
+        self.driver.find_element(By.XPATH, Data.hyper_link).click()
         time.sleep(2)
         self.driver.find_element_by_id('clusterbtn').click()
         cal = GetData()
         self.fname = file_extention()
         cal.page_loading(self.driver)
         dots = self.driver.find_elements_by_class_name(Data.dots)
-        markers = len(dots)-1
+        markers = len(dots) - 1
         cal.page_loading(self.driver)
-        management_name = self.driver.find_element(By.ID,"name").text
-        print(management_name,'is management')
+        management_name = self.driver.find_element(By.ID, "name").text
+        print(management_name, 'is management')
         management = (management_name[16:].strip()).lower()
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
         p = pwd()
-        self.filename = p.get_download_dir() + "/" + self.fname.exception_cluster()+management+"_overall_allGrades__allClusters_"+cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + "/" + self.fname.exception_cluster() + management + "_overall_allGrades__allClusters_" + cal.get_current_date() + '.csv'
         if os.path.isfile(self.filename) != True:
             os.remove(self.filename)
             return "File Not Downloaded"
@@ -141,13 +144,13 @@ class Semester_Assessment_Test_Exception():
         cal = GetData()
         self.fname = file_extention()
         cal.page_loading(self.driver)
-        result= self.driver.find_elements_by_class_name(Data.dots)
+        result = self.driver.find_elements_by_class_name(Data.dots)
         cal.page_loading(self.driver)
         markers = len(result) - 1
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(5)
         p = pwd()
-        self.filename = p.get_download_dir() + "/" + self.fname.exception_school()+cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + "/" + self.fname.exception_school() + cal.get_current_date() + '.csv'
         if os.path.isfile(self.filename) != True:
             return "File Not Downloaded"
         if os.path.isfile(self.filename) == True:
@@ -167,11 +170,11 @@ class Semester_Assessment_Test_Exception():
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
             value = self.driver.find_element_by_id('choose_dist').get_attribute('value')
-            value = value[4:]+'_'
+            value = value[4:] + '_'
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(3)
             p = pwd()
-            self.filename = p.get_download_dir() + "/" + self.fname.exception_districtwise()+management+'_overall_allGrades__blockPerDistricts_of_district_'+value.strip()+cal.get_current_date()+'.csv'
+            self.filename = p.get_download_dir() + "/" + self.fname.exception_districtwise() + management + '_overall_allGrades__blockPerDistricts_of_district_' + value.strip() + cal.get_current_date() + '.csv'
             print(self.filename)
             if os.path.isfile(self.filename) != True:
                 print("District" + select_district.first_selected_option.text + "csv is not downloaded")
@@ -206,7 +209,7 @@ class Semester_Assessment_Test_Exception():
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
         p = pwd()
-        self.filename = p.get_download_dir() + "/" + self.fname.exception_district()+management+'_overall_allGrades__allDistricts_'+cal.get_current_date()+'.csv'
+        self.filename = p.get_download_dir() + "/" + self.fname.exception_district() + management + '_overall_allGrades__allDistricts_' + cal.get_current_date() + '.csv'
         print(self.filename)
         cal.page_loading(self.driver)
         if not os.path.isfile(self.filename):
@@ -269,7 +272,7 @@ class Semester_Assessment_Test_Exception():
         select_district = Select(self.driver.find_element_by_id('choose_dist'))
         select_block = Select(self.driver.find_element_by_id('choose_block'))
         count = 0
-        for x in range(len(select_district.options)-1, len(select_district.options)):
+        for x in range(len(select_district.options) - 1, len(select_district.options)):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
             for y in range(1, len(select_block.options)):
@@ -280,11 +283,13 @@ class Semester_Assessment_Test_Exception():
                 value = value[1].strip() + '_'
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(4)
-                p= pwd()
-                self.filename = p.get_download_dir() + "/" + self.fname.exception_blockwise()+management+'_overall_allGrades__clusterPerBlocks_of_block_'+value.strip()+date.today().strftime('%d-%m-%Y').strip()+'.csv'
+                p = pwd()
+                self.filename = p.get_download_dir() + "/" + self.fname.exception_blockwise() + management + '_overall_allGrades__clusterPerBlocks_of_block_' + value.strip() + date.today().strftime(
+                    '%d-%m-%Y').strip() + '.csv'
                 print(self.filename)
                 if os.path.isfile(self.filename) != True:
-                    print("District" + select_district.first_selected_option.text + "Block " + select_block.first_selected_option.text   + "csv is not downloaded")
+                    print(
+                        "District" + select_district.first_selected_option.text + "Block " + select_block.first_selected_option.text + "csv is not downloaded")
                     count = count + 1
                 else:
                     # with open(self.filename) as fin:
@@ -304,6 +309,7 @@ class Semester_Assessment_Test_Exception():
                         count = count + 1
                 os.remove(self.filename)
                 return count
+
     def click_on_logout(self):
         self.driver.find_element_by_id(Data.cQube_logo).click()
         time.sleep(1)
@@ -334,6 +340,5 @@ class Semester_Assessment_Test_Exception():
         result2 = self.driver.find_element_by_id('choose_cluster').is_displayed()
         time.sleep(2)
         dist = Select(self.driver.find_element_by_id('choose_dist'))
-        choose_dist= dist.first_selected_option.text
-        return result1,result2,choose_dist
-
+        choose_dist = dist.first_selected_option.text
+        return result1, result2, choose_dist

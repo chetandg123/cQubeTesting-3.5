@@ -7,6 +7,8 @@ from reuse_func import GetData
 
 
 class cQube_SI_Map_Report(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -36,9 +38,8 @@ class cQube_SI_Map_Report(unittest.TestCase):
         print("checking markers on map ")
         b = Infrastructure_access_by_location(self.driver)
         result = b.test_map()
-        self.assertNotEqual(0,result,msg="Locators not present on map")
+        self.assertNotEqual(0, result, msg="Locators not present on map")
         self.data.page_loading(self.driver)
-
 
     def test_districtwise_download(self):
         b = Infrastructure_access_by_location(self.driver)
@@ -64,8 +65,6 @@ class cQube_SI_Map_Report(unittest.TestCase):
         self.assertEqual(int(r), int(r3), msg="mis match found in no of school in school level")
         self.data.page_loading(self.driver)
 
-
-
     def test_district_options(self):
         print("districtwise functionality working fine")
         b = Infrastructure_access_by_location(self.driver)
@@ -82,7 +81,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_hyperlink(self):
         b = Infrastructure_access_by_location(self.driver)
-        res = b.test_link()
+        b.test_link()
         if "school-infra-map" in self.driver.current_url:
             print("school infra map based report present")
         else:
@@ -99,21 +98,21 @@ class cQube_SI_Map_Report(unittest.TestCase):
     def test_districtwise_csv(self):
         print("download districtwise csv file")
         b = Infrastructure_access_by_location(self.driver)
-        res = b.test_districtwise()
+        b.test_districtwise()
         self.data.page_loading(self.driver)
 
     def test_mouseover_on_dots(self):
         print("mouseover on markers present on map")
         b = Infrastructure_access_by_location(self.driver)
-        res  =b.test_mousehover()
+        b.test_mousehover()
         count = self.data.test_mouse_over()
-        self.assertNotEqual(0,count,msg="markers not present in map ")
+        self.assertNotEqual(0, count, msg="markers not present in map ")
         self.data.page_loading(self.driver)
 
     def test_blockwise(self):
         print("check with blockwise records")
-        b =Infrastructure_access_by_location(self.driver)
-        res = b.test_dist_blocks()
+        b = Infrastructure_access_by_location(self.driver)
+        b.test_dist_blocks()
         self.data.page_loading(self.driver)
 
     @classmethod

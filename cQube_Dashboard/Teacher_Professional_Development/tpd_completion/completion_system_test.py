@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 import time
 import unittest
 
@@ -14,6 +7,8 @@ from reuse_func import GetData
 
 
 class cQube_completion_percentage_system(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -30,21 +25,20 @@ class cQube_completion_percentage_system(unittest.TestCase):
     def test_completion_percentage_icon(self):
         b = tpd_completion_percentage_report(self.driver)
         res = b.test_completion_percentage_icon()
-        self.assertEqual(0,res,msg="Completion icon is not working ")
+        self.assertEqual(0, res, msg="Completion icon is not working ")
         self.data.page_loading(self.driver)
 
-
     def test_Click_download_icon(self):
-        b  = tpd_completion_percentage_report(self.driver)
+        b = tpd_completion_percentage_report(self.driver)
         res = b.test_check_download_icon()
-        self.assertEqual(res,0,msg='Districtwise csv file is not downloaded')
+        self.assertEqual(res, 0, msg='Districtwise csv file is not downloaded')
         self.data.page_loading(self.driver)
 
     def test_districtwise_records(self):
-        b =tpd_completion_percentage_report(self.driver)
-        res,res1 = b.test_district_selectbox()
-        self.assertEqual(0,res,msg='Some district csv file is not downloaded')
-        self.assertNotEqual(0,res1,msg="Collection items are not present")
+        b = tpd_completion_percentage_report(self.driver)
+        res, res1 = b.test_district_selectbox()
+        self.assertEqual(0, res, msg='Some district csv file is not downloaded')
+        self.assertNotEqual(0, res1, msg="Collection items are not present")
         self.data.page_loading(self.driver)
 
     def test_blockwise_records(self):
@@ -62,10 +56,10 @@ class cQube_completion_percentage_system(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_collection_records_districtwise(self):
-        b =tpd_completion_percentage_report(self.driver)
-        res1,res2 = b.test_download_collection_options()
-        self.assertNotEqual(0,res1,msg='Collection names are not present')
-        self.assertEqual(0,res2,"Collection name csv file is not downloaded")
+        b = tpd_completion_percentage_report(self.driver)
+        res1, res2 = b.test_download_collection_options()
+        self.assertNotEqual(0, res1, msg='Collection names are not present')
+        self.assertEqual(0, res2, "Collection name csv file is not downloaded")
         self.data.page_loading(self.driver)
 
     def test_collection_records_district(self):
@@ -88,8 +82,6 @@ class cQube_completion_percentage_system(unittest.TestCase):
         self.assertNotEqual(0, res1, msg='Collection names are not present')
         self.assertEqual(0, res2, "Collection name csv file is not downloaded")
         self.data.page_loading(self.driver)
-
-
 
     @classmethod
     def tearDownClass(cls):

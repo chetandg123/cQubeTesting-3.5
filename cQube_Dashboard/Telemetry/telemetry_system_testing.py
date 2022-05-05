@@ -8,6 +8,8 @@ from reuse_func import GetData
 
 
 class Test_Telemetry(unittest.TestCase):
+    data = None
+    driver = None
 
     @classmethod
     def setUpClass(self):
@@ -32,7 +34,7 @@ class Test_Telemetry(unittest.TestCase):
         else:
             print("Telemetry page is not present ")
             count = count + 1
-        self.assertEqual(0,count,msg='Telemetry page is not displayed')
+        self.assertEqual(0, count, msg='Telemetry page is not displayed')
         self.driver.find_element_by_id(Data.menu_icon).click()
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id('telemData').click()
@@ -44,12 +46,11 @@ class Test_Telemetry(unittest.TestCase):
         self.data.page_loading(self.driver)
         dots = self.driver.find_elements_by_class_name(Data.dots)
         count = len(dots) - 1
-        self.assertNotEqual(0, count  , msg="Markers not present on block level ")
+        self.assertNotEqual(0, count, msg="Markers not present on block level ")
         self.driver.find_element_by_id(Data.menu_icon).click()
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id('telemData').click()
         self.data.page_loading(self.driver)
-
 
     def test_click_on_cluster(self):
         self.data.page_loading(self.driver)
@@ -57,7 +58,7 @@ class Test_Telemetry(unittest.TestCase):
         self.data.page_loading(self.driver)
         dots = self.driver.find_elements_by_class_name(Data.dots)
         count = len(dots) - 1
-        self.assertNotEqual(0, count  , msg="Markers not present on cluster level ")
+        self.assertNotEqual(0, count, msg="Markers not present on cluster level ")
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.menu_icon).click()
         self.data.page_loading(self.driver)

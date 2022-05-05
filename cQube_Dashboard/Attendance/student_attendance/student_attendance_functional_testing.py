@@ -9,6 +9,9 @@ from reuse_func import GetData
 
 
 class cQube_Student_Attendance_functional(unittest.TestCase):
+    driver = None
+    data = None
+
     @classmethod
     def setUpClass(self):
         self.data = GetData()
@@ -23,7 +26,7 @@ class cQube_Student_Attendance_functional(unittest.TestCase):
         self.driver.implicitly_wait(100)
 
     def test_click_on_student_attendence_report(self):
-        sar = student_attendance_report(self.driver)
+        sar = student_attendance_report(self.driver,self.year,self.month)
         result = sar.click_on_sar()
         if "Student Attendance Report" in self.driver.page_source:
             print("Navigating to Student Attendance Report is working")
@@ -31,21 +34,21 @@ class cQube_Student_Attendance_functional(unittest.TestCase):
             print("Student_Attendance page does not exist!...")
 
     def test_click_on_blocks(self):
-        block = student_attendance_report(self.driver)
+        block = student_attendance_report(self.driver,self.year,self.month)
         result = block.check_markers_on_block_map()
         self.assertNotEqual(0, len(result) - 1, msg="Dots are not present on map")
         print("Blocks button is working")
         print("Markers are present on the map")
 
     def test_click_on_clusters(self):
-        cluster = student_attendance_report(self.driver)
+        cluster = student_attendance_report(self.driver,self.year,self.month)
         result = cluster.check_markers_on_clusters_map()
         self.assertNotEqual(0, len(result) - 1, msg="Dots are not present on map")
         print("Clusters button is working")
         print("Markers are present on the map")
 
     def test_click_on_schools(self):
-        school = student_attendance_report(self.driver)
+        school = student_attendance_report(self.driver,self.year,self.month)
         result = school.check_markers_on_schools_map()
         self.assertNotEqual(0, int(len(result) - 1), msg="Dots are not present on map")
         print("Schools button is working")
@@ -119,7 +122,7 @@ class cQube_Student_Attendance_functional(unittest.TestCase):
             raise self.failureException("Schools per cluster csv report download is working")
 
     def test_check_hyperlinks(self):
-        hyperlinks = student_attendance_report(self.driver)
+        hyperlinks = student_attendance_report(self.driver,self.year,self.month)
         result1,result2,choose_dist= hyperlinks.click_on_hyperlinks()
         # if result1 == False and result2 == False and choose_dist == "Choose a District " :
         #     print("hyperlinks are working")
@@ -127,7 +130,7 @@ class cQube_Student_Attendance_functional(unittest.TestCase):
         #     raise self.failureException("hyperlinks are not working")
 
     def test_home_icon(self):
-        home = student_attendance_report(self.driver)
+        home = student_attendance_report(self.driver,self.year,self.month)
         home.click_on_blocks_click_on_home_icon()
         result = home.click_HomeButton()
         if "student-attendance" in result:
@@ -137,7 +140,7 @@ class cQube_Student_Attendance_functional(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_total_no_of_students_and_total_no_of_schools_is_equals_at_districts_blocks_clusters_schools(self):
-        tc = student_attendance_report(self.driver)
+        tc = student_attendance_report(self.driver,self.year,self.month)
         print("Total number of schools equals on clicking of blocks,clusters,schools")
         student_count, Bstudents,school_count, Bschools = tc.block_total_no_of_students()
         self.assertEqual(int(student_count), int(Bstudents), msg="Block level no of students are not equal")
@@ -150,19 +153,19 @@ class cQube_Student_Attendance_functional(unittest.TestCase):
         self.assertEqual(int(school_count), int(Sschool), msg="School level no of schools are not equal to no of schools ")
 
     def test_academic_year_raw_file_download(self):
-        b = student_attendance_report(self.driver)
+        b = student_attendance_report(self.driver,self.year,self.month)
         res,res1 = b.test_academicYear_dropdown()
         self.assertEqual(0,res,msg="Academic raw file is not downloaded..")
         self.assertNotEqual(0,res1,msg="Academic year dropdown is not having options")
 
 
     def test_click_on_trends(self):
-        b = student_attendance_report(self.driver)
+        b = student_attendance_report(self.driver,self.year,self.month)
         res = b.test_click_on_trends_link()
         self.assertEqual(0,res,msg='Trends screen is not displayed')
 
     def test_logout(self):
-        logout = student_attendance_report(self.driver)
+        logout = student_attendance_report(self.driver,self.year,self.month)
         result = logout.click_on_logout()
         self.assertEqual("Log in to cQube", result, msg="login page is not exist!..")
         print("Logout Functionality is working")

@@ -6,6 +6,8 @@ from reuse_func import GetData
 
 
 class cQube_SI_Report(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -25,29 +27,28 @@ class cQube_SI_Report(unittest.TestCase):
     def test_download_blockwise(self):
         b = Composite_Report(self.driver)
         res = b.test_block()
-        self.assertEqual(0,res, msg="File is not downloaded")
+        self.assertEqual(0, res, msg="File is not downloaded")
         print("blockwise csv file downloaded")
         self.data.page_loading(self.driver)
 
     def test_download_districtwise(self):
         b = Composite_Report(self.driver)
         res = b.test_districtwise()
-        self.assertEqual(0,res, msg="File is not downloaded")
+        self.assertEqual(0, res, msg="File is not downloaded")
         print("districtwise csv file is downloaded")
         self.data.page_loading(self.driver)
 
-
     def test_download_clusterwise(self):
-        b=Composite_Report(self.driver)
+        b = Composite_Report(self.driver)
         res = b.test_clusterwise()
-        self.assertEqual(0,res, msg="File is not downloaded")
+        self.assertEqual(0, res, msg="File is not downloaded")
         print("clusterwise csv file is downloaded")
         self.data.page_loading(self.driver)
 
     def test_download_schoolwise(self):
         b = Composite_Report(self.driver)
         res = b.test_schoolwise()
-        self.assertEqual(0,res, msg="File is not downloaded")
+        self.assertEqual(0, res, msg="File is not downloaded")
         print("schoolwise csv file is downloaded")
         self.data.page_loading(self.driver)
 
@@ -61,16 +62,12 @@ class cQube_SI_Report(unittest.TestCase):
         print('checked with hyperlinks from district , block and cluster level ')
         self.data.page_loading(self.driver)
 
-
-
-
     def test_homebutton(self):
         b = Composite_Report(self.driver)
         res = b.test_homebtn()
         print("homeicon is working..")
-        self.assertEqual(res,0,msg='Home button is not working ')
+        self.assertEqual(res, 0, msg='Home button is not working ')
         self.data.page_loading(self.driver)
-
 
     def test_schools_per_cluster_csv_download1(self):
         school = Composite_Report(self.driver)
@@ -82,7 +79,6 @@ class cQube_SI_Report(unittest.TestCase):
             print("equals to downloaded file")
         else:
             raise self.failureException("Schools per cluster csv report download1 is working")
-
 
     def test_logout(self):
         b = Composite_Report(self.driver)
@@ -107,14 +103,12 @@ class cQube_SI_Report(unittest.TestCase):
         print("Checked with  y axis values are working..")
         self.data.page_loading(self.driver)
 
-
     def test_sc_scator_districtwise(self):
         b = Composite_Report(self.driver)
         result = b.test_districtwise()
         self.assertEqual(0, result, msg="No data found")
         print("Checked with each district wise records")
         self.data.page_loading(self.driver)
-
 
     def test_sc_scator_blockwise(self):
         b = Composite_Report(self.driver)

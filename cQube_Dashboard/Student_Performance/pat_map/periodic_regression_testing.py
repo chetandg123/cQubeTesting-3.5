@@ -8,6 +8,8 @@ from reuse_func import GetData
 
 
 class periodic_regression(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -18,7 +20,6 @@ class periodic_regression(unittest.TestCase):
         self.data.login_cqube(self.driver)
         self.data.navigate_to_periodic_report()
         self.data.page_loading(self.driver)
-
 
     def test_dashboard_patreport(self):
         count = 0
@@ -33,13 +34,13 @@ class periodic_regression(unittest.TestCase):
         else:
             print('Pat report icon is not working')
             count = count + 1
-        self.assertEqual(count,0,msg='Pat report button is not working')
+        self.assertEqual(count, 0, msg='Pat report button is not working')
         self.data.page_loading(self.driver)
 
     def test_DistrictwiseCsv(self):
         cls = Periodic_Assessment_Test(self.driver)
         func = cls.click_download_icon()
-        self.assertEqual(0,func,msg='Mismatch found at Districtwise footer values')
+        self.assertEqual(0, func, msg='Mismatch found at Districtwise footer values')
         print('Downloading district level csv file is working')
         self.data.page_loading(self.driver)
 
@@ -69,15 +70,14 @@ class periodic_regression(unittest.TestCase):
 
     def test_TotalStudentsSchools(self):
         b = Periodic_Assessment_Test(self.driver)
-        res= b.block_cluster_schools_footer_info()
-        self.assertEqual(res,0,msg='Block level footers  are not matched')
+        res = b.block_cluster_schools_footer_info()
+        self.assertEqual(res, 0, msg='Block level footers  are not matched')
         self.data.page_loading(self.driver)
-
 
     def test_homebtn(self):
         b = Periodic_Assessment_Test(self.driver)
         res = b.click_HomeButton()
-        self.assertEqual(0,res,msg='home button is not worked ')
+        self.assertEqual(0, res, msg='home button is not worked ')
         print('Home button is working ')
         self.data.navigate_to_periodic_report()
         self.data.page_loading(self.driver)
@@ -94,13 +94,12 @@ class periodic_regression(unittest.TestCase):
     def test_Logout(self):
         b = Periodic_Assessment_Test(self.driver)
         res = b.click_on_logout()
-        self.assertEqual('Log in to cQube',res ,msg='Logout button is not working')
+        self.assertEqual('Log in to cQube', res, msg='Logout button is not working')
         self.data.page_loading(self.driver)
         print('Logout button is button and navigated to login page ')
         self.data.login_cqube(self.driver)
         self.data.navigate_to_periodic_report()
         self.data.page_loading(self.driver)
-
 
     def test_each_district(self):
         b = Periodic_Assessment_Test(self.driver)
@@ -109,7 +108,6 @@ class periodic_regression(unittest.TestCase):
         print('Districtwise records are working fine')
         self.data.page_loading(self.driver)
 
-
     def test_district_block_clusterwise(self):
         b = Periodic_Assessment_Test(self.driver)
         res = b.check_district_block_cluster()
@@ -117,33 +115,31 @@ class periodic_regression(unittest.TestCase):
         print('School level records are working fine')
         self.data.page_loading(self.driver)
 
-
     def test_periodic_grades(self):
         b = Periodic_Assessment_Test(self.driver)
         res = b.check_grade_dropdown_options()
-        self.assertNotEqual(0,res,msg="Grade options not present")
+        self.assertNotEqual(0, res, msg="Grade options not present")
         print("checking with each grades")
         self.data.page_loading(self.driver)
 
     def test_grades_subjects(self):
         b = Periodic_Assessment_Test(self.driver)
         res = b.select_subjects_dropdown()
-        self.assertEqual(0,res,msg='Files are not downloaded')
+        self.assertEqual(0, res, msg='Files are not downloaded')
         print("checking with each grades with subjects")
         self.data.page_loading(self.driver)
 
-
     def test_timeseries(self):
         b = Periodic_Assessment_Test(self.driver)
-        res =b.test_options_times()
-        self.assertNotEqual(0,res,msg="Time series options are not present ")
+        res = b.test_options_times()
+        self.assertNotEqual(0, res, msg="Time series options are not present ")
         print("checking with time period options ")
         self.data.page_loading(self.driver)
 
     def test_timeseries_with_downloading(self):
         b = Periodic_Assessment_Test(self.driver)
-        res =b.time_over_all()
-        self.assertEqual(0,res,msg="Some mismatch found in footer values")
+        res = b.time_over_all()
+        self.assertEqual(0, res, msg="Some mismatch found in footer values")
         print("checking with time period options ")
         self.data.page_loading(self.driver)
 
@@ -170,21 +166,21 @@ class periodic_regression(unittest.TestCase):
     def test_last30days_district_blockwise_clusterwise(self):
         block = Periodic_Assessment_Test(self.driver)
         result = block.check_last30days_districts_block()
-        self.assertEqual(0,result,msg="Cluster per block csv report download is not working")
+        self.assertEqual(0, result, msg="Cluster per block csv report download is not working")
 
         schools = Periodic_Assessment_Test(self.driver)
         result = schools.check_last30_district_block_cluster()
-        self.assertEqual(result,0,msg="School wise csv file is not working ")
+        self.assertEqual(result, 0, msg="School wise csv file is not working ")
 
     def test_last7days_district_blockwise_clusterwise(self):
         block = Periodic_Assessment_Test(self.driver)
         result = block.check_last7days_districts_block()
-        self.assertEqual(result,0,msg='district csv file is not downloaded')
+        self.assertEqual(result, 0, msg='district csv file is not downloaded')
 
         schools = Periodic_Assessment_Test(self.driver)
         result = schools.check_last7_district_block_cluster()
-        self.assertEqual(result,0,msg="Schools per cluster csv download report is working on selection of each district,block and cluster The footer value of no of schools and no of students are equals to downloaded file")
-
+        self.assertEqual(result, 0,
+                         msg="Schools per cluster csv download report is working on selection of each district,block and cluster The footer value of no of schools and no of students are equals to downloaded file")
 
     @classmethod
     def tearDownClass(cls):

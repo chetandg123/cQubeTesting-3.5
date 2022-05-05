@@ -78,7 +78,7 @@ class cQube_Semester_Report(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_logout(self):
-        state = GetData()
+        GetData()
         self.driver.find_element_by_id(Data.cQube_logo).click()
         time.sleep(1)
         element = WebDriverWait(self.driver, 10).until(
