@@ -1,14 +1,13 @@
 import time
 import unittest
-
 from reuse_func import GetData
 
 
 class SemesterExamGradeDetails(unittest.TestCase):
 
     def setUp(self):
-        self.processor_name="sat_transformer"
-        self.folder_name="sat"
+        self.processor_name = "sat_transformer"
+        self.folder_name = "sat"
         self.cQube_data_storage = "cQube_data_storage"
         self.cal = GetData()
         self.storage_type = self.cal.get_storage_type()
@@ -21,28 +20,35 @@ class SemesterExamGradeDetails(unittest.TestCase):
             result = self.cal.copy_file_to_s3(self.filepath, self.folder_name)
             time.sleep(10)
             if result.returncode == 0:
-                print(self.folder_name.capitalize()+" file is successfully uploaded to s3")
-                while 1 :
-                    if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(self.cQube_data_storage) == 0 and len(self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
-                        print(self.folder_name.capitalize()+" file is successfully processed")
-                        self.assertTrue(0 == 0,self.folder_name.capitalize()+" file is successfully processed")
+                print(self.folder_name.capitalize() + " file is successfully uploaded to s3")
+                while 1:
+                    if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(
+                            self.cQube_data_storage) == 0 and len(
+                            self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
+                        print(self.folder_name.capitalize() + " file is successfully processed")
+                        self.assertTrue(0 == 0, self.folder_name.capitalize() + " file is successfully processed")
                         break
                     elif len(self.cal.get_processor_group_error_msg(self.processor_name)) != 0:
-                        self.assertEqual(0,len(self.cal.get_processor_group_error_msg(self.processor_name)),self.cal.get_processor_group_error_msg(self.processor_name)[0])
+                        self.assertEqual(0, len(self.cal.get_processor_group_error_msg(self.processor_name)),
+                                         self.cal.get_processor_group_error_msg(self.processor_name)[0])
                         break
-                    elif self.cal.get_queued_count(self.processor_name) !=0 and self.cal.get_queued_count(self.cQube_data_storage) != 0 :
+                    elif self.cal.get_queued_count(self.processor_name) != 0 and self.cal.get_queued_count(
+                            self.cQube_data_storage) != 0:
                         time.sleep(2)
             else:
-                print(self.folder_name.capitalize()+" file is not uploaded to s3")
+                print(self.folder_name.capitalize() + " file is not uploaded to s3")
         else:
             dir_created_result, file_copied_result = self.cal.copy_file_to_local(self.filepath, self.folder_name)
             time.sleep(10)
             if dir_created_result.returncode == 0 or dir_created_result.returncode == 1:
                 print(self.folder_name.capitalize() + " folder is successfully created in emission directory")
                 if file_copied_result.returncode == 0:
-                    print(self.folder_name.capitalize() + " file is successfully copied in emission directory of "+self.folder_name)
+                    print(
+                        self.folder_name.capitalize() + " file is successfully copied in emission directory of " + self.folder_name)
                     while 1:
-                        if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(self.cQube_data_storage) == 0 and len(self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
+                        if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(
+                                self.cQube_data_storage) == 0 and len(
+                                self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
                             print(self.folder_name.capitalize() + " file is successfully processed")
                             self.assertTrue(0 == 0, self.folder_name.capitalize() + " file is successfully processed")
                             break
@@ -50,24 +56,26 @@ class SemesterExamGradeDetails(unittest.TestCase):
                             self.assertEqual(0, len(self.cal.get_processor_group_error_msg(self.processor_name)),
                                              self.cal.get_processor_group_error_msg(self.processor_name)[0])
                             break
-                        elif self.cal.get_queued_count(self.processor_name) != 0 and self.cal.get_queued_count(self.cQube_data_storage) != 0:
+                        elif self.cal.get_queued_count(self.processor_name) != 0 and self.cal.get_queued_count(
+                                self.cQube_data_storage) != 0:
                             time.sleep(2)
                 else:
-                    print(self.folder_name.capitalize() + " file is not copied in emission directory of " + self.folder_name)
+                    print(
+                        self.folder_name.capitalize() + " file is not copied in emission directory of " + self.folder_name)
 
             else:
                 print(self.folder_name.capitalize() + " folder is not created in emission directory")
-
 
     def tearDown(self):
         self.cal.stop_nifi_processor(self.processor_name)
         self.cal.stop_nifi_processor("cQube_data_storage")
 
+
 class SemesterExamSubjectDetails(unittest.TestCase):
 
     def setUp(self):
-        self.processor_name="sat_transformer"
-        self.folder_name="sat"
+        self.processor_name = "sat_transformer"
+        self.folder_name = "sat"
         self.cQube_data_storage = "cQube_data_storage"
         self.cal = GetData()
         self.storage_type = self.cal.get_storage_type()
@@ -80,28 +88,35 @@ class SemesterExamSubjectDetails(unittest.TestCase):
             result = self.cal.copy_file_to_s3(self.filepath, self.folder_name)
             time.sleep(10)
             if result.returncode == 0:
-                print(self.folder_name.capitalize()+" file is successfully uploaded to s3")
-                while 1 :
-                    if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(self.cQube_data_storage) == 0 and len(self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
-                        print(self.folder_name.capitalize()+" file is successfully processed")
-                        self.assertTrue(0 == 0,self.folder_name.capitalize()+" file is successfully processed")
+                print(self.folder_name.capitalize() + " file is successfully uploaded to s3")
+                while 1:
+                    if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(
+                            self.cQube_data_storage) == 0 and len(
+                            self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
+                        print(self.folder_name.capitalize() + " file is successfully processed")
+                        self.assertTrue(0 == 0, self.folder_name.capitalize() + " file is successfully processed")
                         break
                     elif len(self.cal.get_processor_group_error_msg(self.processor_name)) != 0:
-                        self.assertEqual(0,len(self.cal.get_processor_group_error_msg(self.processor_name)),self.cal.get_processor_group_error_msg(self.processor_name)[0])
+                        self.assertEqual(0, len(self.cal.get_processor_group_error_msg(self.processor_name)),
+                                         self.cal.get_processor_group_error_msg(self.processor_name)[0])
                         break
-                    elif self.cal.get_queued_count(self.processor_name) !=0 and self.cal.get_queued_count(self.cQube_data_storage) != 0 :
+                    elif self.cal.get_queued_count(self.processor_name) != 0 and self.cal.get_queued_count(
+                            self.cQube_data_storage) != 0:
                         time.sleep(2)
             else:
-                print(self.folder_name.capitalize()+" file is not uploaded to s3")
+                print(self.folder_name.capitalize() + " file is not uploaded to s3")
         else:
             dir_created_result, file_copied_result = self.cal.copy_file_to_local(self.filepath, self.folder_name)
             time.sleep(10)
             if dir_created_result.returncode == 0 or dir_created_result.returncode == 1:
                 print(self.folder_name.capitalize() + " folder is successfully created in emission directory")
                 if file_copied_result.returncode == 0:
-                    print(self.folder_name.capitalize() + " file is successfully copied in emission directory of "+self.folder_name)
+                    print(
+                        self.folder_name.capitalize() + " file is successfully copied in emission directory of " + self.folder_name)
                     while 1:
-                        if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(self.cQube_data_storage) == 0 and len(self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
+                        if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(
+                                self.cQube_data_storage) == 0 and len(
+                                self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
                             print(self.folder_name.capitalize() + " file is successfully processed")
                             self.assertTrue(0 == 0, self.folder_name.capitalize() + " file is successfully processed")
                             break
@@ -109,24 +124,26 @@ class SemesterExamSubjectDetails(unittest.TestCase):
                             self.assertEqual(0, len(self.cal.get_processor_group_error_msg(self.processor_name)),
                                              self.cal.get_processor_group_error_msg(self.processor_name)[0])
                             break
-                        elif self.cal.get_queued_count(self.processor_name) != 0 and self.cal.get_queued_count(self.cQube_data_storage) != 0:
+                        elif self.cal.get_queued_count(self.processor_name) != 0 and self.cal.get_queued_count(
+                                self.cQube_data_storage) != 0:
                             time.sleep(2)
                 else:
-                    print(self.folder_name.capitalize() + " file is not copied in emission directory of " + self.folder_name)
+                    print(
+                        self.folder_name.capitalize() + " file is not copied in emission directory of " + self.folder_name)
 
             else:
                 print(self.folder_name.capitalize() + " folder is not created in emission directory")
-
 
     def tearDown(self):
         self.cal.stop_nifi_processor(self.processor_name)
         self.cal.stop_nifi_processor("cQube_data_storage")
 
+
 class SemesterExamMaster(unittest.TestCase):
 
     def setUp(self):
-        self.processor_name="sat_transformer"
-        self.folder_name="sat"
+        self.processor_name = "sat_transformer"
+        self.folder_name = "sat"
         self.cQube_data_storage = "cQube_data_storage"
         self.cal = GetData()
         self.storage_type = self.cal.get_storage_type()
@@ -139,28 +156,35 @@ class SemesterExamMaster(unittest.TestCase):
             result = self.cal.copy_file_to_s3(self.filepath, self.folder_name)
             time.sleep(10)
             if result.returncode == 0:
-                print(self.folder_name.capitalize()+" file is successfully uploaded to s3")
-                while 1 :
-                    if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(self.cQube_data_storage) == 0 and len(self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
-                        print(self.folder_name.capitalize()+" file is successfully processed")
-                        self.assertTrue(0 == 0,self.folder_name.capitalize()+" file is successfully processed")
+                print(self.folder_name.capitalize() + " file is successfully uploaded to s3")
+                while 1:
+                    if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(
+                            self.cQube_data_storage) == 0 and len(
+                            self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
+                        print(self.folder_name.capitalize() + " file is successfully processed")
+                        self.assertTrue(0 == 0, self.folder_name.capitalize() + " file is successfully processed")
                         break
                     elif len(self.cal.get_processor_group_error_msg(self.processor_name)) != 0:
-                        self.assertEqual(0,len(self.cal.get_processor_group_error_msg(self.processor_name)),self.cal.get_processor_group_error_msg(self.processor_name)[0])
+                        self.assertEqual(0, len(self.cal.get_processor_group_error_msg(self.processor_name)),
+                                         self.cal.get_processor_group_error_msg(self.processor_name)[0])
                         break
-                    elif self.cal.get_queued_count(self.processor_name) !=0 and self.cal.get_queued_count(self.cQube_data_storage) != 0 :
+                    elif self.cal.get_queued_count(self.processor_name) != 0 and self.cal.get_queued_count(
+                            self.cQube_data_storage) != 0:
                         time.sleep(2)
             else:
-                print(self.folder_name.capitalize()+" file is not uploaded to s3")
+                print(self.folder_name.capitalize() + " file is not uploaded to s3")
         else:
             dir_created_result, file_copied_result = self.cal.copy_file_to_local(self.filepath, self.folder_name)
             time.sleep(10)
             if dir_created_result.returncode == 0 or dir_created_result.returncode == 1:
                 print(self.folder_name.capitalize() + " folder is successfully created in emission directory")
                 if file_copied_result.returncode == 0:
-                    print(self.folder_name.capitalize() + " file is successfully copied in emission directory of "+self.folder_name)
+                    print(
+                        self.folder_name.capitalize() + " file is successfully copied in emission directory of " + self.folder_name)
                     while 1:
-                        if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(self.cQube_data_storage) == 0 and len(self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
+                        if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(
+                                self.cQube_data_storage) == 0 and len(
+                                self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
                             print(self.folder_name.capitalize() + " file is successfully processed")
                             self.assertTrue(0 == 0, self.folder_name.capitalize() + " file is successfully processed")
                             break
@@ -168,24 +192,26 @@ class SemesterExamMaster(unittest.TestCase):
                             self.assertEqual(0, len(self.cal.get_processor_group_error_msg(self.processor_name)),
                                              self.cal.get_processor_group_error_msg(self.processor_name)[0])
                             break
-                        elif self.cal.get_queued_count(self.processor_name) != 0 and self.cal.get_queued_count(self.cQube_data_storage) != 0:
+                        elif self.cal.get_queued_count(self.processor_name) != 0 and self.cal.get_queued_count(
+                                self.cQube_data_storage) != 0:
                             time.sleep(2)
                 else:
-                    print(self.folder_name.capitalize() + " file is not copied in emission directory of " + self.folder_name)
+                    print(
+                        self.folder_name.capitalize() + " file is not copied in emission directory of " + self.folder_name)
 
             else:
                 print(self.folder_name.capitalize() + " folder is not created in emission directory")
-
 
     def tearDown(self):
         self.cal.stop_nifi_processor(self.processor_name)
         self.cal.stop_nifi_processor("cQube_data_storage")
 
+
 class SemesterExamQuestionMaster(unittest.TestCase):
 
     def setUp(self):
-        self.processor_name="sat_transformer"
-        self.folder_name="sat"
+        self.processor_name = "sat_transformer"
+        self.folder_name = "sat"
         self.cQube_data_storage = "cQube_data_storage"
         self.cal = GetData()
         self.storage_type = self.cal.get_storage_type()
@@ -198,28 +224,35 @@ class SemesterExamQuestionMaster(unittest.TestCase):
             result = self.cal.copy_file_to_s3(self.filepath, self.folder_name)
             time.sleep(10)
             if result.returncode == 0:
-                print(self.folder_name.capitalize()+" file is successfully uploaded to s3")
-                while 1 :
-                    if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(self.cQube_data_storage) == 0 and len(self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
-                        print(self.folder_name.capitalize()+" file is successfully processed")
-                        self.assertTrue(0 == 0,self.folder_name.capitalize()+" file is successfully processed")
+                print(self.folder_name.capitalize() + " file is successfully uploaded to s3")
+                while 1:
+                    if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(
+                            self.cQube_data_storage) == 0 and len(
+                            self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
+                        print(self.folder_name.capitalize() + " file is successfully processed")
+                        self.assertTrue(0 == 0, self.folder_name.capitalize() + " file is successfully processed")
                         break
                     elif len(self.cal.get_processor_group_error_msg(self.processor_name)) != 0:
-                        self.assertEqual(0,len(self.cal.get_processor_group_error_msg(self.processor_name)),self.cal.get_processor_group_error_msg(self.processor_name)[0])
+                        self.assertEqual(0, len(self.cal.get_processor_group_error_msg(self.processor_name)),
+                                         self.cal.get_processor_group_error_msg(self.processor_name)[0])
                         break
-                    elif self.cal.get_queued_count(self.processor_name) !=0 and self.cal.get_queued_count(self.cQube_data_storage) != 0 :
+                    elif self.cal.get_queued_count(self.processor_name) != 0 and self.cal.get_queued_count(
+                            self.cQube_data_storage) != 0:
                         time.sleep(2)
             else:
-                print(self.folder_name.capitalize()+" file is not uploaded to s3")
+                print(self.folder_name.capitalize() + " file is not uploaded to s3")
         else:
             dir_created_result, file_copied_result = self.cal.copy_file_to_local(self.filepath, self.folder_name)
             time.sleep(10)
             if dir_created_result.returncode == 0 or dir_created_result.returncode == 1:
                 print(self.folder_name.capitalize() + " folder is successfully created in emission directory")
                 if file_copied_result.returncode == 0:
-                    print(self.folder_name.capitalize() + " file is successfully copied in emission directory of "+self.folder_name)
+                    print(
+                        self.folder_name.capitalize() + " file is successfully copied in emission directory of " + self.folder_name)
                     while 1:
-                        if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(self.cQube_data_storage) == 0 and len(self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
+                        if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(
+                                self.cQube_data_storage) == 0 and len(
+                                self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
                             print(self.folder_name.capitalize() + " file is successfully processed")
                             self.assertTrue(0 == 0, self.folder_name.capitalize() + " file is successfully processed")
                             break
@@ -227,24 +260,26 @@ class SemesterExamQuestionMaster(unittest.TestCase):
                             self.assertEqual(0, len(self.cal.get_processor_group_error_msg(self.processor_name)),
                                              self.cal.get_processor_group_error_msg(self.processor_name)[0])
                             break
-                        elif self.cal.get_queued_count(self.processor_name) != 0 and self.cal.get_queued_count(self.cQube_data_storage) != 0:
+                        elif self.cal.get_queued_count(self.processor_name) != 0 and self.cal.get_queued_count(
+                                self.cQube_data_storage) != 0:
                             time.sleep(2)
                 else:
-                    print(self.folder_name.capitalize() + " file is not copied in emission directory of " + self.folder_name)
+                    print(
+                        self.folder_name.capitalize() + " file is not copied in emission directory of " + self.folder_name)
 
             else:
                 print(self.folder_name.capitalize() + " folder is not created in emission directory")
-
 
     def tearDown(self):
         self.cal.stop_nifi_processor(self.processor_name)
         self.cal.stop_nifi_processor("cQube_data_storage")
 
+
 class SemesterExamResultTrans(unittest.TestCase):
 
     def setUp(self):
-        self.processor_name="sat_transformer"
-        self.folder_name="sat"
+        self.processor_name = "sat_transformer"
+        self.folder_name = "sat"
         self.cQube_data_storage = "cQube_data_storage"
         self.cal = GetData()
         self.storage_type = self.cal.get_storage_type()
@@ -257,28 +292,35 @@ class SemesterExamResultTrans(unittest.TestCase):
             result = self.cal.copy_file_to_s3(self.filepath, self.folder_name)
             time.sleep(10)
             if result.returncode == 0:
-                print(self.folder_name.capitalize()+" file is successfully uploaded to s3")
-                while 1 :
-                    if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(self.cQube_data_storage) == 0 and len(self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
-                        print(self.folder_name.capitalize()+" file is successfully processed")
-                        self.assertTrue(0 == 0,self.folder_name.capitalize()+" file is successfully processed")
+                print(self.folder_name.capitalize() + " file is successfully uploaded to s3")
+                while 1:
+                    if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(
+                            self.cQube_data_storage) == 0 and len(
+                            self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
+                        print(self.folder_name.capitalize() + " file is successfully processed")
+                        self.assertTrue(0 == 0, self.folder_name.capitalize() + " file is successfully processed")
                         break
                     elif len(self.cal.get_processor_group_error_msg(self.processor_name)) != 0:
-                        self.assertEqual(0,len(self.cal.get_processor_group_error_msg(self.processor_name)),self.cal.get_processor_group_error_msg(self.processor_name)[0])
+                        self.assertEqual(0, len(self.cal.get_processor_group_error_msg(self.processor_name)),
+                                         self.cal.get_processor_group_error_msg(self.processor_name)[0])
                         break
-                    elif self.cal.get_queued_count(self.processor_name) !=0 and self.cal.get_queued_count(self.cQube_data_storage) != 0 :
+                    elif self.cal.get_queued_count(self.processor_name) != 0 and self.cal.get_queued_count(
+                            self.cQube_data_storage) != 0:
                         time.sleep(2)
             else:
-                print(self.folder_name.capitalize()+" file is not uploaded to s3")
+                print(self.folder_name.capitalize() + " file is not uploaded to s3")
         else:
             dir_created_result, file_copied_result = self.cal.copy_file_to_local(self.filepath, self.folder_name)
             time.sleep(10)
             if dir_created_result.returncode == 0 or dir_created_result.returncode == 1:
                 print(self.folder_name.capitalize() + " folder is successfully created in emission directory")
                 if file_copied_result.returncode == 0:
-                    print(self.folder_name.capitalize() + " file is successfully copied in emission directory of "+self.folder_name)
+                    print(
+                        self.folder_name.capitalize() + " file is successfully copied in emission directory of " + self.folder_name)
                     while 1:
-                        if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(self.cQube_data_storage) == 0 and len(self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
+                        if self.cal.get_queued_count(self.processor_name) == 0 and self.cal.get_queued_count(
+                                self.cQube_data_storage) == 0 and len(
+                                self.cal.get_processor_group_error_msg(self.processor_name)) == 0:
                             print(self.folder_name.capitalize() + " file is successfully processed")
                             self.assertTrue(0 == 0, self.folder_name.capitalize() + " file is successfully processed")
                             break
@@ -286,14 +328,15 @@ class SemesterExamResultTrans(unittest.TestCase):
                             self.assertEqual(0, len(self.cal.get_processor_group_error_msg(self.processor_name)),
                                              self.cal.get_processor_group_error_msg(self.processor_name)[0])
                             break
-                        elif self.cal.get_queued_count(self.processor_name) != 0 and self.cal.get_queued_count(self.cQube_data_storage) != 0:
+                        elif self.cal.get_queued_count(self.processor_name) != 0 and self.cal.get_queued_count(
+                                self.cQube_data_storage) != 0:
                             time.sleep(2)
                 else:
-                    print(self.folder_name.capitalize() + " file is not copied in emission directory of " + self.folder_name)
+                    print(
+                        self.folder_name.capitalize() + " file is not copied in emission directory of " + self.folder_name)
 
             else:
                 print(self.folder_name.capitalize() + " folder is not created in emission directory")
-
 
     def tearDown(self):
         self.cal.stop_nifi_processor(self.processor_name)

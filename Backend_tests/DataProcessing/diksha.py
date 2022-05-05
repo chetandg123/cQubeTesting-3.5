@@ -1,6 +1,5 @@
 import time
 import unittest
-
 from reuse_func import GetData
 
 
