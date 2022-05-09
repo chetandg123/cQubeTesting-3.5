@@ -3,6 +3,9 @@ import unittest
 from cQube_Dashboard.Teacher_Professional_Development.content_course.diksha_content_course import content_course_report
 from reuse_func import GetData
 
+'''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , search box 
+etc '''
+
 
 class cQube_content_course_functional(unittest.TestCase):
     driver = None

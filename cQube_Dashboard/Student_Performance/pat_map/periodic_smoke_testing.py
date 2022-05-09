@@ -4,6 +4,9 @@ import unittest
 from cQube_Dashboard.Student_Performance.pat_map.Periodic_Assessment_Test import Periodic_Assessment_Test
 from reuse_func import GetData
 
+'''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
+
 
 class periodic_smoke(unittest.TestCase):
     driver = None

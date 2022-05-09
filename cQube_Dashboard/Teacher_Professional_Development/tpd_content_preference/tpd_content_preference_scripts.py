@@ -12,6 +12,9 @@ from files import Files
 from get_dir import pwd
 from reuse_func import GetData
 
+'''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , chart 
+etc '''
+
 
 class tpd_content_usage_piechart():
 

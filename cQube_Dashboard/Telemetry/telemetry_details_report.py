@@ -8,6 +8,9 @@ from filenames import file_extention
 from get_dir import pwd
 from reuse_func import GetData
 
+'''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
+
 
 class telemetry_map_report:
     def __init__(self, driver):

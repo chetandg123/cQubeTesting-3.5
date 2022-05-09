@@ -4,7 +4,6 @@ import time
 from unittest import skip
 
 import pandas as pd
-from pandas.io.formats import console
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
@@ -13,6 +12,9 @@ from filenames import file_extention
 from files import Files
 from get_dir import pwd
 from reuse_func import GetData
+
+'''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , map and markers 
+etc '''
 
 
 class tpd_content_plays_map_report():

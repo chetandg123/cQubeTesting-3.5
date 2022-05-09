@@ -1,12 +1,12 @@
 import time
 import unittest
-
-from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
 
 
 class DataReplay(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -20,11 +20,10 @@ class DataReplay(unittest.TestCase):
 
     def test_data_replay_icon(self):
         self.data.click_data_replay(self.driver)
-        #self.assertIn("report",self.driver.current_url,"Locators-replay icon is not working")
-
+        # self.assertIn("report",self.driver.current_url,"Locators-replay icon is not working")
 
     def test_data_replay_infrastructure(self):
-        self.data.select_data_replay_data_source(self.driver,"Infrastructure")
+        self.data.select_data_replay_data_source(self.driver, "Infrastructure")
         time.sleep(2)
         self.data.select_data_replay_year(self.driver, " Delete all data")
         time.sleep(2)
@@ -40,19 +39,6 @@ class DataReplay(unittest.TestCase):
         time.sleep(2)
         self.data.select_data_replay_year(self.driver, " Delete all data")
         time.sleep(2)
-
-
-
-
-
-    # def test_chpassword_icon(self):
-    #     self.data.page_loading(self.driver)
-    #     self.driver.find_element_by_id('addUser').click()
-    #     self.data.page_loading(self.driver)
-    #     head = self.driver.find_element_by_id('head').text
-    #     self.assertEqual("Create User", head, msg="create user page is not exists")
-    #     self.driver.find_element_by_id(Locators.cQube_logo).click()
-    #     self.data.page_loading(self.driver)
 
     @classmethod
     def tearDownClass(cls):

@@ -5,9 +5,11 @@ from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
 
+'''Regression Test suite -- for admin dashboard screen - creation of user , change password , user list , s3 and logs 
+'''
+
 
 class Admin_console_regression(unittest.TestCase):
-
     driver = None
     data = None
 
@@ -115,12 +117,12 @@ class Admin_console_regression(unittest.TestCase):
         self.driver.find_element_by_id('crtUsr').click()
         self.data.page_loading(self.driver)
         role = (Select(self.driver.find_element_by_id("role")))
-        count = len(role.options)-1
+        count = len(role.options) - 1
         for i in range(len(role.options)):
             role.select_by_index(i)
             print(role.options[i].text)
             self.data.page_loading(self.driver)
-        self.assertNotEqual(0,count,msg='Roles are missing ')
+        self.assertNotEqual(0, count, msg='Roles are missing ')
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
 
@@ -129,7 +131,7 @@ class Admin_console_regression(unittest.TestCase):
         self.data.page_loading(self.driver)
         self.driver.find_element_by_xpath("//a[@id='logs']").click()
         self.data.page_loading(self.driver)
-        log_type =Select(self.driver.find_element_by_name("logTypeName"))
+        log_type = Select(self.driver.find_element_by_name("logTypeName"))
         log_name = Select(self.driver.find_element_by_name("logName"))
         log_type.select_by_visible_text(' Application ')
         print(log_type.options[1].text, "is selected")
@@ -139,9 +141,6 @@ class Admin_console_regression(unittest.TestCase):
             print(log_name.options[i].text, "is selected")
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
-
-
-
 
     def test_admin_logs(self):
         self.driver.find_element_by_id(Data.Dashboard).click()
@@ -159,8 +158,6 @@ class Admin_console_regression(unittest.TestCase):
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
 
-
-
     def test_nifi_logs(self):
         self.driver.find_element_by_id(Data.Dashboard).click()
         self.data.page_loading(self.driver)
@@ -176,7 +173,6 @@ class Admin_console_regression(unittest.TestCase):
             print(log_name.options[i].text, "is selected")
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
-
 
     def test_emission_logs(self):
         self.driver.find_element_by_id(Data.Dashboard).click()
@@ -194,9 +190,6 @@ class Admin_console_regression(unittest.TestCase):
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
 
-
-
-
     def test_System_logs(self):
         self.driver.find_element_by_id(Data.Dashboard).click()
         self.data.page_loading(self.driver)
@@ -213,8 +206,6 @@ class Admin_console_regression(unittest.TestCase):
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
 
-
-
     def test_postgress_logs(self):
         self.driver.find_element_by_id(Data.Dashboard).click()
         self.data.page_loading(self.driver)
@@ -230,7 +221,6 @@ class Admin_console_regression(unittest.TestCase):
             print(log_name.options[i].text, "is selected")
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
-
 
     def test_navigate_to_s3files(self):
         self.driver.find_element_by_id(Data.Dashboard).click()
@@ -252,7 +242,7 @@ class Admin_console_regression(unittest.TestCase):
         self.data.page_loading(self.driver)
         print("choosing radio button and downloading s3 files")
         bucket_name = Select(self.driver.find_element_by_name("bucketName"))
-        for i in range(1,len(bucket_name.options)):
+        for i in range(1, len(bucket_name.options)):
             bucket_name.select_by_index(i)
             print(bucket_name.options[i].text)
             self.data.page_loading(self.driver)
@@ -278,7 +268,7 @@ class Admin_console_regression(unittest.TestCase):
         self.driver.find_element_by_id(Data.logout).click()
         self.data.page_loading(self.driver)
         rt = self.driver.title
-        self.assertEqual(rt,'Log in to cQube',msg='Login page is not displayed')
+        self.assertEqual(rt, 'Log in to cQube', msg='Login page is not displayed')
         self.data.page_loading(self.driver)
         self.data.login_to_adminconsole(self.driver)
         self.data.page_loading(self.driver)
@@ -307,7 +297,6 @@ class Admin_console_regression(unittest.TestCase):
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
-
 
     @classmethod
     def tearDownClass(cls):

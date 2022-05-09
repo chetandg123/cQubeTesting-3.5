@@ -1,14 +1,15 @@
-
-
 import unittest
-
 from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
 from summary_values import summary_records
 
+'''Script validate the Static Block summary statistic records are updating in the table properly or not '''
+
 
 class Test_static_block_summary(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -42,12 +43,12 @@ class Test_static_block_summary(unittest.TestCase):
         y.append(self.records.get_static_block_processedrec())
 
         z = x[:-2]
-        print('Screen showing',z)
-        print('In config file',y)
-        if  z == y:
+        print('Screen showing', z)
+        print('In config file', y)
+        if z == y:
             print('Static block file summary is fine')
         else:
             print("Some values are mismatching on table ")
             count = count + 1
-        self.assertEqual(0,count,msg="Records mismatch found ")
+        self.assertEqual(0, count, msg="Records mismatch found ")
         self.data.page_loading(self.driver)

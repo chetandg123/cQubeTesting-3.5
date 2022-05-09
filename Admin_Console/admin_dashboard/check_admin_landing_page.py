@@ -3,8 +3,13 @@ import unittest
 from get_dir import pwd
 from reuse_func import GetData
 
+'''Script implemented for Navigation to each admin dashboard icons and verify whether dashboard icon functioning or 
+not '''
+
 
 class Test_admin_landing_page(unittest.TestCase):
+    data = None
+    driver = None
 
     @classmethod
     def setUpClass(self):
@@ -27,7 +32,6 @@ class Test_admin_landing_page(unittest.TestCase):
         self.driver.find_element_by_id("homeBtn").click()
         self.data.page_loading(self.driver)
 
-
     def test_click_on_changepwd(self):
         self.driver.find_element_by_id("chpass").click()
         self.data.page_loading(self.driver)
@@ -37,7 +41,6 @@ class Test_admin_landing_page(unittest.TestCase):
             print("Change password screen is not present ")
         self.driver.find_element_by_id("homeBtn").click()
         self.data.page_loading(self.driver)
-
 
     def test_click_on_logs(self):
         self.driver.find_element_by_id("'logs'").click()
@@ -49,8 +52,6 @@ class Test_admin_landing_page(unittest.TestCase):
         self.driver.find_element_by_id("homeBtn").click()
         self.data.page_loading(self.driver)
 
-
-
     def test_click_on_allusers(self):
         self.driver.find_element_by_id("usersList").click()
         self.data.page_loading(self.driver)
@@ -60,7 +61,6 @@ class Test_admin_landing_page(unittest.TestCase):
             print("all users screen is not present ")
         self.driver.find_element_by_id("homeBtn").click()
         self.data.page_loading(self.driver)
-
 
     def test_click_on_s3files(self):
         self.driver.find_element_by_id("s3dwn").click()
@@ -79,7 +79,6 @@ class Test_admin_landing_page(unittest.TestCase):
             print("Navigated summary statistics page")
         else:
             print("Summary statistics page does not exist ")
-
 
     def test_click_on_monitor(self):
         self.driver.find_element_by_id("moniter").click()

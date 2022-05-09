@@ -2,8 +2,10 @@ import unittest
 from selenium.webdriver.support.select import Select
 from Locators.parameters import Data
 from cQube_Dashboard.Attendance.teacher_attendance.teacher_attendance_report import Teacher_Attendance_report
-
 from reuse_func import GetData
+
+'''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
 
 
 class Teacher_FunctionalTesting(unittest.TestCase):

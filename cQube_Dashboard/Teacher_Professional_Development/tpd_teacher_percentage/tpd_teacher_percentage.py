@@ -9,6 +9,9 @@ from filenames import file_extention
 from get_dir import pwd
 from reuse_func import GetData
 
+'''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , chart 
+etc '''
+
 
 class tpd_teacher_percentage():
     def __init__(self, driver):

@@ -4,6 +4,9 @@ from cQube_Dashboard.Teacher_Professional_Development.gps_of_learning_tpd.gps_le
     tpd_content_plays_map_report
 from reuse_func import GetData
 
+'''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , chart 
+etc '''
+
 
 class gps_learning_tpd_smoke_suite(unittest.TestCase):
     data = None

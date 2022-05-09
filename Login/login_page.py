@@ -3,6 +3,8 @@ import unittest
 from Login.login_to_cQube import cQube_Login
 from reuse_func import GetData
 
+'''Script performing the login to the cQube application - navigation to application and automatically providing user 
+name and password then clicking on login button '''
 
 class login(unittest.TestCase):
     driver = None

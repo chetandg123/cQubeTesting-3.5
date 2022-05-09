@@ -8,6 +8,9 @@ from Locators.parameters import Data
 from cQube_Dashboard.Exception_List.teacher_exception.teacher_exception_scripts import teacher_exception_report
 from reuse_func import GetData
 
+'''Script perform the functionality test of blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
+
 
 class cQube_teacher_exception_regression_report(unittest.TestCase):
     driver = None

@@ -10,6 +10,9 @@ from filenames import file_extention
 from get_dir import pwd
 from reuse_func import GetData
 
+'''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , chart 
+etc '''
+
 
 class diksha_usage_textbook_report():
     def __init__(self, driver):

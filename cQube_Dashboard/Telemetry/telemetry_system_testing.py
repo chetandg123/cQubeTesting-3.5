@@ -6,6 +6,9 @@ from cQube_Dashboard.Telemetry.telemetry_details_report import telemetry_map_rep
 from get_dir import pwd
 from reuse_func import GetData
 
+'''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
+
 
 class Test_Telemetry(unittest.TestCase):
     data = None

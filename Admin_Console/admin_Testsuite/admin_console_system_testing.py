@@ -7,6 +7,8 @@ from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
 
+'''System Test suite -- for admin dashboard screen - Checking the main functionalities in the Screen 
+'''
 
 class adminconsole_system_test(unittest.TestCase):
 

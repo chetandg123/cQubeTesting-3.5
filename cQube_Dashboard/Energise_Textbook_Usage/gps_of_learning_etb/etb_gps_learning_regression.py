@@ -3,6 +3,9 @@ import unittest
 from cQube_Dashboard.Energise_Textbook_Usage.gps_of_learning_etb.gps_learning_etb import etb_content_plays_map_report
 from reuse_func import GetData
 
+'''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , chart 
+etc '''
+
 
 class gps_learning_etb_regression(unittest.TestCase):
     driver = None

@@ -4,9 +4,11 @@ from cQube_Dashboard.Student_Performance.pat_map.Periodic_Assessment_Test import
 from reuse_func import GetData
 import unittest
 
+'''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
+
 
 class periodic_system_testing(unittest.TestCase):
-
     driver = None
     data = None
 
@@ -80,7 +82,6 @@ class periodic_system_testing(unittest.TestCase):
         self.assertEqual(0, res, msg='Some mis match found at school level records')
         print('School level records are working fine')
         self.data.page_loading(self.driver)
-
 
     @classmethod
     def tearDownClass(cls):

@@ -9,6 +9,9 @@ from reuse_func import GetData
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
+'''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , chart 
+etc '''
+
 
 class usage_per_capita_map():
 

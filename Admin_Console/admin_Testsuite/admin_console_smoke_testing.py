@@ -5,6 +5,8 @@ from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
 
+'''Smoke Test suite -- for admin dashboard screen - creation of user , user list , s3 and logs 
+'''
 
 class Admin_console_smoketest(unittest.TestCase):
 

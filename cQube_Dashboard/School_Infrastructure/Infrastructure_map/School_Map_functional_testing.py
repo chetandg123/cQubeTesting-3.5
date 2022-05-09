@@ -1,9 +1,11 @@
 import time
 import unittest
-
 from cQube_Dashboard.School_Infrastructure.Infrastructure_map.Infrastructure_access_by_location import \
     Infrastructure_access_by_location
 from reuse_func import GetData
+
+'''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
 
 
 class cQube_SI_Functional_Report(unittest.TestCase):

@@ -3,6 +3,9 @@ import unittest
 from cQube_Dashboard.Dashboard_Icons.cQube_icons import cQube_landing_page
 from reuse_func import GetData
 
+'''Script to validate the cQube Dashboard icon functionalities and check whether each icon navigating to their 
+respective reports or not '''
+
 
 class cQube_Home(unittest.TestCase):
     driver = None

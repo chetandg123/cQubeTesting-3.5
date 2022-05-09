@@ -2,16 +2,17 @@ import os
 import re
 import time
 from unittest import skip
-
 import pandas as pd
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
-
 from Locators.parameters import Data
 from filenames import file_extention
 from files import Files
 from get_dir import pwd
 from reuse_func import GetData
+
+'''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , chart 
+etc '''
 
 
 class etb_content_plays_map_report():

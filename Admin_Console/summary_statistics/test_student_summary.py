@@ -5,8 +5,12 @@ from get_dir import pwd
 from reuse_func import GetData
 from summary_values import summary_records
 
+'''Script validate the Student Attendance summary statistic records are updating in the table properly or not '''
+
 
 class Test_summaryreport(unittest.TestCase):
+    data = None
+    driver = None
 
     @classmethod
     def setUpClass(self):
@@ -42,12 +46,12 @@ class Test_summaryreport(unittest.TestCase):
         y.append(self.records.get_std_processed_records())
 
         z = x[:-2]
-        if  z == y:
+        if z == y:
             print('Student attendance summary is fine')
         else:
             print("Some values are mismatching on table ")
             count = count + 1
-        self.assertEqual(0,count,msg="Records mismatch found ")
+        self.assertEqual(0, count, msg="Records mismatch found ")
         self.data.page_loading(self.driver)
 
     # def test_student_attendance_summary2(self):

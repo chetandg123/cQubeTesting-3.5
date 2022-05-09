@@ -4,6 +4,9 @@ from cQube_Dashboard.Energise_Textbook_Usage.content_textbook.diksha_content_tex
     diksha_content_textbook_report
 from reuse_func import GetData
 
+'''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , chart 
+etc '''
+
 
 class cQube_content_textbook_Functional(unittest.TestCase):
     data = None

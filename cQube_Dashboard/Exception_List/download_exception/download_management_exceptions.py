@@ -1,12 +1,12 @@
 import csv
 import os
 import time
-
 from selenium.webdriver.support.select import Select
-
 from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
+
+'''Script validation of downloading the exception information '''
 
 
 class exception_list_download():

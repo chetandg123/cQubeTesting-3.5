@@ -1,16 +1,16 @@
 import time
 import unittest
-
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
 from Locators.parameters import Data
-
 from cQube_Dashboard.Attendance.student_attendance.student_attendance_report import student_attendance_report
 from reuse_func import GetData
+
+'''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
 
 
 class cQube_Student_Attendance(unittest.TestCase):

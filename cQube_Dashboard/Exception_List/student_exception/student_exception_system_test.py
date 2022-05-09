@@ -1,10 +1,11 @@
 import unittest
-
 from selenium.webdriver.support.select import Select
-
 from Locators.parameters import Data
 from cQube_Dashboard.Exception_List.student_exception.Student_Attendance_Exception import Student_Exceptions
 from reuse_func import GetData
+
+'''Script perform the functionality test of blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
 
 
 class cQube_System_Student_exception(unittest.TestCase):

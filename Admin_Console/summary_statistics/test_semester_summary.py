@@ -5,8 +5,13 @@ from get_dir import pwd
 from reuse_func import GetData
 from summary_values import summary_records
 
+'''Script validate the SAT summary statistic records are updating in the table properly or not '''
+
 
 class Test_semester_summary(unittest.TestCase):
+
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -40,12 +45,12 @@ class Test_semester_summary(unittest.TestCase):
         y.append(self.records.get_sem_grade_records())
         y.append(self.records.get_sem_processed_records())
         z = x[:-2]
-        print('Screen showing',z)
-        print('In config file',y)
-        if  z == y:
+        print('Screen showing', z)
+        print('In config file', y)
+        if z == y:
             print('Semester attendance summary is fine')
         else:
             print("Some values are mismatching on table ")
             count = count + 1
-        self.assertEqual(0,count,msg="Records mismatch found ")
+        self.assertEqual(0, count, msg="Records mismatch found ")
         self.data.page_loading(self.driver)

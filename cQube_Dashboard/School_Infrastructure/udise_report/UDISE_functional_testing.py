@@ -1,9 +1,11 @@
 import time
 import unittest
 from Locators.parameters import Data
-
 from cQube_Dashboard.School_Infrastructure.udise_report.udise_report import udise_report
 from reuse_func import GetData
+
+'''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
 
 
 class cQube_udise_Report(unittest.TestCase):

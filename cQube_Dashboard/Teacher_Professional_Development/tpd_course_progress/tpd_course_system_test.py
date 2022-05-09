@@ -5,6 +5,9 @@ from cQube_Dashboard.Teacher_Professional_Development.tpd_course_progress.tpd_co
     tpd_course_progress_report
 from reuse_func import GetData
 
+'''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , chart 
+etc '''
+
 
 class cQube_lpdcontent_system_Test(unittest.TestCase):
     driver = None

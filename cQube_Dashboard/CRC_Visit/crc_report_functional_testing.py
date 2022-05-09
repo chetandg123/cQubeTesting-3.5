@@ -3,9 +3,11 @@ import unittest
 from cQube_Dashboard.CRC_Visit.CRC_Report import crc_visits
 from reuse_func import GetData
 
+'''Script developed to test whether scatter graph , table records , time periods , district , block and cluster level 
+crc visits '''
+
 
 class cQube_CRC_Functional_Report(unittest.TestCase):
-
     driver = None
     data = None
 

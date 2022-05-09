@@ -4,9 +4,11 @@ import unittest
 from cQube_Dashboard.Student_Performance.sat_map.semester_assesment_test import sat_map_report
 from reuse_func import GetData
 
+'''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
+
 
 class cQube_Semester_Report(unittest.TestCase):
-
     driver = None
     data = None
 

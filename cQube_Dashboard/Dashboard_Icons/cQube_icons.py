@@ -3,6 +3,9 @@ import time
 from Locators.parameters import Data
 from reuse_func import GetData
 
+'''Script to validate the cQube Dashboard icon functionalities and check whether each icon navigating to their 
+respective reports or not '''
+
 
 class cQube_landing_page():
     def __init__(self, driver):
@@ -30,7 +33,7 @@ class cQube_landing_page():
         return count
 
     def test_composite_chart_map(self):
-        count=0
+        count = 0
         self.data = GetData()
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.menu_icon).click()
@@ -88,7 +91,7 @@ class cQube_landing_page():
                 print("Navigated to  Semester report")
             else:
                 print("Semester report is not exist")
-                count = count+1
+                count = count + 1
             self.driver.find_element_by_id(Data.cQube_logo).click()
             self.data.page_loading(self.driver)
         return count
@@ -177,7 +180,7 @@ class cQube_landing_page():
             self.data.page_loading(self.driver)
         return count
 
-    #Attendance Reports
+    # Attendance Reports
     def test_SAR(self):
         self.data = GetData()
         count = 0
@@ -219,7 +222,7 @@ class cQube_landing_page():
             self.data.page_loading(self.driver)
         return count
 
-    #Diksha TPD Reports
+    # Diksha TPD Reports
     def test_usage_by_course_report(self):
         count = 0
         self.data = GetData()
@@ -332,8 +335,7 @@ class cQube_landing_page():
             self.data.page_loading(self.driver)
         return count
 
-
-    #Diksha ETB
+    # Diksha ETB
     def test_usage_by_textbook_report(self):
         count = 0
         self.data = GetData()
@@ -378,7 +380,7 @@ class cQube_landing_page():
             self.data.page_loading(self.driver)
         return count
 
-    #CRC Visits
+    # CRC Visits
     def test_crc_visit_report(self):
         count = 0
         self.data = GetData()
@@ -418,16 +420,16 @@ class cQube_landing_page():
             time.sleep(3)
             self.data.page_loading(self.driver)
             if 'composite-report' not in self.driver.current_url:
-                print(self.driver.current_url,' - composite-report is not displayed')
+                print(self.driver.current_url, ' - composite-report is not displayed')
             else:
-                print('entering to report',self.driver.current_url)
+                print('entering to report', self.driver.current_url)
                 print("composite-report is  displayed")
                 self.data.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.cQube_logo).click()
                 self.data.page_loading(self.driver)
             return count
 
-    #Progress card
+    # Progress card
     def test_progress_Card(self):
         count = 0
         self.data = GetData()
@@ -450,7 +452,7 @@ class cQube_landing_page():
             self.data.page_loading(self.driver)
         return count
 
-    #Exception List
+    # Exception List
 
     def check_semester_Exception_report_icon(self):
         count = 0
@@ -565,7 +567,7 @@ class cQube_landing_page():
                 self.data.page_loading(self.driver)
             return count
 
-    #Telemetry
+    # Telemetry
     def check_telemetry_icon(self):
         count = 0
         self.data = GetData()
@@ -589,7 +591,7 @@ class cQube_landing_page():
             self.data.page_loading(self.driver)
         return count
 
-    #TPD Diksha
+    # TPD Diksha
     def check_usage_by_course(self):
         count = 0
         self.data = GetData()
@@ -691,16 +693,16 @@ class cQube_landing_page():
             self.driver.find_element_by_id(Data.completion_percentage).click()
             time.sleep(3)
             if 'tpd-completion' in self.driver.current_url:
-                print(self.driver.current_url,'tpd-completion is displayed')
+                print(self.driver.current_url, 'tpd-completion is displayed')
             else:
-                print(self.driver.current_url,"tpd-completion should be display in url ")
+                print(self.driver.current_url, "tpd-completion should be display in url ")
                 count = count + 1
             self.data.page_loading(self.driver)
             self.driver.find_element_by_id(Data.cQube_logo).click()
             self.data.page_loading(self.driver)
         return count
 
-    #ETB Reports
+    # ETB Reports
     def check_usage_by_textbook(self):
         count = 0
         self.data = GetData()
@@ -714,9 +716,9 @@ class cQube_landing_page():
             self.driver.find_element_by_id(Data.usage_textbook).click()
             self.data.page_loading(self.driver)
             if 'usage-by-textbook' in self.driver.current_url:
-                print(self.driver.current_url,'usage-by-textbook is displayed')
+                print(self.driver.current_url, 'usage-by-textbook is displayed')
             else:
-                print(self.driver.current_url,"usage-by-textbook should be display in url ")
+                print(self.driver.current_url, "usage-by-textbook should be display in url ")
                 count = count + 1
             self.data.page_loading(self.driver)
             self.driver.find_element_by_id(Data.cQube_logo).click()
@@ -737,9 +739,9 @@ class cQube_landing_page():
             time.sleep(4)
             self.data.page_loading(self.driver)
             if 'usage-by-textbook-content' in self.driver.current_url:
-                print(self.driver.current_url,'usage-by-textbook-content is displayed')
+                print(self.driver.current_url, 'usage-by-textbook-content is displayed')
             else:
-                print(self.driver.current_url,"usage-by-textbook-content should be display in url ")
+                print(self.driver.current_url, "usage-by-textbook-content should be display in url ")
                 count = count + 1
                 self.data.page_loading(self.driver)
                 self.driver.find_element_by_id(Data.cQube_logo).click()

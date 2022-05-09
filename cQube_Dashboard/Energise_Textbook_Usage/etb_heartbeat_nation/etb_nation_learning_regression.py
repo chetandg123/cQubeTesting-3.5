@@ -4,6 +4,9 @@ from cQube_Dashboard.Energise_Textbook_Usage.etb_heartbeat_nation.heart_beat_nat
     etb_nation_learning_report
 from reuse_func import GetData
 
+'''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , chart 
+etc '''
+
 
 class etb_nation_learning_regression(unittest.TestCase):
     driver = None

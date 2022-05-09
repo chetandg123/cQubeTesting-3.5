@@ -5,6 +5,9 @@ from Locators.parameters import Data
 from cQube_Dashboard.Energise_Textbook_Usage.usage_textbook.diksha_usage_by_textbook import diksha_usage_textbook_report
 from reuse_func import GetData
 
+'''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , chart 
+etc '''
+
 
 class cQube_usage_textbook_smoke_report(unittest.TestCase):
     data = None

@@ -5,8 +5,12 @@ from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
 
+'''Script are working as creation of users and login with new users as well changing the password '''
+
 
 class change_password(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -50,7 +54,7 @@ class change_password(unittest.TestCase):
         else:
             print('Password changed without entering new password and conf password')
             count = count + 1
-        self.assertEqual(0,count,msg='Password changed without inputs')
+        self.assertEqual(0, count, msg='Password changed without inputs')
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
@@ -71,7 +75,7 @@ class change_password(unittest.TestCase):
         else:
             print('Password re generated ')
             count = count + 1
-        self.assertEqual(0,count,msg='Password is re created with mis match of passwords')
+        self.assertEqual(0, count, msg='Password is re created with mis match of passwords')
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
@@ -86,9 +90,9 @@ class change_password(unittest.TestCase):
         username = self.data.get_admin_username()
         user = self.driver.find_element_by_name('userName').get_attribute('value')
         self.data.page_loading(self.driver)
-        print(user,'in screen')
-        print(username ,'in config')
-        self.assertEqual(username,user,msg='Username and username present in chpass page is different')
+        print(user, 'in screen')
+        print(username, 'in config')
+        self.assertEqual(username, user, msg='Username and username present in chpass page is different')
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
 

@@ -5,9 +5,10 @@ from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
 
+'''Script performs checking the newly created user are updating in the user list or not '''
+
 
 class user_list(unittest.TestCase):
-
     driver = None
     data = None
 
@@ -43,7 +44,6 @@ class user_list(unittest.TestCase):
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
 
-
     def test_created_user_in_userlist(self):
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Dashboard).click()
@@ -70,7 +70,7 @@ class user_list(unittest.TestCase):
         else:
             print('Home button is not working ')
             count = count + 1
-        self.assertEqual(0,count,msg="Admin Landing page is not displayed")
+        self.assertEqual(0, count, msg="Admin Landing page is not displayed")
         self.data.page_loading(self.driver)
 
     def test_searchbox(self):
@@ -79,7 +79,8 @@ class user_list(unittest.TestCase):
         self.driver.find_element_by_id(Data.Dashboard).click()
         time.sleep(2)
         self.driver.find_element_by_xpath(Data.userlst).click()
-        self.driver.find_element_by_xpath("//*[@id='table_filter']/label/input").send_keys(self.data.get_demoreport_name())
+        self.driver.find_element_by_xpath("//*[@id='table_filter']/label/input").send_keys(
+            self.data.get_demoreport_name())
         if self.data.get_demoreport_name() in self.driver.page_source:
             print('Search box is working fine')
         else:
@@ -88,7 +89,7 @@ class user_list(unittest.TestCase):
         self.data.page_loading(self.driver)
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
-        self.assertEqual(0,count,msg="Search box is not working ")
+        self.assertEqual(0, count, msg="Search box is not working ")
 
     @classmethod
     def tearDownClass(cls):

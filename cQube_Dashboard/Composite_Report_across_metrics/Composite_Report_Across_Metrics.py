@@ -8,6 +8,9 @@ from filenames import file_extention
 from get_dir import pwd
 from reuse_func import GetData
 
+'''Script validating the Graphs , Block level , Cluster level buttons , District , Block and Cluster level metrics 
+along with graph '''
+
 
 class Composite_report_across_Metric():
     def __init__(self, driver):

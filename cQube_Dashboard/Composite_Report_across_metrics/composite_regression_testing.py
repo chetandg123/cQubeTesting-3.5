@@ -6,9 +6,11 @@ from cQube_Dashboard.Composite_Report_across_metrics.Composite_Report_Across_Met
     Composite_report_across_Metric
 from reuse_func import GetData
 
+'''Script validating the Graphs , Block level , Cluster level buttons , District , Block and Cluster level metrics 
+along with graph '''
+
 
 class composite_regression_report(unittest.TestCase):
-
     driver = None
     data = None
 

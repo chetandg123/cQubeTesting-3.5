@@ -1,15 +1,16 @@
 import time
 import unittest
 
-
 from Locators.parameters import Data
 from cQube_Dashboard.Composite_Report_across_metrics.Composite_Report_Across_Metrics import \
     Composite_report_across_Metric
 from reuse_func import GetData
 
+'''Script validating the Graphs , Block level , Cluster level buttons , District , Block and Cluster level metrics 
+along with graph '''
+
 
 class composite_smoke_testing(unittest.TestCase):
-
     driver = None
     data = None
 
@@ -125,7 +126,6 @@ class composite_smoke_testing(unittest.TestCase):
         self.assertEqual(0, res, msg="Cluster graph is displayed ")
         print("Cluster wise graph is displayed ")
         self.data.page_loading(self.driver)
-
 
     @classmethod
     def tearDownClass(cls):

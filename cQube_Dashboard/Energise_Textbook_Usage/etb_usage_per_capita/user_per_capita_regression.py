@@ -3,6 +3,9 @@ import unittest
 from cQube_Dashboard.Energise_Textbook_Usage.etb_usage_per_capita.usage_per_capita_report import usage_per_capita_map
 from reuse_func import GetData
 
+'''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , chart 
+etc '''
+
 
 class user_capita_regression(unittest.TestCase):
     driver = None

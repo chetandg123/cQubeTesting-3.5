@@ -1,14 +1,16 @@
-
-
 import unittest
-
 from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
 from summary_values import summary_records
 
+'''Script validate the Static Cluster summary statistic records are updating in the table properly or not '''
+
 
 class Test_static_cluster_summary(unittest.TestCase):
+
+    data = None
+    driver = None
 
     @classmethod
     def setUpClass(self):

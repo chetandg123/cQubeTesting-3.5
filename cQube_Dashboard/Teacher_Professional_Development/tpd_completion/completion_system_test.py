@@ -5,6 +5,9 @@ from cQube_Dashboard.Teacher_Professional_Development.tpd_completion.tpd_complet
     tpd_completion_percentage_report
 from reuse_func import GetData
 
+'''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , chart 
+etc '''
+
 
 class cQube_completion_percentage_system(unittest.TestCase):
     driver = None

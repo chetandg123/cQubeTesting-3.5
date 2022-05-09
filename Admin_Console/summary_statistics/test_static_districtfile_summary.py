@@ -1,14 +1,16 @@
-
-
 import unittest
-
 from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
 from summary_values import summary_records
 
+'''Script validate the Static District summary statistic records are updating in the table properly or not '''
+
 
 class Test_static_district_summary(unittest.TestCase):
+
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):

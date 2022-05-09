@@ -7,9 +7,10 @@ from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
 
+''' Script performs the creation of admin , report viewer and emission user from create user screen '''
+
 
 class create_user(unittest.TestCase):
-
     driver = None
     data = None
 
@@ -127,7 +128,7 @@ class create_user(unittest.TestCase):
         self.data.page_loading(self.driver)
         role = (Select(self.driver.find_element_by_id("role")))
         count = len(role.options) - 1
-        for i in range(1,len(role.options)):
+        for i in range(1, len(role.options)):
             time.sleep(2)
             role.select_by_index(i)
             print(role.options[i].text)
@@ -152,7 +153,7 @@ class create_user(unittest.TestCase):
         else:
             print("Error msg is not displayed")
             count = count + 1
-        self.assertEqual(0,count,msg='Error msg not displayed')
+        self.assertEqual(0, count, msg='Error msg not displayed')
         self.data.page_loading(self.driver)
 
     def test_password_box_with_conditions(self):
@@ -168,12 +169,12 @@ class create_user(unittest.TestCase):
         self.driver.find_element_by_id("username").send_keys('')
         self.driver.find_element_by_id("passswd").send_keys('')
         self.driver.find_element_by_id('btn').click()
-        if  'Enter atleast 8 characters' in self.driver.page_source:
+        if 'Enter atleast 8 characters' in self.driver.page_source:
             print('As per conditions password box is working ')
         else:
             print('Conditions are breaked by password box ')
             count = count + 1
-        self.assertEqual(0,count,msg='Conditions are not met ')
+        self.assertEqual(0, count, msg='Conditions are not met ')
         self.data.page_loading(self.driver)
 
     def test_password_box(self):

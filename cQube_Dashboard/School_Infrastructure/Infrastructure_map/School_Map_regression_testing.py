@@ -6,6 +6,9 @@ from cQube_Dashboard.School_Infrastructure.Infrastructure_map.Infrastructure_acc
 
 from reuse_func import GetData
 
+'''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
+
 
 class cQube_SI_Map_Report(unittest.TestCase):
     driver = None

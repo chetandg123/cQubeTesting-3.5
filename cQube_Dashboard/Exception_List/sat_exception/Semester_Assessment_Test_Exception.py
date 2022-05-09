@@ -2,15 +2,16 @@ import os
 import re
 import time
 from datetime import date
-
 import pandas as pd
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
-
 from Locators.parameters import Data
 from filenames import file_extention
 from get_dir import pwd
 from reuse_func import GetData
+
+'''Script perform the functionality test of blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
 
 
 class Semester_Assessment_Test_Exception():

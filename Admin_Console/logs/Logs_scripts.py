@@ -9,8 +9,13 @@ from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
 
+'''Script performs navigation to logs screen and checking logs console and performing download of all type of logs 
+from admin console '''
+
 
 class Test_logs(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -44,7 +49,7 @@ class Test_logs(unittest.TestCase):
             print("logs page is not present")
             count = count + 1
         self.driver.find_element_by_id("homeBtn").click()
-        self.assertEqual(0,count,msg='Logs page does not exist ')
+        self.assertEqual(0, count, msg='Logs page does not exist ')
         self.data.page_loading(self.driver)
 
     def test_application_node_info(self):
@@ -74,10 +79,9 @@ class Test_logs(unittest.TestCase):
                 reader = csv.reader(f, delimiter=",")
                 data = list(reader)
                 row_count = len(data)
-            self.assertNotEqual(int(row_count),0,msg='Log file does not contains informations')
+            self.assertNotEqual(int(row_count), 0, msg='Log file does not contains informations')
             os.remove(self.filename)
             self.data.page_loading(self.driver)
-
 
     def test_application_node_error(self):
         self.data.logs_page()
@@ -106,7 +110,7 @@ class Test_logs(unittest.TestCase):
                 reader = csv.reader(f, delimiter=",")
                 data = list(reader)
                 row_count = len(data)
-            self.assertNotEqual(int(row_count),0,msg='Log file does not contains informations')
+            self.assertNotEqual(int(row_count), 0, msg='Log file does not contains informations')
             os.remove(self.filename)
             self.data.page_loading(self.driver)
 
@@ -137,7 +141,7 @@ class Test_logs(unittest.TestCase):
                 reader = csv.reader(f, delimiter=",")
                 data = list(reader)
                 row_count = len(data)
-            self.assertNotEqual(int(row_count),0,msg='Log file does not contains informations')
+            self.assertNotEqual(int(row_count), 0, msg='Log file does not contains informations')
             os.remove(self.filename)
             self.data.page_loading(self.driver)
 
@@ -168,7 +172,7 @@ class Test_logs(unittest.TestCase):
                 reader = csv.reader(f, delimiter=",")
                 data = list(reader)
                 row_count = len(data)
-            self.assertNotEqual(int(row_count),0,msg='Log file does not contains informations')
+            self.assertNotEqual(int(row_count), 0, msg='Log file does not contains informations')
             os.remove(self.filename)
             self.data.page_loading(self.driver)
 
@@ -200,10 +204,9 @@ class Test_logs(unittest.TestCase):
                 reader = csv.reader(f, delimiter=",")
                 data = list(reader)
                 row_count = len(data)
-            self.assertNotEqual(int(row_count),0,msg='Log file does not contains informations')
+            self.assertNotEqual(int(row_count), 0, msg='Log file does not contains informations')
             os.remove(self.filename)
             self.data.page_loading(self.driver)
-
 
     def test_admin_node_error(self):
         self.data.logs_page()
@@ -232,7 +235,7 @@ class Test_logs(unittest.TestCase):
                 reader = csv.reader(f, delimiter=",")
                 data = list(reader)
                 row_count = len(data)
-            self.assertNotEqual(int(row_count),0,msg='Log file does not contains informations')
+            self.assertNotEqual(int(row_count), 0, msg='Log file does not contains informations')
             os.remove(self.filename)
             self.data.page_loading(self.driver)
 
@@ -263,10 +266,9 @@ class Test_logs(unittest.TestCase):
                 reader = csv.reader(f, delimiter=",")
                 data = list(reader)
                 row_count = len(data)
-            self.assertNotEqual(int(row_count),0,msg='Log file does not contains informations')
+            self.assertNotEqual(int(row_count), 0, msg='Log file does not contains informations')
             os.remove(self.filename)
             self.data.page_loading(self.driver)
-
 
     def test_admin_angular_error(self):
         self.data.logs_page()
@@ -295,10 +297,9 @@ class Test_logs(unittest.TestCase):
                 reader = csv.reader(f, delimiter=",")
                 data = list(reader)
                 row_count = len(data)
-            self.assertNotEqual(int(row_count),0,msg='Log file does not contains informations')
+            self.assertNotEqual(int(row_count), 0, msg='Log file does not contains informations')
             os.remove(self.filename)
             self.data.page_loading(self.driver)
-
 
     def test_nifi_applogs(self):
         self.data.logs_page()
@@ -327,10 +328,9 @@ class Test_logs(unittest.TestCase):
                 reader = csv.reader(f, delimiter=",")
                 data = list(reader)
                 row_count = len(data)
-            self.assertNotEqual(int(row_count),0,msg='Log file does not contains informations')
+            self.assertNotEqual(int(row_count), 0, msg='Log file does not contains informations')
             os.remove(self.filename)
             self.data.page_loading(self.driver)
-
 
     def test_nifi_bootstrap(self):
         self.data.logs_page()
@@ -359,10 +359,9 @@ class Test_logs(unittest.TestCase):
                 reader = csv.reader(f, delimiter=",")
                 data = list(reader)
                 row_count = len(data)
-            self.assertNotEqual(int(row_count),0,msg='Log file does not contains informations')
+            self.assertNotEqual(int(row_count), 0, msg='Log file does not contains informations')
             os.remove(self.filename)
             self.data.page_loading(self.driver)
-
 
     def test_emission_access_logs(self):
         self.data.logs_page()
@@ -391,10 +390,9 @@ class Test_logs(unittest.TestCase):
                 reader = csv.reader(f, delimiter=",")
                 data = list(reader)
                 row_count = len(data)
-            self.assertNotEqual(int(row_count),0,msg='Log file does not contains informations')
+            self.assertNotEqual(int(row_count), 0, msg='Log file does not contains informations')
             os.remove(self.filename)
             self.data.page_loading(self.driver)
-
 
     def test_emission_error_logs(self):
         self.data.logs_page()
@@ -423,10 +421,9 @@ class Test_logs(unittest.TestCase):
                 reader = csv.reader(f, delimiter=",")
                 data = list(reader)
                 row_count = len(data)
-            self.assertNotEqual(int(row_count),0,msg='Log file does not contains informations')
+            self.assertNotEqual(int(row_count), 0, msg='Log file does not contains informations')
             os.remove(self.filename)
             self.data.page_loading(self.driver)
-
 
     def test_System_syslogs(self):
         self.data.logs_page()
@@ -455,10 +452,9 @@ class Test_logs(unittest.TestCase):
                 reader = csv.reader(f, delimiter=",")
                 data = list(reader)
                 row_count = len(data)
-            self.assertNotEqual(int(row_count),0,msg='Log file does not contains informations')
+            self.assertNotEqual(int(row_count), 0, msg='Log file does not contains informations')
             os.remove(self.filename)
             self.data.page_loading(self.driver)
-
 
     def test_postgress_postgreslog(self):
         self.data.logs_page()
@@ -487,11 +483,9 @@ class Test_logs(unittest.TestCase):
                 reader = csv.reader(f, delimiter=",")
                 data = list(reader)
                 row_count = len(data)
-            self.assertNotEqual(int(row_count),0,msg='Log file does not contains informations')
+            self.assertNotEqual(int(row_count), 0, msg='Log file does not contains informations')
             os.remove(self.filename)
             self.data.page_loading(self.driver)
-
-
 
     @classmethod
     def tearDownClass(cls):

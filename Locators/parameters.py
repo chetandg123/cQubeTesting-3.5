@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+""" This python file contains selenium web elements of cQube Application """
+
+
 class Data():
     login = "login"
     email = "username"

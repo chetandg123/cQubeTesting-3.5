@@ -1,22 +1,23 @@
-
 import unittest
 from cQube_Dashboard.CRC_Visit.CRC_Report import crc_visits
 from reuse_func import GetData
 
+'''Script developed to test whether scatter graph , table records , time periods , district , block and cluster level 
+crc visits '''
+
 
 class cQube_CRC_Report(unittest.TestCase):
-
     driver = None
     data = None
 
     @classmethod
     def setUpClass(self):
-            self.data = GetData()
-            self.driver = self.data.get_driver()
-            self.data.open_cqube_appln(self.driver)
-            self.data.login_cqube(self.driver)
-            self.data.navigate_to_crc_report()
-            self.data.page_loading(self.driver)
+        self.data = GetData()
+        self.driver = self.data.get_driver()
+        self.data.open_cqube_appln(self.driver)
+        self.data.login_cqube(self.driver)
+        self.data.navigate_to_crc_report()
+        self.data.page_loading(self.driver)
 
     def test_navigate_crc(self):
         b = crc_visits(self.driver)

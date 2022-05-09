@@ -2,14 +2,15 @@ import csv
 import os
 import re
 import time
-
 import pandas as pd
 from selenium.webdriver.support.select import Select
-
 from Locators.parameters import Data
 from filenames import file_extention
 from get_dir import pwd
 from reuse_func import GetData
+
+'''Script developed to test whether scatter graph , table records , time periods , district , block and cluster level 
+crc visits '''
 
 
 class crc_visits():

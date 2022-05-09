@@ -6,6 +6,9 @@ from cQube_Dashboard.Exception_List.sat_exception.Semester_Assessment_Test_Excep
 
 from reuse_func import GetData
 
+'''Script perform the functionality test of blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
+
 
 class cQube_semester_exception_report(unittest.TestCase):
     driver = None

@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 import unittest
-import time
-
 from selenium.webdriver.support.select import Select
-
 from Locators.parameters import Data
 from cQube_Dashboard.Exception_List.teacher_exception.teacher_exception_scripts import teacher_exception_report
 from reuse_func import GetData
 
+'''Script perform the functionality test of blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
+
 
 class cQube_teacher_exception_system_report(unittest.TestCase):
-
     driver = None
     data = None
 
@@ -123,7 +122,7 @@ class cQube_teacher_exception_system_report(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_time_series(self):
-        p = teacher_exception_report(self.driver , self.year, self.month)
+        p = teacher_exception_report(self.driver, self.year, self.month)
         res = p.check_time_series_day()
         self.assertEqual(0, res, msg='Time series dropdown having no options ')
         print('checked with Time series drop down ')

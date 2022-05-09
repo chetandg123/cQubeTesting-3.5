@@ -4,8 +4,13 @@ from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
 
+'''This Script performs the navigation to summary result screen checking the each data source table records updating 
+with proper information or not '''
+
 
 class Test_summaryreport(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -26,7 +31,7 @@ class Test_summaryreport(unittest.TestCase):
         else:
             print('Summary report page is not displayed')
             count = count + 1
-        self.assertEqual(0,count,msg='Summary report page is not working')
+        self.assertEqual(0, count, msg='Summary report page is not working')
         self.driver.find_element_by_id(Data.menu_icon).click()
         self.data.page_loading(self.driver)
 
@@ -41,7 +46,7 @@ class Test_summaryreport(unittest.TestCase):
         else:
             print('Summary report page is not displayed')
             count = count + 1
-        self.assertEqual(0,count,msg='Summary report page is not working')
+        self.assertEqual(0, count, msg='Summary report page is not working')
         self.driver.find_element_by_id(Data.menu_icon).click()
         self.data.page_loading(self.driver)
 
@@ -51,7 +56,7 @@ class Test_summaryreport(unittest.TestCase):
         time.sleep(3)
         self.driver.find_element_by_xpath(Data.summ).click()
         self.data.page_loading(self.driver)
-        reports =self.driver.find_elements_by_tag_name('h2')
+        reports = self.driver.find_elements_by_tag_name('h2')
         count = len(reports)
         if "Diksha data Summary:" in self.driver.page_source:
             print('Diksha data Summary: statistics present')
@@ -74,12 +79,12 @@ class Test_summaryreport(unittest.TestCase):
             print(' Semester Infra_Table_Report Summary: is not present')
 
         if "Infra Infra_Table_Report Summary:" in self.driver.page_source:
-           print(' Infra Infra_Table_Report Summary: statistics present')
+            print(' Infra Infra_Table_Report Summary: statistics present')
         else:
             print(' Infra Infra_Table_Report Summary: is not present')
 
         if "Inspection Infra_Table_Report Summary:" in self.driver.page_source:
-           print(' Inspection Infra_Table_Report Summary: statistics present')
+            print(' Inspection Infra_Table_Report Summary: statistics present')
         else:
             print(' Inspection Infra_Table_Report Summary: is not present')
 

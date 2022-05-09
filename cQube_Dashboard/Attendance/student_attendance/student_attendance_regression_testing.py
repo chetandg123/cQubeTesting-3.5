@@ -3,9 +3,11 @@ import unittest
 from selenium.webdriver.support.select import Select
 from Locators.parameters import Data
 
-
 from cQube_Dashboard.Attendance.student_attendance.student_attendance_report import student_attendance_report
 from reuse_func import GetData
+
+'''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
 
 
 class cQube_Student_Attendance_regression(unittest.TestCase):
@@ -62,7 +64,7 @@ class cQube_Student_Attendance_regression(unittest.TestCase):
     def test_blockwise_csv_download(self):
         csv = student_attendance_report(self.driver, self.year, self.month)
         result = csv.click_download_icon_of_blocks()
-        if result==0:
+        if result == 0:
             print("Block wise csv report download is working")
         else:
             raise self.failureException("Block wise csv report download is not working")
@@ -119,7 +121,7 @@ class cQube_Student_Attendance_regression(unittest.TestCase):
 
     def test_check_hyperlinks(self):
         hyperlinks = student_attendance_report(self.driver, self.year, self.month)
-        result1, result2, choose_dist= hyperlinks.click_on_hyperlinks()
+        result1, result2, choose_dist = hyperlinks.click_on_hyperlinks()
         if result1 == False and result2 == False and choose_dist == "Choose a District ":
             print("hyperlinks are working")
         else:
@@ -152,7 +154,6 @@ class cQube_Student_Attendance_regression(unittest.TestCase):
         self.assertEqual(int(school_count), int(Sschool), msg="Cluster level no of schools are not equal to "
                                                               "no of schools ")
         print("Total number of students and school equals on clicking of blocks,clusters,schools")
-
 
     def test_logout(self):
         logout = student_attendance_report(self.driver, self.year, self.month)

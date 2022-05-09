@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import unittest
-
 from cQube_Dashboard.Exception_List.pat_exception.pat_scripts import pat_exception_report
 from reuse_func import GetData
+
+'''Script perform the functionality test of blocks , cluster and school level buttons and dropdowns , map records , 
+footer information's '''
 
 
 class cQube_pat_exception_smoke_report(unittest.TestCase):

@@ -1,32 +1,31 @@
-
 import csv
 import os
 import time
-
 from selenium.webdriver.support.select import Select
-
 from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
 
+'''Script validation of downloading the exception information '''
+
 
 class exception_download():
-    def __init__(self ,driver):
+    def __init__(self, driver):
         self.p = None
         self.driver = driver
 
     def get_exceptions(self):
-        self.data  = GetData()
+        self.data = GetData()
         self.driver.implicitly_wait(200)
         management_types_1 = Select(self.driver.find_element_by_id('management'))
         count = 0
-        for i in range(1 ,len(management_types_1.options)):
+        for i in range(1, len(management_types_1.options)):
 
             management_types = Select(self.driver.find_element_by_id('management'))
             management_types.select_by_index(i)
             name = management_types.options[i].text
             time.sleep(4)
-            print(name ,'is selected')
+            print(name, 'is selected')
             self.driver.find_element_by_id('exceptList').click()
             time.sleep(1)
             self.driver.find_element_by_id('isdata').click()
@@ -47,7 +46,7 @@ class exception_download():
                     row_count = len(data)
                     overall = row_count
                     if int(row_count) > 0:
-                        print(name, row_count ,  'Exception records are present ')
+                        print(name, row_count, 'Exception records are present ')
                     else:
                         print(name, 'exception records are not present')
                         count = count + 1

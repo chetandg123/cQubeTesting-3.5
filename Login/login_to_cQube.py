@@ -1,5 +1,6 @@
 from reuse_func import GetData
 
+''' Script developed to validation of login is working or not '''
 
 class cQube_Login():
     def __init__(self, driver):
