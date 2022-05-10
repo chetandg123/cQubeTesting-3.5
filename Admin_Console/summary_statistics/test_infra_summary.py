@@ -8,7 +8,7 @@ from summary_values import summary_records
 '''Script validate the Infrastructure summary statistic records are updating in the table properly or not '''
 
 
-class Test_infra_summary(unittest.TestCase):
+class TestInfraSummary(unittest.TestCase):
     driver = None
     data = None
 

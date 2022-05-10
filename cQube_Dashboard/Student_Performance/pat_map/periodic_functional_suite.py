@@ -10,7 +10,7 @@ import unittest
 footer information's '''
 
 
-class periodic_functional_testing(unittest.TestCase):
+class Periodic_Functional_Testing(unittest.TestCase):
     data = None
     driver = None
 

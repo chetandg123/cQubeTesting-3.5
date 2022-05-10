@@ -7,7 +7,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from Locators.parameters import Data
-from cQube_Dashboard.Attendance.teacher_attendance.teacher_attendance_report import Teacher_Attendance_report
+from cQube_Dashboard.Attendance.teacher_attendance.teacher_attendance_report import Teacher_Attendance_Report
 from get_dir import pwd
 from reuse_func import GetData
 
@@ -33,7 +33,7 @@ class cQube_Teacher_Attendance_SmokeTest(unittest.TestCase):
         self.month = month.first_selected_option.text
 
     def test_click_on_student_attendence_report(self):
-        sar = Teacher_Attendance_report(self.driver, self.year, self.month)
+        sar = Teacher_Attendance_Report(self.driver, self.year, self.month)
         result = sar.click_on_tar()
         if "teacher-attendance" in result:
             print("Teacher Attendance Report is Working")
@@ -94,7 +94,7 @@ class cQube_Teacher_Attendance_SmokeTest(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_check_hyperlinks(self):
-        hyperlinks = Teacher_Attendance_report(self.driver, self.year, self.month)
+        hyperlinks = Teacher_Attendance_Report(self.driver, self.year, self.month)
         result1, result2, choose_dist = hyperlinks.click_on_hyperlinks()
         if result1 == False and result2 == False and choose_dist == "Choose a District ":
             print("hyperlinks are working")
@@ -150,7 +150,7 @@ class cQube_Teacher_Attendance_SmokeTest(unittest.TestCase):
             raise self.failureException("Choose District,Block and Cluster is not working")
 
     def test_home_icon(self):
-        home = Teacher_Attendance_report(self.driver, self.year, self.month)
+        home = Teacher_Attendance_Report(self.driver, self.year, self.month)
         home.click_on_blocks_click_on_home_icon()
         result = home.click_HomeButton()
         if "teacher-attendance" in result:
@@ -186,7 +186,7 @@ class cQube_Teacher_Attendance_SmokeTest(unittest.TestCase):
             raise self.failureException("Markers are not present on the map")
 
     def test_no_of_schools_is_equals_at_districts_blocks_clusters_schools(self):
-        tc = Teacher_Attendance_report(self.driver, self.year, self.month)
+        tc = Teacher_Attendance_Report(self.driver, self.year, self.month)
         self.school_count, Bschools = tc.block_no_of_schools()
         self.assertEqual(int(self.school_count), int(Bschools),
                          msg="Block level no of schools are not equal to no of schools ")
@@ -198,7 +198,7 @@ class cQube_Teacher_Attendance_SmokeTest(unittest.TestCase):
         self.assertEqual(int(schools), int(Sschools), msg="Cluster level no of schools are not equal to no of schools ")
 
     def test_total_no_of_teachers_is_equals_at_districts_blocks_clusters_schools(self):
-        tc = Teacher_Attendance_report(self.driver, self.year, self.month)
+        tc = Teacher_Attendance_Report(self.driver, self.year, self.month)
         student_count, Bstudents = tc.block_total_no_of_teachers()
         self.assertEqual(int(student_count), int(Bstudents), msg="Block level no of students are not equal")
         student_count, Cstudents = tc.cluster_total_no_of_teachers()

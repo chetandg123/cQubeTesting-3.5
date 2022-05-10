@@ -2,7 +2,7 @@ import time
 import unittest
 from Locators.parameters import Data
 from cQube_Dashboard.School_Infrastructure.Infrastructure_map.Infrastructure_access_by_location import \
-    Infrastructure_access_by_location
+    Infrastructure_Access_By_Location
 
 from reuse_func import GetData
 
@@ -26,21 +26,21 @@ class cQube_SI_Map_Report(unittest.TestCase):
         time.sleep(3)
 
     def test_hyperlink(self):
-        b = Infrastructure_access_by_location(self.driver)
-        res = b.test_link()
+        b = Infrastructure_Access_By_Location(self.driver)
+        b.test_link()
         if "school-infra-map" in self.driver.current_url:
             print("school infra map based report present")
         else:
             print("home icon is not working ")
 
     def test_districtwise_download(self):
-        b = Infrastructure_access_by_location(self.driver)
+        b = Infrastructure_Access_By_Location(self.driver)
         res = b.test_donwload()
         self.assertEqual(0, res, msg="mismatch found at no of school values")
         self.data.page_loading(self.driver)
 
     def test_schools_per_cluster_csv_download1(self):
-        school = Infrastructure_access_by_location(self.driver)
+        school = Infrastructure_Access_By_Location(self.driver)
         result = school.check_download_csv1()
         if result == 0:
             print("Schools per cluster csv download report is working")
@@ -70,7 +70,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_infrascore(self):
-        b = Infrastructure_access_by_location(self.driver)
+        b = Infrastructure_Access_By_Location(self.driver)
         infra_score = b.infra_score()
         b.remove_csv()
         self.assertNotEqual(0, infra_score, msg='Failed')
@@ -116,32 +116,32 @@ class cQube_SI_Map_Report(unittest.TestCase):
         self.assertNotEqual(0, Toilet, msg='Failed')
 
     def test_infrascores(self):
-        b = Infrastructure_access_by_location(self.driver)
+        b = Infrastructure_Access_By_Location(self.driver)
         res = b.test_infrascores()
         self.assertNotEqual(0, res, msg="infra score options not contains in drop down")
         print("checked with infrascores options")
 
     def test_click_on_block_cluster_school(self):
-        b = Infrastructure_access_by_location(self.driver)
+        b = Infrastructure_Access_By_Location(self.driver)
         res1, res2 = b.test_blocks_button()
         self.assertNotEqual(0, res1, msg="Records are not present on map ")
         self.assertTrue(res2, msg='Block wise file downloading is not working ')
         print("Block buttons is working...")
 
-        b = Infrastructure_access_by_location(self.driver)
+        b = Infrastructure_Access_By_Location(self.driver)
         res1, res2 = b.test_clusterbtn()
         self.assertNotEqual(0, res1, msg="Records are not present on map ")
         self.assertTrue(res2, msg='Cluster wise file downloading is not working ')
         print("cluster button is working ")
 
-        b = Infrastructure_access_by_location(self.driver)
+        b = Infrastructure_Access_By_Location(self.driver)
         res1, res2 = b.test_click_on_school_btn()
         self.assertNotEqual(0, res1, msg="Records are not present on map ")
         self.assertTrue(res2, msg='School wise file downloading is not working ')
         print("school button is working ")
 
     def test_no_of_schools(self):
-        b = Infrastructure_access_by_location(self.driver)
+        b = Infrastructure_Access_By_Location(self.driver)
         r, r1, r2, r3 = b.test_check_total_schoolvalue()
         self.assertEqual(int(r), int(r1), msg="mis match found in no of school in block level")
         self.assertEqual(int(r), int(r2), msg="mis match found in no of school in cluster level")
@@ -150,17 +150,17 @@ class cQube_SI_Map_Report(unittest.TestCase):
         print("checked with comapared with footer values ")
 
     def test_block_cluster_schools_infrascores(self):
-        b = Infrastructure_access_by_location(self.driver)
+        b = Infrastructure_Access_By_Location(self.driver)
         b.test_click_blocks()
         self.data.page_loading(self.driver)
         print("block button is worked and infra scores is working ")
 
-        b = Infrastructure_access_by_location(self.driver)
+        b = Infrastructure_Access_By_Location(self.driver)
         b.test_click_clusters()
         self.data.page_loading(self.driver)
         print("cluster button is worked and infra scores is working ")
 
-        b = Infrastructure_access_by_location(self.driver)
+        b = Infrastructure_Access_By_Location(self.driver)
         self.driver.implicitly_wait(30)
         b.test_click_schools()
         self.data.page_loading(self.driver)

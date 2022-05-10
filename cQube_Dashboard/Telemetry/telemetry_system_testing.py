@@ -1,7 +1,7 @@
 import time
 import unittest
 from Locators.parameters import Data
-from cQube_Dashboard.Telemetry.telemetry_details_report import telemetry_map_report
+from cQube_Dashboard.Telemetry.telemetry_details_report import TelemetryReport
 
 from get_dir import pwd
 from reuse_func import GetData
@@ -81,7 +81,7 @@ class Test_Telemetry(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_last7day_download(self):
-        b = telemetry_map_report(self.driver)
+        b = TelemetryReport(self.driver)
         res = b.test_overall_records()
         self.assertTrue(res, msg="last7day's csv file is not downloaded")
         self.driver.find_element_by_id(Data.menu_icon).click()
@@ -90,7 +90,7 @@ class Test_Telemetry(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_lastday_download(self):
-        b = telemetry_map_report(self.driver)
+        b = TelemetryReport(self.driver)
         res = b.test_lastday_records()
         self.assertTrue(res, msg="last7day's csv file is not downloaded")
         self.driver.find_element_by_id(Data.menu_icon).click()
@@ -99,7 +99,7 @@ class Test_Telemetry(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_overall_download(self):
-        b = telemetry_map_report(self.driver)
+        b = TelemetryReport(self.driver)
         res = b.test_overall_records()
         self.assertTrue(res, msg="last7day's csv file is not downloaded")
         self.driver.find_element_by_id(Data.menu_icon).click()
@@ -108,7 +108,7 @@ class Test_Telemetry(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_lastmonth_download(self):
-        b = telemetry_map_report(self.driver)
+        b = TelemetryReport(self.driver)
         res = b.test_lastmonth_records()
         self.assertTrue(res, msg="last7day's csv file is not downloaded")
         self.driver.find_element_by_id(Data.menu_icon).click()

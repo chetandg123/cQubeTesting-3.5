@@ -1,14 +1,14 @@
 import time
 import unittest
 from Locators.parameters import Data
-from cQube_Dashboard.School_Infrastructure.udise_report.udise_report import udise_report
+from cQube_Dashboard.School_Infrastructure.udise_report.udise_report import UdiseReport
 from reuse_func import GetData
 
 '''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
 footer information's '''
 
 
-class cQube_udise_Report(unittest.TestCase):
+class cQube_UdiseReport(unittest.TestCase):
     driver = None
     data = None
 
@@ -34,7 +34,7 @@ class cQube_udise_Report(unittest.TestCase):
         self.driver.find_element_by_id('udise').click()
         self.data.page_loading(self.driver)
         if 'udise-report' in self.driver.current_url:
-            print('UDISE Infra_Table_Report home page is displayed ')
+            print('UDISE Report home page is displayed ')
         else:
             print("Udise report is not exists ")
             count = count + 1
@@ -50,13 +50,13 @@ class cQube_udise_Report(unittest.TestCase):
     #         print("hyperlink is not working ")
 
     def test_download_districtcsv(self):
-        fn = udise_report(self.driver)
+        fn = UdiseReport(self.driver)
         res = fn.test_districtwise()
         self.assertEqual(0, res, msg='Districtwise csv is not downloaded')
         self.data.page_loading(self.driver)
 
     def test_block_wise_download(self):
-        b = udise_report(self.driver)
+        b = UdiseReport(self.driver)
         res, res1 = b.test_download_blockwise()
         self.assertTrue(res, msg='School level csv file is not downloaded')
         self.assertNotEqual(res1, 0, msg='Markers are missing on school level map ')
@@ -65,7 +65,7 @@ class cQube_udise_Report(unittest.TestCase):
 
     def test_cluster_wise_download(self):
         self.data.page_loading(self.driver)
-        b = udise_report(self.driver)
+        b = UdiseReport(self.driver)
         res, res1 = b.test_download_blockwise()
         self.assertTrue(res, msg='School level csv file is not downloaded')
         self.assertNotEqual(res1, 0, msg='Markers are missing on school level map ')
@@ -73,7 +73,7 @@ class cQube_udise_Report(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_school_wise_download(self):
-        b = udise_report(self.driver)
+        b = UdiseReport(self.driver)
         res, res1 = b.test_download()
         self.assertTrue(res, msg='School level csv file is not downloaded')
         self.assertNotEqual(res1, 0, msg='Markers are missing on school level map ')
@@ -81,12 +81,12 @@ class cQube_udise_Report(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_test_each_districtwise(self):
-        b = udise_report(self.driver)
+        b = UdiseReport(self.driver)
         res = b.test_each_districtwise()
         self.assertEqual(0, res, msg="Some district csv file is not downloaded...")
 
     def test_Block_cluster_school_for_udise(self):
-        b = udise_report(self.driver)
+        b = UdiseReport(self.driver)
         res, res1, res2, res3 = b.test_check_total_schoolvalue()
         self.assertEqual(res, res1, msg="Block level school is same")
         self.assertEqual(res, res2, msg="Cluster level school is same")
@@ -95,7 +95,7 @@ class cQube_udise_Report(unittest.TestCase):
 
     def test_indices_download(self):
         self.data.page_loading(self.driver)
-        b = udise_report(self.driver)
+        b = UdiseReport(self.driver)
 
         indices_score = b.infrastructure_score()
         b.remove_csv()
@@ -164,21 +164,21 @@ class cQube_udise_Report(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_block_btn_scores(self):
-        b = udise_report(self.driver)
+        b = UdiseReport(self.driver)
         res = b.test_click_blocks()
         self.assertEqual(0, res, msg='Markers are not present at selected indices')
         print('Checking block level with indices score dropdown')
         self.data.page_loading(self.driver)
 
     def test_cluster_btn_scores(self):
-        b = udise_report(self.driver)
+        b = UdiseReport(self.driver)
         res = b.test_click_clusters()
         self.assertEqual(0, res, msg='Markers are not present at selected indices')
         print('Checking cluster level with indices score dropdown')
         self.data.page_loading(self.driver)
 
     def test_test_school_map_schoollevel_records(self):
-        b = udise_report(self.driver)
+        b = UdiseReport(self.driver)
         res = b.check_download_csv1()
         self.assertEqual(0, res, msg="Some school level csv file not downloaded")
         self.data.page_loading(self.driver)
@@ -203,12 +203,12 @@ class cQube_udise_Report(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_logout(self):
-        b = udise_report(self.driver)
+        b = UdiseReport(self.driver)
         res = b.check_logout()
         self.assertEqual('Log in to cQube', res, msg='Logout button is not workig')
         self.data.page_loading(self.driver)
         self.data.login_cqube(self.driver)
-        self.data.navigate_to_udise_report()
+        self.data.navigate_to_UdiseReport()
         if 'udise-report' in self.driver.current_url:
             print('Udise report home page is displayed ')
         self.data.page_loading(self.driver)

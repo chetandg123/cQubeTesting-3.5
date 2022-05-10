@@ -12,7 +12,7 @@ from selenium.webdriver.support.select import Select
 etc '''
 
 
-class etb_nation_learning_report():
+class Etb_Nation_Learning_Report():
 
     def __init__(self, driver):
         self.driver = driver

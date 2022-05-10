@@ -13,7 +13,7 @@ from reuse_func import GetData
 footer information's '''
 
 
-class Infrastructure_access_by_location():
+class Infrastructure_Access_By_Location():
 
     def __init__(self, driver):
         self.driver = driver

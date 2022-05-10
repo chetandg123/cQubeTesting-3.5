@@ -7,7 +7,7 @@ from summary_values import summary_records
 '''Script validate the Static District summary statistic records are updating in the table properly or not '''
 
 
-class Test_static_district_summary(unittest.TestCase):
+class TestStaticDistrictSummary(unittest.TestCase):
 
     driver = None
     data = None

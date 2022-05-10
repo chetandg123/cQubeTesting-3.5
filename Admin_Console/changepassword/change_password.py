@@ -8,7 +8,7 @@ from reuse_func import GetData
 '''Script are working as creation of users and login with new users as well changing the password '''
 
 
-class change_password(unittest.TestCase):
+class ChangePassword(unittest.TestCase):
     driver = None
     data = None
 

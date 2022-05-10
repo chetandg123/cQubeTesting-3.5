@@ -1,14 +1,14 @@
 import unittest
 
 from Locators.parameters import Data
-from cQube_Dashboard.Energise_Textbook_Usage.usage_textbook.diksha_usage_by_textbook import diksha_usage_textbook_report
+from cQube_Dashboard.Energise_Textbook_Usage.usage_textbook.diksha_usage_by_textbook import Diksha_Usage_Textbook_Report
 from reuse_func import GetData
 
 '''Script developed to test the each functionalities of web element like buttons , charts , dropdowns , chart 
 etc '''
 
 
-class cQube_usage_textbook_system_report(unittest.TestCase):
+class cQube_Usage_Textbook_System_Report(unittest.TestCase):
     data = None
     driver = None
 
@@ -40,25 +40,25 @@ class cQube_usage_textbook_system_report(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_overalldownload(self):
-        b = diksha_usage_textbook_report(self.driver)
+        b = Diksha_Usage_Textbook_Report(self.driver)
         res = b.download_csv_file()
         self.assertEqual(0, res, msg='Failed due to mismatch found on content plays')
         self.data.page_loading(self.driver)
 
     def test_test_course_based_on_last30days(self):
-        b = diksha_usage_textbook_report(self.driver)
+        b = Diksha_Usage_Textbook_Report(self.driver)
         res = b.test_last30_days()
         self.assertEqual(0, res, msg='mis match found at content usage ')
         self.data.page_loading(self.driver)
 
     def test_test_course_based_on_last7days(self):
-        b = diksha_usage_textbook_report(self.driver)
+        b = Diksha_Usage_Textbook_Report(self.driver)
         res = b.test_last7_days()
         self.assertEqual(0, res, msg='mis match found at content usage ')
         self.data.page_loading(self.driver)
 
     def test_test_course_based_on_lastday(self):
-        b = diksha_usage_textbook_report(self.driver)
+        b = Diksha_Usage_Textbook_Report(self.driver)
         res = b.test_last_day()
         self.assertEqual(0, res, msg='mis match found at content usage ')
         self.data.page_loading(self.driver)

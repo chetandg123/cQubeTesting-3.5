@@ -15,22 +15,22 @@ class MyTestSuite(unittest.TestCase):
     def test_Issue01(self):
         functional_test = unittest.TestSuite()
         functional_test.addTests([
-            unittest.defaultTestLoader.loadTestsFromTestCase(test_crc_summary.Test_crc_summary),
-            unittest.defaultTestLoader.loadTestsFromTestCase(test_diksha_data_summary.Test_diksha_data_summary),
-            unittest.defaultTestLoader.loadTestsFromTestCase(test_dikshatpd_file_summary.Test_diksha_tpd_summary),
-            unittest.defaultTestLoader.loadTestsFromTestCase(test_infra_summary.Test_infra_summary),
-            unittest.defaultTestLoader.loadTestsFromTestCase(test_inspection_summary.Test_inspection_summary),
-            unittest.defaultTestLoader.loadTestsFromTestCase(test_pat_file_summary.Test_pat_summary),
-            unittest.defaultTestLoader.loadTestsFromTestCase(test_semester_summary.Test_semester_summary),
-            unittest.defaultTestLoader.loadTestsFromTestCase(test_static_block_file_summary.Test_static_block_summary),
+            unittest.defaultTestLoader.loadTestsFromTestCase(test_crc_summary.TestCrcSummary),
+            unittest.defaultTestLoader.loadTestsFromTestCase(test_diksha_data_summary.TestDikshaSummary),
+            unittest.defaultTestLoader.loadTestsFromTestCase(test_dikshatpd_file_summary.TestDikshaTPDSummary),
+            unittest.defaultTestLoader.loadTestsFromTestCase(test_infra_summary.TestInfraSummary),
+            unittest.defaultTestLoader.loadTestsFromTestCase(test_inspection_summary.TestInspectionSummary),
+            unittest.defaultTestLoader.loadTestsFromTestCase(test_pat_file_summary.TestPatSummary),
+            unittest.defaultTestLoader.loadTestsFromTestCase(test_semester_summary.TestSemesterSummary),
+            unittest.defaultTestLoader.loadTestsFromTestCase(test_static_block_file_summary.TestStaticBlockSummary),
             unittest.defaultTestLoader.loadTestsFromTestCase
-            (test_static_cluster_file_summary.Test_static_cluster_summary),
+            (test_static_cluster_file_summary.TestStaticClusterSummary),
             unittest.defaultTestLoader.loadTestsFromTestCase
-            (test_static_districtfile_summary.Test_static_district_summary),
+            (test_static_districtfile_summary.TestStaticDistrictSummary),
             unittest.defaultTestLoader.loadTestsFromTestCase
-            (test_static_school_file_summary.Test_static_school_summary),
-            unittest.defaultTestLoader.loadTestsFromTestCase(test_student_summary.Test_summaryreport),
-            unittest.defaultTestLoader.loadTestsFromTestCase(test_udise_summary.Test_udise_file_summary),
+            (test_static_school_file_summary.TestStaticSchoolSummary),
+            unittest.defaultTestLoader.loadTestsFromTestCase(test_student_summary.TestSummaryReport),
+            unittest.defaultTestLoader.loadTestsFromTestCase(test_udise_summary.TestUdiseFileSummary),
 
         ])
         p = pwd()
@@ -38,7 +38,7 @@ class MyTestSuite(unittest.TestCase):
 
         runner1 = HTMLTestRunner.HTMLTestRunner(
             stream=outfile,
-            title='Summary Functional Test Infra_Table_Report',
+            title='Summary Functional Test Report',
             verbosity=1,
             description="Admin Console Test Result "
         )

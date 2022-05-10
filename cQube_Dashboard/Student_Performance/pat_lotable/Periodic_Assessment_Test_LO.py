@@ -11,7 +11,7 @@ from get_dir import pwd
 from reuse_func import GetData
 
 
-class Periodic_Assessment_Test_LO_Table():
+class Periodic_Assessment_Test_LoTable():
     def __init__(self, driver):
         self.fname = None
         self.year = None

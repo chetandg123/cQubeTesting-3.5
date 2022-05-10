@@ -3,7 +3,7 @@ import unittest
 
 from Locators.parameters import Data
 from cQube_Dashboard.Composite_Report_across_metrics.Composite_Report_Across_Metrics import \
-    Composite_report_across_Metric
+    Composite_Report_Across_Metric
 from reuse_func import GetData
 
 '''Script validating the Graphs , Block level , Cluster level buttons , District , Block and Cluster level metrics 
@@ -39,15 +39,15 @@ class composite_smoke_testing(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_districtwise_csv_download(self):
-        b = Composite_report_across_Metric(self.driver)
-        res = b.test_districtwise()
+        b = Composite_Report_Across_Metric(self.driver)
+        res = b.test_district_wise()
         self.assertTrue(res, msg="Districtwise csv file is not downloaded ")
         print("Checked district wise csv downloading functionality is working ")
         b.remove_csv()
         self.data.page_loading(self.driver)
 
     def test_blockwise_csv_download(self):
-        b = Composite_report_across_Metric(self.driver)
+        b = Composite_Report_Across_Metric(self.driver)
         res = b.test_blockwise()
         self.assertTrue(res, msg="Blockwise csv file is not downloaded ")
         print("Checked block wise csv downloading functionality is working ")
@@ -55,7 +55,7 @@ class composite_smoke_testing(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_clusterwise_csv_download(self):
-        b = Composite_report_across_Metric(self.driver)
+        b = Composite_Report_Across_Metric(self.driver)
         res = b.test_clusterwise()
         self.assertTrue(res, msg="Clusterwise csv file is not downloaded ")
         print("Checked cluster wise csv downloading functionality is working ")
@@ -63,7 +63,7 @@ class composite_smoke_testing(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_school_wise_download(self):
-        b = Composite_report_across_Metric(self.driver)
+        b = Composite_Report_Across_Metric(self.driver)
         res = b.test_schoolwise()
         self.assertTrue(res, msg="Schoolwise csv file is not downloaded ")
         print("Checked school wise csv downloading functionality is working ")
@@ -72,32 +72,32 @@ class composite_smoke_testing(unittest.TestCase):
 
     def test_composite_schoolwise_records(self):
         self.data.page_loading(self.driver)
-        b = Composite_report_across_Metric(self.driver)
+        b = Composite_Report_Across_Metric(self.driver)
         res = b.check_csv_download()
         self.assertTrue(res, msg="Some of school csv file is not downloaded ")
         print("Checked with School wise csv file downloading ")
         self.data.page_loading(self.driver)
 
     def test_hyperlink(self):
-        b = Composite_report_across_Metric(self.driver)
+        b = Composite_Report_Across_Metric(self.driver)
         res = b.test_hyperlink()
         print("Checked with hyper link ")
         self.data.page_loading(self.driver)
 
     def test_xaxis_options(self):
-        b = Composite_report_across_Metric(self.driver)
+        b = Composite_Report_Across_Metric(self.driver)
         res = b.test_xplots()
         print("Checked with all xaxis options are selectable")
         self.data.page_loading(self.driver)
 
     def test_yaxis_options(self):
-        b = Composite_report_across_Metric(self.driver)
+        b = Composite_Report_Across_Metric(self.driver)
         res = b.test_yplots()
         print("Checked with all yaxis options are selectable")
         self.data.page_loading(self.driver)
 
     def test_homebutton(self):
-        b = Composite_report_across_Metric(self.driver)
+        b = Composite_Report_Across_Metric(self.driver)
         res = b.test_homebutton()
         self.assertEqual(0, res, msg="Home button is not working")
         print("Home button is working ")
@@ -115,13 +115,13 @@ class composite_smoke_testing(unittest.TestCase):
         self.data.navigate_to_composite_report()
 
     def test_blocks_clusters_schools(self):
-        b = Composite_report_across_Metric(self.driver)
+        b = Composite_Report_Across_Metric(self.driver)
         res = b.click_on_blocks_button()
         self.assertEqual(0, res, msg="Blocks graph is displayed ")
         print("Block wise graph is displayed ")
         self.data.page_loading(self.driver)
 
-        b = Composite_report_across_Metric(self.driver)
+        b = Composite_Report_Across_Metric(self.driver)
         res = b.click_on_clusters_button()
         self.assertEqual(0, res, msg="Cluster graph is displayed ")
         print("Cluster wise graph is displayed ")

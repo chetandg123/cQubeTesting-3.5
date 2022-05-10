@@ -8,7 +8,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from Locators.parameters import Data
-from cQube_Dashboard.Student_Performance.sat_map.semester_assesment_test import sat_map_report
+from cQube_Dashboard.Student_Performance.sat_map.semester_assesment_test import Sat_Map_Report
 from reuse_func import GetData
 
 '''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
@@ -29,7 +29,7 @@ class cQube_Semester_Report(unittest.TestCase):
         self.data.navigate_to_semester_report()
 
     def test_click_on_semester_report(self):
-        sr = sat_map_report(self.driver)
+        sr = Sat_Map_Report(self.driver)
         result = sr.check_semester_landing_page()
         if "sat-report" in result:
             print("Semester Infra_Table_Report is Working")
@@ -96,7 +96,7 @@ class cQube_Semester_Report(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_check_hyperlinks(self):
-        hyperlinks = sat_map_report(self.driver)
+        hyperlinks = Sat_Map_Report(self.driver)
         result1, result2, choose_dist = hyperlinks.click_on_hyperlinks()
         if result1 == False and result2 == False and choose_dist == "Choose a District":
             print("hyperlinks are working")
@@ -156,7 +156,7 @@ class cQube_Semester_Report(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_home_icon(self):
-        home = sat_map_report(self.driver)
+        home = Sat_Map_Report(self.driver)
         home.click_on_blocks_click_on_home_icon()
         result = home.click_HomeButton()
         if "sat-report" in result:

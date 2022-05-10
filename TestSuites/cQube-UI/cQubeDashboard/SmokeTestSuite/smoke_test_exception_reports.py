@@ -35,7 +35,7 @@ class MyTestSuite_Exception(unittest.TestCase):
             smoke_test = unittest.TestSuite()
             smoke_test.addTests([
                 unittest.defaultTestLoader.loadTestsFromTestCase(
-                    exception_smoke_testing.cQube_semester_exception_report)
+                    exception_smoke_testing.cQube_Semester_Exception_Report)
             ])
             p = pwd()
             outfile = open(p.get_smoke_exception_report(), "a")
@@ -58,7 +58,7 @@ class MyTestSuite_Exception(unittest.TestCase):
             smoke_test = unittest.TestSuite()
             smoke_test.addTests([
                 unittest.defaultTestLoader.loadTestsFromTestCase(
-                    smoke_student_exception.cQube_smoke_Student_exception)
+                    smoke_student_exception.cQube_Smoke_Student_Exception)
             ])
             p = pwd()
             outfile = open(p.get_smoke_exception_report(), "a")
@@ -104,7 +104,7 @@ class MyTestSuite_Exception(unittest.TestCase):
             smoke_test = unittest.TestSuite()
             smoke_test.addTests([
                 unittest.defaultTestLoader.loadTestsFromTestCase(
-                    smoke_pat_exception.cQube_pat_exception_smoke_report)
+                    smoke_pat_exception.cQube_Pat_Exception_Smoke_Report)
             ])
             p = pwd()
             outfile = open(p.get_smoke_exception_report(), "a")

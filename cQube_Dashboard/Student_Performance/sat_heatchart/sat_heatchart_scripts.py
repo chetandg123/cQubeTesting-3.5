@@ -11,7 +11,7 @@ from get_dir import pwd
 from reuse_func import GetData
 
 
-class sat_heat_chart():
+class Sat_Heat_Chart():
 
     def __init__(self, driver):
         self.load = None

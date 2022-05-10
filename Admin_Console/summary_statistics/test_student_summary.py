@@ -8,7 +8,7 @@ from summary_values import summary_records
 '''Script validate the Student Attendance summary statistic records are updating in the table properly or not '''
 
 
-class Test_summaryreport(unittest.TestCase):
+class TestSummaryReport(unittest.TestCase):
     data = None
     driver = None
 

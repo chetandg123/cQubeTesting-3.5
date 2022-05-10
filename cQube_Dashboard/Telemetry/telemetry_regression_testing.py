@@ -6,7 +6,7 @@ from HTMLTestRunner import HTMLTestRunner
 from selenium.webdriver.common.by import By
 
 from Locators.parameters import Data
-from cQube_Dashboard.Telemetry.telemetry_details_report import telemetry_map_report
+from cQube_Dashboard.Telemetry.telemetry_details_report import TelemetryReport
 
 from filenames import file_extention
 
@@ -127,7 +127,7 @@ class Test_Telemetry(unittest.TestCase):
         self.driver.find_element_by_id('home').click()
 
     def test_check_with_lastday(self):
-        b = telemetry_map_report(self.driver)
+        b = TelemetryReport(self.driver)
         res1, res2, res3 = b.test_lastday_records()
         self.assertNotEqual(0, res1, msg='Block level markers are not present')
         self.assertNotEqual(0, res2, msg='Cluster level markers are not present')
@@ -136,7 +136,7 @@ class Test_Telemetry(unittest.TestCase):
         self.data.navigate_to_telemetry()
 
     def test_last7day_timeperiod(self):
-        b = telemetry_map_report(self.driver)
+        b = TelemetryReport(self.driver)
         res1, res2, res3 = b.test_last7day_records()
         self.assertNotEqual(0, res1, msg='Block level markers are not present')
         self.assertNotEqual(0, res2, msg='Cluster level markers are not present')
@@ -144,7 +144,7 @@ class Test_Telemetry(unittest.TestCase):
         self.data.navigate_to_telemetry()
 
     def test_lastmonth_timeperiod(self):
-        b = telemetry_map_report(self.driver)
+        b = TelemetryReport(self.driver)
         res1, res2, res3 = b.test_lastmonth_records()
         self.assertNotEqual(0, res1, msg='Block level markers are not present')
         self.assertNotEqual(0, res2, msg='Cluster level markers are not present')
@@ -152,7 +152,7 @@ class Test_Telemetry(unittest.TestCase):
         self.data.navigate_to_telemetry()
 
     def test_overall_period(self):
-        b = telemetry_map_report(self.driver)
+        b = TelemetryReport(self.driver)
         res1, res2, res3 = b.test_overall_records()
         self.assertNotEqual(0, res1, msg='Block level markers are not present')
         self.assertNotEqual(0, res2, msg='Cluster level markers are not present')
@@ -160,25 +160,25 @@ class Test_Telemetry(unittest.TestCase):
         self.data.navigate_to_telemetry()
 
     def test_last7day_download(self):
-        b = telemetry_map_report(self.driver)
+        b = TelemetryReport(self.driver)
         res = b.test_last_7_records()
         self.assertTrue(res, msg="last 7day's csv file is not downloaded")
         self.data.navigate_to_telemetry()
 
     def test_lastday_download(self):
-        b = telemetry_map_report(self.driver)
+        b = TelemetryReport(self.driver)
         res = b.test_lastday_records()
         self.assertTrue(res, msg="last7day's csv file is not downloaded")
         self.data.navigate_to_telemetry()
 
     def test_overall_download(self):
-        b = telemetry_map_report(self.driver)
+        b = TelemetryReport(self.driver)
         res = b.test_overall_records()
         self.assertTrue(res, msg="last7day's csv file is not downloaded")
         self.data.navigate_to_telemetry()
 
     def test_lastmonth_download(self):
-        b = telemetry_map_report(self.driver)
+        b = TelemetryReport(self.driver)
         res = b.test_lastmonth_records()
         self.assertTrue(res, msg="last7day's csv file is not downloaded")
         self.data.navigate_to_telemetry()

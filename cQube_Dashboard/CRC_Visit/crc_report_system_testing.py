@@ -1,6 +1,6 @@
 import unittest
 
-from cQube_Dashboard.CRC_Visit.CRC_Report import crc_visits
+from cQube_Dashboard.CRC_Visit.CRC_Report import CrcVisits
 from reuse_func import GetData
 
 '''Script developed to test whether scatter graph , table records , time periods , district , block and cluster level 
@@ -22,14 +22,14 @@ class crc_System_Testing(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_dash_menu(self):
-        b = crc_visits(self.driver)
+        b = CrcVisits(self.driver)
         res = b.test_homeicon()
         self.assertEqual(res, "menu", msg="Dashboard button is not working")
         print("Dashboard icon is working....")
         self.data.page_loading(self.driver)
 
     def test_download_districtwise(self):
-        b = crc_visits(self.driver)
+        b = CrcVisits(self.driver)
         result = b.test_districtwise()
         self.assertTrue(result, msg="File is not downloaded")
         b.remove_file()
@@ -37,7 +37,7 @@ class crc_System_Testing(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_download_blockwise_csv(self):
-        b = crc_visits(self.driver)
+        b = CrcVisits(self.driver)
         result = b.test_blockwise()
         self.assertTrue(result, msg="File is not downloaded")
         b.remove_file()
@@ -45,7 +45,7 @@ class crc_System_Testing(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_donwoad_clusterwise_csv(self):
-        b = crc_visits(self.driver)
+        b = CrcVisits(self.driver)
         result = b.test_clusterwise()
         self.assertTrue(result, msg="File is not downloaded")
         b.remove_file()
@@ -53,7 +53,7 @@ class crc_System_Testing(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_download_schoolwise(self):
-        b = crc_visits(self.driver)
+        b = CrcVisits(self.driver)
         result = b.test_schoolwise()
         self.assertTrue(result, msg="File is not downloaded")
         b.remove_file()
@@ -61,14 +61,14 @@ class crc_System_Testing(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_crc_clusterwise(self):
-        b = crc_visits(self.driver)
+        b = CrcVisits(self.driver)
         res = b.check_csv_download()
         print("Clusterwise records checking ")
         self.assertEqual(0, res, msg='Some of clusterwise records mismatch found! ')
         self.data.page_loading(self.driver)
 
     def test_districtwise_tabledata(self):
-        b = crc_visits(self.driver)
+        b = CrcVisits(self.driver)
         result = b.test_table_data()
         if result != 0:
             raise self.failureException('Locators not found on table')
@@ -76,7 +76,7 @@ class crc_System_Testing(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_crc_graph(self):
-        b = crc_visits(self.driver)
+        b = CrcVisits(self.driver)
         res1, res2 = b.test_plots()
         self.assertNotEqual(0, res1, msg="x Axis options are not contains in select box")
         self.assertNotEqual(0, res2, msg="y axis options are not present in drop down")

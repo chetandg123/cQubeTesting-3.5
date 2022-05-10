@@ -1,13 +1,12 @@
 import unittest
 
-from Diksha_Reports.content_course import content_course_functional_test
-from Diksha_Reports.content_textbook import content_textbook_functional_test
-from Diksha_Reports.usage_by_course import location_course_functional_testing
-from Diksha_Reports.usage_by_textbook import location_textbook_functional_testing
-from Diksha_TPD.TPD_Completion_percentage import tpd_completion_functionaltest
-from Diksha_TPD.TPD_Course_Progress import tpd_course_functional_test
-from Diksha_TPD.TPD_Enrollment_completion import enrollment_functional_test
-from Student_Attendance import student_attendance_functional_testing
+from cQube_Dashboard.Attendance.student_attendance import student_attendance_functional_testing
+from cQube_Dashboard.Energise_Textbook_Usage.content_textbook import content_textbook_functional_test
+from cQube_Dashboard.Energise_Textbook_Usage.usage_textbook import usage_by_textbook_functional_testing
+from cQube_Dashboard.Teacher_Professional_Development.content_course import content_course_functional_test
+from cQube_Dashboard.Teacher_Professional_Development.tpd_completion import tpd_completion_functionaltest
+from cQube_Dashboard.Teacher_Professional_Development.tpd_course_progress import tpd_course_functional_test
+from cQube_Dashboard.Teacher_Professional_Development.usage_course import location_course_functional_testing
 from get_dir import pwd
 from HTMLTestRunner import HTMLTestRunner
 
@@ -15,6 +14,8 @@ from reuse_func import GetData
 
 
 class MyTestSuite_Functional(unittest.TestCase):
+    driver = None
+    data = None
 
     @classmethod
     def setUpClass(self):
@@ -37,7 +38,8 @@ class MyTestSuite_Functional(unittest.TestCase):
             else:
                 functional_test = unittest.TestSuite()
                 functional_test.addTests([
-                    unittest.defaultTestLoader.loadTestsFromTestCase(content_course_functional_test.cQube_content_course_functional)
+                    unittest.defaultTestLoader.loadTestsFromTestCase(
+                        content_course_functional_test.cQube_Content_Course_Functional)
                 ])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "w")
@@ -45,11 +47,11 @@ class MyTestSuite_Functional(unittest.TestCase):
                 runner1 = HTMLTestRunner.HTMLTestRunner(
                     stream=outfile,
                     title='Content BY Course Functional Test Report',
-                    verbosity=1,)
+                    verbosity=1, )
                 runner1.run(functional_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue02(self):
         self.data.page_loading(self.driver)
@@ -63,7 +65,8 @@ class MyTestSuite_Functional(unittest.TestCase):
             else:
                 functional_test = unittest.TestSuite()
                 functional_test.addTests([
-                    unittest.defaultTestLoader.loadTestsFromTestCase(content_textbook_functional_test.cQube_content_textbook_Functional)
+                    unittest.defaultTestLoader.loadTestsFromTestCase(
+                        content_textbook_functional_test.cQube_Content_Textbook_Functional)
                 ])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "a")
@@ -76,7 +79,7 @@ class MyTestSuite_Functional(unittest.TestCase):
                 runner1.run(functional_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue03(self):
         self.data.page_loading(self.driver)
@@ -90,7 +93,8 @@ class MyTestSuite_Functional(unittest.TestCase):
             else:
                 functional_test = unittest.TestSuite()
                 functional_test.addTests([
-                    unittest.defaultTestLoader.loadTestsFromTestCase(location_course_functional_testing.cQube_diskha_course_functional_report)
+                    unittest.defaultTestLoader.loadTestsFromTestCase(
+                        location_course_functional_testing.cQube_diskha_course_functional_report)
                 ])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "a")
@@ -104,7 +108,7 @@ class MyTestSuite_Functional(unittest.TestCase):
                 runner1.run(functional_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue04(self):
         self.data.page_loading(self.driver)
@@ -118,7 +122,8 @@ class MyTestSuite_Functional(unittest.TestCase):
             else:
                 functional_test = unittest.TestSuite()
                 functional_test.addTests([
-                    unittest.defaultTestLoader.loadTestsFromTestCase(location_textbook_functional_testing.cQube_usage_textbook_functional_report)
+                    unittest.defaultTestLoader.loadTestsFromTestCase(
+                        usage_by_textbook_functional_testing.cQube_Usage_Textbook_Functional_Report)
                 ])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "a")
@@ -126,11 +131,11 @@ class MyTestSuite_Functional(unittest.TestCase):
                 runner1 = HTMLTestRunner.HTMLTestRunner(
                     stream=outfile,
                     title=' Usage By Textbook Report Functional Test Report',
-                    verbosity=1,)
+                    verbosity=1, )
                 runner1.run(functional_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue05(self):
         self.data.page_loading(self.driver)
@@ -144,7 +149,8 @@ class MyTestSuite_Functional(unittest.TestCase):
             else:
                 functional_test = unittest.TestSuite()
                 functional_test.addTests([
-                    unittest.defaultTestLoader.loadTestsFromTestCase(tpd_course_functional_test.cQube_lpdcontent_functional_Test)
+                    unittest.defaultTestLoader.loadTestsFromTestCase(
+                        tpd_course_functional_test.cQube_TpdContent_Functional_Test)
                 ])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "a")
@@ -152,12 +158,11 @@ class MyTestSuite_Functional(unittest.TestCase):
                 runner1 = HTMLTestRunner.HTMLTestRunner(
                     stream=outfile,
                     title='TPD course Progress Functional Test Infra_Table_Report',
-                    verbosity=1,)
+                    verbosity=1, )
                 runner1.run(functional_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
-
+            print(status, "is selected due to this unable to run suite")
 
     #
     # def test_issue06(self):
@@ -187,34 +192,6 @@ class MyTestSuite_Functional(unittest.TestCase):
     #     else:
     #         print(status,"is selected due to this unable to run suite")
 
-    def test_issue07(self):
-        self.data.page_loading(self.driver)
-        status = self.data.get_student_status("Diksha_TPD")
-        if status == str(True):
-            self.data.page_loading(self.driver)
-            self.data.navigate_to_tpd_enrollment_report()
-            if 'No data found' in self.driver.page_source:
-                print('TPD Enrollment/Completion Report is showing no data found!..')
-                self.driver.close()
-            else:
-                functional_test = unittest.TestSuite()
-                functional_test.addTests([
-                    unittest.defaultTestLoader.loadTestsFromTestCase(enrollment_functional_test.cQube_enrollment_functionalTest)
-                ])
-                p = pwd()
-                outfile = open(p.get_diksha_tpds_regression_report(), "a")
-
-                runner1 = HTMLTestRunner.HTMLTestRunner(
-                    stream=outfile,
-                    title='TPD Enrollment Functional Test Infra_Table_Report',
-                    verbosity=1,
-                )
-                runner1.run(functional_test)
-                outfile.close()
-        else:
-            print(status,"is selected due to this unable to run suite")
-
-
     def test_issue08(self):
         self.data.page_loading(self.driver)
         status = self.data.get_student_status("Diksha_TPD")
@@ -228,7 +205,7 @@ class MyTestSuite_Functional(unittest.TestCase):
                 functional_test = unittest.TestSuite()
                 functional_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        tpd_completion_functionaltest.cQube_completion_percentage_functional
+                        tpd_completion_functionaltest.cQube_Completion_Percentage_Functional
                     )
                 ])
                 p = pwd()
@@ -242,7 +219,7 @@ class MyTestSuite_Functional(unittest.TestCase):
                 runner1.run(functional_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue09(self):
         self.data.page_loading(self.driver)
@@ -257,7 +234,7 @@ class MyTestSuite_Functional(unittest.TestCase):
                 functional_test = unittest.TestSuite()
                 functional_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                       student_attendance_functional_testing.cQube_Student_Attendance_functional
+                        student_attendance_functional_testing.cQube_Student_Attendance_Functional
                     )
                 ])
                 p = pwd()
@@ -271,7 +248,7 @@ class MyTestSuite_Functional(unittest.TestCase):
                 runner1.run(functional_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue010(self):
         self.data.page_loading(self.driver)
@@ -300,7 +277,7 @@ class MyTestSuite_Functional(unittest.TestCase):
                 runner1.run(functional_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue011(self):
         self.data.page_loading(self.driver)
@@ -314,9 +291,7 @@ class MyTestSuite_Functional(unittest.TestCase):
             else:
                 functional_test = unittest.TestSuite()
                 functional_test.addTests([
-                    unittest.defaultTestLoader.loadTestsFromTestCase(
-
-                    )
+                    unittest.defaultTestLoader.loadTestsFromTestCase()
                 ])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "a")
@@ -329,22 +304,19 @@ class MyTestSuite_Functional(unittest.TestCase):
                 runner1.run(functional_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     @classmethod
     def tearDownClass(self):
         self.driver.close()
 
+
 if __name__ == '__main__':
     unittest.main()
 
 
-
-
-    @classmethod
     def tearDownClass(cls):
         cls.driver.close()
-
 
 if __name__ == '__main__':
     unittest.main()

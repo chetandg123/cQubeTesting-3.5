@@ -7,7 +7,7 @@ from reuse_func import GetData
 not '''
 
 
-class Test_admin_landing_page(unittest.TestCase):
+class TestAdminLandingPage(unittest.TestCase):
     data = None
     driver = None
 

@@ -9,7 +9,7 @@ from reuse_func import GetData
 along with graph '''
 
 
-class composite_report(unittest.TestCase):
+class Composite_Report(unittest.TestCase):
     driver = None
     data = None
 

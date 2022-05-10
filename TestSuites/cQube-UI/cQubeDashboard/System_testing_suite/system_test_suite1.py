@@ -184,7 +184,7 @@ class MyTestSuite(unittest.TestCase):
             system_test = unittest.TestSuite()
             system_test.addTests([
                 unittest.defaultTestLoader.loadTestsFromTestCase(
-                    exception_system_testing.cQube_semester_exception_report)
+                    exception_system_testing.cQube_Semester_Exception_Report)
             ])
             p = pwd()
             outfile = open(p.get_system_report_path(), "a")
@@ -238,7 +238,7 @@ class MyTestSuite(unittest.TestCase):
                 system_test = unittest.TestSuite()
                 system_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        udise_system_testing.cQube_udise_Report)
+                        udise_system_testing.cQube_UdiseReport)
                 ])
                 p = pwd()
                 outfile = open(p.get_system_report_path(), "a")
@@ -266,7 +266,7 @@ class MyTestSuite(unittest.TestCase):
                 system_test = unittest.TestSuite()
                 system_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        periodic_system_suite.periodic_system_testing)
+                        periodic_system_suite.Periodic_System_Testing)
                 ])
                 p = pwd()
                 outfile = open(p.get_system_report_path(), "a")

@@ -13,7 +13,7 @@ from reuse_func import GetData
 from admin console '''
 
 
-class Test_logs(unittest.TestCase):
+class TestLogs(unittest.TestCase):
     driver = None
     data = None
 

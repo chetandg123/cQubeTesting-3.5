@@ -13,7 +13,7 @@ from reuse_func import GetData
 etc '''
 
 
-class tpd_completion_percentage_report():
+class Tpd_Completion_Percentage_Report():
     def __init__(self, driver):
         self.driver = driver
 

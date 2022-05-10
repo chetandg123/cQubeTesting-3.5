@@ -11,7 +11,7 @@ from get_dir import pwd
 from reuse_func import GetData
 
 
-class tpd_enrollment_completion_reports():
+class Tpd_Enrollment_Completion_Reports():
     def __init__(self, driver):
         self.msg = None
         self.data = None

@@ -7,7 +7,7 @@ from summary_values import summary_records
 '''Script validate the Inspection summary statistic records are updating in the table properly or not '''
 
 
-class Test_inspection_summary(unittest.TestCase):
+class TestInspectionSummary(unittest.TestCase):
     driver = None
     data = None
 

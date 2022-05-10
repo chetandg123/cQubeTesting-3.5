@@ -12,7 +12,7 @@ from reuse_func import GetData
 footer information's '''
 
 
-class sat_map_report():
+class Sat_Map_Report():
     def __init__(self, driver):
         self.fname = None
         self.data = None

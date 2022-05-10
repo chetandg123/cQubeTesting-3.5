@@ -7,7 +7,7 @@ from summary_values import summary_records
 '''Script validate the Static Block summary statistic records are updating in the table properly or not '''
 
 
-class Test_static_block_summary(unittest.TestCase):
+class TestStaticBlockSummary(unittest.TestCase):
     driver = None
     data = None
 

@@ -11,7 +11,7 @@ from get_dir import pwd
 from reuse_func import GetData
 
 
-class diksha_usage_course_report():
+class Diksha_Usage_Course_Report():
     def __init__(self, driver):
         self.filename = None
         self.driver = driver

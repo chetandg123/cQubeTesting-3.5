@@ -7,7 +7,7 @@ from reuse_func import GetData
 respective reports or not '''
 
 
-class cQube_landing_page():
+class cQubeLandingPage():
     def __init__(self, driver):
         self.driver = driver
 

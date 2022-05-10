@@ -8,7 +8,7 @@ from summary_values import summary_records
 '''Script validate the PAT summary statistic records are updating in the table properly or not '''
 
 
-class Test_pat_summary(unittest.TestCase):
+class TestPatSummary(unittest.TestCase):
     driver = None
     data = None
 

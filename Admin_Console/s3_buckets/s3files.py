@@ -8,7 +8,7 @@ from reuse_func import GetData
 not '''
 
 
-class Test_s3files(unittest.TestCase):
+class Tests3files(unittest.TestCase):
     driver = None
     data = None
 

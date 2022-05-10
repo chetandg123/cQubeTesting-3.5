@@ -10,7 +10,7 @@ from get_dir import pwd
 from reuse_func import GetData
 
 
-class Periodic_Assessment_Test_Heat_chart():
+class Periodic_Assessment_Test_Heat_Chart():
     def __init__(self, driver):
         self.p = None
         self.load = None

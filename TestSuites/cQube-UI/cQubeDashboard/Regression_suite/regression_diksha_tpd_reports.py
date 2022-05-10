@@ -46,7 +46,7 @@ class MyTestSuite_Diksha_tpds(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        content_course_regression_suite.cQube_content_course_regression)
+                        content_course_regression_suite.cQube_Content_Course_Regression)
                 ])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "w")
@@ -72,7 +72,7 @@ class MyTestSuite_Diksha_tpds(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        content_textbook_regression_suite.cQube_content_textbook_regression
+                        content_textbook_regression_suite.cQube_Content_Textbook_Regression
                     )
                 ])
                 p = pwd()
@@ -102,7 +102,7 @@ class MyTestSuite_Diksha_tpds(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        usage_by_course_regression_suite.cQube_diskha_course_regression_report
+                        usage_by_course_regression_suite.cQube_Diskha_Course_Regression_Report
                     )
                 ])
                 p = pwd()
@@ -129,7 +129,7 @@ class MyTestSuite_Diksha_tpds(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        usage_by_textbook_regression_suite.cQube_usage_textbook_regression_report
+                        usage_by_textbook_regression_suite.cQube_Usage_Textbook_Regression_Report
                     )
                 ])
                 p = pwd()
@@ -156,7 +156,7 @@ class MyTestSuite_Diksha_tpds(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        tpd_course_regression_test.cQube_tpd_content_regression_Test
+                        tpd_course_regression_test.cQube_Tpd_Content_Regression_Test
                     )
                 ])
                 p = pwd()
@@ -182,7 +182,7 @@ class MyTestSuite_Diksha_tpds(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        enrollment_regression_test.cQube_enrollment_regression
+                        enrollment_regression_test.cQube_Enrollment_Regression
                     )])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "a")
@@ -208,7 +208,7 @@ class MyTestSuite_Diksha_tpds(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        completion_regression_test.cQube_completion_percentage_regression
+                        completion_regression_test.cQube_Completion_Percentage_Regression
                     )])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "a")
@@ -236,7 +236,7 @@ class MyTestSuite_Diksha_tpds(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        content_preference_regression_suite.preference_report_regression_suite
+                        content_preference_regression_suite.Preference_Report_Regression_Suite
                     )])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "a")
@@ -288,7 +288,7 @@ class MyTestSuite_Diksha_tpds(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        user_engagement_report_regression.user_engagement_regression
+                        user_engagement_report_regression.User_Engagement_Regression
                     )])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "a")
@@ -314,7 +314,7 @@ class MyTestSuite_Diksha_tpds(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        user_on_boarding_line_regression.user_on_boarding_line_chart_regression
+                        user_on_boarding_line_regression.User_On_Boarding_Line_Chart_Regression
                     )])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "a")
@@ -340,7 +340,7 @@ class MyTestSuite_Diksha_tpds(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        etb_gps_learning_regression.gps_learning_etb_regression
+                        etb_gps_learning_regression.Etb_Gps_Learning_Regression
                     )])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "a")
@@ -366,7 +366,7 @@ class MyTestSuite_Diksha_tpds(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        etb_gps_learning_regression.gps_learning_etb_regression
+                        etb_gps_learning_regression.Etb_Gps_Learning_Regression
                     )])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "a")
@@ -392,7 +392,7 @@ class MyTestSuite_Diksha_tpds(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        user_per_capita_regression.user_capita_regression
+                        user_per_capita_regression.User_Capita_Regression
                     )])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "a")
@@ -418,7 +418,7 @@ class MyTestSuite_Diksha_tpds(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        etb_nation_learning_regression.etb_nation_learning_regression
+                        etb_nation_learning_regression.Etb_Nation_Learning_Regression
                     )])
                 p = pwd()
                 outfile = open(p.get_diksha_tpds_regression_report(), "a")

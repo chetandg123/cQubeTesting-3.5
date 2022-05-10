@@ -7,7 +7,7 @@ from summary_values import summary_records
 '''Script validate the Diksha TPD summary statistic records are updating in the table properly or not '''
 
 
-class Test_diksha_tpd_summary(unittest.TestCase):
+class TestDikshaTPDSummary(unittest.TestCase):
     driver = None
     data = None
 

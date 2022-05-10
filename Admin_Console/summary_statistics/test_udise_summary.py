@@ -7,7 +7,7 @@ from summary_values import summary_records
 '''Script validate the UDISE summary statistic records are updating in the table properly or not '''
 
 
-class Test_udise_file_summary(unittest.TestCase):
+class TestUdiseFileSummary(unittest.TestCase):
     driver = None
     data = None
 

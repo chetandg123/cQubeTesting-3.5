@@ -7,7 +7,7 @@ from summary_values import summary_records
 '''Script validate the Static Cluster summary statistic records are updating in the table properly or not '''
 
 
-class Test_static_cluster_summary(unittest.TestCase):
+class TestStaticClusterSummary(unittest.TestCase):
 
     data = None
     driver = None

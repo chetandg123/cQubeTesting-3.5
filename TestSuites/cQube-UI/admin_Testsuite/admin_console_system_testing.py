@@ -10,8 +10,8 @@ from reuse_func import GetData
 '''System Test suite -- for admin dashboard screen - Checking the main functionalities in the Screen 
 '''
 
-class adminconsole_system_test(unittest.TestCase):
 
+class Admin_Console_System_Test(unittest.TestCase):
     driver = None
     data = None
 
@@ -226,7 +226,7 @@ class adminconsole_system_test(unittest.TestCase):
         self.data.page_loading(self.driver)
         self.data.login_to_adminconsole(self.driver)
         self.data.page_loading(self.driver)
-        
+
     @classmethod
     def tearDownClass(cls):
         cls.driver.close()

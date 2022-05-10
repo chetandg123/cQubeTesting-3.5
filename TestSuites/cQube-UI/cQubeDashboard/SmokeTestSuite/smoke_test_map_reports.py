@@ -171,7 +171,7 @@ class MyTestSuite_Smoke_map_reports(unittest.TestCase):
                 smoke_test = unittest.TestSuite()
                 smoke_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        udise_smoke_testing.cQube_udise_Report)
+                        udise_smoke_testing.cQube_UdiseReport)
                 ])
                 p = pwd()
                 outfile = open(p.get_smoke_map_report(), "a")
@@ -195,7 +195,7 @@ class MyTestSuite_Smoke_map_reports(unittest.TestCase):
                 smoke_test = unittest.TestSuite()
                 smoke_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        periodic_smoke_testing.periodic_smoke)
+                        periodic_smoke_testing.Periodic_Smoke)
                 ])
                 p = pwd()
                 outfile = open(p.get_smoke_map_report(), "a")

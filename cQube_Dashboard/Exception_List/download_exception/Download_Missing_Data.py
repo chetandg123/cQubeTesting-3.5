@@ -9,7 +9,7 @@ from reuse_func import GetData
 '''Script validation of downloading the exception information '''
 
 
-class exception_download():
+class Exception_Download():
     def __init__(self, driver):
         self.p = None
         self.driver = driver

@@ -8,7 +8,7 @@ from summary_values import summary_records
 '''Script validate the SAT summary statistic records are updating in the table properly or not '''
 
 
-class Test_semester_summary(unittest.TestCase):
+class TestSemesterSummary(unittest.TestCase):
 
     driver = None
     data = None

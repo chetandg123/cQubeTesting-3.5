@@ -7,7 +7,7 @@ from summary_values import summary_records
 '''Script validate the Static School summary statistic records are updating in the table properly or not '''
 
 
-class Test_static_school_summary(unittest.TestCase):
+class TestStaticSchoolSummary(unittest.TestCase):
     data = None
     driver = None
 

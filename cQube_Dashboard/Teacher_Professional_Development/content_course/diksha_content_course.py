@@ -13,7 +13,7 @@ from reuse_func import GetData
 etc '''
 
 
-class content_course_report():
+class Content_Course_Report():
 
     def __init__(self, driver):
         self.p = None

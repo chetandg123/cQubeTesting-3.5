@@ -13,12 +13,13 @@ from reuse_func import GetData
 etc '''
 
 
-class tpd_teacher_percentage():
+class Tpd_Teacher_Percentage():
     def __init__(self, driver):
+        self.data = None
         self.fname = None
         self.driver = driver
 
-    def check_last_day_districtwise_download(self):
+    def check_last_day_district_wise_download(self):
         self.data = GetData()
         self.p = pwd()
         count = 0

@@ -2,14 +2,14 @@ import time
 import unittest
 
 from Locators.parameters import Data
-from cQube_Dashboard.Student_Performance.sat_map.semester_assesment_test import sat_map_report
+from cQube_Dashboard.Student_Performance.sat_map.semester_assesment_test import Sat_Map_Report
 from reuse_func import GetData
 
 '''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
 footer information's '''
 
 
-class cQube_Semester_Report(unittest.TestCase):
+class cQube_Semester_Regression_Report(unittest.TestCase):
     driver = None
     data = None
 
@@ -23,7 +23,7 @@ class cQube_Semester_Report(unittest.TestCase):
         time.sleep(5)
 
     def test_click_on_semester_report(self):
-        sr = sat_map_report(self.driver)
+        sr = Sat_Map_Report(self.driver)
         result = sr.check_semester_landing_page()
         if "sat-report" in result:
             print("Navigating to semester report is working")
@@ -40,7 +40,7 @@ class cQube_Semester_Report(unittest.TestCase):
     #     self.data.page_loading(self.driver)
 
     def test_click_on_blocks(self):
-        block = sat_map_report(self.driver)
+        block = Sat_Map_Report(self.driver)
         result = block.check_markers_on_block_map()
         self.assertNotEqual(0, len(result) - 1, msg="Dots are not present on map")
         print("Blocks button is working and Markers are present on the map")
@@ -101,21 +101,21 @@ class cQube_Semester_Report(unittest.TestCase):
     #         raise self.failureException("Schools per cluster csv report download not is working")
 
     def test_click_on_clusters(self):
-        cluster = sat_map_report(self.driver)
+        cluster = Sat_Map_Report(self.driver)
         result = cluster.check_markers_on_clusters_map()
         self.assertNotEqual(0, len(result) - 1, msg="Dots are not present on map")
         print("Clusters button is working")
         print("Markers are present on the map")
 
     def test_click_on_schools(self):
-        school = sat_map_report(self.driver)
+        school = Sat_Map_Report(self.driver)
         result = school.check_markers_on_school_map()
         self.assertNotEqual(0, len(result) - 1, msg="Dots are not present on map")
         print("Schools button is working")
         print("Markers are present on the map")
 
     def test_logout(self):
-        logout = sat_map_report(self.driver)
+        logout = Sat_Map_Report(self.driver)
         result = logout.click_on_logout()
         self.assertEqual("Log in to cQube", result, msg="login page is not exist!..")
         self.data.login_cqube(self.driver)
@@ -123,7 +123,7 @@ class cQube_Semester_Report(unittest.TestCase):
         print("Logout Functionality is working")
 
     def test_check_hyperlinks(self):
-        hyperlinks = sat_map_report(self.driver)
+        hyperlinks = Sat_Map_Report(self.driver)
         result1, result2, choose_dist = hyperlinks.click_on_hyperlinks()
         if result1 == False and result2 == False and choose_dist == "Choose a District":
             print("hyperlinks are working")
@@ -131,7 +131,7 @@ class cQube_Semester_Report(unittest.TestCase):
             raise self.failureException("hyperlinks are not working")
 
     def test_districtwise_csv_download(self):
-        csv = sat_map_report(self.driver)
+        csv = Sat_Map_Report(self.driver)
         result = csv.click_download_icon_of_district()
         if result == "Mismatch found at footer values":
             raise self.failureException(result)
@@ -139,7 +139,7 @@ class cQube_Semester_Report(unittest.TestCase):
             print("District wise csv report download is working")
 
     def test_blockwise_csv_download(self):
-        csv = sat_map_report(self.driver)
+        csv = Sat_Map_Report(self.driver)
         result = csv.click_download_icon_of_blocks()
         if result == "File Not Downloaded":
             raise self.failureException(result)
@@ -147,7 +147,7 @@ class cQube_Semester_Report(unittest.TestCase):
             print("Block wise csv report download is working")
 
     def test_clusterwise_csv_download(self):
-        csv = sat_map_report(self.driver)
+        csv = Sat_Map_Report(self.driver)
         result = csv.click_download_icon_of_clusters()
         if result == "File Not Downloaded":
             raise self.failureException(result)
@@ -170,7 +170,7 @@ class cQube_Semester_Report(unittest.TestCase):
             raise self.failureException('test_home_button is not working')
 
     def test_home_icon(self):
-        home = sat_map_report(self.driver)
+        home = Sat_Map_Report(self.driver)
         home.click_on_blocks_click_on_home_icon()
         result = home.click_HomeButton()
         if "sat-report" in result:
@@ -179,23 +179,23 @@ class cQube_Semester_Report(unittest.TestCase):
             raise self.failureException('Home Icon is not working')
 
     def test_gradewise_csv_downloading(self):
-        tc = sat_map_report(self.driver)
+        tc = Sat_Map_Report(self.driver)
         res = tc.check_grade_dropdown_options()
         self.assertNotEqual(0, res, msg="Grade options are not present ")
         print("Checked with grade options in sat map report")
         self.data.page_loading(self.driver)
 
-        fun = sat_map_report(self.driver)
+        fun = Sat_Map_Report(self.driver)
         res1 = fun.click_each_grades()
         self.assertEqual(0, res1, msg="gradewise csv file is not downloaded")
 
     def test_subjectwise_csv_downloading(self):
-        tc = sat_map_report(self.driver)
+        tc = Sat_Map_Report(self.driver)
         res = tc.select_subjects_dropdown()
         self.assertEqual(0, res, msg="Subjectwise csv file is not downloaded")
 
     def test_choose_district_block_cluster(self):
-        dist = sat_map_report(self.driver)
+        dist = Sat_Map_Report(self.driver)
         result = dist.check_district()
         if result == 0:
             print("Block per district csv report download is working")
@@ -204,14 +204,14 @@ class cQube_Semester_Report(unittest.TestCase):
             print("equals to downloaded file")
         else:
             raise self.failureException("Block per district csv report download is not working")
-        block = sat_map_report(self.driver)
+        block = Sat_Map_Report(self.driver)
         result = block.check_districts_block()
         if result == 0:
             print("Cluster per block csv report download is working")
             print("on selection of each district and block")
         else:
             raise self.failureException("Cluster per block csv report download not is working")
-        schools = sat_map_report(self.driver)
+        schools = Sat_Map_Report(self.driver)
         result = schools.check_district_block_cluster()
         self.assertEqual(0, result, msg='School of cluster csv file downloaded')
 

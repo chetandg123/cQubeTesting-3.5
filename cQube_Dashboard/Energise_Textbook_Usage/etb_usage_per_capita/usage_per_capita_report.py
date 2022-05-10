@@ -13,7 +13,7 @@ from selenium.webdriver.support.select import Select
 etc '''
 
 
-class usage_per_capita_map():
+class Usage_Per_Capita_Map():
 
     def __init__(self, driver):
         self.driver = driver

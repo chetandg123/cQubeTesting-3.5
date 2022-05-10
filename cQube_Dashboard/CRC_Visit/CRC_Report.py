@@ -13,7 +13,7 @@ from reuse_func import GetData
 crc visits '''
 
 
-class crc_visits():
+class CrcVisits():
     def __init__(self, driver):
         self.p = None
         self.driver = driver

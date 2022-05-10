@@ -13,7 +13,7 @@ from get_dir import pwd
 from reuse_func import GetData
 
 
-class user_progress():
+class User_Progress():
 
     def __init__(self,driver):
         self.data = None

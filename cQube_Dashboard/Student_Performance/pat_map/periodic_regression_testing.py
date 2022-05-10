@@ -10,7 +10,7 @@ from reuse_func import GetData
 footer information's '''
 
 
-class periodic_regression(unittest.TestCase):
+class Periodic_Regression(unittest.TestCase):
     driver = None
     data = None
 

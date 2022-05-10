@@ -11,7 +11,7 @@ from get_dir import pwd
 from reuse_func import GetData
 
 
-class user_on_boarding_report():
+class User_On_Boarding_Report():
     def __init__(self, driver):
         self.driver = driver
         self.data = GetData()

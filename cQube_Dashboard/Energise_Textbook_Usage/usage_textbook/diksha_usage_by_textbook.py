@@ -14,8 +14,9 @@ from reuse_func import GetData
 etc '''
 
 
-class diksha_usage_textbook_report():
+class Diksha_Usage_Textbook_Report():
     def __init__(self, driver):
+        self.p = None
         self.msg = None
         self.data = None
         self.driver = driver
@@ -42,13 +43,13 @@ class diksha_usage_textbook_report():
         self.filename = p.get_download_dir() + '/' + fname.location_textbook() + self.data.get_current_date() + '.csv'
         print(self.filename)
         self.data.page_loading(self.driver)
-        if os.path.isfile(self.filename) == False:
+        if not os.path.isfile(self.filename):
             print('Diksha usage by course chart csv file is not downloded ')
             count = count + 1
         else:
             with open(self.filename) as fin:
                 csv_reader = csv.reader(fin, delimiter=',')
-                header = next(csv_reader)
+                next(csv_reader)
                 contents = 0
                 for row in csv.reader(fin):
                     contents += int(row[0])
@@ -120,7 +121,7 @@ class diksha_usage_textbook_report():
             else:
                 with open(self.filename) as fin:
                     csv_reader = csv.reader(fin, delimiter=',')
-                    header = next(csv_reader)
+                    next(csv_reader)
                     contentplays = 0
                     for row in csv.reader(fin):
                         contentplays += int(row[0])

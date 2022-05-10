@@ -13,7 +13,7 @@ from HTMLTestRunner import HTMLTestRunner
 from reuse_func import GetData
 
 
-class MyTestSuite_cQube_map_reports(unittest.TestCase):
+class MyTestSuite_cQube_Map_Reports(unittest.TestCase):
     driver = None
     data = None
 
@@ -74,7 +74,7 @@ class MyTestSuite_cQube_map_reports(unittest.TestCase):
                 regression_test.addTests([
                     # file name .class name
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        student_attendance_regression_testing.cQube_Student_Attendance_regression),
+                        student_attendance_regression_testing.cQube_Student_Attendance_Regression),
 
                 ])
                 p = pwd()
@@ -102,7 +102,7 @@ class MyTestSuite_cQube_map_reports(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        semester_report_regression_testing.cQube_Semester_Report),
+                        semester_report_regression_testing.cQube_Semester_Regression_Report),
                 ])
                 p = pwd()
                 outfile = open(p.get_regression_map_reports(), "a")
@@ -183,7 +183,7 @@ class MyTestSuite_cQube_map_reports(unittest.TestCase):
             else:
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
-                    unittest.defaultTestLoader.loadTestsFromTestCase(udise_regression_testing.cQube_udise_Report)
+                    unittest.defaultTestLoader.loadTestsFromTestCase(udise_regression_testing.cQube_UdiseReport)
                 ])
                 p = pwd()
                 outfile = open(p.get_regression_map_reports(), "a")
@@ -211,7 +211,7 @@ class MyTestSuite_cQube_map_reports(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        periodic_regression_testing.periodic_regression)
+                        periodic_regression_testing.Periodic_Regression)
                 ])
                 p = pwd()
                 outfile = open(p.get_regression_map_reports(), "a")
@@ -237,7 +237,7 @@ class MyTestSuite_cQube_map_reports(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        teacher_attendance_regression_testing.cQube_Teacher_Attendance_regression
+                        teacher_attendance_regression_testing.cQube_Teacher_Attendance_Regression
                     )
                 ])
                 p = pwd()

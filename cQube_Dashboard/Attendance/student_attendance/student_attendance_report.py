@@ -14,7 +14,7 @@ from reuse_func import GetData
 footer information's '''
 
 
-class student_attendance_report():
+class StudentAttendanceReport():
     def __init__(self, driver, year, month):
         self.driver = driver
         self.year = year.strip()

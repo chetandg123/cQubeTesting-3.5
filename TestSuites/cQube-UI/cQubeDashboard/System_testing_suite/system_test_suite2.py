@@ -1,4 +1,3 @@
-
 import unittest
 
 from cQube_Dashboard.Attendance.teacher_attendance import teacher_attendance_system_testing
@@ -21,7 +20,6 @@ from HTMLTestRunner import HTMLTestRunner
 
 
 class MyTestSuite(unittest.TestCase):
-
     driver = None
     data = None
 
@@ -48,7 +46,7 @@ class MyTestSuite(unittest.TestCase):
                 system_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
                         patheatchart_system_test.cQube_heatchart_system_test
-                        )
+                    )
                 ])
                 p = pwd()
                 outfile = open(p.get_system_report_path(), "a")
@@ -56,11 +54,11 @@ class MyTestSuite(unittest.TestCase):
                 runner1 = HTMLTestRunner.HTMLTestRunner(
                     stream=outfile,
                     title=' PAT Heat chart  System Test  ',
-                    verbosity=1,)
+                    verbosity=1, )
                 runner1.run(system_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue02(self):
         self.data.page_loading(self.driver)
@@ -75,8 +73,8 @@ class MyTestSuite(unittest.TestCase):
                 system_test = unittest.TestSuite()
                 system_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        PAT_LO_Table_system_suite.cQube_pat_lotable_system_test
-                      )
+                        PAT_LO_Table_system_suite.cQube_Pat_LoTable_System_Test
+                    )
                 ])
                 p = pwd()
                 outfile = open(p.get_system_report_path(), "a")
@@ -84,11 +82,11 @@ class MyTestSuite(unittest.TestCase):
                 runner1 = HTMLTestRunner.HTMLTestRunner(
                     stream=outfile,
                     title=' PAT LO Table System Test  ',
-                    verbosity=1,)
+                    verbosity=1, )
                 runner1.run(system_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue03(self):
         self.data.page_loading(self.driver)
@@ -103,7 +101,7 @@ class MyTestSuite(unittest.TestCase):
                 system_test = unittest.TestSuite()
                 system_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                    content_course_system_suite.cQube_content_course_system_suite)
+                        content_course_system_suite.cQube_content_course_system_suite)
                 ])
                 p = pwd()
                 outfile = open(p.get_system_report_path(), "a")
@@ -111,11 +109,11 @@ class MyTestSuite(unittest.TestCase):
                 runner1 = HTMLTestRunner.HTMLTestRunner(
                     stream=outfile,
                     title='Diksha Content BY Course System Test ',
-                    verbosity=1,)
+                    verbosity=1, )
                 runner1.run(system_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue04(self):
         self.data.page_loading(self.driver)
@@ -130,7 +128,7 @@ class MyTestSuite(unittest.TestCase):
                 system_test = unittest.TestSuite()
                 system_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        content_textbook_system_suite.cQube_content_textbook_systemtest
+                        content_textbook_system_suite.cQube_Content_Textbook_SystemTest
                     )
                 ])
                 p = pwd()
@@ -145,7 +143,7 @@ class MyTestSuite(unittest.TestCase):
                 runner1.run(system_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue05(self):
         p = pwd()
@@ -161,13 +159,14 @@ class MyTestSuite(unittest.TestCase):
                 system_test = unittest.TestSuite()
                 system_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        usage_by_course_system_testing.cQube_diskha_course_system_report)])
+                        usage_by_course_system_testing.cQube_Diskha_Course_System_Report)])
                 outfile = open(p.get_system_report_path(), "a")
-                runner1 = HTMLTestRunner.HTMLTestRunner(stream=outfile,title=' Diksha Usage By Course System Test  ',verbosity=1,)
+                runner1 = HTMLTestRunner.HTMLTestRunner(stream=outfile, title=' Diksha Usage By Course System Test  ',
+                                                        verbosity=1, )
                 runner1.run(system_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue06(self):
         self.data.page_loading(self.driver)
@@ -182,7 +181,7 @@ class MyTestSuite(unittest.TestCase):
                 system_test = unittest.TestSuite()
                 system_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        usage_by_textbook_system_suite.cQube_usage_textbook_system_report
+                        usage_by_textbook_system_suite.cQube_Usage_Textbook_System_Report
                     )
                 ])
                 p = pwd()
@@ -191,11 +190,11 @@ class MyTestSuite(unittest.TestCase):
                 runner1 = HTMLTestRunner.HTMLTestRunner(
                     stream=outfile,
                     title=' Usage By Textbook   System Test  ',
-                    verbosity=1,)
+                    verbosity=1, )
                 runner1.run(system_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue07(self):
         self.data.page_loading(self.driver)
@@ -210,7 +209,7 @@ class MyTestSuite(unittest.TestCase):
                 system_test = unittest.TestSuite()
                 system_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        tpd_course_system_test.cQube_lpdcontent_system_Test
+                        tpd_course_system_test.cQube_TpdContent_System_Test
                     )
                 ])
                 p = pwd()
@@ -219,11 +218,11 @@ class MyTestSuite(unittest.TestCase):
                 runner1 = HTMLTestRunner.HTMLTestRunner(
                     stream=outfile,
                     title=' Usage By TPD Course   System Test  ',
-                    verbosity=1,)
+                    verbosity=1, )
                 runner1.run(system_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue08(self):
         self.data.page_loading(self.driver)
@@ -238,7 +237,7 @@ class MyTestSuite(unittest.TestCase):
                 system_test = unittest.TestSuite()
                 system_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        lpd_percentage_system_test.cQube_lpdpercentage_system_Test )])
+                        lpd_percentage_system_test.cQube_TpdPercentage_System_Test)])
                 p = pwd()
                 outfile = open(p.get_system_report_path(), "a")
                 runner1 = HTMLTestRunner.HTMLTestRunner(
@@ -249,9 +248,7 @@ class MyTestSuite(unittest.TestCase):
                 runner1.run(system_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
-
-
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue10(self):
         self.data.page_loading(self.driver)
@@ -281,8 +278,7 @@ class MyTestSuite(unittest.TestCase):
                 runner1.run(system_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
-
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue12(self):
         self.data.page_loading(self.driver)
@@ -297,7 +293,7 @@ class MyTestSuite(unittest.TestCase):
                 system_test = unittest.TestSuite()
                 system_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        teacher_attendance_system_testing.cQube_Teacher_Attendance_systemTest
+                        teacher_attendance_system_testing.cQube_Teacher_Attendance_SystemTest
                     )
                 ])
                 p = pwd()
@@ -306,12 +302,11 @@ class MyTestSuite(unittest.TestCase):
                 runner1 = HTMLTestRunner.HTMLTestRunner(
                     stream=outfile,
                     title='Teacher Attendance System Test  ',
-                    verbosity=1,)
+                    verbosity=1, )
                 runner1.run(system_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
-
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue13(self):
         self.data.page_loading(self.driver)
@@ -326,7 +321,7 @@ class MyTestSuite(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        student_exception_system_test.cQube_System_Student_exception)
+                        student_exception_system_test.cQube_System_Student_Exception)
                 ])
                 p = pwd()
                 outfile = open(p.get_regression_map_reports(), "a")
@@ -339,7 +334,7 @@ class MyTestSuite(unittest.TestCase):
                 runner1.run(regression_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue14(self):
         self.data.page_loading(self.driver)
@@ -354,7 +349,7 @@ class MyTestSuite(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        teacher_exception_system_test.cQube_teacher_exception_system_report)
+                        teacher_exception_system_test.cQube_Teacher_Exception_System_Report)
                 ])
                 p = pwd()
                 outfile = open(p.get_regression_map_reports(), "a")
@@ -368,8 +363,7 @@ class MyTestSuite(unittest.TestCase):
                 runner1.run(regression_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
-
+            print(status, "is selected due to this unable to run suite")
 
     def test_issue15(self):
         self.data.page_loading(self.driver)
@@ -384,7 +378,7 @@ class MyTestSuite(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        pat_exception_system_test.cQube_pat_exception_system_report)
+                        pat_exception_system_test.cQube_Pat_Exception_System_Report)
                 ])
                 p = pwd()
                 outfile = open(p.get_regression_map_reports(), "a")
@@ -397,11 +391,12 @@ class MyTestSuite(unittest.TestCase):
                 runner1.run(regression_test)
                 outfile.close()
         else:
-            print(status,"is selected due to this unable to run suite")
+            print(status, "is selected due to this unable to run suite")
 
     @classmethod
     def tearDownClass(self):
         self.driver.close()
+
 
 if __name__ == '__main__':
     unittest.main()

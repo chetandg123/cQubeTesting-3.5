@@ -8,7 +8,7 @@ from reuse_func import GetData
 footer information's '''
 
 
-class periodic_smoke(unittest.TestCase):
+class Periodic_Smoke(unittest.TestCase):
     driver = None
     data = None
 

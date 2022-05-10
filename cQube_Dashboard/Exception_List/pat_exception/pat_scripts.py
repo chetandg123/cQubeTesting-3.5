@@ -13,7 +13,7 @@ from reuse_func import GetData
 footer information's '''
 
 
-class pat_exception_report():
+class Pat_Exception_Report():
 
     def __init__(self, driver):
         self.driver = driver

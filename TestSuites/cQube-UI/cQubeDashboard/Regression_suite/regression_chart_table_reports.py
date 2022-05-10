@@ -90,7 +90,7 @@ class MyTestSuite(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        composite_regression_testing.composite_regression_report)
+                        composite_regression_testing.Composite_Regression_report)
                 ])
                 p = pwd()
                 outfile = open(p.get_regression_chart_table_reports(), "a")
@@ -147,7 +147,7 @@ class MyTestSuite(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        PAT_LO_Table_regression_suite.cQube_pat_lotable_regression_test
+                        PAT_LO_Table_regression_suite.cQube_Pat_LoTable_Regression_Test
                     )
                 ])
                 p = pwd()

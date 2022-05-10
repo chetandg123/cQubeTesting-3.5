@@ -8,7 +8,7 @@ from reuse_func import GetData
 footer information's '''
 
 
-class cQube_smoke_Student_exception(unittest.TestCase):
+class cQube_Smoke_Student_Exception(unittest.TestCase):
     driver = None
     data = None
 

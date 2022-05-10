@@ -8,7 +8,7 @@ from reuse_func import GetData
 with proper information or not '''
 
 
-class Test_summaryreport(unittest.TestCase):
+class TestSummaryReport(unittest.TestCase):
     driver = None
     data = None
 

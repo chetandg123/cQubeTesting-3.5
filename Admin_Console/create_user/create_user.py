@@ -10,7 +10,7 @@ from reuse_func import GetData
 ''' Script performs the creation of admin , report viewer and emission user from create user screen '''
 
 
-class create_user(unittest.TestCase):
+class CreateUser(unittest.TestCase):
     driver = None
     data = None
 

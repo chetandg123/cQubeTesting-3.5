@@ -1,4 +1,3 @@
-
 import unittest
 
 from Locators.parameters import Data
@@ -8,8 +7,8 @@ from summary_values import summary_records
 
 '''Script validate the CRC summary statistic records are updating in the table properly or not '''
 
-class Test_crc_summary(unittest.TestCase):
 
+class TestCrcSummary(unittest.TestCase):
     driver = None
     data = None
 
@@ -47,12 +46,12 @@ class Test_crc_summary(unittest.TestCase):
         y.append(self.records.get_crc_processedrec())
 
         z = x[:-2]
-        print('Screen showing' ,z)
-        print('In config file' ,y)
-        if  z == y:
+        print('Screen showing', z)
+        print('In config file', y)
+        if z == y:
             print('crc summary is fine')
         else:
             print("Some values are mismatching on table ")
             count = count + 1
-        self.assertEqual(0 ,count ,msg="Records mismatch found ")
+        self.assertEqual(0, count, msg="Records mismatch found ")
         self.data.page_loading(self.driver)

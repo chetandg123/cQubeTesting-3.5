@@ -30,9 +30,10 @@ class Periodic_Assessment_Test():
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
         p = pwd()
-        self.filename = p.get_download_dir() + "/" + self.fname.pat_district() + management + '_all_allGrades__allDistricts_' + cal.get_current_date() + '.csv'
+        self.filename = p.get_download_dir() + "/" + self.fname.pat_district() + management \
+                        + '_all_allGrades__allDistricts_' + cal.get_current_date() + '.csv'
         print(self.filename)
-        if os.path.isfile(self.filename) != True:
+        if not os.path.isfile(self.filename):
             return "File Not Downloaded"
         else:
             markers = self.driver.find_elements_by_class_name(Data.dots)
@@ -81,7 +82,7 @@ class Periodic_Assessment_Test():
         count = 0
         self.filename = p.get_download_dir() + "/" + files.pat_block() + management + '_all_allGrades__allBlocks_' + cal.get_current_date() + '.csv'
         print(self.filename)
-        if os.path.isfile(self.filename) != True:
+        if not os.path.isfile(self.filename):
             return "File Not Downloaded"
         else:
             markers = self.driver.find_elements_by_class_name(Data.dots)
@@ -96,37 +97,6 @@ class Periodic_Assessment_Test():
                     count = count + 1
             os.remove(self.filename)
         return counts, count
-
-    def check_with_footervalues(self):
-        cal = GetData()
-        files = file_extention()
-        cal.click_on_state(self.driver)
-        cal.page_loading(self.driver)
-        management = self.driver.find_element_by_id('name').text
-        management = management[16:].lower().strip()
-        self.driver.find_element_by_id(Data.cluster_btn).click()
-        cal.page_loading(self.driver)
-        markers = self.driver.find_elements_by_class_name(Data.dots)
-        dots = len(markers) - 1
-        self.driver.find_element_by_id(Data.Download).click()
-        time.sleep(10)
-        p = pwd()
-        count = 0
-        self.filename = p.get_download_dir() + "/" + files.pat_cluster() + management + '_all_allGrades__allClusters_' + cal.get_current_date() + '.csv'
-        print(self.filename)
-        if os.path.isfile(self.filename) != True:
-            return "File Not Downloaded"
-        else:
-            with open(self.filename) as fin:
-                csv_reader = csv.reader(fin, delimiter=',')
-                header = next(csv_reader)
-                data = list(csv_reader)
-                row_count = len(data)
-                if int(dots) != row_count:
-                    print("Markers and csv file records count mismatched", dots, row_count)
-                    count = count + 1
-            os.remove(self.filename)
-        return dots, count
 
     def check_with_footers(self):
         cal = GetData()
@@ -152,7 +122,7 @@ class Periodic_Assessment_Test():
             dots = len(markers) - 1
             with open(self.filename) as fin:
                 csv_reader = csv.reader(fin, delimiter=',')
-                header = next(csv_reader)
+                next(csv_reader)
                 data = list(csv_reader)
                 row_count = len(data)
                 if int(dots) != row_count:
@@ -651,6 +621,7 @@ class Periodic_Assessment_Test():
     #             return count
 
     def check_last_30_days(self):
+        global cattended, cschools, cstudents, cattended
         cal = GetData()
         count = 0
         self.driver.find_element_by_xpath(Data.hyper_link).click()

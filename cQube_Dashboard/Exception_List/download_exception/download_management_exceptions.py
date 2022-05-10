@@ -9,9 +9,10 @@ from reuse_func import GetData
 '''Script validation of downloading the exception information '''
 
 
-class exception_list_download():
+class Exception_List_Download():
 
     def __init__(self, driver):
+        self.data = None
         self.driver = driver
 
     def get_exceptions(self):
@@ -116,7 +117,7 @@ class exception_list_download():
         time.sleep(30)
         self.p = pwd()
         self.filename = self.p.get_download_dir() + '/school_invalid_data.csv'
-        if os.path.isfile(self.filename) != True:
+        if not os.path.isfile(self.filename):
             print(name, 'Download exception list is not downloaded ')
             count = count + 1
         else:
@@ -152,7 +153,7 @@ class exception_list_download():
         time.sleep(30)
         self.p = pwd()
         self.filename = self.p.get_download_dir() + '/school_invalid_data.csv'
-        if os.path.isfile(self.filename) != True:
+        if not os.path.isfile(self.filename):
             print(name, 'Download exception list is not downloaded ')
             count = count + 1
         else:
@@ -188,7 +189,7 @@ class exception_list_download():
         time.sleep(30)
         self.p = pwd()
         self.filename = self.p.get_download_dir() + '/school_invalid_data.csv'
-        if os.path.isfile(self.filename) != True:
+        if not os.path.isfile(self.filename):
             print(name, 'Download exception list is not downloaded ')
             count = count + 1
         else:
@@ -224,7 +225,7 @@ class exception_list_download():
         time.sleep(30)
         self.p = pwd()
         self.filename = self.p.get_download_dir() + '/school_invalid_data.csv'
-        if os.path.isfile(self.filename) != True:
+        if not os.path.isfile(self.filename):
             print(name, 'Download exception list is not downloaded ')
             count = count + 1
         else:
@@ -260,7 +261,7 @@ class exception_list_download():
         time.sleep(30)
         self.p = pwd()
         self.filename = self.p.get_download_dir() + '/school_invalid_data.csv'
-        if os.path.isfile(self.filename) != True:
+        if not os.path.isfile(self.filename):
             print(name, 'Download exception list is not downloaded ')
             count = count + 1
         else:
@@ -296,7 +297,7 @@ class exception_list_download():
         time.sleep(30)
         self.p = pwd()
         self.filename = self.p.get_download_dir() + '/school_invalid_data.csv'
-        if os.path.isfile(self.filename) != True:
+        if not os.path.isfile(self.filename):
             print(name, 'Download exception list is not downloaded ')
             count = count + 1
         else:

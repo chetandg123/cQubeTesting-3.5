@@ -1,12 +1,12 @@
 import unittest
 
-from cQube_Dashboard.Exception_List.download_exception.Download_Missing_Data import exception_download
+from cQube_Dashboard.Exception_List.download_exception.Download_Missing_Data import Exception_Download
 from reuse_func import GetData
 
 '''Script validation of downloading the exception information '''
 
 
-class cQube_regression_download_exceptions(unittest.TestCase):
+class cQube_Regression_Download_Exceptions(unittest.TestCase):
     driver = None
     data = None
 
@@ -20,7 +20,7 @@ class cQube_regression_download_exceptions(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_checking_all_the_management_files(self):
-        function = exception_download(self.driver)
+        function = Exception_Download(self.driver)
         res = function.get_exceptions()
         self.assertEqual(0, res, msg="Files are not downloaded")
         self.data.page_loading(self.driver)

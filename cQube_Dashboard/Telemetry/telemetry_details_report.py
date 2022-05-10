@@ -12,7 +12,7 @@ from reuse_func import GetData
 footer information's '''
 
 
-class telemetry_map_report:
+class TelemetryReport:
     def __init__(self, driver):
         self.p = None
         self.fname = None

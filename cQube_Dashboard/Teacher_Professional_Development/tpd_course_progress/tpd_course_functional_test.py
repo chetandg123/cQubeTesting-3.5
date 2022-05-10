@@ -2,7 +2,7 @@ import unittest
 
 from Locators.parameters import Data
 from cQube_Dashboard.Teacher_Professional_Development.tpd_course_progress.tpd_course_progress import \
-    tpd_course_progress_report
+    Tpd_Course_Progress_Report
 
 from reuse_func import GetData
 
@@ -10,7 +10,7 @@ from reuse_func import GetData
 etc '''
 
 
-class cQube_lpdcontent_functional_Test(unittest.TestCase):
+class cQube_TpdContent_Functional_Test(unittest.TestCase):
     data = None
     driver = None
 
@@ -46,111 +46,111 @@ class cQube_lpdcontent_functional_Test(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_lastday_csv_download(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.check_last_day_districtwise_download()
         self.assertEqual(0, res, msg='Csv file is not downloaded')
         print('Last Day content progress district wise csv file is downloaded')
         self.data.page_loading(self.driver)
 
     def test_last7day_csv_download(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.check_last_7_days_districtwise_download()
         self.assertEqual(0, res, msg='Csv file is not downloaded')
         print('Last 7 Days content progress district wise csv file is downloaded')
         self.data.page_loading(self.driver)
 
     def test_last30day_csv_download(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.check_last_30_day_districtwise_download()
         self.assertEqual(0, res, msg='Csv file is not downloaded')
         print('Last 30 Days content progress district wise csv file is downloaded')
         self.data.page_loading(self.driver)
 
     def test_all_type_csv_download(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.check_all_districtwise_download()
         self.assertEqual(0, res, msg='Csv file is not downloaded')
         print('All time content progress district wise csv file is downloaded')
         self.data.page_loading(self.driver)
 
     def test_Home_buttons_functions(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         b.test_homeicons()
         print("checked with home icons is working")
         self.data.page_loading(self.driver)
 
     def test_Home_button_functions(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.test_homebutton()
         self.assertEqual(0, res, msg='Navigation failed to content progress chart')
         print("checked with homebutton is working")
         self.data.page_loading(self.driver)
 
     def test_all_districts(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.test_all_districtwise()
         self.assertEqual(0, res, msg='All type some district wise csv file not downloaded')
         print('checked with all period all districts')
         self.data.page_loading(self.driver)
 
     def test_last7_districts(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.test_last_7_days_districtwise()
         self.assertEqual(0, res, msg='last 7days some district wise csv file not downloaded')
         print('checked last 7 days period records with all districts')
         self.data.page_loading(self.driver)
 
     def test_last_day_districts(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.test_last_day_districtwise()
         self.assertEqual(0, res, msg='last day some district wise csv file not downloaded')
         print('checked last day period records with all districts')
         self.data.page_loading(self.driver)
 
     def test_last_30days_districts(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.test_last_30_days_districtwise()
         self.assertEqual(0, res, msg='last 30days some district wise csv file not downloaded')
         print('checked last 30days period records with all districts')
         self.data.page_loading(self.driver)
 
     def test_Cluster_wise_records(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.Blocks_select_box()
         self.assertEqual(0, res, msg="some cluster csv file not downloaded")
         print("checked with cluster wise records")
 
     def test_School_wise_records(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.Clusters_select_box()
         self.assertEqual(0, res, msg="School wise csv file is not downloaded")
         print("checked school wise records")
         self.data.page_loading(self.driver)
 
     def test_logout_button(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.test_logoutbtn()
         self.assertEqual(res, 0, msg='Login page is not displayed ')
         print("checked with logout button is working ")
         self.data.page_loading(self.driver)
 
     def test_download_raw_files_overall_period(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.test_overall_rawfile_download()
         self.assertEqual(0, res, msg='Raw file is not downloaded')
 
     def test_download_raw_files_last_30days_period(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.test_last_30_days_rawfile_download()
         self.assertEqual(0, res, msg='Raw file is not downloaded')
 
     def test_download_raw_files_last_7_day_period(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.test_last_7_days_rawfile_download()
         self.assertEqual(0, res, msg='Raw file is not downloaded')
 
     def test_download_raw_files_lastday_period(self):
-        b = tpd_course_progress_report(self.driver)
+        b = Tpd_Course_Progress_Report(self.driver)
         res = b.test_last_day_rawfile_download()
         self.assertEqual(0, res, msg='Raw file is not downloaded')
 

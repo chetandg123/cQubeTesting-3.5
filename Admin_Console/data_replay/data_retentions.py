@@ -2,10 +2,12 @@ from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.support.select import Select
 
 from reuse_func import GetData
+
 '''Script performs the checking data retention dropdown are working as expected or not i.e selection of retention 
 period '''
 
-class data_retentions():
+
+class DataRetentions():
 
     def __init__(self, driver):
         self.data = None

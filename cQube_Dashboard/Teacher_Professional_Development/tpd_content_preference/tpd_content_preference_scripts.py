@@ -16,9 +16,10 @@ from reuse_func import GetData
 etc '''
 
 
-class tpd_content_usage_piechart():
+class Tpd_Content_Usage_PieChart():
 
     def __init__(self, driver):
+        self.filename = None
         self.driver = driver
         self.data = GetData()
         self.p = pwd()
@@ -112,7 +113,7 @@ class tpd_content_usage_piechart():
             state_name = self.driver.find_element(By.XPATH, '//p/span').text
             self.filename = self.p.get_download_dir() + '/' + self.fname.content_preference_state
             print(os.path.isfile(self.filename), 'file is present or not ')
-            if os.path.isfile(self.filename) != True:
+            if not os.path.isfile(self.filename):
                 print(self.fname.content_preference_state, 'is not downloaded: ', self.filename)
                 count = count + 1
             else:
@@ -149,12 +150,11 @@ class tpd_content_usage_piechart():
             time.sleep(3)
             state_name = self.driver.find_element(By.XPATH, "//p/span").text
             self.filename = self.p.get_download_dir() + '/' + self.fname.content_preference_state
-            if os.path.isfile(self.filename) != True:
+            if not os.path.isfile(self.filename):
                 print(self.fname.content_preference_state, 'is not downloaded ')
                 count = count + 1
             else:
                 df = pd.read_csv(self.filename)
-                size = len(df)
                 content_plays = df['Total Content Plays ' + state_name].sum()
 
                 total_cp = self.driver.find_element(By.TAG_NAME, Data.state_cp_header).text
@@ -197,7 +197,7 @@ class tpd_content_usage_piechart():
                 self.driver.find_element(By.ID, Data.Download).click()
                 time.sleep(3)
                 self.filename = self.p.get_download_dir() + self.fname.content_preference_state
-                if os.path.isfile(self.filename) != False:
+                if os.path.isfile(self.filename):
                     print(self.fname.tpd_content_plays_file, 'is not downloaded ')
                     count = count + 1
                 else:

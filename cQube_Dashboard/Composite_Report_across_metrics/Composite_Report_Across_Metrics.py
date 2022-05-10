@@ -12,11 +12,11 @@ from reuse_func import GetData
 along with graph '''
 
 
-class Composite_report_across_Metric():
+class Composite_Report_Across_Metric():
     def __init__(self, driver):
         self.driver = driver
 
-    def test_districtwise(self):
+    def test_district_wise(self):
         p = pwd()
         self.cal = GetData()
         self.driver.implicitly_wait(20)

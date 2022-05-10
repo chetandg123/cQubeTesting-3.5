@@ -15,7 +15,7 @@ from reuse_func import GetData
 etc '''
 
 
-class etb_content_plays_map_report():
+class Etb_Content_Plays_Map_Report():
     def __init__(self, driver):
         self.driver = driver
         self.count = 0

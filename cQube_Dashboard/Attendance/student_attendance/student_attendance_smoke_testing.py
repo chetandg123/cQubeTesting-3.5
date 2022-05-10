@@ -6,7 +6,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from Locators.parameters import Data
-from cQube_Dashboard.Attendance.student_attendance.student_attendance_report import student_attendance_report
+from cQube_Dashboard.Attendance.student_attendance.student_attendance_report import StudentAttendanceReport
 from reuse_func import GetData
 
 '''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
@@ -31,7 +31,7 @@ class cQube_Student_Attendance(unittest.TestCase):
         self.month = month.first_selected_option.text
 
     def test_click_on_student_attendence_report(self):
-        sar = student_attendance_report(self.driver, self.year, self.month)
+        sar = StudentAttendanceReport(self.driver, self.year, self.month)
         result = sar.click_on_sar()
         if "student-attendance" in result:
             print("Student Attendance Infra_Table_Report is Working")
@@ -140,7 +140,7 @@ class cQube_Student_Attendance(unittest.TestCase):
             raise self.failureException("Choose District,Block and Cluster is not working")
 
     def test_home_icon(self):
-        home = student_attendance_report(self.driver, self.year, self.month)
+        home = StudentAttendanceReport(self.driver, self.year, self.month)
         home.click_on_blocks_click_on_home_icon()
         result = home.click_HomeButton()
         if "student-attendance" in result:
@@ -149,7 +149,7 @@ class cQube_Student_Attendance(unittest.TestCase):
             raise self.failureException('Home Icon is not working')
 
     def test_districtwise_csv_download(self):
-        csv = student_attendance_report(self.driver, self.year, self.month)
+        csv = StudentAttendanceReport(self.driver, self.year, self.month)
         result = csv.click_download_icon_of_district()
         self.assertEqual(0, result, msg='Mis match found at footer information')
         print('Districtwise csv file is downloaded')
@@ -165,7 +165,7 @@ class cQube_Student_Attendance(unittest.TestCase):
             raise self.failureException("Markers are not present on the map")
 
     def test_no_of_schools_is_equals_at_districts_blocks_clusters_schools(self):
-        tc = student_attendance_report(self.driver, self.year, self.month)
+        tc = StudentAttendanceReport(self.driver, self.year, self.month)
         schools, Bschools = tc.block_no_of_schools()
         self.assertEqual(int(schools), int(Bschools), msg="Block level no of schools are not equal to no of schools ")
         schools, Cschools = tc.cluster_no_of_schools()
@@ -174,7 +174,7 @@ class cQube_Student_Attendance(unittest.TestCase):
         self.assertEqual(int(schools), int(Sschools), msg="Cluster level no of schools are not equal to no of schools ")
 
     def test_total_no_of_students_is_equals_at_districts_blocks_clusters_schools(self):
-        tc = student_attendance_report(self.driver, self.year, self.month)
+        tc = StudentAttendanceReport(self.driver, self.year, self.month)
         student_count, Bstudents = tc.block_total_no_of_students()
         self.assertEqual(int(student_count), int(Bstudents), msg="Block level no of students are not equal")
         student_count, Cstudents = tc.cluster_total_no_of_students()
@@ -192,7 +192,7 @@ class cQube_Student_Attendance(unittest.TestCase):
     #     self.data.page_loading(self.driver)
 
     def test_total_no_of_students_and_total_no_of_schools_is_equals_at_blocks_clusters_schools(self):
-        tc = student_attendance_report(self.driver, self.year, self.month)
+        tc = StudentAttendanceReport(self.driver, self.year, self.month)
         student_count, Bstudents, school_count, Bschools = tc.check_blocklevel_total_no_of_students()
         self.assertEqual(int(student_count), int(Bstudents), msg="Block level no of students are not equal")
         self.assertEqual(int(school_count), int(Bschools),

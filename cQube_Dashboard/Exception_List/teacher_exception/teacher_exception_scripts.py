@@ -12,7 +12,7 @@ from reuse_func import GetData
 footer information's '''
 
 
-class teacher_exception_report():
+class Teacher_Exception_Report():
 
     def __init__(self, driver, year, month):
         self.p = None

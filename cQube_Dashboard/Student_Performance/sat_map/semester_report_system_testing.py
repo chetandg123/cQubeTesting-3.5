@@ -1,7 +1,7 @@
 import time
 import unittest
 
-from cQube_Dashboard.Student_Performance.sat_map.semester_assesment_test import sat_map_report
+from cQube_Dashboard.Student_Performance.sat_map.semester_assesment_test import Sat_Map_Report
 from reuse_func import GetData
 
 '''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
@@ -30,31 +30,31 @@ class cQube_Semester_Report(unittest.TestCase):
     #     self.data.page_loading(self.driver)
 
     def test_districtwise_csv_download(self):
-        csv = sat_map_report(self.driver)
+        csv = Sat_Map_Report(self.driver)
         result = csv.click_download_icon_of_district()
         if result == "File Not Downloaded":
             raise self.failureException(result)
 
     def test_blockwise_csv_download(self):
-        csv = sat_map_report(self.driver)
+        csv = Sat_Map_Report(self.driver)
         result = csv.click_download_icon_of_blocks()
         if result == "File Not Downloaded":
             raise self.failureException(result)
 
     def test_clusterwise_csv_download(self):
-        csv = sat_map_report(self.driver)
+        csv = Sat_Map_Report(self.driver)
         result = csv.click_download_icon_of_clusters()
         if result == "File Not Downloaded":
             raise self.failureException(result)
 
     def test_schoolwise_cv_download(self):
-        csv = sat_map_report(self.driver)
+        csv = Sat_Map_Report(self.driver)
         result = csv.click_download_icon_of_schools()
         if result == "File Not Downloaded":
             raise self.failureException(result)
 
     def test_choose_district_block_cluster(self):
-        dist = sat_map_report(self.driver)
+        dist = Sat_Map_Report(self.driver)
         result = dist.check_district()
         if result == 0:
             print("Block per district csv report download is working")
@@ -63,7 +63,7 @@ class cQube_Semester_Report(unittest.TestCase):
             print("equals to downloaded file")
         else:
             raise self.failureException("Block per district csv report download is not working")
-        block = sat_map_report(self.driver)
+        block = Sat_Map_Report(self.driver)
         result = block.check_districts_block()
         if result == 0:
             print("Cluster per block csv report download is working")
@@ -72,7 +72,7 @@ class cQube_Semester_Report(unittest.TestCase):
             print("equals to downloaded file")
         else:
             raise self.failureException("Cluster per block csv report download not is working")
-        schools = sat_map_report(self.driver)
+        schools = Sat_Map_Report(self.driver)
         result = schools.check_district_block_cluster()
         if result == 0:
             print("Schools per cluster csv download report is working")

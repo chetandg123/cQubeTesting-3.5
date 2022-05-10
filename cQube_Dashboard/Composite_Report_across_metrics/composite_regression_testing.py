@@ -10,7 +10,7 @@ from reuse_func import GetData
 along with graph '''
 
 
-class composite_regression_report(unittest.TestCase):
+class Composite_Regression_report(unittest.TestCase):
     driver = None
     data = None
 

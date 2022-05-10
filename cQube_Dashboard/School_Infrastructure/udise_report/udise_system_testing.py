@@ -1,14 +1,14 @@
 import time
 import unittest
 from Locators.parameters import Data
-from cQube_Dashboard.School_Infrastructure.udise_report.udise_report import udise_report
+from cQube_Dashboard.School_Infrastructure.udise_report.udise_report import UdiseReport
 from reuse_func import GetData
 
 '''Script perform the test the blocks , cluster and school level buttons and dropdowns , map records , 
 footer information's '''
 
 
-class cQube_udise_Report(unittest.TestCase):
+class cQube_UdiseReport(unittest.TestCase):
     driver = None
     data = None
 
@@ -41,40 +41,40 @@ class cQube_udise_Report(unittest.TestCase):
         self.data.page_loading(self.driver)
 
     def test_download_districtcsv(self):
-        fn = udise_report(self.driver)
+        fn = UdiseReport(self.driver)
         res = fn.test_districtwise()
         self.assertEqual(0, res, msg='Districtwise csv is not downloaded')
         self.data.page_loading(self.driver)
 
     def test_test_school_map_schoollevel_records(self):
-        b = udise_report(self.driver)
+        b = UdiseReport(self.driver)
         res = b.check_download_csv1()
         self.assertEqual(0, res, msg="Some school level csv file not downloaded")
         self.data.page_loading(self.driver)
 
     def test_block_wise_download(self):
-        b = udise_report(self.driver)
+        b = UdiseReport(self.driver)
         res, res1 = b.test_download_blockwise()
         self.assertTrue(res, msg='School level csv file is not downloaded')
         self.assertNotEqual(res1, 0, msg='Markers are missing on school level map ')
         print('blockwise csv file download is working')
 
     def test_cluster_wise_download(self):
-        b = udise_report(self.driver)
+        b = UdiseReport(self.driver)
         res, res1 = b.test_download_blockwise()
         self.assertTrue(res, msg='School level csv file is not downloaded')
         self.assertNotEqual(res1, 0, msg='Markers are missing on school level map ')
         print('clusterwise csv file download is working')
 
     def test_school_wise_download(self):
-        b = udise_report(self.driver)
+        b = UdiseReport(self.driver)
         res, res1 = b.test_download()
         self.assertTrue(res, msg='School level csv file is not downloaded')
         self.assertNotEqual(res1, 0, msg='Markers are missing on school level map ')
         print('Schoolwise csv file download is working')
 
     def test_indices_download(self):
-        b = udise_report(self.driver)
+        b = UdiseReport(self.driver)
 
         indices_score = b.infrastructure_score()
         b.remove_csv()

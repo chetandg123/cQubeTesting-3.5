@@ -8,7 +8,7 @@ import unittest
 footer information's '''
 
 
-class periodic_system_testing(unittest.TestCase):
+class Periodic_System_Testing(unittest.TestCase):
     driver = None
     data = None
 

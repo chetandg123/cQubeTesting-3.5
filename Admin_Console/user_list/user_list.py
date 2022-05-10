@@ -8,7 +8,7 @@ from reuse_func import GetData
 '''Script performs checking the newly created user are updating in the user list or not '''
 
 
-class user_list(unittest.TestCase):
+class UserList(unittest.TestCase):
     driver = None
     data = None
 

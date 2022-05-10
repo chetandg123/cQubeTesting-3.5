@@ -12,7 +12,7 @@ from selenium.webdriver.support.select import Select
 etc '''
 
 
-class user_engagement_automation_scripts:
+class User_Engagement_Automation_Scripts:
 
     def __init__(self, driver):
         self.driver = driver

@@ -10,7 +10,7 @@ from reuse_func import GetData
 footer information's '''
 
 
-class cQube_Teacher_Attendance_systemTest(unittest.TestCase):
+class cQube_Teacher_Attendance_SystemTest(unittest.TestCase):
     driver = None
     data = None
 

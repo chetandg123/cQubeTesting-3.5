@@ -5,11 +5,11 @@ from Locators.parameters import Data
 from get_dir import pwd
 from reuse_func import GetData
 
-'''Smoke Test suite -- for admin dashboard screen - creation of user , user list , s3 and logs 
+'''Regression Test suite -- for admin dashboard screen - creation of user , change password , user list , s3 and logs 
 '''
 
-class Admin_console_smoketest(unittest.TestCase):
 
+class Admin_Console_Regression(unittest.TestCase):
     driver = None
     data = None
 
@@ -25,12 +25,90 @@ class Admin_console_smoketest(unittest.TestCase):
 
     def test_createuser_icon(self):
         self.data.page_loading(self.driver)
-        self.driver.find_element_by_xpath(Data.createusericon).click()
+        self.driver.find_element_by_id('addUser').click()
         self.data.page_loading(self.driver)
         head = self.driver.find_element_by_id('head').text
         self.assertEqual("Create User", head, msg="create user page is not exists")
         self.driver.find_element_by_id(Data.cQube_logo).click()
         self.data.page_loading(self.driver)
+
+    def test_create_adminrole(self):
+        self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.Dashboard).click()
+        self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.cuser).click()
+        print("creating new user for admin role")
+        self.data.page_loading(self.driver)
+        self.driver.find_element_by_id("username").send_keys(self.data.get_demoadmin_name())
+        role = (Select(self.driver.find_element_by_id("role")))
+        for i in range(len(role.options)):
+            role.select_by_visible_text(" admin ")
+            self.data.page_loading(self.driver)
+        self.driver.find_element_by_id("passswd").send_keys(self.data.get_demoadmin_password())
+        self.driver.find_element_by_id("btn").click()
+        self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+        self.driver.find_element_by_id(Data.Dashboard).click()
+        self.driver.find_element_by_id(Data.userlist).click()
+        self.data.page_loading(self.driver)
+        if self.data.get_demoadmin_name() in self.driver.page_source:
+            print("User is created and present in user list")
+        else:
+            print("User is not created and also not present in user list ")
+        self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+
+    def test_create_report_role(self):
+        self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.Dashboard).click()
+        self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.cuser).click()
+        print("creating new user for reportviewer role")
+        self.data.page_loading(self.driver)
+        self.driver.find_element_by_id("username").send_keys(self.data.get_demoreport_name())
+        role = (Select(self.driver.find_element_by_id("role")))
+        for i in range(len(role.options)):
+            role.select_by_visible_text(" report_viewer ")
+            self.data.page_loading(self.driver)
+        self.driver.find_element_by_id("passswd").send_keys(self.data.get_demoreport_password())
+        self.driver.find_element_by_id("btn").click()
+        self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+        self.driver.find_element_by_id(Data.Dashboard).click()
+        self.driver.find_element_by_id(Data.userlist).click()
+        self.data.page_loading(self.driver)
+        if self.data.get_demoreport_name() in self.driver.page_source:
+            print("User is created and present in user list")
+        else:
+            print("User is not created and also not present in user list ")
+        self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+
+    def test_create_emission_role(self):
+        self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.Dashboard).click()
+        self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.cuser).click()
+        print("creating new user for emission role")
+        self.data.page_loading(self.driver)
+        self.driver.find_element_by_id("username").send_keys(self.data.get_demoemission_name())
+        role = (Select(self.driver.find_element_by_id("role")))
+        for i in range(len(role.options)):
+            role.select_by_visible_text(" emission ")
+            self.data.page_loading(self.driver)
+        self.driver.find_element_by_id("passswd").send_keys(self.data.get_demoemission_password())
+        self.driver.find_element_by_id("btn").click()
+        self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.cQube_logo).click()
+        self.driver.find_element_by_id(Data.Dashboard).click()
+        self.driver.find_element_by_id(Data.userlist).click()
+        self.data.page_loading(self.driver)
+        if self.data.get_demoemission_name() in self.driver.page_source:
+            print("User is created and present in user list")
+        else:
+            print("User is not created and also not present in user list ")
+        self.data.page_loading(self.driver)
+        self.driver.find_element_by_id(Data.cQube_logo).click()
 
     def test_roles_dropdown(self):
         self.data.page_loading(self.driver)
@@ -39,7 +117,7 @@ class Admin_console_smoketest(unittest.TestCase):
         self.driver.find_element_by_id('crtUsr').click()
         self.data.page_loading(self.driver)
         role = (Select(self.driver.find_element_by_id("role")))
-        count = len(role.options)-1
+        count = len(role.options) - 1
         for i in range(len(role.options)):
             role.select_by_index(i)
             print(role.options[i].text)
@@ -51,7 +129,7 @@ class Admin_console_smoketest(unittest.TestCase):
     def test_application_logs(self):
         self.driver.find_element_by_id(Data.Dashboard).click()
         self.data.page_loading(self.driver)
-        self.driver.find_element_by_id("logs").click()
+        self.driver.find_element_by_xpath("//a[@id='logs']").click()
         self.data.page_loading(self.driver)
         log_type = Select(self.driver.find_element_by_name("logTypeName"))
         log_name = Select(self.driver.find_element_by_name("logName"))
@@ -67,7 +145,7 @@ class Admin_console_smoketest(unittest.TestCase):
     def test_admin_logs(self):
         self.driver.find_element_by_id(Data.Dashboard).click()
         self.data.page_loading(self.driver)
-        self.driver.find_element_by_id("logs").click()
+        self.driver.find_element_by_xpath("//a[@id='logs']").click()
         self.data.page_loading(self.driver)
         log_type = Select(self.driver.find_element_by_name("logTypeName"))
         log_name = Select(self.driver.find_element_by_name("logName"))
@@ -83,7 +161,7 @@ class Admin_console_smoketest(unittest.TestCase):
     def test_nifi_logs(self):
         self.driver.find_element_by_id(Data.Dashboard).click()
         self.data.page_loading(self.driver)
-        self.driver.find_element_by_id("logs").click()
+        self.driver.find_element_by_xpath("//a[@id='logs']").click()
         self.data.page_loading(self.driver)
         log_type = Select(self.driver.find_element_by_name("logTypeName"))
         log_name = Select(self.driver.find_element_by_name("logName"))
@@ -99,7 +177,7 @@ class Admin_console_smoketest(unittest.TestCase):
     def test_emission_logs(self):
         self.driver.find_element_by_id(Data.Dashboard).click()
         self.data.page_loading(self.driver)
-        self.driver.find_element_by_id("logs").click()
+        self.driver.find_element_by_xpath("//a[@id='logs']").click()
         self.data.page_loading(self.driver)
         log_type = Select(self.driver.find_element_by_name("logTypeName"))
         log_name = Select(self.driver.find_element_by_name("logName"))
@@ -115,7 +193,7 @@ class Admin_console_smoketest(unittest.TestCase):
     def test_System_logs(self):
         self.driver.find_element_by_id(Data.Dashboard).click()
         self.data.page_loading(self.driver)
-        self.driver.find_element_by_id("logs").click()
+        self.driver.find_element_by_xpath("//a[@id='logs']").click()
         self.data.page_loading(self.driver)
         log_type = Select(self.driver.find_element_by_name("logTypeName"))
         log_name = Select(self.driver.find_element_by_name("logName"))
@@ -131,7 +209,7 @@ class Admin_console_smoketest(unittest.TestCase):
     def test_postgress_logs(self):
         self.driver.find_element_by_id(Data.Dashboard).click()
         self.data.page_loading(self.driver)
-        self.driver.find_element_by_id("logs").click()
+        self.driver.find_element_by_xpath("//a[@id='logs']").click()
         self.data.page_loading(self.driver)
         log_type = Select(self.driver.find_element_by_name("logTypeName"))
         log_name = Select(self.driver.find_element_by_name("logName"))
@@ -213,7 +291,7 @@ class Admin_console_smoketest(unittest.TestCase):
         self.driver.find_element_by_id(Data.Dashboard).click()
         self.driver.find_element_by_id(Data.userlist).click()
         self.data.page_loading(self.driver)
-        table = self.driver.find_elements_by_xpath(Data.userlisttable)
+        table = self.driver.find_elements_by_xpath('//tr/td')
         for i in range(len(table)):
             print(table[i].text)
         self.data.page_loading(self.driver)

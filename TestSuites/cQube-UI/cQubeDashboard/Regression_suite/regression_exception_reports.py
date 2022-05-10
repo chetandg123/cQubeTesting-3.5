@@ -36,7 +36,7 @@ class MyTestSuite_Exception(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        exception_regression_testing.cQube_semester_exception_report)
+                        exception_regression_testing.cQube_Semester_Exception_Report)
                 ])
                 p = pwd()
                 outfile = open(p.get_regression_map_reports(), "a")
@@ -63,7 +63,7 @@ class MyTestSuite_Exception(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        regression_student_exception.cQube_regression_Student_exception)
+                        regression_student_exception.cQube_Regression_Student_Exception)
                 ])
                 p = pwd()
                 outfile = open(p.get_regression_map_reports(), "a")
@@ -91,7 +91,7 @@ class MyTestSuite_Exception(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        regression_teacher_exception.cQube_teacher_exception_regression_report)
+                        regression_teacher_exception.cQube_Teacher_Exception_Regression_Report)
                 ])
                 p = pwd()
                 outfile = open(p.get_regression_map_reports(), "a")
@@ -120,7 +120,7 @@ class MyTestSuite_Exception(unittest.TestCase):
                 regression_test = unittest.TestSuite()
                 regression_test.addTests([
                     unittest.defaultTestLoader.loadTestsFromTestCase(
-                        regression_pat_exception.cQube_pat_exception_regression_report)
+                        regression_pat_exception.cQube_Pat_Exception_Regression_Report)
                 ])
                 p = pwd()
                 outfile = open(p.get_regression_map_reports(), "a")
