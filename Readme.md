@@ -10,11 +10,9 @@
    sudo apt install ./google-chrome-stable_current_amd64.deb
    Check chrome brower version using command -> google-chrome -version
   ```
- - Navigate to the directory where cQubeTesting has been downloaded or cloned 
+ - Navigate to the directory where cQubeTesting-3.5 has been downloaded or cloned 
 ```
-  cd cQubeTesting/
-  git checkout cQubeTesting-3.5
-  git pull
+  cd cQube_Workflow/tests/cQubeTesting-3.5/
   ```
  - Chrome driver need to be downloaded and placed in the cQubeTesting-3.5/Driver/ folder.
  - Steps to Download the chrome driver 
