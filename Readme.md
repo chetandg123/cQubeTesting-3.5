@@ -10,11 +10,9 @@
    sudo apt install ./google-chrome-stable_current_amd64.deb
    Check chrome brower version using command -> google-chrome -version
   ```
- - Navigate to the directory where cQubeTesting has been downloaded or cloned 
+ - Navigate to the directory where cQubeTesting-3.5 has been downloaded or cloned 
 ```
-  cd cQubeTesting/
-  git checkout cQubeTesting-3.5
-  git pull
+  cd cQube_Workflow/tests/cQubeTesting-3.5/
   ```
  - Chrome driver need to be downloaded and placed in the cQubeTesting-3.5/Driver/ folder.
  - Steps to Download the chrome driver 
@@ -35,7 +33,7 @@
 # Steps to execute the test script
 
     
-     cd cQubeTesting/
+     cd cQube_Workflow/tests/cQubeTesting-3.5/
      sudo apt update
      sudo apt install python3-pip
     
@@ -157,7 +155,7 @@ createemission= #for creating new admin user provide name of emission user
 emissionpassword= # Enter password for new emission user
 ```
 
-# Navigate to cQubeTesting-3.5 Directory in the terminal (ex cd /home/ubuntu/cQubeTesting-3.5)
+# Navigate to cQubeTesting-3.5 Directory in the terminal (ex cd cQube_Workflow/tests/cQubeTesting-3.5/)
 ### Note : To Test admin console test suite. Need to connected with vpn 
 
 - For Regression:
