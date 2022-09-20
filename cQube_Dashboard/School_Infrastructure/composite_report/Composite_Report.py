@@ -352,10 +352,12 @@ class Composite_Report():
             self.p.page_loading(self.driver)
             for x in range(1, len(x_axis.options)):
                 x_axis.select_by_index(x)
+                print(x_axis.options[x].text)
                 self.p.page_loading(self.driver)
             for y in range(1, len(y_axis.options)):
                     y_axis.select_by_index(y)
                     self.p.page_loading(self.driver)
+                    print(y_axis.options[y].text)
         except exceptions.NoSuchElementException:
             print("Both x and y axis are selectable ")
 

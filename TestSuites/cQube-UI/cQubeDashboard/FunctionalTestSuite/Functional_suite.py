@@ -305,7 +305,32 @@ class MyTestSuite_Functional(unittest.TestCase):
                 outfile.close()
         else:
             print(status, "is selected due to this unable to run suite")
+    def test_issue011(self):
+        self.data.page_loading(self.driver)
+        status = self.data.get_student_status("sat")
+        if status == str(True):
+            self.data.page_loading(self.driver)
+            self.data.navigate_to()
+            if 'No data found' in self.driver.page_source:
+                print('CRC Report is showing no data found!..')
+                self.driver.close()
+            else:
+                functional_test = unittest.TestSuite()
+                functional_test.addTests([
+                    unittest.defaultTestLoader.loadTestsFromTestCase()
+                ])
+                p = pwd()
+                outfile = open(p.get_diksha_tpds_regression_report(), "a")
 
+                runner1 = HTMLTestRunner.HTMLTestRunner(
+                    stream=outfile,
+                    title='Semester Assessment Heatchart Functional Test Report',
+                    verbosity=1,
+                )
+                runner1.run(functional_test)
+                outfile.close()
+        else:
+            print(status, "is selected due to this unable to run suite")
     @classmethod
     def tearDownClass(self):
         self.driver.close()

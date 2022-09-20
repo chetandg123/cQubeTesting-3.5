@@ -46,7 +46,7 @@ class Etb_Nation_Learning_Regression(unittest.TestCase):
     def test_dowload_button_on_each_districtwise_selection(self):
         fun = Etb_Nation_Learning_Report(self.driver)
         method = fun.check_download_functionality_each_districtwise()
-        self.assertEqual(0, method, msg='Some Districtwise csv file is not downloaded')
+        self.assertEqual(0, method, msg='Some District wise csv file is not downloaded')
 
     def test_dowload_button_on_state_level(self):
         fun = Etb_Nation_Learning_Report(self.driver)

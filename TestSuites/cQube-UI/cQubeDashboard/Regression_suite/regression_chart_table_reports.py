@@ -84,7 +84,7 @@ class MyTestSuite(unittest.TestCase):
             self.data.page_loading(self.driver)
             self.data.navigate_to_composite_report()
             if 'No data found' in self.driver.page_source:
-                print('Composite Accross metrics Report is showing no data found!..')
+                print('Composite Across metrics Report is showing no data found!..')
                 self.driver.close()
             else:
                 regression_test = unittest.TestSuite()
@@ -164,8 +164,8 @@ class MyTestSuite(unittest.TestCase):
             print(status, "is selected due to this unable to run suite")
 
     @classmethod
-    def tearDownClass(self):
-        self.driver.close()
+    def tearDownClass(cls):
+        cls.driver.close()
 
 
 if __name__ == '__main__':

@@ -12,7 +12,7 @@ from reuse_func import GetData
 along with graph '''
 
 
-class Composite_Report_Across_Metric():
+class Composite_Report_Across_Metric:
     def __init__(self, driver):
         self.driver = driver
 

@@ -477,6 +477,9 @@ class Data():
     time_spent = "etb_total_spent"
     avg_time = "etb_avg_spent"
 
+    tpd_content_plays = "contentPlays"
+    tpd_timespent = "timeSpent"
+    tpd_avgtime = "avgTime"
     # Content preference
     state_cp_header = "h5"
     state_district = "choose_district"

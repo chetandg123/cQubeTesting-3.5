@@ -176,7 +176,7 @@ class Periodic_Assessment_Test_Heat_Chart():
         cal.page_loading(self.driver)
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(3)
-        self.filename = self.p.get_download_dir() + '/' + self.fname.pchart_all_districts() + management + '_overall_allDistricts_' + self.month + '_' + self.year + '_' + cal.get_current_date() + '.csv '
+        self.filename = self.p.get_download_dir() + '/' + self.fname.pchart_all_districts() + management + '_overall_allDistricts_' + self.month + '_' + self.year + '_' + cal.get_current_date() + '.csv'
         print(self.filename)
         if os.path.isfile(self.filename) != True:
             print("Districtwise csv file is not downloaded")

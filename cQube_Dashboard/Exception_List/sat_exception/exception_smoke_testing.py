@@ -69,8 +69,8 @@ class cQube_Semester_Exception_Report(unittest.TestCase):
 
     def test_sem_exception_hyperlink(self):
         b = Semester_Assessment_Test_Exception(self.driver)
-        result1, result2, choose_dist = b.click_on_hyperlinks()
-        if result1 == False and result2 == False and choose_dist == "Choose a District":
+        choose_dist = b.click_on_hyperlinks()
+        if choose_dist == self.driver.page_source:
             print("hyperlinks are working")
         else:
             raise self.failureException("hyperlinks are not working")

@@ -335,7 +335,7 @@ class Etb_Content_Plays_Map_Report():
         self.data.click_on_state(self.driver)
         timespent = Select(self.driver.find_element(By.ID, Data.time_spent_Dropdown))
         timespent.select_by_index(2)
-        time.sleep(2)
+        time.sleep(4)
         markers = self.driver.find_elements(By.CLASS_NAME, Data.dots)
         if len(markers) - 1 == 0 or 'No data found' in self.driver.page_source:
             print("markers are not displayed and showing no data found")

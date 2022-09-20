@@ -51,9 +51,12 @@ class Student_Exceptions():
         return count
 
     def check_markers_on_block_map(self):
-        self.driver.find_element_by_id(Data.SAR_Blocks_btn).click()
         cal = GetData()
         count = 0
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
+        time.sleep(3)
+        self.driver.find_element_by_id(Data.SAR_Blocks_btn).click()
+        time.sleep(3)
         cal.page_loading(self.driver)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
@@ -83,6 +86,8 @@ class Student_Exceptions():
         return count
 
     def check_markers_on_clusters_map(self):
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
+        time.sleep(3)
         self.driver.find_element_by_id(Data.SAR_Clusters_btn).click()
         cal = GetData()
         cal.page_loading(self.driver)
@@ -116,9 +121,11 @@ class Student_Exceptions():
         return count
 
     def check_markers_on_schools_map(self):
+        self.driver.find_element_by_xpath(Data.hyper_link).click()
+        time.sleep(3)
         self.driver.find_element_by_id(Data.SAR_Schools_btn).click()
         cal = GetData()
-        time.sleep(2)
+        time.sleep(5)
         cal.page_loading(self.driver)
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
@@ -327,7 +334,7 @@ class Student_Exceptions():
             self.driver.find_element_by_id(Data.Download).click()
             time.sleep(2)
             p = pwd()
-            self.filename = p.get_download_dir() + "/student_attendance_exception_" + management + "_Blocks_of_district_" + value.strip() + self.month + "_" + self.year + '_' + cal.get_current_date() + ".csv"
+            self.filename = p.get_download_dir() + "/student_attendance_exception_" + management + "_blockPerDistricts_of_district_" + value.strip() + self.month + "_" + self.year + '_' + cal.get_current_date() + ".csv"
             print(self.filename)
             if not os.path.isfile(self.filename):
                 print("District" + select_district.first_selected_option.text + "csv is not downloaded")
@@ -356,16 +363,17 @@ class Student_Exceptions():
         management = management[16:].lower().strip()
         self.year, self.month = cal.get_student_month_and_year_values()
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
-        select_block = Select(self.driver.find_element_by_name('myBlock'))
         count = 0
         for x in range(1, len(select_district.options)):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
+            select_block = Select(self.driver.find_element_by_name('myBlock'))
             for y in range(1, len(select_block.options)):
                 select_block.select_by_index(y)
                 cal.page_loading(self.driver)
                 value = self.driver.find_element_by_name('myBlock').get_attribute('value')
-                value = value[3:].strip() + '_'
+                values = value.split(":")
+                val_code = values[1].strip()
                 time.sleep(2)
                 markers = self.driver.find_elements_by_class_name(Data.dots)
                 if len(markers) - 1 == 0:
@@ -376,7 +384,7 @@ class Student_Exceptions():
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(5)
                 p = pwd()
-                self.filename = p.get_download_dir() + "/student_attendance_exception_" + management + "_Clusters_of_block_" + value.strip() + self.month + "_" + self.year + "_" + cal.get_current_date() + ".csv"
+                self.filename = p.get_download_dir() + "/student_attendance_exception_" + management + "_clusterPerBlocks_of_block_" + val_code +'_'+ self.month + "_" + self.year + "_" + cal.get_current_date() + ".csv"
                 print(self.filename)
                 if not os.path.isfile(self.filename):
                     print(
@@ -406,16 +414,16 @@ class Student_Exceptions():
         management = self.driver.find_element_by_id('name').text
         management = management[16:].lower().strip()
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
-        select_block = Select(self.driver.find_element_by_name('myBlock'))
-        select_cluster = Select(self.driver.find_element_by_name('myCluster'))
         count = 0
         for x in range(1, len(select_district.options)):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
+            select_block = Select(self.driver.find_element_by_name('myBlock'))
             for y in range(1, len(select_block.options)):
                 select_block.select_by_index(y)
                 cal.page_loading(self.driver)
                 time.sleep(2)
+                select_cluster = Select(self.driver.find_element_by_name('myCluster'))
                 for z in range(1, len(select_cluster.options)):
                     select_cluster.select_by_index(z)
                     cal.page_loading(self.driver)
@@ -430,7 +438,7 @@ class Student_Exceptions():
                     self.driver.find_element_by_id(Data.Download).click()
                     time.sleep(5)
                     p = pwd()
-                    self.filename = p.get_download_dir() + "/student_attendance_exception_" + management + "_Schools_of_cluster_" + \
+                    self.filename = p.get_download_dir() + "/student_attendance_exception_" + management + "_schoolPerClusters_of_cluster_" + \
                                     value[
                                         1].strip() + '_' + self.month + "_" + self.year + "_" + cal.get_current_date() + ".csv"
                     print(self.filename)

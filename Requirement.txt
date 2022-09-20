@@ -6,3 +6,5 @@ pathlib
 psycopg2-binary
 requests
 pillow
+requests
+

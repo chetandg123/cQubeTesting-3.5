@@ -167,12 +167,12 @@ class Teacher_Exception_Report():
         management = management[16:].lower().strip()
         self.year, self.month = cal.get_student_month_and_year_values()
         select_district = Select(self.driver.find_element_by_id('choose_dist'))
-        select_block = Select(self.driver.find_element_by_id('choose_block'))
         count = 0
         for x in range(len(select_district.options) - 1, len(select_district.options)):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
-            for y in range(1, len(select_block.options)):
+            select_block = Select(self.driver.find_element_by_id('choose_block'))
+            for y in range(len(select_block.options)-2 , len(select_block.options)):
                 select_block.select_by_index(y)
                 cal.page_loading(self.driver)
                 value = self.driver.find_element_by_id('choose_block').get_attribute('value')
@@ -219,8 +219,6 @@ class Teacher_Exception_Report():
         management = management[16:].lower().strip()
         self.year, self.month = cal.get_student_month_and_year_values()
         select_district = Select(self.driver.find_element_by_id('choose_dist'))
-        select_block = Select(self.driver.find_element_by_id('choose_block'))
-        select_cluster = Select(self.driver.find_element_by_id('choose_cluster'))
         count = 0
         markers = 0
         if 'No data found' in self.driver.page_source:
@@ -232,11 +230,13 @@ class Teacher_Exception_Report():
                 time.sleep(1)
                 select_district.select_by_index(x)
                 cal.page_loading(self.driver)
-                for y in range(1, len(select_block.options)):
+                select_block = Select(self.driver.find_element_by_id('choose_block'))
+                for y in range(len(select_block.options)-2, len(select_block.options)):
                     time.sleep(2)
                     select_block.select_by_index(y)
                     cal.page_loading(self.driver)
-                    for z in range(1, len(select_cluster.options)):
+                    select_cluster = Select(self.driver.find_element_by_id('choose_cluster'))
+                    for z in range(len(select_cluster.options)-2, len(select_cluster.options)):
                         select_cluster.select_by_index(z)
                         cal.page_loading(self.driver)
                         time.sleep(2)

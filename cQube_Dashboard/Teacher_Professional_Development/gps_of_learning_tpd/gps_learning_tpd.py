@@ -287,9 +287,9 @@ class Tpd_Content_Plays_Map_Report():
                 time_spent = df['Total Time Spent'].sum()
                 avg_time = round(df['Avg Time Spent'].sum() / size)
 
-                total_cp = self.driver.find_element(By.ID, Data.content_plays).text
-                total_ts = self.driver.find_element(By.ID, Data.time_spent).text
-                avg_spent = self.driver.find_element(By.ID, avg_time).text
+                total_cp = self.driver.find_element(By.ID, Data.tpd_content_plays).text
+                total_ts = self.driver.find_element(By.ID, Data.tpd_timespent).text
+                avg_spent = self.driver.find_element(By.ID, Data.tpd_avgtime).text
 
                 total_cp = re.sub('\D', "", total_cp)
                 total_ts = re.sub('\D', "", total_ts)
@@ -356,9 +356,9 @@ class Tpd_Content_Plays_Map_Report():
                 time_spent = df['Total Time Spent'].sum()
                 avg_time = round(df['Avg Time Spent'].sum() / size)
 
-                total_cp = self.driver.find_element(By.ID, Data.content_plays).text
-                total_ts = self.driver.find_element(By.ID, Data.time_spent).text
-                avg_spent = self.driver.find_element(By.ID, avg_time).text
+                total_cp = self.driver.find_element(By.ID, Data.tpd_content_plays).text
+                total_ts = self.driver.find_element(By.ID, Data.tpd_timespent).text
+                avg_spent = self.driver.find_element(By.ID, Data.tpd_avgtime).text
 
                 total_cp = re.sub('\D', "", total_cp)
                 total_ts = re.sub('\D', "", total_ts)
@@ -427,8 +427,8 @@ class Tpd_Content_Plays_Map_Report():
                 time_spent = df['Total Time Spent'].sum()
                 avg_time = round(df['Avg Time Spent'].sum() / size)
                 print(avg_time)
-                total_cp = self.driver.find_element(By.ID, Data.content_plays).text
-                total_ts = self.driver.find_element(By.ID, Data.time_spent).text
+                total_cp = self.driver.find_element(By.ID, Data.tpd_content_plays).text
+                total_ts = self.driver.find_element(By.ID, Data.tpd_timespent).text
                 avg_spent = self.driver.find_element(By.ID, avg_time).text
 
                 total_cp = re.sub('\D', "", total_cp)

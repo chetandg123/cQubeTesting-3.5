@@ -570,11 +570,11 @@ class Sat_Map_Report():
         self.driver.find_element_by_id(Data.Download).click()
         time.sleep(10)
         p = pwd()
-        self.filename = p.get_download_dir() + "/" + self.fname.sr_cluster() + management + '_' + self.year.strip() + '_' + self.semester + '_allGrades__allClusters_' + cal.get_current_date() + '.csv '
+        self.filename = p.get_download_dir() + "/" + self.fname.sr_cluster() + management + '_' + self.year.strip() + '_' + self.semester + '_allGrades__allClusters_' + cal.get_current_date() + '.csv'
         print(self.filename)
-        if os.path.isfile(self.filename) != True:
+        if not os.path.isfile(self.filename):
             return "File Not Downloaded"
-        if os.path.isfile(self.filename) == True:
+        if os.path.isfile(self.filename):
             os.remove(self.filename)
 
     def click_on_blocks_click_on_home_icon(self):

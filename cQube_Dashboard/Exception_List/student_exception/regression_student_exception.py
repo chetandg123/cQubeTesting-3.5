@@ -16,7 +16,7 @@ class cQube_Regression_Student_Exception(unittest.TestCase):
     def setUpClass(self):
         self.data = GetData()
         self.driver = self.data.get_driver()
-        self.driver.implicitly_wait(100)
+        self.driver.implicitly_wait(30)
         self.data.open_cqube_appln(self.driver)
         self.data.login_cqube(self.driver)
         self.data.navigate_to_student_exception()

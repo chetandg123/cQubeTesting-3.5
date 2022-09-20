@@ -117,7 +117,7 @@ class StudentAttendanceReport():
             count = count + 1
         else:
             with open(self.filename) as fin:
-                csv_reader = csv.reader(fin, delimiter=', ')
+                csv_reader = csv.reader(fin, delimiter=',')
                 header = next(csv_reader)
                 total = 0
                 schools = 0
@@ -251,7 +251,7 @@ class StudentAttendanceReport():
                 count = count + 1
             else:
                 with open(self.filename) as fin:
-                    csv_reader = csv.reader(fin, delimiter=', ')
+                    csv_reader = csv.reader(fin, delimiter=',')
                     header = next(csv_reader)
                     total = 0
                     schools = 0
@@ -282,12 +282,12 @@ class StudentAttendanceReport():
         name = management_name[16:].strip().lower()
         self.year, self.month = cal.get_student_month_and_year_values()
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
-        select_block = Select(self.driver.find_element_by_name('myBlock'))
         count = 0
         for x in range(1, len(select_district.options) - 31):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
-            for y in range(1, len(select_block.options)):
+            select_block = Select(self.driver.find_element_by_name('myBlock'))
+            for y in range(len(select_block.options)-2, len(select_block.options)):
                 select_block.select_by_index(y)
                 cal.page_loading(self.driver)
                 value = self.driver.find_element_by_name('myBlock').get_attribute('value')
@@ -312,7 +312,7 @@ class StudentAttendanceReport():
                     count = count + 1
                 else:
                     with open(self.filename) as fin:
-                        csv_reader = csv.reader(fin, delimiter=', ')
+                        csv_reader = csv.reader(fin, delimiter=',')
                         header = next(csv_reader)
                         total = 0
                         schools = 0
@@ -346,16 +346,16 @@ class StudentAttendanceReport():
         name = management[16:].strip().lower()
         self.year, self.month = cal.get_student_month_and_year_values()
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
-        select_block = Select(self.driver.find_element_by_name('myBlock'))
-        select_cluster = Select(self.driver.find_element_by_name('myCluster'))
         count = 0
         for x in range(len(select_district.options) - 1, len(select_district.options)):
             select_district.select_by_index(x)
             cal.page_loading(self.driver)
+            select_block = Select(self.driver.find_element_by_name('myBlock'))
             for y in range(len(select_block.options) - 1, len(select_block.options)):
                 select_block.select_by_index(y)
                 cal.page_loading(self.driver)
-                for z in range(1, len(select_cluster.options)):
+                select_cluster = Select(self.driver.find_element_by_name('myCluster'))
+                for z in range(len(select_cluster.options)-3 , len(select_cluster.options)):
                     select_cluster.select_by_index(z)
                     cal.page_loading(self.driver)
                     value = self.driver.find_element_by_name('myCluster').get_attribute('value')
@@ -419,11 +419,9 @@ class StudentAttendanceReport():
         cal.page_loading(self.driver)
         self.driver.find_element_by_xpath(Data.sr_dist_hyper).click()
         cal.page_loading(self.driver)
-        result1 = self.driver.find_element_by_id('choose_block').is_displayed()
-        result2 = self.driver.find_element_by_id('choose_cluster').is_displayed()
         dist = Select(self.driver.find_element_by_id('choose_dist'))
         choose_dist = dist.first_selected_option.text
-        return result1, result2, choose_dist
+        return choose_dist
 
     def click_HomeButton(self):
         self.driver.find_element_by_id(Data.cQube_logo).click()

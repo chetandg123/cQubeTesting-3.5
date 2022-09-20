@@ -121,9 +121,10 @@ class cQube_Student_Attendance_Regression(unittest.TestCase):
 
     def test_check_hyperlinks(self):
         hyperlinks = StudentAttendanceReport(self.driver, self.year, self.month)
-        result1, result2, choose_dist = hyperlinks.click_on_hyperlinks()
-        if result1 == False and result2 == False and choose_dist == "Choose a District ":
-            print("hyperlinks are working")
+        choose_dist = hyperlinks.click_on_hyperlinks()
+        print(choose_dist)
+        if choose_dist in self.driver.page_source:
+            print("Hyperlinks are working")
         else:
             raise self.failureException("hyperlinks are not working")
 

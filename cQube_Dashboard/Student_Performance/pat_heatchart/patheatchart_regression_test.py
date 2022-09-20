@@ -30,7 +30,7 @@ class cQube_heatchart_regression_test(unittest.TestCase):
     def test_Download_districtwise(self):
         b = Periodic_Assessment_Test_Heat_Chart(self.driver)
         res = b.download_all_district_records()
-        self.assertEqual(res, 0, msg="Districtwise csv file is not downloaded")
+        self.assertEqual(res, 0, msg="District Wise csv file is not downloaded")
         self.data.page_loading(self.driver)
         time.sleep(4)
 

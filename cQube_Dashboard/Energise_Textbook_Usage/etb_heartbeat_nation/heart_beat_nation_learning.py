@@ -93,7 +93,7 @@ class Etb_Nation_Learning_Report():
                     print(self.filename, 'file is downlaoded')
                     df = pd.read_csv(self.filename)
                     size = len(df)
-                    total_enrolled = df[(dist_name).lower()].sum() or df[(dist_name)].sum()
+                    total_enrolled = df[dist_name].sum()
                     avg_time = df['Total Content Plays ' + state_name].sum()
                     # if int(count_of_course) != int(size):
                     #     print('Course Result in UI and Downloaded files are not same  so no of courses ',

@@ -280,7 +280,7 @@ class CrcVisits():
             self.cal.page_loading(self.driver)
             value = self.driver.find_element_by_name('myDistrict').get_attribute('value')
             value = value.split(":")
-            distval = value[1].strip()
+            dist_id = value[1].strip()
             nodata = self.driver.find_element_by_id("errMsg").text
             if nodata == "No data found":
                 print(select_district.options[x].text, "no data found!")
@@ -288,11 +288,11 @@ class CrcVisits():
             else:
                 self.driver.find_element_by_id(Data.Download).click()
                 time.sleep(4)
-                self.filename = p.get_download_dir() + "/" + self.fname.crc_districtwise() + name + "_" + self.year + "_" + str(
-                    self.month) + '_blocks_of_district_' + distval + '_' + self.cal.get_current_date() + '.csv'
+                self.filename = p.get_download_dir() + "/" + self.fname.crc_districtwise() + name + \
+                                "_" + self.year + "_" + str(self.month) + '_blocks_of_district_' + dist_id.strip() + '_' + self.cal.get_current_date() + '.csv'
 
                 print(self.filename)
-                if os.path.isfile(self.filename) != True:
+                if not os.path.isfile(self.filename):
                     print(select_district.options[x].text, 'csv file is not downloaded')
                     count = count + 1
                 else:
@@ -426,7 +426,7 @@ class CrcVisits():
         self.p.page_loading(self.driver)
         select_district = Select(self.driver.find_element_by_name('myDistrict'))
         count = 0
-        for k in range(1, len(select_district.options)):
+        for k in range(1, len(select_district.options) - 20):
             select_district.select_by_index(k)
             self.p.page_loading(self.driver)
             table_data = []
