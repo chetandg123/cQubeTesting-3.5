@@ -273,12 +273,12 @@ class Tpd_Course_Progress_Report():
         count = 0
         self.fname = file_extention()
         self.driver.find_element_by_xpath(Data.hyper_link).click()
-        self.load.page_loading(self.driver)
+        time.sleep(2)
         dists = Select(self.driver.find_element_by_id(Data.district_dropdown))
         period = Select(self.driver.find_element_by_id(Data.timeperiods))
         # period.select_by_visible_text(' Last 7 Days ')
         period.select_by_index(3)
-        self.load.page_loading(self.driver)
+        time.sleep(3)
         if "No data found" in self.driver.page_source:
             print("Last 7 days does not have records ")
         else:
